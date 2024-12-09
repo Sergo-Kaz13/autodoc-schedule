@@ -1,0 +1,62 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  min-inline-size: 100%;
+  block-size: auto;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  font-size: 1rem;
+  background: rgb(248, 90, 0);
+  font-family: "Inter", sans-serif;
+}
+
+.wrapper {
+  min-height: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.appTitle {
+  font-size: 24px;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 15px;
+  font-weight: 500;
+}
+
+.schedule {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  color: rgb(248, 90, 0);
+  padding: 10px;
+}
+
+.scheduleItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(248, 90, 0);
+  border-radius: 5px;
+  min-height: 50px;
+  background: rgb(255, 255, 255);
+}
