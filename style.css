@@ -58,5 +58,32 @@ body {
   border: 1px solid rgb(248, 90, 0);
   border-radius: 5px;
   min-height: 50px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.scheduleItemWork {
   background: rgb(255, 255, 255);
+}
+
+.scheduleItemDayOff {
+  background: rgb(248, 90, 0);
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+.nameDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.nameDay {
+  background: rgba(255, 255, 255, 0.8);
+  color: rgb(248, 90, 0);
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  border-radius: 5px;
 }
