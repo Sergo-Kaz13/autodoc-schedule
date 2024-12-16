@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const schedule = localStorage.getItem("schedule");
 
   if (!schedule) {
-    createSchedule(2);
+    createSchedule();
   }
 
   console.log(schedule);
@@ -51,18 +51,26 @@ function createSchedule(month, year) {
       scheduleItem.classList.add("scheduleItemWork");
     }
     scheduleItem.classList.add("scheduleItem");
+    // console.log(["numDaysMonth"], index <= numDaysMonth);
+
     if (
-      (index >= numDayWeek && index === 5) ||
-      index === 6 ||
-      index === 12 ||
-      index === 13 ||
-      index === 19 ||
-      index === 20 ||
-      index === 26 ||
-      index === 27 ||
-      index === 33 ||
-      index === 34
+      index >= numDayWeek &&
+      index <= numDaysMonth + numDayWeek - 1 &&
+      (index === 5 ||
+        index === 6 ||
+        index === 12 ||
+        index === 13 ||
+        index === 19 ||
+        index === 20 ||
+        index === 26 ||
+        index === 27 ||
+        index === 33 ||
+        index === 34)
     ) {
+      if (true && true && true) {
+        console.log(["numDaysMonth"], index <= numDaysMonth);
+      }
+
       scheduleItem.classList.add("scheduleItemDayOff");
     }
     scheduleItem.append(span);
