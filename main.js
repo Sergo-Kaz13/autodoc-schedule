@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const schedule = localStorage.getItem("schedule");
 
   if (!schedule) {
-    createSchedule();
+    createSchedule(2);
   }
 
   console.log(schedule);
@@ -20,13 +20,14 @@ const days = [
   "неділя",
 ];
 
-function createSchedule() {
+function createSchedule(month, year) {
   const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
+  year = year !== undefined ? (year = year) : date.getFullYear();
+  month = month !== undefined ? (month = month) : date.getMonth() + 1;
   let numDayWeek = new Date(`${year}-${month}-01`).getDay() - 1;
-  // const numDaysMonth = daysInMonth(month);
-  const numDaysMonth = daysInMonth(month);
+  console.log(["numDayWeek"], numDayWeek);
+
+  const numDaysMonth = daysInMonth(month, year);
 
   numDayWeek = numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
 
