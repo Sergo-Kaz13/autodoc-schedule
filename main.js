@@ -6,19 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!schedule) {
     createSchedule();
   }
-
-  console.log(schedule);
 });
-
-const days = [
-  "понеділок",
-  "вівторок",
-  "середа",
-  "четверг",
-  "пятниця",
-  "субота",
-  "неділя",
-];
 
 function createSchedule(month, year) {
   const date = new Date();
@@ -51,7 +39,6 @@ function createSchedule(month, year) {
       scheduleItem.classList.add("scheduleItemWork");
     }
     scheduleItem.classList.add("scheduleItem");
-    // console.log(["numDaysMonth"], index <= numDaysMonth);
 
     if (
       index >= numDayWeek &&
@@ -67,17 +54,11 @@ function createSchedule(month, year) {
         index === 33 ||
         index === 34)
     ) {
-      if (true && true && true) {
-        console.log(["numDaysMonth"], index <= numDaysMonth);
-      }
-
       scheduleItem.classList.add("scheduleItemDayOff");
     }
     scheduleItem.append(span);
     schedule.append(scheduleItem);
   }
-
-  console.log(["schedule"], schedule);
 }
 
 function daysInMonth(month, year) {
