@@ -1,5 +1,20 @@
 "use strict";
 
+const months = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
+];
+
 window.addEventListener("DOMContentLoaded", () => {
   const schedule = localStorage.getItem("schedule");
 
@@ -13,8 +28,6 @@ function createSchedule(month, year) {
   year = year !== undefined ? (year = year) : date.getFullYear();
   month = month !== undefined ? (month = month) : date.getMonth() + 1;
   let numDayWeek = new Date(`${year}-${month}-01`).getDay() - 1;
-  console.log(["numDayWeek"], numDayWeek);
-
   const numDaysMonth = daysInMonth(month, year);
 
   numDayWeek = numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
@@ -25,8 +38,11 @@ function createSchedule(month, year) {
     daysSchedule++;
   }
 
+  const monthItem = document.querySelector(".monthItem");
   const schedule = document.querySelector(".schedule");
+
   schedule.classList.add("schedule");
+  monthItem.textContent = months[month - 1];
 
   let startDayDate = 1;
 
