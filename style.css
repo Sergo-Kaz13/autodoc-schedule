@@ -65,11 +65,17 @@ body {
 
 .scheduleItemWork {
   background: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
 }
 
 .scheduleItemDayOff {
   background: rgb(248, 90, 0);
   border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+.scheduleItemDay100 {
+  background: rgb(246, 169, 15);
   color: rgb(255, 255, 255);
 }
 
@@ -82,10 +88,12 @@ body {
 }
 
 .activeMonth {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
   color: rgb(255, 255, 255);
-  font-size: 16px;
-  font-weight: 400;
+  font-weight: 700;
   text-transform: uppercase;
   padding: 0 10px 10px 10px;
 }
@@ -95,6 +103,18 @@ body {
   font-size: 20px;
   font-weight: 900;
   color: rgba(255, 255, 255, 0.7);
+  transition: all ease-in-out 0.28s;
+}
+
+.btnLeft:hover,
+.btnRight:hover {
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+}
+
+.monthItem {
+  letter-spacing: 2px;
+  font-size: 20px;
 }
 
 .nameDays {

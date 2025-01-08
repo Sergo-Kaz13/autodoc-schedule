@@ -15,67 +15,189 @@ const months = [
   "december",
 ];
 
-window.addEventListener("DOMContentLoaded", () => {
-  const schedule = localStorage.getItem("schedule");
+let schedule = null;
 
-  if (!schedule) {
-    createSchedule();
+let currentYear = new Date().getFullYear();
+let currentMonth = new Date().getMonth();
+
+const scheduleBlock = document.querySelector(".schedule");
+const activeYear = document.querySelector(".activeYear");
+const monthItem = document.querySelector(".monthItem");
+const btnMinMonth = document.querySelector(".btnLeft");
+const btnPlusMont = document.querySelector(".btnRight");
+
+console.log(["currentMont"], currentMonth);
+console.log(["currentMonth"], months[currentMonth]);
+
+activeYear.textContent = currentYear;
+monthItem.textContent = months[currentMonth];
+
+window.addEventListener("DOMContentLoaded", () => {
+  schedule = localStorage.getItem("schedule") || {};
+
+  const year = new Date().getFullYear();
+
+  if (Object.keys(schedule).length === 0) {
+    schedule[year] = createSchedule(year);
+
+    console.log(["schedule"], schedule);
+
+    showSchedule(schedule);
   }
 });
 
-function createSchedule(month, year) {
-  const date = new Date();
-  year = year !== undefined ? (year = year) : date.getFullYear();
-  month = month !== undefined ? (month = month) : date.getMonth() + 1;
-  let numDayWeek = new Date(`${year}-${month}-01`).getDay() - 1;
-  const numDaysMonth = daysInMonth(month, year);
+btnMinMonth.addEventListener("click", () => {
+  if (currentMonth > 0) {
+    currentMonth--;
+    monthItem.textContent = months[currentMonth];
 
-  numDayWeek = numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
-
-  let daysSchedule = numDaysMonth + numDayWeek;
-
-  while (!(daysSchedule % 7 === 0)) {
-    daysSchedule++;
+    scheduleBlock.innerHTML = "";
+    showSchedule(schedule, undefined, currentMonth);
   }
+});
 
-  const monthItem = document.querySelector(".monthItem");
-  const schedule = document.querySelector(".schedule");
+btnPlusMont.addEventListener("click", () => {
+  if (currentMonth < months.length) {
+    currentMonth++;
+    monthItem.textContent = months[currentMonth];
 
-  schedule.classList.add("schedule");
-  monthItem.textContent = months[month - 1];
-
-  let startDayDate = 1;
-
-  for (let index = 0; index < daysSchedule; index++) {
-    const scheduleItem = document.createElement("div");
-    const span = document.createElement("span");
-    if (index >= numDayWeek && index <= numDaysMonth + numDayWeek - 1) {
-      span.textContent = startDayDate;
-      startDayDate++;
-      scheduleItem.classList.add("scheduleItemWork");
-    }
-    scheduleItem.classList.add("scheduleItem");
-
-    if (
-      index >= numDayWeek &&
-      index <= numDaysMonth + numDayWeek - 1 &&
-      (index === 5 ||
-        index === 6 ||
-        index === 12 ||
-        index === 13 ||
-        index === 19 ||
-        index === 20 ||
-        index === 26 ||
-        index === 27 ||
-        index === 33 ||
-        index === 34)
-    ) {
-      scheduleItem.classList.add("scheduleItemDayOff");
-    }
-    scheduleItem.append(span);
-    schedule.append(scheduleItem);
+    scheduleBlock.innerHTML = "";
+    showSchedule(schedule, undefined, currentMonth);
   }
+});
+
+scheduleBlock.addEventListener("click", (e) => {
+  const scheduleItem = e.target.closest("div");
+
+  if (scheduleItem.id === "scheduleItem") {
+    console.log(["ura"], "ura");
+    scheduleItem.classList.add("scheduleItemDay100");
+  }
+});
+
+function showSchedule(schedule, year, month) {
+  year = year !== undefined ? (year = year) : new Date().getFullYear();
+  month = month !== undefined ? (month = month) : new Date().getMonth();
+
+  const currentYear = schedule[year];
+  const currentMonth = currentYear[month];
+
+  currentMonth.map((day, i) => {
+    if (i === 0) {
+      for (let j = 0; j < day.numberDay; j++) {
+        const fakeDay = document.createElement("div");
+        scheduleBlock.append(fakeDay);
+      }
+
+      const div = document.createElement("div");
+      const span = document.createElement("span");
+      span.textContent = i + 1;
+      div.append(span);
+      div.id = "scheduleItem";
+      if (day.numberDay === 5 || day.numberDay === 6) {
+        div.classList.add("scheduleItem", "scheduleItemDayOff");
+      } else {
+        div.classList.add("scheduleItem", "scheduleItemWork");
+      }
+      scheduleBlock.append(div);
+    } else {
+      const div = document.createElement("div");
+      const span = document.createElement("span");
+      span.textContent = i + 1;
+      div.append(span);
+      div.id = "scheduleItem";
+      if (day.numberDay === 5 || day.numberDay === 6) {
+        div.classList.add("scheduleItem", "scheduleItemDayOff");
+      } else {
+        div.classList.add("scheduleItem", "scheduleItemWork");
+      }
+      scheduleBlock.append(div);
+    }
+  });
 }
+
+function createSchedule(year) {
+  const fullYear = [];
+
+  for (let i = 1; i < 13; i++) {
+    const days = daysInMonth(i, year);
+
+    const month = [];
+    // console.log(["month"], i);
+
+    for (let j = 1; j <= days; j++) {
+      let numDayWeek = new Date(`${year}-${i}-${j}`).getDay() - 1;
+      numDayWeek =
+        numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
+
+      // console.log(["numDayWeek"], numDayWeek);
+      let statusDay = "working";
+      if (numDayWeek === 5 || numDayWeek === 6) statusDay = "weekend";
+
+      month.push({
+        numberDay: numDayWeek,
+        statusDay: statusDay,
+      });
+    }
+    fullYear.push(month);
+  }
+  console.log(["fullYear"], fullYear);
+  return fullYear;
+}
+
+// function createSchedule(month, year) {
+//   const date = new Date();
+//   year = year !== undefined ? (year = year) : date.getFullYear();
+//   month = month !== undefined ? (month = month) : date.getMonth() + 1;
+//   let numDayWeek = new Date(`${year}-${month}-01`).getDay() - 1;
+//   const numDaysMonth = daysInMonth(month, year);
+
+//   numDayWeek = numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
+
+//   let daysSchedule = numDaysMonth + numDayWeek;
+
+//   while (!(daysSchedule % 7 === 0)) {
+//     daysSchedule++;
+//   }
+
+//   const monthItem = document.querySelector(".monthItem");
+//   const schedule = document.querySelector(".schedule");
+
+//   schedule.classList.add("schedule");
+//   monthItem.textContent = months[month - 1];
+
+//   let startDayDate = 1;
+
+//   for (let index = 0; index < daysSchedule; index++) {
+//     const scheduleItem = document.createElement("div");
+//     const span = document.createElement("span");
+//     if (index >= numDayWeek && index <= numDaysMonth + numDayWeek - 1) {
+//       span.textContent = startDayDate;
+//       startDayDate++;
+//       scheduleItem.classList.add("scheduleItemWork");
+//     }
+//     scheduleItem.classList.add("scheduleItem");
+
+//     if (
+//       index >= numDayWeek &&
+//       index <= numDaysMonth + numDayWeek - 1 &&
+//       (index === 5 ||
+//         index === 6 ||
+//         index === 12 ||
+//         index === 13 ||
+//         index === 19 ||
+//         index === 20 ||
+//         index === 26 ||
+//         index === 27 ||
+//         index === 33 ||
+//         index === 34)
+//     ) {
+//       scheduleItem.classList.add("scheduleItemDayOff");
+//     }
+//     scheduleItem.append(span);
+//     schedule.append(scheduleItem);
+//   }
+// }
 
 function daysInMonth(month, year) {
   month = month + 1;
