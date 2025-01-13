@@ -81,6 +81,10 @@ function showSchedule(schedule, year, month) {
 
   const currentYear = schedule[year];
   const currentMonth = currentYear[month];
+  const currentDate = new Date().getDate();
+  // const currentDate = 18;
+
+  console.log(["currentMonth"], currentMonth);
 
   currentMonth.map((day, i) => {
     if (i === 0) {
@@ -96,8 +100,14 @@ function showSchedule(schedule, year, month) {
       div.id = "scheduleItem";
       if (day.numberDay === 5 || day.numberDay === 6) {
         div.classList.add("scheduleItem", "scheduleItemDayOff");
+        if (i + 1 === currentDate) {
+          div.classList.add("currentDate");
+        }
       } else {
         div.classList.add("scheduleItem", "scheduleItemWork");
+        if (i + 1 === currentDate) {
+          div.classList.add("currentDate");
+        }
       }
       scheduleBlock.append(div);
     } else {
@@ -108,8 +118,16 @@ function showSchedule(schedule, year, month) {
       div.id = "scheduleItem";
       if (day.numberDay === 5 || day.numberDay === 6) {
         div.classList.add("scheduleItem", "scheduleItemDayOff");
+        if (i + 1 === currentDate) {
+          div.classList.add("currentDate");
+        }
       } else {
         div.classList.add("scheduleItem", "scheduleItemWork");
+        if (i + 1 === currentDate) {
+          console.log(["i1"], i);
+
+          div.classList.add("currentDate");
+        }
       }
       scheduleBlock.append(div);
     }
