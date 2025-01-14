@@ -25,9 +25,7 @@ const activeYear = document.querySelector(".activeYear");
 const monthItem = document.querySelector(".monthItem");
 const btnMinMonth = document.querySelector(".btnLeft");
 const btnPlusMont = document.querySelector(".btnRight");
-
-console.log(["currentMont"], currentMonth);
-console.log(["currentMonth"], months[currentMonth]);
+const listItems = document.querySelector(".listItemsBlock");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -39,8 +37,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (Object.keys(schedule).length === 0) {
     schedule[year] = createSchedule(year);
-
-    console.log(["schedule"], schedule);
 
     showSchedule(schedule);
   }
@@ -70,8 +66,17 @@ scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");
 
   if (scheduleItem.id === "scheduleItem") {
-    console.log(["ura"], "ura");
-    scheduleItem.classList.add("scheduleItemDay100");
+    scheduleItem.classList.add("scheduleItemDayEvent");
+
+    listItems.classList.add("listItemsShow");
+  }
+});
+
+listItems.addEventListener("click", (e) => {
+  if (!e.target.closest("ul")) {
+    listItems.classList.remove("listItemsShow");
+  } else if (e.target.tagName === "LI") {
+    console.log(["e"], e.target.id);
   }
 });
 
@@ -80,13 +85,12 @@ function showSchedule(schedule, year, month) {
   month = month !== undefined ? (month = month) : new Date().getMonth();
 
   const currentYear = schedule[year];
-  const currentMonth = currentYear[month];
+  const activeMonth = currentYear[month];
+
+  const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();
-  // const currentDate = 18;
 
-  console.log(["currentMonth"], currentMonth);
-
-  currentMonth.map((day, i) => {
+  activeMonth.map((day, i) => {
     if (i === 0) {
       for (let j = 0; j < day.numberDay; j++) {
         const fakeDay = document.createElement("div");
@@ -100,12 +104,12 @@ function showSchedule(schedule, year, month) {
       div.id = "scheduleItem";
       if (day.numberDay === 5 || day.numberDay === 6) {
         div.classList.add("scheduleItem", "scheduleItemDayOff");
-        if (i + 1 === currentDate) {
+        if (i + 1 === currentDate && currentMonth === month) {
           div.classList.add("currentDate");
         }
       } else {
         div.classList.add("scheduleItem", "scheduleItemWork");
-        if (i + 1 === currentDate) {
+        if (i + 1 === currentDate && currentMonth === month) {
           div.classList.add("currentDate");
         }
       }
@@ -118,14 +122,12 @@ function showSchedule(schedule, year, month) {
       div.id = "scheduleItem";
       if (day.numberDay === 5 || day.numberDay === 6) {
         div.classList.add("scheduleItem", "scheduleItemDayOff");
-        if (i + 1 === currentDate) {
+        if (i + 1 === currentDate && currentMonth === month) {
           div.classList.add("currentDate");
         }
       } else {
         div.classList.add("scheduleItem", "scheduleItemWork");
-        if (i + 1 === currentDate) {
-          console.log(["i1"], i);
-
+        if (i + 1 === currentDate && currentMonth === month) {
           div.classList.add("currentDate");
         }
       }
@@ -141,14 +143,12 @@ function createSchedule(year) {
     const days = daysInMonth(i, year);
 
     const month = [];
-    // console.log(["month"], i);
 
     for (let j = 1; j <= days; j++) {
       let numDayWeek = new Date(`${year}-${i}-${j}`).getDay() - 1;
       numDayWeek =
         numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
 
-      // console.log(["numDayWeek"], numDayWeek);
       let statusDay = "working";
       if (numDayWeek === 5 || numDayWeek === 6) statusDay = "weekend";
 
@@ -159,7 +159,6 @@ function createSchedule(year) {
     }
     fullYear.push(month);
   }
-  console.log(["fullYear"], fullYear);
   return fullYear;
 }
 
