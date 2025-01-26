@@ -20,6 +20,10 @@ let schedule = null;
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth();
 
+let dayIndex = null;
+let monthActive = null;
+let yearActive = null;
+
 const scheduleBlock = document.querySelector(".schedule");
 const activeYear = document.querySelector(".activeYear");
 const monthItem = document.querySelector(".monthItem");
@@ -31,14 +35,17 @@ activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
 
 window.addEventListener("DOMContentLoaded", () => {
-  schedule = localStorage.getItem("schedule") || {};
+  schedule = JSON.parse(localStorage.getItem("schedule")) || {};
 
   const year = new Date().getFullYear();
 
   if (Object.keys(schedule).length === 0) {
     schedule[year] = createSchedule(year);
-
+    localStorage.setItem("schedule", JSON.stringify(schedule));
     showSchedule(schedule);
+  } else {
+    showSchedule(schedule);
+    console.log(["schedule"], schedule);
   }
 });
 
@@ -69,6 +76,11 @@ scheduleBlock.addEventListener("click", (e) => {
     scheduleItem.classList.add("scheduleItemDayEvent");
 
     listItems.classList.add("listItemsShow");
+
+    dayIndex = Number(e.target.textContent);
+    console.log(["dayIndex"], dayIndex);
+    yearActive = Number(document.querySelector(".activeYear").textContent);
+    console.log(["activeYear"], yearActive);
   }
 });
 
@@ -76,7 +88,11 @@ listItems.addEventListener("click", (e) => {
   if (!e.target.closest("ul")) {
     listItems.classList.remove("listItemsShow");
   } else if (e.target.tagName === "LI") {
-    console.log(["e"], e.target.id);
+    console.log(["li"], e.target.tagName);
+    const dayStatus = e.target.id;
+    console.log(["dayStatus"], dayStatus);
+
+    console.log(["scheduleDay"], schedule[yearActive][1]);
   }
 });
 

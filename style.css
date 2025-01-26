@@ -86,8 +86,8 @@ body {
 }
 
 .scheduleItemDayEvent {
-  background: rgb(246, 169, 15);
-  color: rgb(255, 255, 255);
+  /* background: rgb(246, 169, 15);
+  color: rgb(255, 255, 255); */
 }
 
 .listItemsBlock {
@@ -117,6 +117,15 @@ body {
   padding: 15px;
   background: orange;
   font-size: 12px;
+}
+
+.listItemsEvents li {
+  transition: all ease-in-out 0.28s;
+}
+
+.listItemsEvents li:hover {
+  cursor: pointer;
+  opacity: 0.2;
 }
 
 .listItems li {
