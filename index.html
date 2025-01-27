@@ -11,7 +11,7 @@
     />
     <link rel="icon" type="image/x-icon" href="../images/favicon-16x16.png" />
     <link rel="stylesheet" href="style.css" />
-    <script src="./main.js" defer></script>
+    <script type="module" src="./main.js" defer></script>
     <title>Autodoc Schedule</title>
   </head>
   <body>
@@ -37,18 +37,50 @@
 
       <div class="listItemsBlock">
         <ul class="listItemsEvents">
-          <li id="100">Н/Г 100%</li>
+          <li id="100">Н/Г 100% <input type="number" value="8" /></li>
           <li id="50">Д/Г 50%</li>
           <li id="120">Д/Г 120%</li>
           <li id="holiday">Святковий вихідний</li>
           <li id="weekend">Вихідний</li>
-          <li id="work">Робочий</li>
+          <li id="working">Робочий</li>
+          <li id="l4">l4</li>
         </ul>
       </div>
 
       <div class="schedule">
         <!-- <div class="scheduleItem"><span>1</span></div> -->
       </div>
+
+      <ul class="statusDay">
+        <li class="statusDayItem">
+          <span class="statusDayColorWorkDay"></span>
+          <span class="statusDayText">working day</span>
+        </li>
+        <li class="statusDayItem">
+          <span class="statusDayColorWeekend"></span>
+          <span class="statusDayText">weekend</span>
+        </li>
+        <li class="statusDayItem">
+          <span class="statusDayColorHoliday"></span>
+          <span class="statusDayText">holiday</span>
+        </li>
+        <li class="statusDayItem">
+          <span class="statusDayColor100"></span>
+          <span class="statusDayText">100%</span>
+        </li>
+        <li class="statusDayItem">
+          <span class="statusDayColor"></span>
+          <span class="statusDayText">50%</span>
+        </li>
+        <li class="statusDayItem">
+          <span class="statusDayColor"></span>
+          <span class="statusDayText">120%</span>
+        </li>
+        <li class="statusDayItem">
+          <span class="statusDayColor"></span>
+          <span class="statusDayText">2 зм</span>
+        </li>
+      </ul>
     </div>
   </body>
 </html>

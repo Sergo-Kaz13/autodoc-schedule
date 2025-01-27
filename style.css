@@ -54,6 +54,7 @@ body {
 }
 
 .scheduleItem {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,6 +62,12 @@ body {
   border-radius: 5px;
   min-height: 50px;
   background: rgba(255, 255, 255, 0.5);
+  transition: all ease-in-out 0.28s;
+  cursor: pointer;
+}
+
+.scheduleItem:hover {
+  opacity: 0.7;
 }
 
 .scheduleItemWork {
@@ -72,6 +79,91 @@ body {
   background: rgb(248, 90, 0);
   border: 2px solid rgb(255, 255, 255);
   color: rgb(255, 255, 255);
+}
+
+.scheduleItemHoliday {
+  background: rgb(216, 112, 147);
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+.scheduleItem100 {
+  background: rgb(93 177 166);
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+.scheduleItemL4 {
+  background: rgb(3 239 135);
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+/* .scheduleItemEvening span {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.7);
+} */
+
+.scheduleItemEvening::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+}
+
+.statusDay {
+  display: flex;
+  /* justify-content: space-between; */
+  flex-direction: column;
+  padding: 5px 0 5px 15px;
+  list-style: none;
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.statusDayItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.statusDayColorWorkDay {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 1px;
+  background: rgb(255, 255, 255);
+}
+
+.statusDayColorWeekend {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 1px;
+  background: rgb(248, 90, 0);
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.statusDayColorHoliday {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 1px;
+  background: rgb(216, 112, 147);
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.statusDayColor100 {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 1px;
+  background: rgb(93 177 166);
+  border: 1px solid rgb(255, 255, 255);
 }
 
 .currentDate span {
@@ -92,6 +184,7 @@ body {
 
 .listItemsBlock {
   position: absolute;
+  z-index: 100;
   /* display: flex; */
   justify-content: center;
   align-items: center;
