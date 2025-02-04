@@ -19,6 +19,39 @@ export function createSchedule(year) {
       month.push({
         numberDay: numDayWeek,
         statusDay: statusDay,
+        dayInfo: {
+          dayWork: {
+            status: true,
+            time: 8,
+          },
+          weekend: {
+            status: false,
+          },
+          holiday: {
+            status: false,
+          },
+          100: {
+            status: false,
+            time: 0,
+          },
+          50: {
+            status: false,
+            time: 0,
+          },
+          120: {
+            status: false,
+            time: 0,
+          },
+          l4: {
+            status: false,
+          },
+          eveningWorkShift: {
+            status: false,
+          },
+          workHoliday: {
+            status: false,
+          },
+        },
       });
     }
     fullYear.push(month);

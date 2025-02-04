@@ -4,6 +4,8 @@ import { showSchedule } from "./scripts/showSchedule.js";
 import { months, scheduleBlock } from "./scripts/data.js";
 import { createSchedule } from "./scripts/createSchedule.js";
 
+const { form } = document.forms;
+
 let schedule = null;
 
 let currentYear = new Date().getFullYear();
@@ -18,6 +20,7 @@ const monthItem = document.querySelector(".monthItem");
 const btnMinMonth = document.querySelector(".btnLeft");
 const btnPlusMont = document.querySelector(".btnRight");
 const listItems = document.querySelector(".listItemsBlock");
+const btnClose = document.querySelector(".btnClose");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -72,19 +75,35 @@ scheduleBlock.addEventListener("click", (e) => {
   }
 });
 
-listItems.addEventListener("click", (e) => {
-  if (!e.target.closest("ul")) {
-    listItems.classList.remove("listItemsShow");
-  } else if (e.target.tagName === "LI") {
-    console.log(["li"], e.target.tagName);
-    const dayStatus = e.target.id;
-    schedule[yearActive][Number(monthItem.id)][dayIndex - 1].statusDay =
-      dayStatus;
-    console.log(["scheduleDay"], schedule[yearActive][0]);
-
-    listItems.classList.remove("listItemsShow");
-
-    scheduleBlock.innerHTML = "";
-    showSchedule(schedule, yearActive, Number(monthItem.id));
-  }
+btnClose.addEventListener("click", () => {
+  listItems.classList.remove("listItemsShow");
 });
+
+form.addEventListener("submit", formSend);
+
+async function formSend(e) {
+  e.preventDefault();
+
+  const formDate = new FormData(form);
+  console.log(formDate);
+  const values = Object.fromEntries(formDate.entries());
+
+  console.log(values);
+}
+
+// listItems.addEventListener("click", (e) => {
+//   if (!e.target.closest("ul")) {
+//     listItems.classList.remove("listItemsShow");
+//   } else if (e.target.tagName === "LI") {
+//     console.log(["li"], e.target.tagName);
+//     const dayStatus = e.target.id;
+//     schedule[yearActive][Number(monthItem.id)][dayIndex - 1].statusDay =
+//       dayStatus;
+//     console.log(["scheduleDay"], schedule[yearActive][0]);
+
+//     listItems.classList.remove("listItemsShow");
+
+//     scheduleBlock.innerHTML = "";
+//     showSchedule(schedule, yearActive, Number(monthItem.id));
+//   }
+// });
