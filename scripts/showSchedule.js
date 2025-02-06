@@ -29,8 +29,11 @@ export function showSchedule(schedule, year, month) {
     }
 
     switch (statusDay) {
-      case "working":
+      case "workDay":
         div.classList.add("scheduleItem", "scheduleItemWork");
+        break;
+      case "addHours100":
+        div.classList.add("scheduleItem", "scheduleItem100");
         break;
       case "weekend":
         div.classList.add("scheduleItem", "scheduleItemDayOff");
@@ -38,11 +41,17 @@ export function showSchedule(schedule, year, month) {
       case "holiday":
         div.classList.add("scheduleItem", "scheduleItemHoliday");
         break;
-      case "100":
-        div.classList.add("scheduleItem", "scheduleItem100");
+      case "workHoliday":
+        div.classList.add("scheduleItem", "scheduleItemWorkHoliday");
         break;
-      case "l4":
+      case "leaveOnRequest":
+        div.classList.add("scheduleItem", "scheduleItemLeaveOnRequest");
+        break;
+      case "hospital":
         div.classList.add("scheduleItem", "scheduleItemL4");
+        break;
+      case "birthday":
+        div.classList.add("scheduleItem", "scheduleItemBirthday");
         break;
     }
 

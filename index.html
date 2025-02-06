@@ -74,6 +74,30 @@
               <input
                 type="radio"
                 name="statusDay"
+                id="addHours100"
+                value="addHours100"
+              />
+              <label for="addHours100">100%</label>
+              <select name="100Time" id="">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8" selected>8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                name="statusDay"
                 id="weekend"
                 value="weekend"
               />
@@ -104,25 +128,20 @@
               <input
                 type="radio"
                 name="statusDay"
+                id="leaveOnRequest"
+                value="leaveOnRequest"
+              />
+              <label for="leaveOnRequest">відпустка на вимогу</label>
+            </div>
+
+            <div>
+              <input
+                type="radio"
+                name="statusDay"
                 id="hospital"
                 value="hospital"
               />
               <label for="hospital">лікарняний</label>
-            </div>
-
-            <div>
-              <input type="radio" name="statusDay" id="100" value="100" />
-              <label for="100">100%</label>
-              <select name="100Time" id="">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8" selected>8</option>
-              </select>
             </div>
 
             <div>
@@ -161,8 +180,13 @@
               </select>
             </div>
             <div>
-              <input type="checkbox" name="50" id="" value="50" />
-              <label for="50">50</label>
+              <input
+                type="checkbox"
+                name="addHours50"
+                id="addHours50"
+                value="addHours50"
+              />
+              <label for="addHours50">50%</label>
               <select name="50Time" id="">
                 <option value="1">1</option>
                 <option value="2" selected>2</option>
@@ -174,9 +198,15 @@
                 <option value="8">8</option>
               </select>
             </div>
+
             <div>
-              <input type="checkbox" name="120" id="" value="120" />
-              <label for="120">120</label>
+              <input
+                type="checkbox"
+                name="addHours120"
+                id="addHours120"
+                value="addHours120"
+              />
+              <label for="addHours120">120%</label>
               <select name="120Time" id="">
                 <option value="1">1</option>
                 <option value="2" selected>2</option>
@@ -199,7 +229,44 @@
         <!-- <div class="scheduleItem"><span>1</span></div> -->
       </div>
 
-      <ul class="statusDay">
+      <table class="statusDay">
+        <tbody>
+          <tr>
+            <td><span class="statusDayColorWorkDay"></span></td>
+            <td>робочий день</td>
+          </tr>
+          <tr>
+            <td><span class="statusDayColor100"></span></td>
+            <td>додаткові години 100%</td>
+          </tr>
+          <tr>
+            <td><span class="statusDayColorWeekend"></span></td>
+            <td>вихідний</td>
+          </tr>
+          <tr>
+            <td><span class="statusDayColorHoliday"></span></td>
+            <td>святковий вихідний</td>
+          </tr>
+          <tr>
+            <td><span class="statusDayColorWorkHoliday"></span></td>
+            <td>відпустка</td>
+          </tr>
+          <tr>
+            <td><span class="statusDayColorLeaveOnRequest"></span></td>
+            <td>відпустка на вимогу</td>
+          </tr>
+          <tr>
+            <td><span class="statusDayColorHospital"></span></td>
+            <td>лікарняний</td>
+          </tr>
+          <tr>
+            <td><span class="statusDayColorBirthday"></span></td>
+            <td>вихідний до дн</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- <ul class="statusDay">
         <li class="statusDayItem">
           <span class="statusDayColorWorkDay"></span>
           <span class="statusDayText">робочий день</span>
@@ -236,7 +303,7 @@
           <span class="statusDayColor"></span>
           <span class="statusDayText">лікарняний</span>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </body>
 </html>

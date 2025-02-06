@@ -13,14 +13,14 @@ export function createSchedule(year) {
       numDayWeek =
         numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
 
-      let statusDay = "working";
+      let statusDay = "workDay";
       if (numDayWeek === 5 || numDayWeek === 6) statusDay = "weekend";
 
       month.push({
         numberDay: numDayWeek,
         statusDay: statusDay,
         dayInfo: {
-          dayWork: {
+          workDay: {
             status: true,
             time: 8,
           },
@@ -30,26 +30,36 @@ export function createSchedule(year) {
           holiday: {
             status: false,
           },
-          100: {
-            status: false,
-            time: 0,
-          },
-          50: {
-            status: false,
-            time: 0,
-          },
-          120: {
-            status: false,
-            time: 0,
-          },
-          l4: {
-            status: false,
-          },
-          eveningWorkShift: {
-            status: false,
-          },
           workHoliday: {
             status: false,
+          },
+          leaveOnRequest: {
+            status: false,
+          },
+          hospital: {
+            status: false,
+          },
+          birthday: {
+            status: false,
+          },
+          backshift: {
+            status: false,
+          },
+          higherPower: {
+            status: false,
+            time: 0,
+          },
+          addHours50: {
+            status: false,
+            time: 0,
+          },
+          addHours100: {
+            status: false,
+            time: 0,
+          },
+          addHours120: {
+            status: false,
+            time: 0,
           },
         },
       });

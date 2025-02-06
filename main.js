@@ -13,7 +13,7 @@ let currentMonth = new Date().getMonth();
 
 let dayIndex = null;
 // let monthActive = null;
-let yearActive = null;
+// let yearActive = null;
 
 const activeYear = document.querySelector(".activeYear");
 const monthItem = document.querySelector(".monthItem");
@@ -71,7 +71,13 @@ scheduleBlock.addEventListener("click", (e) => {
     listItems.classList.add("listItemsShow");
 
     dayIndex = Number(e.target.textContent);
-    yearActive = Number(document.querySelector(".activeYear").textContent);
+    // yearActive = Number(document.querySelector(".activeYear").textContent);
+
+    const formDate = new FormData(form);
+    const values = Object.fromEntries(formDate.entries());
+    const { statusDay } = values;
+    // console.log(["statusDay"], statusDay);
+    // weekend, holiday, workHoliday, leaveOnRequest, hospital, birthday/
   }
 });
 
@@ -87,8 +93,22 @@ async function formSend(e) {
   const formDate = new FormData(form);
   console.log(formDate);
   const values = Object.fromEntries(formDate.entries());
+  const { statusDay, backshift, higherPower, addHours50, addHours120 } = values;
+
+  const yearActive = Number(document.querySelector(".activeYear").textContent);
+
+  schedule[yearActive][Number(monthItem.id)][dayIndex - 1].statusDay =
+    statusDay;
+
+  console.log(["backshift"], backshift);
 
   console.log(values);
+  console.log(["schedule"], schedule);
+
+  listItems.classList.remove("listItemsShow");
+
+  scheduleBlock.innerHTML = "";
+  showSchedule(schedule, yearActive, Number(monthItem.id));
 }
 
 // listItems.addEventListener("click", (e) => {

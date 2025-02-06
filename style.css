@@ -51,6 +51,7 @@ body {
   padding: 10px;
   padding-bottom: 30px;
   border-bottom: 1px solid rgb(255, 255, 255);
+  margin-bottom: 30px;
 }
 
 .scheduleItem {
@@ -70,33 +71,51 @@ body {
   opacity: 0.7;
 }
 
+.scheduleItemWork,
+.scheduleItem100,
+.scheduleItemDayOff,
+.scheduleItemHoliday,
+.scheduleItemWorkHoliday,
+.scheduleItemLeaveOnRequest,
+.scheduleItemL4,
+.scheduleItemBirthday {
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+}
+
 .scheduleItemWork {
   background: rgb(255, 255, 255);
-  border: 2px solid rgb(255, 255, 255);
-}
-
-.scheduleItemDayOff {
-  background: rgb(248, 90, 0);
-  border: 2px solid rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
-}
-
-.scheduleItemHoliday {
-  background: rgb(216, 112, 147);
-  border: 2px solid rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
+  color: rgb(248, 90, 0);
 }
 
 .scheduleItem100 {
   background: rgb(93 177 166);
-  border: 2px solid rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
+}
+
+.scheduleItemDayOff {
+  background: rgb(248, 90, 0);
+}
+
+.scheduleItemHoliday {
+  background: rgb(216, 112, 147);
+}
+
+.scheduleItemWorkHoliday {
+  background: rgb(0, 86, 128);
+}
+
+.scheduleItemLeaveOnRequest {
+  background: rgb(236, 13, 110);
 }
 
 .scheduleItemL4 {
-  background: rgb(3 239 135);
-  border: 2px solid rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
+  background: rgb(23, 3, 239);
+}
+
+.scheduleItemBirthday {
+  background: rgb(255, 255, 0);
+  color: rgb(12, 62, 235);
 }
 
 /* .scheduleItemEvening span {
@@ -115,14 +134,9 @@ body {
 }
 
 .statusDay {
-  display: flex;
-  /* justify-content: space-between; */
-  flex-direction: column;
-  padding: 5px 0 5px 15px;
-  list-style: none;
   color: rgb(255, 255, 255);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .statusDayItem {
@@ -131,39 +145,51 @@ body {
   gap: 5px;
 }
 
-.statusDayColorWorkDay {
+.statusDayColorWorkDay,
+.statusDayColor100,
+.statusDayColorWeekend,
+.statusDayColorHoliday,
+.statusDayColorWorkHoliday,
+.statusDayColorLeaveOnRequest,
+.statusDayColorHospital,
+.statusDayColorBirthday {
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   border-radius: 1px;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.statusDayColorWorkDay {
   background: rgb(255, 255, 255);
 }
 
+.statusDayColor100 {
+  background: rgb(93 177 166);
+}
+
 .statusDayColorWeekend {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 1px;
   background: rgb(248, 90, 0);
-  border: 1px solid rgb(255, 255, 255);
 }
 
 .statusDayColorHoliday {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 1px;
   background: rgb(216, 112, 147);
-  border: 1px solid rgb(255, 255, 255);
 }
 
-.statusDayColor100 {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 1px;
-  background: rgb(93 177 166);
-  border: 1px solid rgb(255, 255, 255);
+.statusDayColorWorkHoliday {
+  background: rgb(0, 86, 128);
+}
+
+.statusDayColorLeaveOnRequest {
+  background: rgb(236, 13, 110);
+}
+
+.statusDayColorHospital {
+  background: rgb(23, 3, 239);
+}
+
+.statusDayColorBirthday {
+  background: rgb(215, 239, 3);
 }
 
 .currentDate span {
@@ -203,13 +229,13 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 20px;
   list-style: none;
   border: 2px solid rgb(255, 255, 0);
   border-radius: 10px;
   padding: 50px 30px 20px 30px;
   background: rgb(255, 165, 0);
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 600;
   color: rgb(255, 255, 255);
   text-transform: capitalize;
@@ -257,6 +283,8 @@ body {
 }
 
 .btnSubmit {
+  min-width: 150px;
+  min-height: 50px;
   padding: 5px 30px;
   border-radius: 5px;
   border: 2px solid rgb(255, 255, 255);
@@ -264,6 +292,11 @@ body {
   color: rgb(248, 90, 0);
   text-transform: uppercase;
   font-weight: 700;
+  transition: all ease-in-out 0.28s;
+}
+
+.btnSubmit:hover {
+  cursor: pointer;
 }
 
 .listItemsEvents li {
