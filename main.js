@@ -132,8 +132,17 @@ async function formSend(e) {
   if (statusDay === "workDay") {
     workDay.status = true;
     workDay.time = Number(workDayTime);
-  } else if (statusDay === "addHours100") {
-    console.log(["time100"], time100);
+  } else {
+    workDay.status = false;
+    workDay.time = 0;
+  }
+
+  if (statusDay === "addHours100") {
+    addHours100.status = true;
+    addHours100.time = Number(time100);
+  } else {
+    addHours100.status = false;
+    addHours100.time = 0;
   }
 
   backshiftStatus ? (backshift.status = true) : (backshift.status = false);
@@ -166,6 +175,8 @@ async function formSend(e) {
   console.log(["schedule"], schedule);
 
   listItems.classList.remove("listItemsShow");
+
+  localStorage.setItem("schedule", JSON.stringify(schedule));
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, yearActive, Number(monthItem.id));
