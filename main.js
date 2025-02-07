@@ -93,14 +93,60 @@ async function formSend(e) {
   const formDate = new FormData(form);
   console.log(formDate);
   const values = Object.fromEntries(formDate.entries());
-  const { statusDay, backshift, higherPower, addHours50, addHours120 } = values;
+  const {
+    statusDay,
+    backshift: backshiftStatus,
+    higherPower,
+    addHours100,
+    addHours50,
+    addHours120,
+    time100,
+    time50,
+    time120,
+    workDayTime,
+  } = values;
+
+  console.log(["backshiftStatus"], backshiftStatus);
 
   const yearActive = Number(document.querySelector(".activeYear").textContent);
 
   schedule[yearActive][Number(monthItem.id)][dayIndex - 1].statusDay =
     statusDay;
 
-  console.log(["backshift"], backshift);
+  const {
+    addHours100,
+    addHours120,
+    addHours50,
+    backshift,
+    birthday,
+    higherPowe,
+    holiday,
+    hospital,
+    leaveOnRequest,
+    weekend,
+    workDay,
+    workHoliday,
+  } = schedule[yearActive][Number(monthItem.id)][dayIndex - 1].dayInfo;
+
+  if (statusDay === "workDay") {
+    schedule[yearActive][Number(monthItem.id)][
+      dayIndex - 1
+    ].dayInfo.workDay.status = true;
+    // schedule[yearActive][Number(monthItem.id)][
+    //   dayIndex - 1
+    // ].dayInfo.workDay.time = Number(workDayTime);
+    workDay.time = Number(workDayTime);
+  } else if (statusDay === "addHours100") {
+    console.log(["time100"], time100);
+  }
+
+  // console.log(["backshift"], backshift);
+
+  // backshiftStatus !== undefined
+  //   ? (backshift.status = true)
+  //   : (backshift.status = false);
+
+  // console.log(["backshift"], backshift);
 
   console.log(values);
   console.log(["schedule"], schedule);
@@ -127,3 +173,9 @@ async function formSend(e) {
 //     showSchedule(schedule, yearActive, Number(monthItem.id));
 //   }
 // });
+
+const removeLocalhost = document.querySelector(".removeLocalhoste");
+
+removeLocalhost.addEventListener("click", () => {
+  localStorage.removeItem("schedule");
+});
