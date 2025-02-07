@@ -10,7 +10,7 @@ export function showSchedule(schedule, year, month) {
   const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();
 
-  activeMonth.map(({ numberDay, statusDay }, i) => {
+  activeMonth.map(({ numberDay, statusDay, dayInfo }, i) => {
     if (i === 0) {
       for (let j = 0; j < numberDay; j++) {
         const fakeDay = document.createElement("div");
@@ -27,6 +27,11 @@ export function showSchedule(schedule, year, month) {
     if (i + 1 === currentDate && currentMonth === month) {
       div.classList.add("currentDate");
     }
+
+    if (dayInfo.backshift.status) div.classList.add("backshift");
+    if (dayInfo.addHours50.status) div.classList.add("addHours50");
+    if (dayInfo.addHours120.status) div.classList.add("addHours120");
+    if (dayInfo.higherPower.status) div.classList.add("higherPower");
 
     switch (statusDay) {
       case "workDay":
