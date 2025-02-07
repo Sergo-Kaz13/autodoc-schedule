@@ -7,10 +7,22 @@ export function showSchedule(schedule, year, month) {
   const currentYear = schedule[year];
   const activeMonth = currentYear[month];
 
+  console.log(["activeMonth"], activeMonth);
+
   const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();
 
+  let workTime = 0;
+  let time100 = 0;
+  let time50 = 0;
+  let time120 = 0;
+
   activeMonth.map(({ numberDay, statusDay, dayInfo }, i) => {
+    workTime += dayInfo.workDay.time;
+    time100 += dayInfo.addHours100.time;
+    time50 += dayInfo.addHours50.time;
+    time120 += dayInfo.addHours120.time;
+
     if (i === 0) {
       for (let j = 0; j < numberDay; j++) {
         const fakeDay = document.createElement("div");
@@ -59,6 +71,18 @@ export function showSchedule(schedule, year, month) {
         div.classList.add("scheduleItem", "scheduleItemBirthday");
         break;
     }
+
+    document.querySelector(".workDayTime").textContent = workTime;
+    document.querySelector(".workPrice").textContent = workTime * 31.5;
+
+    document.querySelector(".dayTime100").textContent = time100;
+    document.querySelector(".time100Price").textContent = time100 * 31.5 * 2;
+
+    document.querySelector(".dayTime50").textContent = time50;
+    document.querySelector(".time50Price").textContent = time50 * 31.5 * 1.5;
+
+    document.querySelector(".dayTime120").textContent = time120;
+    document.querySelector(".time120Price").textContent = time120 * 31.5 * 2.2;
 
     scheduleBlock.append(div);
 
