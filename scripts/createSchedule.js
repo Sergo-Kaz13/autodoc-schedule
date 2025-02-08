@@ -15,9 +15,13 @@ export function createSchedule(year) {
 
       let statusDay = "workDay";
       let time = 8;
+      let workStatus = true;
+      let weekendStatus = false;
       if (numDayWeek === 5 || numDayWeek === 6) {
         statusDay = "weekend";
         time = 0;
+        workStatus = false;
+        weekendStatus = true;
       }
 
       month.push({
@@ -25,11 +29,11 @@ export function createSchedule(year) {
         statusDay: statusDay,
         dayInfo: {
           workDay: {
-            status: true,
+            status: workStatus,
             time: time,
           },
           weekend: {
-            status: false,
+            status: weekendStatus,
           },
           holiday: {
             status: false,

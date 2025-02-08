@@ -20,6 +20,7 @@ const monthItem = document.querySelector(".monthItem");
 const btnMinMonth = document.querySelector(".btnLeft");
 const btnPlusMont = document.querySelector(".btnRight");
 const listItems = document.querySelector(".listItemsBlock");
+const dayInfoTable = document.querySelector(".dayInfoTable");
 const btnClose = document.querySelector(".btnClose");
 
 activeYear.textContent = currentYear;
@@ -66,18 +67,158 @@ scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");
 
   if (scheduleItem.id === "scheduleItem") {
-    scheduleItem.classList.add("scheduleItemDayEvent");
-
-    listItems.classList.add("listItemsShow");
-
+    // scheduleItem.classList.add("scheduleItemDayEvent");
     dayIndex = Number(e.target.textContent);
-    // yearActive = Number(document.querySelector(".activeYear").textContent);
 
-    const formDate = new FormData(form);
-    const values = Object.fromEntries(formDate.entries());
-    const { statusDay } = values;
-    // console.log(["statusDay"], statusDay);
-    // weekend, holiday, workHoliday, leaveOnRequest, hospital, birthday/
+    const {
+      addHours100,
+      addHours120,
+      addHours50,
+      backshift,
+      birthday,
+      higherPower,
+      holiday,
+      hospital,
+      leaveOnRequest,
+      weekend,
+      workDay,
+      workHoliday,
+    } =
+      schedule[Number(document.querySelector(".activeYear").textContent)][
+        Number(monthItem.id)
+      ][dayIndex - 1].dayInfo;
+
+    console.log(["schedule"], schedule);
+
+    console.log(["workDay.status"], workDay.status);
+    console.log(["weekend"], weekend);
+
+    const infoDay = `
+      <tbody>
+        ${
+          backshift.status
+            ? `
+            <tr>
+              <td>друга зміна</td>
+              <td>14:00 - 22:00</td>
+            </tr>
+          `
+            : `
+              <tr>
+                <td>перша зміна</td>
+                <td>06:00 - 14:00</td>
+              </tr>
+            `
+        }
+        ${
+          workDay.status
+            ? `<tr>
+          <td>Робочий день</td>
+          <td>${workDay.time} год.</td>
+        </tr>`
+            : ``
+        }
+        ${
+          weekend.status
+            ? `
+            <tr>
+              <td>вихідний</td>
+            </tr>
+          `
+            : ``
+        }
+        ${
+          addHours100.status
+            ? `
+          <tr>
+            <td>100%</td>
+            <td>${addHours100.time} год.</td>
+          </tr>
+        `
+            : ``
+        }
+        ${
+          holiday.status
+            ? `
+          <tr>
+            <td>святковий вихідний</td>
+          </tr>
+        `
+            : ``
+        }
+        ${
+          workHoliday.status
+            ? `
+            <tr>
+              <td>відпустка</td>
+            </tr>
+          `
+            : ``
+        }
+        ${
+          leaveOnRequest.status
+            ? `
+            <tr>
+              <td>відпустка на вимогу</td>
+            </tr>
+          `
+            : ``
+        }
+        ${
+          birthday.status
+            ? `
+            <tr>
+              <td>вихідний до ДН 🎂🎈</td>
+            </tr>
+          `
+            : ``
+        }
+        ${
+          hospital.status
+            ? `
+            <tr>
+              <td>лікарняний</td>
+            </tr>
+          `
+            : ``
+        }
+        ${
+          addHours50.status
+            ? `
+            <tr>
+              <td>50%</td>
+              <td>${addHours50.time} год.</td>
+            </tr>
+          `
+            : ``
+        }
+        ${
+          addHours120.status
+            ? `
+            <tr>
+              <td>120%</td>
+              <td>${addHours120.time} год.</td>
+            </tr>
+          `
+            : ``
+        }
+        ${
+          higherPower.status
+            ? `
+            <tr>
+              <td>вища сила</td>
+              <td>${higherPower.time} год.</td>
+            </tr>
+          `
+            : ``
+        }
+      </tbody>
+    `;
+
+    console.log(["dayInfoTable"], dayInfoTable);
+
+    dayInfoTable.innerHTML = infoDay;
+    listItems.classList.add("listItemsShow");
   }
 });
 
@@ -145,6 +286,21 @@ async function formSend(e) {
     addHours100.time = 0;
   }
 
+  statusDay === "weekend" ? (weekend.status = true) : (weekend.status = false);
+  statusDay === "holiday" ? (holiday.status = true) : (holiday.status = false);
+  statusDay === "workHoliday"
+    ? (workHoliday.status = true)
+    : (workHoliday.status = false);
+  statusDay === "leaveOnRequest"
+    ? (leaveOnRequest.status = true)
+    : (leaveOnRequest.status = false);
+  statusDay === "birthday"
+    ? (birthday.status = true)
+    : (birthday.status = false);
+  statusDay === "hospital"
+    ? (hospital.status = true)
+    : (hospital.status = false);
+
   backshiftStatus ? (backshift.status = true) : (backshift.status = false);
 
   if (addHours50Form) {
@@ -166,6 +322,10 @@ async function formSend(e) {
   if (higherPowerForm) {
     higherPower.status = true;
     higherPower.time = Number(higherPowerTime);
+
+    if (statusDay === "workDay")
+      workDay.time = workDay.time - Number(higherPowerTime);
+    if (workDay.time === 0) workDay.status = false;
   } else {
     higherPower.status = false;
     higherPower.time = 0;
@@ -181,23 +341,6 @@ async function formSend(e) {
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, yearActive, Number(monthItem.id));
 }
-
-// listItems.addEventListener("click", (e) => {
-//   if (!e.target.closest("ul")) {
-//     listItems.classList.remove("listItemsShow");
-//   } else if (e.target.tagName === "LI") {
-//     console.log(["li"], e.target.tagName);
-//     const dayStatus = e.target.id;
-//     schedule[yearActive][Number(monthItem.id)][dayIndex - 1].statusDay =
-//       dayStatus;
-//     console.log(["scheduleDay"], schedule[yearActive][0]);
-
-//     listItems.classList.remove("listItemsShow");
-
-//     scheduleBlock.innerHTML = "";
-//     showSchedule(schedule, yearActive, Number(monthItem.id));
-//   }
-// });
 
 const removeLocalhost = document.querySelector(".removeLocalhoste");
 
