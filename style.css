@@ -23,7 +23,7 @@ body {
 body {
   line-height: 1.5;
   font-size: 1rem;
-  background: rgb(248, 90, 0);
+  background: rgb(244, 133, 38);
   font-family: "Inter", sans-serif;
 }
 
@@ -48,7 +48,7 @@ body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
-  color: rgb(248, 90, 0);
+  color: rgb(244, 133, 38);
   padding: 10px;
   padding-bottom: 30px;
   border-bottom: 1px solid rgb(255, 255, 255);
@@ -60,7 +60,7 @@ body {
   display: flex;
   justify-content: center;
   /* align-items: center; */
-  border: 1px solid rgb(248, 90, 0);
+  border: 1px solid rgb(244, 133, 38);
   border-radius: 5px;
   min-height: 50px;
   background: rgba(255, 255, 255, 0.5);
@@ -81,55 +81,105 @@ body {
 .scheduleItemL4,
 .scheduleItemBirthday {
   border: 2px solid rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
   font-weight: 700;
+  color: rgb(255, 255, 255);
 }
 
 .scheduleItemWork {
   background: rgb(255, 255, 255);
-  color: rgb(248, 90, 0);
+  color: rgb(244, 133, 38);
 }
 
 .scheduleItem100 {
-  /* background: rgb(93 177 166); */
-  box-shadow: inset 0 0 20px rgb(93 177 166);
-  background: rgb(255, 255, 255);
-  color: rgb(248 90 0);
+  background: rgb(176, 199, 227);
 }
 
 .scheduleItem100::before {
   content: "100%";
   position: absolute;
-  bottom: -2px;
-  left: 2px;
+  bottom: 2px;
+  width: 100%;
+  text-align: center;
   font-size: 12px;
   color: rgb(255, 255, 255);
-  color: rgb(248 90 0);
 }
 
 .scheduleItemDayOff {
-  background: rgb(248, 90, 0);
+  background: rgb(244, 133, 38);
+  color: rgb(255, 255, 255);
+}
+
+.scheduleItemDayOff::after {
+  content: "wolne";
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+  text-align: center;
+  font-size: 8px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .scheduleItemHoliday {
-  background: rgb(216, 112, 147);
+  background: rgb(244, 133, 38);
+  color: rgb(255, 255, 255);
+}
+
+.scheduleItemHoliday::after {
+  content: "wolne za święto";
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+  text-align: center;
+  font-size: 8px;
+  line-height: 1.2;
 }
 
 .scheduleItemWorkHoliday {
-  background: rgb(0, 86, 128);
+  background: rgb(191, 128, 183);
+}
+
+.scheduleItemWorkHoliday::after {
+  content: "urlop";
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+  text-align: center;
+  font-size: 8px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .scheduleItemLeaveOnRequest {
-  background: rgb(236, 13, 110);
+  background: rgb(90, 104, 179);
+}
+
+.scheduleItemLeaveOnRequest::after {
+  content: "urlop na żądanie";
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+  text-align: center;
+  font-size: 8px;
+  line-height: 1.2;
 }
 
 .scheduleItemL4 {
-  background: rgb(23, 3, 239);
+  color: rgb(255, 255, 255);
+  background: rgb(245, 124, 113);
+}
+
+.scheduleItemL4::after {
+  content: "L4";
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+  text-align: center;
+  font-size: 13px;
 }
 
 .scheduleItemBirthday {
-  background: rgb(255, 255, 0);
-  color: rgb(12, 62, 235);
+  background: #65c296;
 }
 
 .scheduleItemBirthday::after {
@@ -141,30 +191,44 @@ body {
 }
 
 .backshift {
-  border: 2px solid rgb(0, 0, 0);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
 }
 
 .addHours50::after {
   content: "50%";
   position: absolute;
-  top: 2px;
-  right: 2px;
-  font-size: 12px;
-  color: rgba(36, 82, 142, 0.7);
+  bottom: 12px;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  color: rgb(255, 255, 255);
+  background: rgb(191, 128, 183);
 }
 
 .addHours120::before {
   content: "120%";
   position: absolute;
-  bottom: 2px;
-  left: 2px;
-  font-size: 12px;
-  color: rgba(230, 6, 208, 0.7);
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  color: rgb(255, 255, 255);
+  background: rgb(191, 128, 183);
 }
 
 .higherPower {
-  background: tomato;
+  background: rgb(88, 196, 198);
+  color: rgb(255, 255, 255);
+}
+
+.higherPower::after {
+  content: "urlop siła wyższa";
+  position: absolute;
+  width: 100%;
+  bottom: 2px;
+  text-align: center;
+  font-size: 8px;
+  line-height: 1.2;
 }
 
 /* .scheduleItemEvening span {
@@ -190,13 +254,13 @@ body {
 
 .statusDay th {
   background-color: #d6eeee;
-  color: rgb(248, 90, 0);
+  color: rgb(244, 133, 38);
   padding: 3px 15px;
 }
 
 .statusDay tr:nth-child(even) {
   background-color: #d6eeee;
-  color: rgb(248, 90, 0);
+  color: rgb(244, 133, 38);
 }
 
 .statusDay td {
@@ -233,7 +297,7 @@ body {
 }
 
 .statusDayColorWeekend {
-  background: rgb(248, 90, 0);
+  background: rgb(244, 133, 38);
 }
 
 .statusDayColorHoliday {
@@ -264,14 +328,14 @@ body {
   color: rgba(230, 6, 208, 0.7);
 }
 
+.currentDate {
+  /* color: rgb(3, 105, 179); */
+}
+
 .currentDate span {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  padding: 5px;
-  background: rgb(32 167 66);
-  color: rgb(255 255 255);
-  line-height: 1.2;
+  width: 20px;
+  height: 20px;
+  color: #ee1c25;
   text-align: center;
 }
 
@@ -307,7 +371,7 @@ body {
   border-radius: 10px;
   padding: 50px 30px 20px 30px;
   background: rgb(255, 165, 0);
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
   color: rgb(255, 255, 255);
   text-transform: capitalize;
@@ -328,14 +392,30 @@ body {
 .listItemsEvents select {
   margin-left: 10px;
   border-radius: 5px;
-  color: rgb(248, 90, 0);
+  color: rgb(244, 133, 38);
   font-size: 14px;
   font-weight: 700;
+}
+
+.dayInfoTable {
+  background: rgb(255, 255, 255);
+  color: rgb(111, 93, 93);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.dayInfoTable tr {
+  background-color: #d6eeee;
+}
+
+.dayInfoTable td {
+  padding: 0 3px;
 }
 
 .listItemsBlockOne {
   border-bottom: 2px solid rgb(255, 255, 255);
   padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .listItemsBlockTwo {
@@ -361,7 +441,7 @@ body {
   border-radius: 5px;
   border: 2px solid rgb(255, 255, 255);
   background: rgb(255, 255, 255);
-  color: rgb(248, 90, 0);
+  color: rgb(244, 133, 38);
   text-transform: uppercase;
   font-weight: 700;
   transition: all ease-in-out 0.28s;
@@ -433,7 +513,7 @@ body {
 
 .nameDay {
   background: rgba(255, 255, 255, 0.8);
-  color: rgb(248, 90, 0);
+  color: rgb(244, 133, 38);
   font-size: 16px;
   font-weight: 500;
   text-transform: capitalize;
