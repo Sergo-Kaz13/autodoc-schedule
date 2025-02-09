@@ -248,19 +248,25 @@ body {
 
 .statusDay {
   color: rgb(255, 255, 255);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 800;
+  margin: 0 auto;
 }
 
 .statusDay th {
   background-color: #d6eeee;
   color: rgb(244, 133, 38);
-  padding: 3px 15px;
+  /* padding: 1px 15px; */
 }
 
-.statusDay tr:nth-child(even) {
+.statusDay tr:nth-child(odd) {
   background-color: #d6eeee;
   color: rgb(244, 133, 38);
+}
+
+.statusDay tr:last-child {
+  background: #58c6c7;
+  color: rgb(255, 255, 255);
 }
 
 .statusDay td {
@@ -272,7 +278,7 @@ body {
   align-items: center;
   gap: 5px;
 } */
-
+/* 
 .statusDayColorWorkDay,
 .statusDayColor100,
 .statusDayColorWeekend,
@@ -326,7 +332,7 @@ body {
 
 .statusDayColor120 {
   color: rgba(230, 6, 208, 0.7);
-}
+} */
 
 .currentDate {
   /* color: rgb(3, 105, 179); */

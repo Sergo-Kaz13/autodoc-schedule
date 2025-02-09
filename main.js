@@ -96,19 +96,24 @@ scheduleBlock.addEventListener("click", (e) => {
     const infoDay = `
       <tbody>
         ${
-          backshift.status
+          backshift.status && (workDay.status || addHours100.status)
             ? `
             <tr>
               <td>друга зміна</td>
               <td>14:00 - 22:00</td>
             </tr>
           `
-            : `
-              <tr>
-                <td>перша зміна</td>
-                <td>06:00 - 14:00</td>
-              </tr>
-            `
+            : ``
+        }
+        ${
+          (workDay.status || addHours100.status) && !backshift.status
+            ? `
+            <tr>
+              <td>перша  зміна</td>
+              <td>06:00 - 14:00</td>
+            </tr>
+          `
+            : ``
         }
         ${
           workDay.status
