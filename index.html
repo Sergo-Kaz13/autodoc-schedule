@@ -42,6 +42,10 @@
           <table class="dayInfoTable"></table>
 
           <form id="form">
+            <div class="formTitle">
+              <span class="formTitleText">внести зміни</span>
+              <span class="formTitleIcon">👇</span>
+            </div>
             <div class="listItemsBlockOne">
               <div>
                 <input
@@ -51,7 +55,7 @@
                   value="workDay"
                   checked
                 />
-                <label for="workDay">робочий день</label>
+                <label for="workDay">години праці</label>
                 <select name="workDayTime" id="">
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -71,7 +75,7 @@
                   id="addHours100"
                   value="addHours100"
                 />
-                <label for="addHours100">100%</label>
+                <label for="addHours100">понаднормові 100%</label>
                 <select name="time100" id="">
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -185,7 +189,7 @@
                   id="addHours50"
                   value="addHours50"
                 />
-                <label for="addHours50">50%</label>
+                <label for="addHours50">понаднормові 50%</label>
                 <select name="time50" id="">
                   <option value="1">1</option>
                   <option value="2" selected>2</option>
@@ -205,7 +209,7 @@
                   id="addHours120"
                   value="addHours120"
                 />
-                <label for="addHours120">120%</label>
+                <label for="addHours120">понаднормові 120%</label>
                 <select name="time120" id="">
                   <option value="1">1</option>
                   <option value="2" selected>2</option>
@@ -263,12 +267,28 @@
             <td><span class="hoursWorked">0</span> год.</td>
             <td><span class="grossSalary">0</span> zł</td>
           </tr>
-          <!-- <tr>
+        </tbody>
+      </table>
+
+      <table class="tableUrlop">
+        <thead>
+          <tr>
+            <th></th>
+            <th>кількість</th>
+            <th>використано</th>
+            <th>залишилося</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
             <td>відпустка</td>
           </tr>
           <tr>
-            <td>відпустка на вимогу</td>
-          </tr> -->
+            <td>підпустка на вимогу</td>
+          </tr>
+          <tr>
+            <td>вища сила</td>
+          </tr>
         </tbody>
       </table>
 

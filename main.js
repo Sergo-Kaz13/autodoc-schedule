@@ -3,6 +3,7 @@
 import { showSchedule } from "./scripts/showSchedule.js";
 import { months, scheduleBlock } from "./scripts/data.js";
 import { createSchedule } from "./scripts/createSchedule.js";
+import sumSalaryDay from "./scripts/sumSalaryDay.js";
 
 const { form } = document.forms;
 
@@ -67,7 +68,6 @@ scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");
 
   if (scheduleItem.id === "scheduleItem") {
-    // scheduleItem.classList.add("scheduleItemDayEvent");
     dayIndex = Number(e.target.textContent);
 
     const {
@@ -90,10 +90,30 @@ scheduleBlock.addEventListener("click", (e) => {
 
     console.log(["schedule"], schedule);
 
-    console.log(["workDay.status"], workDay.status);
-    console.log(["weekend"], weekend);
+    const salaryDay = sumSalaryDay(
+      addHours100,
+      addHours120,
+      addHours50,
+      birthday,
+      higherPower,
+      hospital,
+      leaveOnRequest,
+      workDay,
+      workHoliday,
+      31.5
+    ).toFixed(2);
+
+    // console.log(["workDay.status"], workDay.status);
+    // console.log(["weekend"], weekend);
+
+    const dayInfo = dayIndex < 10 ? "0" + dayIndex : dayIndex;
+    const monthInfo = Number(monthItem.id) + 1;
+    const monthInfoStr = monthInfo < 10 ? "0" + monthInfo : monthInfo;
 
     const infoDay = `
+      <thead>
+        <th colspan="2">Інформація за ${dayInfo + "." + monthInfoStr}</th>
+      </thead>
       <tbody>
         ${
           backshift.status && (workDay.status || addHours100.status)
@@ -136,7 +156,7 @@ scheduleBlock.addEventListener("click", (e) => {
           addHours100.status
             ? `
           <tr>
-            <td>100%</td>
+            <td>понаднормові 100%</td>
             <td>${addHours100.time} год.</td>
           </tr>
         `
@@ -191,7 +211,7 @@ scheduleBlock.addEventListener("click", (e) => {
           addHours50.status
             ? `
             <tr>
-              <td>50%</td>
+              <td>понаднормові 50%</td>
               <td>${addHours50.time} год.</td>
             </tr>
           `
@@ -201,7 +221,7 @@ scheduleBlock.addEventListener("click", (e) => {
           addHours120.status
             ? `
             <tr>
-              <td>120%</td>
+              <td>понаднормові 120%</td>
               <td>${addHours120.time} год.</td>
             </tr>
           `
@@ -217,6 +237,10 @@ scheduleBlock.addEventListener("click", (e) => {
           `
             : ``
         }
+        <tr class="salaryDay">
+          <td>дохід брутто</td>
+          <td>${salaryDay} zl</td>
+        </tr>
       </tbody>
     `;
 
