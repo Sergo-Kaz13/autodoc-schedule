@@ -1,3 +1,4 @@
+import calculateSalaryMonth from "./calculateSalaryMonth.js";
 import { scheduleBlock } from "./data.js";
 
 export function showSchedule(schedule, year, month) {
@@ -12,12 +13,14 @@ export function showSchedule(schedule, year, month) {
   const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();
 
+  const { rate } = activeMonth;
+
   let workTime = 0;
   let time100 = 0;
   let time50 = 0;
   let time120 = 0;
 
-  activeMonth.map(({ numberDay, statusDay, dayInfo }, i) => {
+  activeMonth.days.map(({ numberDay, statusDay, dayInfo }, i) => {
     workTime += dayInfo.workDay.time;
     time100 += dayInfo.addHours100.time;
     time50 += dayInfo.addHours50.time;
@@ -72,85 +75,45 @@ export function showSchedule(schedule, year, month) {
         break;
     }
 
-    document.querySelector(".workDayTime").textContent = workTime;
-    document.querySelector(".workPrice").textContent = (
-      workTime * 31.5
-    ).toFixed(2);
-
-    document.querySelector(".dayTime100").textContent = time100;
-    document.querySelector(".time100Price").textContent = (
-      time100 *
-      31.5 *
-      2
-    ).toFixed(2);
-
-    document.querySelector(".dayTime50").textContent = time50;
-    document.querySelector(".time50Price").textContent = (
-      time50 *
-      31.5 *
-      1.5
-    ).toFixed(2);
-
-    document.querySelector(".dayTime120").textContent = time120;
-    document.querySelector(".time120Price").textContent = (
-      time120 *
-      31.5 *
-      2.2
-    ).toFixed(2);
-
-    document.querySelector(".hoursWorked").textContent =
-      workTime + time100 + time50 + time120;
-    document.querySelector(".grossSalary").textContent = (
-      workTime * 31.5 +
-      time100 * 31.5 * 2 +
-      time50 * 31.5 * 1.5 +
-      time120 * 31.5 * 2.2
-    ).toFixed(2);
-
     scheduleBlock.append(div);
-
-    // if (i === 0) {
-    //   const div = document.createElement("div");
-    //   const span = document.createElement("span");
-    //   span.textContent = i + 1;
-    //   div.append(span);
-    //   div.id = "scheduleItem";
-    //   if (
-    //     (numberDay === 5 && statusDay === "weekend") ||
-    //     (numberDay === 6 && statusDay === "weekend")
-    //   ) {
-    //     div.classList.add("scheduleItem", "scheduleItemDayOff");
-    //     if (i + 1 === currentDate && currentMonth === month) {
-    //       div.classList.add("currentDate");
-    //     }
-    //   } else {
-    //     div.classList.add("scheduleItem", "scheduleItemWork");
-    //     if (i + 1 === currentDate && currentMonth === month) {
-    //       div.classList.add("currentDate");
-    //     }
-    //   }
-    //   scheduleBlock.append(div);
-    // } else {
-    //   const div = document.createElement("div");
-    //   const span = document.createElement("span");
-    //   span.textContent = i + 1;
-    //   div.append(span);
-    //   div.id = "scheduleItem";
-    //   if (
-    //     (numberDay === 5 && statusDay === "weekend") ||
-    //     (numberDay === 6 && statusDay === "weekend")
-    //   ) {
-    //     div.classList.add("scheduleItem", "scheduleItemDayOff");
-    //     if (i + 1 === currentDate && currentMonth === month) {
-    //       div.classList.add("currentDate");
-    //     }
-    //   } else {
-    //     div.classList.add("scheduleItem", "scheduleItemWork");
-    //     if (i + 1 === currentDate && currentMonth === month) {
-    //       div.classList.add("currentDate");
-    //     }
-    //   }
-    //   scheduleBlock.append(div);
-    // }
   });
+
+  // document.querySelector(".workDayTime").textContent = workTime;
+  // document.querySelector(".workPrice").textContent = (
+  //   workTime * 31.5
+  // ).toFixed(2);
+
+  document.querySelector(".rateSpan").textContent = rate;
+
+  calculateSalaryMonth(".workDayTime", ".workPrice", workTime, rate);
+
+  document.querySelector(".dayTime100").textContent = time100;
+  document.querySelector(".time100Price").textContent = (
+    time100 *
+    31.5 *
+    2
+  ).toFixed(2);
+
+  document.querySelector(".dayTime50").textContent = time50;
+  document.querySelector(".time50Price").textContent = (
+    time50 *
+    31.5 *
+    1.5
+  ).toFixed(2);
+
+  document.querySelector(".dayTime120").textContent = time120;
+  document.querySelector(".time120Price").textContent = (
+    time120 *
+    31.5 *
+    2.2
+  ).toFixed(2);
+
+  document.querySelector(".hoursWorked").textContent =
+    workTime + time100 + time50 + time120;
+  document.querySelector(".grossSalary").textContent = (
+    workTime * 31.5 +
+    time100 * 31.5 * 2 +
+    time50 * 31.5 * 1.5 +
+    time120 * 31.5 * 2.2
+  ).toFixed(2);
 }

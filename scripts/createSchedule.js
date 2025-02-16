@@ -6,7 +6,10 @@ export function createSchedule(year) {
   for (let i = 1; i < 13; i++) {
     const days = daysInMonth(i, year);
 
-    const month = [];
+    const month = {
+      rate: 31.5,
+      days: [],
+    };
 
     for (let j = 1; j <= days; j++) {
       let numDayWeek = new Date(`${year}-${i}-${j}`).getDay() - 1;
@@ -24,7 +27,7 @@ export function createSchedule(year) {
         weekendStatus = true;
       }
 
-      month.push({
+      month.days.push({
         numberDay: numDayWeek,
         statusDay: statusDay,
         dayInfo: {

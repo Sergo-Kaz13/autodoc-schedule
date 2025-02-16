@@ -1,18 +1,18 @@
 "use strict";
 
 const months = [
-  "january",
-  "february",
-  "march",
-  "april",
-  "may",
-  "june",
-  "july",
-  "august",
-  "september",
-  "october",
-  "november",
-  "december",
+  "січень",
+  "лютий",
+  "березень",
+  "квітень",
+  "травень",
+  "червень",
+  "липень",
+  "серпень",
+  "вересень",
+  "жовтень",
+  "листопад",
+  "грудень",
 ];
 
 const scheduleBlock = document.querySelector(".schedule");

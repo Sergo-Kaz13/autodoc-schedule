@@ -4,17 +4,17 @@ import { showSchedule } from "./scripts/showSchedule.js";
 import { months, scheduleBlock } from "./scripts/data.js";
 import { createSchedule } from "./scripts/createSchedule.js";
 import sumSalaryDay from "./scripts/sumSalaryDay.js";
+import createDayInfo from "./scripts/createDayInfo.js";
 
 const { form } = document.forms;
 
 let schedule = null;
+let btnToggleRate = true;
 
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth();
 
 let dayIndex = null;
-// let monthActive = null;
-// let yearActive = null;
 
 const activeYear = document.querySelector(".activeYear");
 const monthItem = document.querySelector(".monthItem");
@@ -23,6 +23,8 @@ const btnPlusMont = document.querySelector(".btnRight");
 const listItems = document.querySelector(".listItemsBlock");
 const dayInfoTable = document.querySelector(".dayInfoTable");
 const btnClose = document.querySelector(".btnClose");
+const toggleRate = document.querySelector(".toggleRate");
+const rateSpanBlock = document.querySelector(".rateSpanBlock");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -54,7 +56,7 @@ btnMinMonth.addEventListener("click", () => {
 });
 
 btnPlusMont.addEventListener("click", () => {
-  if (currentMonth < months.length) {
+  if (currentMonth < months.length - 1) {
     currentMonth++;
     monthItem.textContent = months[currentMonth];
     monthItem.id = currentMonth;
@@ -62,6 +64,31 @@ btnPlusMont.addEventListener("click", () => {
     scheduleBlock.innerHTML = "";
     showSchedule(schedule, undefined, currentMonth);
   }
+});
+
+toggleRate.addEventListener("click", (e) => {
+  // if (btnToggleRate) {
+  const value = document.querySelector(".rateSpan").textContent;
+  rateSpanBlock.innerHTML = `
+      <input class="rateInput" type="number" value=${value} />
+    `;
+  const rateInput = document.querySelector(".rateInput");
+  rateInput.focus();
+  rateInput.addEventListener("blur", (e) => {
+    const value = e.target.value;
+    rateSpanBlock.innerHTML = `
+      <span class="rateSpan">${value}</span>
+    `;
+    // btnToggleRate = !btnToggleRate;
+  });
+  // } else {
+  //   const value = document.querySelector(".rateInput").value;
+  //   rateSpanBlock.innerHTML = `
+  //     <span class="rateSpan">${value}</span>
+  //   `;
+  // }
+
+  // btnToggleRate = !btnToggleRate;
 });
 
 scheduleBlock.addEventListener("click", (e) => {
@@ -86,7 +113,7 @@ scheduleBlock.addEventListener("click", (e) => {
     } =
       schedule[Number(document.querySelector(".activeYear").textContent)][
         Number(monthItem.id)
-      ][dayIndex - 1].dayInfo;
+      ].days[dayIndex - 1].dayInfo;
 
     console.log(["schedule"], schedule);
 
@@ -102,147 +129,27 @@ scheduleBlock.addEventListener("click", (e) => {
       workHoliday,
       31.5
     ).toFixed(2);
-
-    // console.log(["workDay.status"], workDay.status);
-    // console.log(["weekend"], weekend);
-
     const dayInfo = dayIndex < 10 ? "0" + dayIndex : dayIndex;
     const monthInfo = Number(monthItem.id) + 1;
     const monthInfoStr = monthInfo < 10 ? "0" + monthInfo : monthInfo;
 
-    const infoDay = `
-      <thead>
-        <th colspan="2">Інформація за ${dayInfo + "." + monthInfoStr}</th>
-      </thead>
-      <tbody>
-        ${
-          backshift.status && (workDay.status || addHours100.status)
-            ? `
-            <tr>
-              <td>друга зміна</td>
-              <td>14:00 - 22:00</td>
-            </tr>
-          `
-            : ``
-        }
-        ${
-          (workDay.status || addHours100.status) && !backshift.status
-            ? `
-            <tr>
-              <td>перша  зміна</td>
-              <td>06:00 - 14:00</td>
-            </tr>
-          `
-            : ``
-        }
-        ${
-          workDay.status
-            ? `<tr>
-          <td>Робочий день</td>
-          <td>${workDay.time} год.</td>
-        </tr>`
-            : ``
-        }
-        ${
-          weekend.status
-            ? `
-            <tr>
-              <td>вихідний</td>
-            </tr>
-          `
-            : ``
-        }
-        ${
-          addHours100.status
-            ? `
-          <tr>
-            <td>понаднормові 100%</td>
-            <td>${addHours100.time} год.</td>
-          </tr>
-        `
-            : ``
-        }
-        ${
-          holiday.status
-            ? `
-          <tr>
-            <td>святковий вихідний</td>
-          </tr>
-        `
-            : ``
-        }
-        ${
-          workHoliday.status
-            ? `
-            <tr>
-              <td>відпустка</td>
-            </tr>
-          `
-            : ``
-        }
-        ${
-          leaveOnRequest.status
-            ? `
-            <tr>
-              <td>відпустка на вимогу</td>
-            </tr>
-          `
-            : ``
-        }
-        ${
-          birthday.status
-            ? `
-            <tr>
-              <td>вихідний до ДН 🎂🎈</td>
-            </tr>
-          `
-            : ``
-        }
-        ${
-          hospital.status
-            ? `
-            <tr>
-              <td>лікарняний</td>
-            </tr>
-          `
-            : ``
-        }
-        ${
-          addHours50.status
-            ? `
-            <tr>
-              <td>понаднормові 50%</td>
-              <td>${addHours50.time} год.</td>
-            </tr>
-          `
-            : ``
-        }
-        ${
-          addHours120.status
-            ? `
-            <tr>
-              <td>понаднормові 120%</td>
-              <td>${addHours120.time} год.</td>
-            </tr>
-          `
-            : ``
-        }
-        ${
-          higherPower.status
-            ? `
-            <tr>
-              <td>вища сила</td>
-              <td>${higherPower.time} год.</td>
-            </tr>
-          `
-            : ``
-        }
-        <tr class="salaryDay">
-          <td>дохід брутто</td>
-          <td>${salaryDay} zl</td>
-        </tr>
-      </tbody>
-    `;
+    const infoDay = createDayInfo(
+      addHours100,
+      addHours120,
+      addHours50,
+      backshift,
+      birthday,
+      higherPower,
+      holiday,
+      hospital,
+      leaveOnRequest,
+      weekend,
+      workDay,
+      workHoliday,
+      dayInfo,
+      monthInfoStr,
+      salaryDay
+    );
 
     console.log(["dayInfoTable"], dayInfoTable);
 
@@ -281,7 +188,7 @@ async function formSend(e) {
 
   const yearActive = Number(document.querySelector(".activeYear").textContent);
 
-  schedule[yearActive][Number(monthItem.id)][dayIndex - 1].statusDay =
+  schedule[yearActive][Number(monthItem.id)].days[dayIndex - 1].statusDay =
     statusDay;
 
   const {
@@ -297,7 +204,7 @@ async function formSend(e) {
     weekend,
     workDay,
     workHoliday,
-  } = schedule[yearActive][Number(monthItem.id)][dayIndex - 1].dayInfo;
+  } = schedule[yearActive][Number(monthItem.id)].days[dayIndex - 1].dayInfo;
 
   if (statusDay === "workDay") {
     workDay.status = true;
