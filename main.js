@@ -67,28 +67,28 @@ btnPlusMont.addEventListener("click", () => {
 });
 
 toggleRate.addEventListener("click", (e) => {
-  // if (btnToggleRate) {
-  const value = document.querySelector(".rateSpan").textContent;
-  rateSpanBlock.innerHTML = `
+  if (btnToggleRate) {
+    const value = document.querySelector(".rateSpan").textContent;
+    rateSpanBlock.innerHTML = `
       <input class="rateInput" type="number" value=${value} />
     `;
-  const rateInput = document.querySelector(".rateInput");
-  rateInput.focus();
-  rateInput.addEventListener("blur", (e) => {
-    const value = e.target.value;
+    const rateInput = document.querySelector(".rateInput");
+    rateInput.focus();
+    rateInput.addEventListener("blur", (e) => {
+      const value = e.target.value;
+      rateSpanBlock.innerHTML = `
+      <span class="rateSpan">${value}</span>
+    `;
+      // btnToggleRate = !btnToggleRate;
+    });
+  } else {
+    const value = document.querySelector(".rateInput").value;
     rateSpanBlock.innerHTML = `
       <span class="rateSpan">${value}</span>
     `;
-    // btnToggleRate = !btnToggleRate;
-  });
-  // } else {
-  //   const value = document.querySelector(".rateInput").value;
-  //   rateSpanBlock.innerHTML = `
-  //     <span class="rateSpan">${value}</span>
-  //   `;
-  // }
+  }
 
-  // btnToggleRate = !btnToggleRate;
+  btnToggleRate = !btnToggleRate;
 });
 
 scheduleBlock.addEventListener("click", (e) => {
