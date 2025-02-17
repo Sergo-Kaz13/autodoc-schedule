@@ -9,7 +9,6 @@ import createDayInfo from "./scripts/createDayInfo.js";
 const { form } = document.forms;
 
 let schedule = null;
-// let btnToggleRate = true;
 
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth();
@@ -23,8 +22,7 @@ const btnPlusMont = document.querySelector(".btnRight");
 const listItems = document.querySelector(".listItemsBlock");
 const dayInfoTable = document.querySelector(".dayInfoTable");
 const btnClose = document.querySelector(".btnClose");
-const toggleRate = document.querySelector(".toggleRate");
-const rateSpanBlock = document.querySelector(".rateSpanBlock");
+const editBoard = document.querySelector(".editBoard");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -66,7 +64,7 @@ btnPlusMont.addEventListener("click", () => {
   }
 });
 
-toggleRate.addEventListener("click", (e) => {
+editBoard.addEventListener("click", (e) => {
   const rateSpan = document.querySelector(".rateSpan");
 
   if (rateSpan) {
@@ -76,9 +74,27 @@ toggleRate.addEventListener("click", (e) => {
     input.classList.add("rateInput");
     input.id = "rateInput";
     input.value = ratePrice;
+    input.setAttribute("max", "99");
+    input.setAttribute("min", "0");
+
+    let width;
+    let height;
+
+    if (e.target.tagName === "TD") {
+      width = e.target.offsetWidth;
+      height = e.target.offsetHeight;
+    } else {
+      width = e.target.parentNode.offsetWidth;
+      height = e.target.parentNode.offsetHeight;
+    }
+
+    input.style.width = width + "px";
+    input.style.height = height + "px";
+
+    editBoard.innerHTML = "";
+    editBoard.appendChild(input).focus();
 
     input.addEventListener("keydown", (e) => {
-      console.log(["e.key"], e.key);
       if (e.key === "Enter") {
         const rateInput = document.querySelector(".rateInput");
         const ratePrice = rateInput.value;
@@ -86,48 +102,23 @@ toggleRate.addEventListener("click", (e) => {
         const span = document.createElement("span");
         span.classList.add("rateSpan");
         span.textContent = ratePrice;
-        rateSpanBlock.innerHTML = "";
-        rateSpanBlock.appendChild(span);
+        editBoard.innerHTML = "";
+        editBoard.appendChild(span);
       }
     });
 
-    rateSpanBlock.innerHTML = "";
-    rateSpanBlock.appendChild(input).focus();
-  } else {
-    const rateInput = document.querySelector(".rateInput");
-    const ratePrice = rateInput.value;
+    input.addEventListener("blur", (e) => {
+      const rateInput = document.querySelector(".rateInput");
+      const ratePrice = rateInput.value;
 
-    const span = document.createElement("span");
-    span.classList.add("rateSpan");
-    span.textContent = ratePrice;
-    rateSpanBlock.innerHTML = "";
-    rateSpanBlock.appendChild(span);
+      const span = document.createElement("span");
+      span.classList.add("rateSpan");
+      span.textContent = ratePrice;
+      editBoard.innerHTML = "";
+      editBoard.appendChild(span);
+    });
   }
 });
-
-// toggleRate.addEventListener("click", (e) => {
-//   if (btnToggleRate) {
-//     const value = document.querySelector(".rateSpan").textContent;
-//     rateSpanBlock.innerHTML = `
-//       <input class="rateInput" type="number" value=${value} />
-//     `;
-//     const rateInput = document.querySelector(".rateInput");
-//     rateInput.focus();
-//     rateInput.addEventListener("blur", (e) => {
-//       const value = e.target.value;
-//       rateSpanBlock.innerHTML = `
-//       <span class="rateSpan">${value}</span>
-//     `;
-//     });
-//   } else {
-//     const value = document.querySelector(".rateInput").value;
-//     rateSpanBlock.innerHTML = `
-//       <span class="rateSpan">${value}</span>
-//     `;
-//   }
-
-//   btnToggleRate = !btnToggleRate;
-// });
 
 scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");
