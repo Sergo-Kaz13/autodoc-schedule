@@ -5,6 +5,7 @@ import { months, scheduleBlock } from "./scripts/data.js";
 import { createSchedule } from "./scripts/createSchedule.js";
 import sumSalaryDay from "./scripts/sumSalaryDay.js";
 import createDayInfo from "./scripts/createDayInfo.js";
+import toggleInputActive from "./scripts/toggleInputActive.js";
 
 const { form } = document.forms;
 
@@ -64,61 +65,7 @@ btnPlusMont.addEventListener("click", () => {
   }
 });
 
-editBoard.addEventListener("click", (e) => {
-  const rateSpan = document.querySelector(".rateSpan");
-
-  if (rateSpan) {
-    const ratePrice = rateSpan.innerText;
-    const input = document.createElement("input");
-    input.type = "number";
-    input.classList.add("rateInput");
-    input.id = "rateInput";
-    input.value = ratePrice;
-    input.setAttribute("max", "99");
-    input.setAttribute("min", "0");
-
-    let width;
-    let height;
-
-    if (e.target.tagName === "TD") {
-      width = e.target.offsetWidth;
-      height = e.target.offsetHeight;
-    } else {
-      width = e.target.parentNode.offsetWidth;
-      height = e.target.parentNode.offsetHeight;
-    }
-
-    input.style.width = width + "px";
-    input.style.height = height + "px";
-
-    editBoard.innerHTML = "";
-    editBoard.appendChild(input).focus();
-
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        const rateInput = document.querySelector(".rateInput");
-        const ratePrice = rateInput.value;
-
-        const span = document.createElement("span");
-        span.classList.add("rateSpan");
-        span.textContent = ratePrice;
-        editBoard.innerHTML = "";
-        editBoard.appendChild(span);
-      }
-    });
-
-    input.addEventListener("blur", (e) => {
-      const rateInput = document.querySelector(".rateInput");
-      const ratePrice = rateInput.value;
-
-      const span = document.createElement("span");
-      span.classList.add("rateSpan");
-      span.textContent = ratePrice;
-      editBoard.innerHTML = "";
-      editBoard.appendChild(span);
-    });
-  }
-});
+toggleInputActive(".editBoard", "rateSpan", "rateInput");
 
 scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");

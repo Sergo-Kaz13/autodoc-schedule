@@ -243,14 +243,20 @@ body {
   border-radius: 50%;
 }
 
-.statusDay {
-  color: rgb(255, 255, 255);
-  font-size: 12px;
-  font-weight: 400;
-  margin: 0 auto;
+.statisticsBoard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
 }
 
-.statusDay td.editBoard {
+.statusDay {
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.editBoard {
   position: relative;
   padding: 0;
   text-align: center;
@@ -289,13 +295,24 @@ body {
 } */
 
 .statusDay tr:nth-child(odd) {
-  background-color: rgb(214, 238, 238);
+  background: rgb(214, 238, 238);
   color: rgb(244, 133, 38);
 }
 
-.statusDay tr:last-child {
-  background: rgb(250, 201, 123);
+.statusDay tr:nth-child(even) {
+  background: rgb(32, 204, 135);
+  color: rgb(214, 238, 238);
+}
+
+.statusDay tr.allBlock {
+  background: rgb(4 73 116);
   color: rgb(255, 255, 255);
+  font-weight: 700;
+}
+
+.allBlock td:first-child {
+  text-transform: uppercase;
+  font-size: 12px;
 }
 
 .tableUrlop tr {

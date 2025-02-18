@@ -1,5 +1,6 @@
 import calculateSalaryMonth from "./calculateSalaryMonth.js";
 import { scheduleBlock } from "./data.js";
+import showMonthInfo from "./showMonthInfo.js";
 
 export function showSchedule(schedule, year, month) {
   year = year !== undefined ? (year = year) : new Date().getFullYear();
@@ -8,12 +9,14 @@ export function showSchedule(schedule, year, month) {
   const currentYear = schedule[year];
   const activeMonth = currentYear[month];
 
-  console.log(["activeMonth"], activeMonth);
-
   const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();
 
   const { rate } = activeMonth;
+
+  console.log(["activeMonth"], activeMonth);
+
+  console.log(["rate"], rate);
 
   let workTime = 0;
   let time100 = 0;
@@ -78,10 +81,7 @@ export function showSchedule(schedule, year, month) {
     scheduleBlock.append(div);
   });
 
-  // document.querySelector(".workDayTime").textContent = workTime;
-  // document.querySelector(".workPrice").textContent = (
-  //   workTime * 31.5
-  // ).toFixed(2);
+  showMonthInfo(activeMonth);
 
   document.querySelector(".rateSpan").textContent = rate;
 

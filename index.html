@@ -55,7 +55,7 @@
                   value="workDay"
                   checked
                 />
-                <label for="workDay">години праці</label>
+                <label for="workDay">робочий день</label>
                 <select name="workDayTime" id="">
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -233,106 +233,111 @@
         <!-- <div class="scheduleItem"><span>1</span></div> -->
       </div>
 
-      <table class="statusDay">
-        <tbody>
-          <tr>
-            <td>ставка</td>
-            <td></td>
-            <td class="editBoard">
-              <!-- <span class="rateSpanBlock"> -->
-              <span class="rateSpan"></span>
-              <!-- </span> -->
-              <!-- <span class="toggleRate">✏</span> -->
-            </td>
-          </tr>
-          <tr>
-            <td>години праці</td>
-            <td><span class="workDayTime">0</span> год.</td>
-            <td><span class="workPrice">0</span> zł.</td>
-          </tr>
-          <tr>
-            <td>понаднормові 100%</td>
-            <td><span class="dayTime100">0</span> год.</td>
-            <td><span class="time100Price">0</span> zł.</td>
-          </tr>
-          <tr>
-            <td>понаднормові 50%</td>
-            <td><span class="dayTime50">0</span> год.</td>
-            <td><span class="time50Price">0</span> zł.</td>
-          </tr>
-          <tr>
-            <td>понаднормові 120%</td>
-            <td><span class="dayTime120">0</span> год.</td>
-            <td><span class="time120Price">0</span> zł</td>
-          </tr>
-          <tr>
-            <td>всього</td>
-            <td><span class="hoursWorked">0</span> год.</td>
-            <td><span class="grossSalary">0</span> zł</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="statisticsBoard">
+        <table class="statusDay">
+          <tbody>
+            <tr>
+              <td>робочий день</td>
+              <td><span class="workDayTime">0</span> год.</td>
+              <td><span class="workPrice">0</span> zł.</td>
+            </tr>
+            <tr>
+              <td>понаднормові 100%</td>
+              <td><span class="dayTime100">0</span> год.</td>
+              <td><span class="time100Price">0</span> zł.</td>
+            </tr>
+            <tr>
+              <td>понаднормові 50%</td>
+              <td><span class="dayTime50">0</span> год.</td>
+              <td><span class="time50Price">0</span> zł.</td>
+            </tr>
+            <tr>
+              <td>понаднормові 120%</td>
+              <td><span class="dayTime120">0</span> год.</td>
+              <td><span class="time120Price">0</span> zł.</td>
+            </tr>
+            <tr>
+              <td>вища сила</td>
+              <td><span class="higherPowerTime">0</span> год.</td>
+              <td><span class="higherPowerPrice">0</span> zł.</td>
+            </tr>
+            <tr>
+              <td>відпустка</td>
+              <td><span class="workHolidayTime">0</span> дн.</td>
+              <td><span class="workHolidayPrice">0</span> zł.</td>
+            </tr>
+            <tr>
+              <td>лікарняний</td>
+              <td><span class="hospitalTime">0</span> дн.</td>
+              <td><span class="hospitalPrice">0</span> zł.</td>
+            </tr>
+            <tr>
+              <td>премія</td>
+              <td></td>
+              <td><span>0</span> zł.</td>
+            </tr>
+            <tr class="allBlock">
+              <td>всього</td>
+              <td><span class="hoursWorked">0</span> год.</td>
+              <td><span class="grossSalary">0</span> zł.</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>нетто</td>
+              <td><span>0</span> zł.</td>
+            </tr>
+          </tbody>
+        </table>
 
-      <table class="tableUrlop">
-        <thead>
-          <tr>
-            <th></th>
-            <th>кількість</th>
-            <th>використано</th>
-            <th>залишилося</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>відпустка</td>
-          </tr>
-          <tr>
-            <td>підпустка на вимогу</td>
-          </tr>
-          <tr>
-            <td>вища сила</td>
-          </tr>
-        </tbody>
-      </table>
+        <table>
+          <tbody>
+            <tr>
+              <td>ставка</td>
+              <td class="editBoard">
+                <span class="rateSpan"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>податок</td>
+              <td>
+                <span>25%</span>
+              </td>
+            </tr>
+            <tr>
+              <td>лікарняні</td>
+              <td>
+                <span>68%</span>
+              </td>
+            </tr>
+            <tr>
+              <td>відпускні</td>
+              <td><span>100%</span></td>
+            </tr>
+          </tbody>
+        </table>
 
-      <!-- <ul class="statusDay">
-        <li class="statusDayItem">
-          <span class="statusDayColorWorkDay"></span>
-          <span class="statusDayText">робочий день</span>
-        </li>
-        <li class="statusDayItem">
-          <span class="statusDayColorWeekend"></span>
-          <span class="statusDayText">вихідний</span>
-        </li>
-        <li class="statusDayItem">
-          <span class="statusDayColorHoliday"></span>
-          <span class="statusDayText">святковий вихідний</span>
-        </li>
-        <li class="statusDayItem">
-          <span class="statusDayColorWorkHoliday"></span>
-          <span class="statusDayText">відпустка</span>
-        </li>
-        <li class="statusDayItem">
-          <span class="statusDayColor100"></span>
-          <span class="statusDayText">100%</span>
-        </li>
-        <li class="statusDayItem">
-          <span class="statusDayColor"></span>
-          <span class="statusDayText">50%</span>
-        </li>
-        <li class="statusDayItem">
-          <span class="statusDayColor"></span>
-          <span class="statusDayText">120%</span>
-        </li>
-        <li class="statusDayItem">
-          <span class="statusDayColor"></span>
-          <span class="statusDayText">друга зміна</span>
-        </li>
-        <li class="statusDayItem">
-          <span class="statusDayColor"></span>
-          <span class="statusDayText">лікарняний</span>
-        </li>
-      </ul> -->
+        <table class="tableUrlop">
+          <thead>
+            <tr>
+              <th></th>
+              <th>кількість</th>
+              <th>використано</th>
+              <th>залишилося</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>відпустка</td>
+            </tr>
+            <tr>
+              <td>підпустка на вимогу</td>
+            </tr>
+            <tr>
+              <td>вища сила</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <button class="removeLocalhoste">remove locaStorage</button>
