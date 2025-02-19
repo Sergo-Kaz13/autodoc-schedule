@@ -323,17 +323,18 @@ body {
 
 .tableUrlop .tableUrlopTitle {
   color: rgb(0, 0, 0);
+  font-size: 12px;
 }
 
 .tableUrlop td:first-child {
   background: rgb(90, 104, 179);
   color: rgb(231 238 246);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 300;
 }
 
 .tableUrlop th {
-  font-size: 12px;
+  font-size: 10px;
   color: rgb(231 238 246);
   text-transform: uppercase;
   padding: 5px 5px;
@@ -361,8 +362,12 @@ body {
   font-size: 14px;
 }
 
-.rateTable tr {
-  background: rgb(75, 143, 37);
+.rateTable tr:nth-child(odd) {
+  background: rgb(184 87 149);
+}
+
+.rateTable tr:nth-child(even) {
+  background: rgb(51, 169, 243);
 }
 
 .rateTable td {
