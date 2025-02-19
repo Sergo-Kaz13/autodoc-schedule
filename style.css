@@ -316,8 +316,39 @@ body {
   font-size: 12px;
 }
 
+.tableUrlop {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tableUrlop .tableUrlopTitle {
+  color: rgb(0, 0, 0);
+}
+
+.tableUrlop td:first-child {
+  background: rgb(90, 104, 179);
+  color: rgb(231 238 246);
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.tableUrlop th {
+  font-size: 12px;
+  color: rgb(231 238 246);
+  text-transform: uppercase;
+  padding: 5px 5px;
+}
+
+.tableUrlop th:not(.tableUrlop th:first-child) {
+  background: rgb(200, 93, 93);
+}
+
 .tableUrlop tr {
   background: rgb(214, 238, 238);
+}
+
+.tableUrlop td {
+  padding: 3px 5px;
 }
 
 .statusDay td {
@@ -325,7 +356,6 @@ body {
 }
 
 .rateTable {
-  border: 1px solid red;
   align-self: center;
   color: rgb(214, 238, 238);
   font-size: 14px;
