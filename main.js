@@ -23,7 +23,6 @@ const btnPlusMont = document.querySelector(".btnRight");
 const listItems = document.querySelector(".listItemsBlock");
 const dayInfoTable = document.querySelector(".dayInfoTable");
 const btnClose = document.querySelector(".btnClose");
-const editBoard = document.querySelector(".editBoard");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -41,6 +40,10 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     showSchedule(schedule);
   }
+  toggleInputActive(".editBoard", "rateSpan", "rateInput");
+  toggleInputActive(".taxBoard", "taxSpan", "taxInput");
+  toggleInputActive(".hospitalBoard", "hospitalSpan", "hospitalInput");
+  toggleInputActive(".holidayBoard", "holidaySpan", "holidayInput");
 });
 
 btnMinMonth.addEventListener("click", () => {
@@ -65,7 +68,7 @@ btnPlusMont.addEventListener("click", () => {
   }
 });
 
-toggleInputActive(".editBoard", "rateSpan", "rateInput");
+// toggleInputActive(".editBoard", "rateSpan", "rateInput");
 
 scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");
