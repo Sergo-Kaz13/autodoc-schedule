@@ -288,11 +288,12 @@ body {
   font-size: 16px;
 }
 
-/* 
 .statusDay th {
-  background-color: rgb(214, 238, 238);
-  color: rgb(244, 133, 38);
-} */
+  background-color: rgb(104 227 227);
+  color: rgb(16 52 242);
+  text-transform: uppercase;
+  padding: 5px;
+}
 
 .statusDay tr:nth-child(odd) {
   background: rgb(214, 238, 238);
