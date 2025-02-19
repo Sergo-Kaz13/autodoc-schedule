@@ -44,6 +44,14 @@ window.addEventListener("DOMContentLoaded", () => {
   toggleInputActive(".taxBoard", "taxSpan", "taxInput");
   toggleInputActive(".hospitalBoard", "hospitalSpan", "hospitalInput");
   toggleInputActive(".holidayBoard", "holidaySpan", "holidayInput");
+  toggleInputActive(".editHolidayDays", "holidayDaysSpan", "holidayDaysInput");
+  toggleInputActive(".editPremium", "editPremiumSpan", "editPremiumInput");
+  toggleInputActive(".editHospital", "editHospitalSpan", "editHospitalInput");
+  toggleInputActive(
+    ".editWorkHoliday",
+    "editWorkHolidaySpan",
+    "editWorkHolidayInput"
+  );
 });
 
 btnMinMonth.addEventListener("click", () => {

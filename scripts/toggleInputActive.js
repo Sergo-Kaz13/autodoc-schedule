@@ -11,8 +11,8 @@ const toggleInputActive = (board = "", spanText = "", inputText = "") => {
       input.classList.add(inputText);
       input.id = inputText;
       input.value = ratePrice;
-      input.setAttribute("max", "99");
       input.setAttribute("min", "0");
+      input.setAttribute("max", "99");
 
       let width;
       let height;
@@ -25,7 +25,8 @@ const toggleInputActive = (board = "", spanText = "", inputText = "") => {
         height = e.target.parentNode.offsetHeight;
       }
 
-      input.style.width = width + "px";
+      // input.style.width = width + "px";
+      input.style.width = "100%";
       input.style.height = height + "px";
 
       editBoard.innerHTML = "";

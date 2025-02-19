@@ -9,6 +9,11 @@
   padding: 0;
 }
 
+input {
+  outline: none;
+  border: none;
+}
+
 img {
   display: block;
   min-inline-size: 100%;
@@ -346,26 +351,44 @@ body {
 .rateTable .editBoard,
 .rateTable .taxBoard,
 .rateTable .hospitalBoard,
-.rateTable .holidayBoard {
+.rateTable .holidayBoard,
+.editHolidayDays,
+.editPremium,
+.editHospital,
+.editWorkHoliday {
   position: relative;
   padding: 0;
   text-align: center;
 }
 
+.editHolidayDays,
+.editPremium,
+.editHospital,
+.editWorkHoliday {
+  text-align: left;
+}
+
 .rateSpan::before,
 .taxSpan::before,
 .hospitalSpan::before,
-.holidaySpan::before {
-  content: "🖍";
+.holidaySpan::before,
+.holidayDaysSpan::before,
+.editPremiumSpan::before,
+.editHospitalSpan::before,
+.editWorkHolidaySpan::before {
+  content: "🖊";
   position: absolute;
-  right: 5px;
+  right: 10px;
   top: 50%;
   transform: rotate(110deg);
   transform: translateY(-50%);
   font-size: 16px;
 }
 
-.rateSpan::after {
+.rateSpan::after,
+.editPremiumSpan::after,
+.editHospitalSpan::after,
+.editWorkHolidaySpan::after {
   content: " zł.";
 }
 
@@ -378,17 +401,30 @@ body {
 .rateInput,
 .taxInput,
 .hospitalInput,
-.holidayInput {
+.holidayInput,
+.holidayDaysInput,
+.editPremiumInput,
+.editHospitalInput,
+.editWorkHolidayInput {
   box-sizing: border-box;
   margin: 0;
   text-align: center;
 }
-/* 
-.toggleRate {
-  display: inline-block;
-  transform: rotate(110deg);
-  font-size: 16px;
-} */
+
+.holidayDaysInput,
+.editPremiumInput,
+.editHospitalInput,
+.editWorkHolidayInput {
+  text-align: left;
+  padding-left: 5px;
+}
+
+.editHolidayDays:has(input),
+.editPremium:has(input),
+.editHospital:has(input),
+.editWorkHoliday:has(input) {
+  padding: 0;
+}
 
 .currentDate {
   border: 4px solid rgb(249, 4, 4);
