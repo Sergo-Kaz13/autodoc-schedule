@@ -1,10 +1,10 @@
 "use strict";
 
 function calculateSalaryMonth(
-  domItemTime,
-  domItemPrice,
-  time,
-  rate,
+  domItemTime = "",
+  domItemPrice = "",
+  time = 0,
+  rate = 0,
   surcharge = 1
 ) {
   document.querySelector(domItemTime).textContent = time;

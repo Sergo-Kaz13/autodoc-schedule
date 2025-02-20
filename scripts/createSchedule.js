@@ -1,13 +1,25 @@
 import { daysInMonth } from "./daysInMonth.js";
 
 export function createSchedule(year) {
-  const fullYear = [];
+  // const fullYear = [];
+  const fullYear = {
+    workHolidayDays: 22,
+    leaveOnRequestDays: 4,
+    higherPowerTime: 16,
+    birthday: 1,
+    salaryYear: 0,
+    months: [],
+  };
 
   for (let i = 1; i < 13; i++) {
     const days = daysInMonth(i, year);
 
     const month = {
       rate: 31.5,
+      tax: 25,
+      hospitalRate: 68,
+      vacationPay: 100,
+      premiumPay: 0,
       days: [],
     };
 
@@ -43,15 +55,19 @@ export function createSchedule(year) {
           },
           workHoliday: {
             status: false,
+            day: 0,
           },
           leaveOnRequest: {
             status: false,
+            day: 0,
           },
           hospital: {
             status: false,
+            day: 0,
           },
           birthday: {
             status: false,
+            day: 0,
           },
           backshift: {
             status: false,
@@ -75,7 +91,7 @@ export function createSchedule(year) {
         },
       });
     }
-    fullYear.push(month);
+    fullYear.months.push(month);
   }
   return fullYear;
 }

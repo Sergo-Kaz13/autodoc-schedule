@@ -1,3 +1,5 @@
+import calculateSalaryMonth from "./calculateSalaryMonth.js";
+
 const showMonthInfo = (activeMonth) => {
   const { rate, days } = activeMonth;
 
@@ -7,7 +9,9 @@ const showMonthInfo = (activeMonth) => {
     dayTime50: 0,
     dayTime120: 0,
     higherPowerTime: 0,
+    birthdayTime: 0,
     workHolidayTime: 0,
+    leaveOnRequestTime: 0,
     hospitalTime: 0,
   };
 
@@ -33,18 +37,51 @@ const showMonthInfo = (activeMonth) => {
             ? (allTime.higherPowerTime += dayInfo[key].time)
             : "";
           break;
+        case "birthday":
+          dayInfo[key].status ? (allTime.birthdayTime += 1) : "";
+          break;
         case "workHoliday":
           dayInfo[key].status ? (allTime.workHolidayTime += 1) : "";
+          break;
+        case "leaveOnRequest":
+          dayInfo[key].status ? (allTime.leaveOnRequestTime += 1) : "";
           break;
         case "hospital":
           dayInfo[key].status ? (allTime.hospitalTime += 1) : "";
           break;
-        case "leaveOnRequest":
-          dayInfo[key].status ? (allTime.workHolidayTime += 1) : "";
-          break;
       }
     }
   });
+
+  calculateSalaryMonth(".workDayTime", ".workPrice", allTime.workDayTime, rate);
+  calculateSalaryMonth(
+    ".dayTime100",
+    ".time100Price",
+    allTime.dayTime100,
+    rate,
+    2
+  );
+  calculateSalaryMonth(
+    ".dayTime50",
+    ".time50Price",
+    allTime.dayTime50,
+    rate,
+    1.5
+  );
+  calculateSalaryMonth(
+    ".dayTime120",
+    ".time120Price",
+    allTime.dayTime120,
+    rate,
+    2.2
+  );
+  calculateSalaryMonth(
+    ".higherPowerTime",
+    ".higherPowerPrice",
+    allTime.higherPowerTime,
+    rate,
+    0.5
+  );
 
   console.log(["time"], allTime.workDayTime);
 

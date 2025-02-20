@@ -355,7 +355,8 @@ body {
 .editHolidayDays,
 .editPremium,
 .editHospital,
-.editWorkHoliday {
+.editWorkHoliday,
+.editLeaveOnRequest {
   position: relative;
   padding: 0;
   text-align: center;
@@ -364,7 +365,8 @@ body {
 .editHolidayDays,
 .editPremium,
 .editHospital,
-.editWorkHoliday {
+.editWorkHoliday,
+.editLeaveOnRequest {
   text-align: left;
 }
 
@@ -375,7 +377,8 @@ body {
 .holidayDaysSpan::before,
 .editPremiumSpan::before,
 .editHospitalSpan::before,
-.editWorkHolidaySpan::before {
+.editWorkHolidaySpan::before,
+.editLeaveOnRequestSpan::before {
   content: "🖊";
   position: absolute;
   right: 10px;
@@ -388,7 +391,8 @@ body {
 .rateSpan::after,
 .editPremiumSpan::after,
 .editHospitalSpan::after,
-.editWorkHolidaySpan::after {
+.editWorkHolidaySpan::after,
+.editLeaveOnRequestSpan::after {
   content: " zł.";
 }
 
@@ -405,7 +409,8 @@ body {
 .holidayDaysInput,
 .editPremiumInput,
 .editHospitalInput,
-.editWorkHolidayInput {
+.editWorkHolidayInput,
+.editLeaveOnRequestInput {
   box-sizing: border-box;
   margin: 0;
   text-align: center;
@@ -414,7 +419,8 @@ body {
 .holidayDaysInput,
 .editPremiumInput,
 .editHospitalInput,
-.editWorkHolidayInput {
+.editWorkHolidayInput,
+.editLeaveOnRequestInput {
   text-align: left;
   padding-left: 5px;
 }
@@ -422,7 +428,8 @@ body {
 .editHolidayDays:has(input),
 .editPremium:has(input),
 .editHospital:has(input),
-.editWorkHoliday:has(input) {
+.editWorkHoliday:has(input),
+.editLeaveOnRequest:has(input) {
   padding: 0;
 }
 

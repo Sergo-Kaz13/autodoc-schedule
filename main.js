@@ -39,6 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
     showSchedule(schedule);
   } else {
     showSchedule(schedule);
+    console.log(["schedule"], schedule);
   }
   toggleInputActive(".editBoard", "rateSpan", "rateInput");
   toggleInputActive(".taxBoard", "taxSpan", "taxInput");
@@ -51,6 +52,11 @@ window.addEventListener("DOMContentLoaded", () => {
     ".editWorkHoliday",
     "editWorkHolidaySpan",
     "editWorkHolidayInput"
+  );
+  toggleInputActive(
+    ".editLeaveOnRequest",
+    "editLeaveOnRequestSpan",
+    "editLeaveOnRequestInput"
   );
 });
 
@@ -98,9 +104,8 @@ scheduleBlock.addEventListener("click", (e) => {
       workDay,
       workHoliday,
     } =
-      schedule[Number(document.querySelector(".activeYear").textContent)][
-        Number(monthItem.id)
-      ].days[dayIndex - 1].dayInfo;
+      schedule[Number(document.querySelector(".activeYear").textContent)]
+        .months[Number(monthItem.id)].days[dayIndex - 1].dayInfo;
 
     console.log(["schedule"], schedule);
 
@@ -175,8 +180,9 @@ async function formSend(e) {
 
   const yearActive = Number(document.querySelector(".activeYear").textContent);
 
-  schedule[yearActive][Number(monthItem.id)].days[dayIndex - 1].statusDay =
-    statusDay;
+  schedule[yearActive].months[Number(monthItem.id)].days[
+    dayIndex - 1
+  ].statusDay = statusDay;
 
   const {
     addHours100,
@@ -191,7 +197,9 @@ async function formSend(e) {
     weekend,
     workDay,
     workHoliday,
-  } = schedule[yearActive][Number(monthItem.id)].days[dayIndex - 1].dayInfo;
+  } =
+    schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1]
+      .dayInfo;
 
   if (statusDay === "workDay") {
     workDay.status = true;
@@ -209,11 +217,29 @@ async function formSend(e) {
     addHours100.time = 0;
   }
 
+  if (statusDay === "workHoliday") {
+    workHoliday.status = true;
+    workHoliday.day = 1;
+  } else {
+    workHoliday.status = false;
+    workHoliday.day = 0;
+  }
+
+  if (statusDay === "leaveOnRequest") {
+    leaveOnRequest.status = true;
+    leaveOnRequest.day = 1;
+  } else {
+    leaveOnRequest.status = false;
+    leaveOnRequest.day = 0;
+  }
+
+  // Доробити цю секцію
+
   statusDay === "weekend" ? (weekend.status = true) : (weekend.status = false);
   statusDay === "holiday" ? (holiday.status = true) : (holiday.status = false);
-  statusDay === "workHoliday"
-    ? (workHoliday.status = true)
-    : (workHoliday.status = false);
+  // statusDay === "workHoliday"
+  //   ? (workHoliday.status = true)
+  //   : (workHoliday.status = false);
   statusDay === "leaveOnRequest"
     ? (leaveOnRequest.status = true)
     : (leaveOnRequest.status = false);

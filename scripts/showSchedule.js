@@ -7,7 +7,7 @@ export function showSchedule(schedule, year, month) {
   month = month !== undefined ? (month = month) : new Date().getMonth();
 
   const currentYear = schedule[year];
-  const activeMonth = currentYear[month];
+  const activeMonth = currentYear.months[month];
 
   const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();
@@ -85,7 +85,7 @@ export function showSchedule(schedule, year, month) {
 
   document.querySelector(".rateSpan").textContent = rate;
 
-  calculateSalaryMonth(".workDayTime", ".workPrice", workTime, rate);
+  // calculateSalaryMonth(".workDayTime", ".workPrice", workTime, rate);
 
   document.querySelector(".dayTime100").textContent = time100;
   document.querySelector(".time100Price").textContent = (
