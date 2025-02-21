@@ -1,4 +1,3 @@
-import calculateSalaryMonth from "./calculateSalaryMonth.js";
 import { scheduleBlock } from "./data.js";
 import showMonthInfo from "./showMonthInfo.js";
 
@@ -13,10 +12,6 @@ export function showSchedule(schedule, year, month) {
   const currentDate = new Date().getDate();
 
   const { rate } = activeMonth;
-
-  console.log(["activeMonth"], activeMonth);
-
-  console.log(["rate"], rate);
 
   let workTime = 0;
   let time100 = 0;
@@ -82,38 +77,4 @@ export function showSchedule(schedule, year, month) {
   });
 
   showMonthInfo(activeMonth);
-
-  document.querySelector(".rateSpan").textContent = rate;
-
-  // calculateSalaryMonth(".workDayTime", ".workPrice", workTime, rate);
-
-  // document.querySelector(".dayTime100").textContent = time100;
-  // document.querySelector(".time100Price").textContent = (
-  //   time100 *
-  //   31.5 *
-  //   2
-  // ).toFixed(2);
-
-  // document.querySelector(".dayTime50").textContent = time50;
-  // document.querySelector(".time50Price").textContent = (
-  //   time50 *
-  //   31.5 *
-  //   1.5
-  // ).toFixed(2);
-
-  // document.querySelector(".dayTime120").textContent = time120;
-  // document.querySelector(".time120Price").textContent = (
-  //   time120 *
-  //   31.5 *
-  //   2.2
-  // ).toFixed(2);
-
-  // document.querySelector(".hoursWorked").textContent =
-  //   workTime + time100 + time50 + time120;
-  // document.querySelector(".grossSalary").textContent = (
-  //   workTime * 31.5 +
-  //   time100 * 31.5 * 2 +
-  //   time50 * 31.5 * 1.5 +
-  //   time120 * 31.5 * 2.2
-  // ).toFixed(2);
 }

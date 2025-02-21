@@ -1,4 +1,13 @@
-const toggleInputActive = (board = "", spanText = "", inputText = "") => {
+import editDataField from "./editDataField.js";
+
+const toggleInputActive = (
+  board = "",
+  spanText = "",
+  inputText = "",
+  schedule
+) => {
+  console.log(["schedule"], schedule);
+
   const editBoard = document.querySelector(board);
 
   editBoard.addEventListener("click", (e) => {
@@ -14,18 +23,14 @@ const toggleInputActive = (board = "", spanText = "", inputText = "") => {
       input.setAttribute("min", "0");
       input.setAttribute("max", "99");
 
-      let width;
       let height;
 
       if (e.target.tagName === "TD") {
-        width = e.target.offsetWidth;
         height = e.target.offsetHeight;
       } else {
-        width = e.target.parentNode.offsetWidth;
         height = e.target.parentNode.offsetHeight;
       }
 
-      // input.style.width = width + "px";
       input.style.width = "100%";
       input.style.height = height + "px";
 
@@ -42,6 +47,8 @@ const toggleInputActive = (board = "", spanText = "", inputText = "") => {
           span.textContent = ratePrice;
           editBoard.innerHTML = "";
           editBoard.appendChild(span);
+
+          editDataField(board, ratePrice, schedule);
         }
       });
 
@@ -54,6 +61,8 @@ const toggleInputActive = (board = "", spanText = "", inputText = "") => {
         span.textContent = ratePrice;
         editBoard.innerHTML = "";
         editBoard.appendChild(span);
+
+        editDataField(board, ratePrice, schedule);
       });
     }
   });

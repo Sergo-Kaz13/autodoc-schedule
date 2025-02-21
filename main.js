@@ -1,4 +1,4 @@
-// "use strict";
+"use strict";
 
 import { showSchedule } from "./scripts/showSchedule.js";
 import { months, scheduleBlock } from "./scripts/data.js";
@@ -39,24 +39,46 @@ window.addEventListener("DOMContentLoaded", () => {
     showSchedule(schedule);
   } else {
     showSchedule(schedule);
-    console.log(["schedule"], schedule);
+    // console.log(["schedule"], schedule);
   }
-  toggleInputActive(".editBoard", "rateSpan", "rateInput");
-  toggleInputActive(".taxBoard", "taxSpan", "taxInput");
-  toggleInputActive(".hospitalBoard", "hospitalSpan", "hospitalInput");
-  toggleInputActive(".holidayBoard", "holidaySpan", "holidayInput");
-  toggleInputActive(".editHolidayDays", "holidayDaysSpan", "holidayDaysInput");
-  toggleInputActive(".editPremium", "editPremiumSpan", "editPremiumInput");
-  toggleInputActive(".editHospital", "editHospitalSpan", "editHospitalInput");
+  toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
+  toggleInputActive(".taxBoard", "taxSpan", "taxInput", schedule);
+  toggleInputActive(
+    ".hospitalBoard",
+    "hospitalSpan",
+    "hospitalInput",
+    schedule
+  );
+  toggleInputActive(".holidayBoard", "holidaySpan", "holidayInput", schedule);
+  toggleInputActive(
+    ".editHolidayDays",
+    "holidayDaysSpan",
+    "holidayDaysInput",
+    schedule
+  );
+  toggleInputActive(
+    ".editPremium",
+    "editPremiumSpan",
+    "editPremiumInput",
+    schedule
+  );
+  toggleInputActive(
+    ".editHospital",
+    "editHospitalSpan",
+    "editHospitalInput",
+    schedule
+  );
   toggleInputActive(
     ".editWorkHoliday",
     "editWorkHolidaySpan",
-    "editWorkHolidayInput"
+    "editWorkHolidayInput",
+    schedule
   );
   toggleInputActive(
     ".editLeaveOnRequest",
     "editLeaveOnRequestSpan",
-    "editLeaveOnRequestInput"
+    "editLeaveOnRequestInput",
+    schedule
   );
 });
 
@@ -81,8 +103,6 @@ btnPlusMont.addEventListener("click", () => {
     showSchedule(schedule, undefined, currentMonth);
   }
 });
-
-// toggleInputActive(".editBoard", "rateSpan", "rateInput");
 
 scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");
@@ -249,22 +269,8 @@ async function formSend(e) {
     hospital.day = 0;
   }
 
-  // Доробити цю секцію
-
   statusDay === "weekend" ? (weekend.status = true) : (weekend.status = false);
   statusDay === "holiday" ? (holiday.status = true) : (holiday.status = false);
-  // statusDay === "workHoliday"
-  //   ? (workHoliday.status = true)
-  //   : (workHoliday.status = false);
-  // statusDay === "leaveOnRequest"
-  //   ? (leaveOnRequest.status = true)
-  //   : (leaveOnRequest.status = false);
-  // statusDay === "birthday"
-  //   ? (birthday.status = true)
-  //   : (birthday.status = false);
-  // statusDay === "hospital"
-  //   ? (hospital.status = true)
-  //   : (hospital.status = false);
 
   backshiftStatus ? (backshift.status = true) : (backshift.status = false);
 

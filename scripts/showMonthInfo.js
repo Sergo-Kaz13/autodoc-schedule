@@ -1,7 +1,8 @@
 import calculateSalaryMonth from "./calculateSalaryMonth.js";
 
 const showMonthInfo = (activeMonth) => {
-  const { rate, vacationPay, hospitalRate, tax, days } = activeMonth;
+  const { rate, vacationPay, hospitalRate, tax, premiumPay, days } =
+    activeMonth;
 
   let salaryMonthBrutto = 0;
 
@@ -117,6 +118,7 @@ const showMonthInfo = (activeMonth) => {
     rate,
     hospitalRate / 100
   );
+  salaryMonthBrutto += premiumPay;
 
   const sumWorkTime =
     allTime.workDayTime +
@@ -131,6 +133,11 @@ const showMonthInfo = (activeMonth) => {
     salaryMonthBrutto -
     (salaryMonthBrutto / 100) * 25
   ).toFixed(2);
+  document.querySelector(".rateSpan").textContent = rate;
+  document.querySelector(".taxSpan").textContent = tax;
+  document.querySelector(".hospitalSpan").textContent = hospitalRate;
+  document.querySelector(".holidaySpan").textContent = vacationPay;
+  document.querySelector(".editPremiumSpan").textContent = premiumPay;
 
   console.log(["time"], allTime.workDayTime);
 
