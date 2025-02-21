@@ -7,12 +7,28 @@ function calculateSalaryMonth(
   rate = 0,
   surcharge = 1
 ) {
-  document.querySelector(domItemTime).textContent = time;
-  document.querySelector(domItemPrice).textContent = (
-    time *
-    rate *
-    surcharge
-  ).toFixed(2);
+  if (
+    domItemTime === ".birthdayTime" ||
+    domItemTime === ".workHolidayTime" ||
+    domItemTime === ".leaveOnRequestTime" ||
+    domItemTime === ".hospitalTime"
+  ) {
+    document.querySelector(domItemTime).textContent = time;
+
+    const salaryDay = (time * 8 * rate * surcharge).toFixed(2);
+
+    document.querySelector(domItemPrice).textContent = salaryDay;
+
+    return Number(salaryDay);
+  } else {
+    document.querySelector(domItemTime).textContent = time;
+
+    const salaryDay = (time * rate * surcharge).toFixed(2);
+
+    document.querySelector(domItemPrice).textContent = salaryDay;
+
+    return Number(salaryDay);
+  }
 }
 
 export default calculateSalaryMonth;

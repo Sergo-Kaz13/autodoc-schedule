@@ -233,6 +233,22 @@ async function formSend(e) {
     leaveOnRequest.day = 0;
   }
 
+  if (statusDay === "birthday") {
+    birthday.status = true;
+    birthday.day = 1;
+  } else {
+    birthday.status = false;
+    birthday.day = 0;
+  }
+
+  if (statusDay === "hospital") {
+    hospital.status = true;
+    hospital.day = 1;
+  } else {
+    hospital.status = false;
+    hospital.day = 0;
+  }
+
   // Доробити цю секцію
 
   statusDay === "weekend" ? (weekend.status = true) : (weekend.status = false);
@@ -240,15 +256,15 @@ async function formSend(e) {
   // statusDay === "workHoliday"
   //   ? (workHoliday.status = true)
   //   : (workHoliday.status = false);
-  statusDay === "leaveOnRequest"
-    ? (leaveOnRequest.status = true)
-    : (leaveOnRequest.status = false);
-  statusDay === "birthday"
-    ? (birthday.status = true)
-    : (birthday.status = false);
-  statusDay === "hospital"
-    ? (hospital.status = true)
-    : (hospital.status = false);
+  // statusDay === "leaveOnRequest"
+  //   ? (leaveOnRequest.status = true)
+  //   : (leaveOnRequest.status = false);
+  // statusDay === "birthday"
+  //   ? (birthday.status = true)
+  //   : (birthday.status = false);
+  // statusDay === "hospital"
+  //   ? (hospital.status = true)
+  //   : (hospital.status = false);
 
   backshiftStatus ? (backshift.status = true) : (backshift.status = false);
 

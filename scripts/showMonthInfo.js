@@ -1,7 +1,9 @@
 import calculateSalaryMonth from "./calculateSalaryMonth.js";
 
 const showMonthInfo = (activeMonth) => {
-  const { rate, days } = activeMonth;
+  const { rate, vacationPay, hospitalRate, tax, days } = activeMonth;
+
+  let salaryMonthBrutto = 0;
 
   const allTime = {
     workDayTime: 0,
@@ -53,35 +55,82 @@ const showMonthInfo = (activeMonth) => {
     }
   });
 
-  calculateSalaryMonth(".workDayTime", ".workPrice", allTime.workDayTime, rate);
-  calculateSalaryMonth(
+  salaryMonthBrutto += calculateSalaryMonth(
+    ".workDayTime",
+    ".workPrice",
+    allTime.workDayTime,
+    rate
+  );
+  salaryMonthBrutto += calculateSalaryMonth(
     ".dayTime100",
     ".time100Price",
     allTime.dayTime100,
     rate,
     2
   );
-  calculateSalaryMonth(
+  salaryMonthBrutto += calculateSalaryMonth(
     ".dayTime50",
     ".time50Price",
     allTime.dayTime50,
     rate,
     1.5
   );
-  calculateSalaryMonth(
+  salaryMonthBrutto += calculateSalaryMonth(
     ".dayTime120",
     ".time120Price",
     allTime.dayTime120,
     rate,
     2.2
   );
-  calculateSalaryMonth(
+  salaryMonthBrutto += calculateSalaryMonth(
     ".higherPowerTime",
     ".higherPowerPrice",
     allTime.higherPowerTime,
     rate,
     0.5
   );
+  salaryMonthBrutto += calculateSalaryMonth(
+    ".birthdayTime",
+    ".birthdayPrice",
+    allTime.birthdayTime,
+    rate,
+    vacationPay / 100
+  );
+  salaryMonthBrutto += calculateSalaryMonth(
+    ".workHolidayTime",
+    ".workHolidayPrice",
+    allTime.workHolidayTime,
+    rate,
+    vacationPay / 100
+  );
+  salaryMonthBrutto += calculateSalaryMonth(
+    ".leaveOnRequestTime",
+    ".leaveOnRequestPrice",
+    allTime.leaveOnRequestTime,
+    rate,
+    vacationPay / 100
+  );
+  salaryMonthBrutto += calculateSalaryMonth(
+    ".hospitalTime",
+    ".hospitalPrice",
+    allTime.hospitalTime,
+    rate,
+    hospitalRate / 100
+  );
+
+  const sumWorkTime =
+    allTime.workDayTime +
+    allTime.dayTime100 +
+    allTime.dayTime50 +
+    allTime.dayTime120;
+
+  document.querySelector(".hoursWorked").textContent = sumWorkTime;
+  document.querySelector(".grossSalary").textContent =
+    salaryMonthBrutto.toFixed(2);
+  document.querySelector(".salaryMonthNetto").textContent = (
+    salaryMonthBrutto -
+    (salaryMonthBrutto / 100) * 25
+  ).toFixed(2);
 
   console.log(["time"], allTime.workDayTime);
 
