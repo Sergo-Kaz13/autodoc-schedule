@@ -1,12 +1,23 @@
 import { daysInMonth } from "./daysInMonth.js";
 
 export function createSchedule(year) {
-  // const fullYear = [];
   const fullYear = {
-    workHolidayDays: 22,
-    leaveOnRequestDays: 4,
-    higherPowerTime: 16,
-    birthday: 1,
+    workHolidayDays: {
+      days: 24,
+      daysUsed: 0,
+    },
+    leaveOnRequestDays: {
+      days: 4,
+      daysUsed: 0,
+    },
+    higherPowerTime: {
+      hours: 16,
+      hoursUsed: 0,
+    },
+    birthday: {
+      day: 1,
+      dayUsed: 0,
+    },
     salaryYear: 0,
     months: [],
   };
@@ -16,8 +27,8 @@ export function createSchedule(year) {
 
     const month = {
       rate: 31.5,
-      tax: 25,
-      hospitalRate: 68,
+      tax: 27,
+      hospitalRate: 63.3,
       vacationPay: 100,
       premiumPay: 0,
       days: [],

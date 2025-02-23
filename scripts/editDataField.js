@@ -5,7 +5,6 @@ function editDataField(board = "", value = "", schedule) {
   const activeMonthId = document.querySelector(".monthItem").id;
 
   const activeMonth = schedule[activeYear].months[activeMonthId];
-  console.log(["activeMonth"], activeMonth);
 
   switch (board) {
     case ".editBoard":
@@ -22,6 +21,9 @@ function editDataField(board = "", value = "", schedule) {
       break;
     case ".editPremium":
       activeMonth.premiumPay = Number(value);
+      break;
+    case ".editHolidayDays":
+      schedule[activeYear].workHolidayDays.days = Number(value);
       break;
   }
   localStorage.setItem("schedule", JSON.stringify(schedule));

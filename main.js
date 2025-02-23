@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
     showSchedule(schedule);
   } else {
     showSchedule(schedule);
-    // console.log(["schedule"], schedule);
+    console.log(["schedule"], schedule);
   }
   toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
   toggleInputActive(".taxBoard", "taxSpan", "taxInput", schedule);
@@ -60,24 +60,6 @@ window.addEventListener("DOMContentLoaded", () => {
     ".editPremium",
     "editPremiumSpan",
     "editPremiumInput",
-    schedule
-  );
-  toggleInputActive(
-    ".editHospital",
-    "editHospitalSpan",
-    "editHospitalInput",
-    schedule
-  );
-  toggleInputActive(
-    ".editWorkHoliday",
-    "editWorkHolidaySpan",
-    "editWorkHolidayInput",
-    schedule
-  );
-  toggleInputActive(
-    ".editLeaveOnRequest",
-    "editLeaveOnRequestSpan",
-    "editLeaveOnRequestInput",
     schedule
   );
 });
@@ -129,6 +111,10 @@ scheduleBlock.addEventListener("click", (e) => {
 
     console.log(["schedule"], schedule);
 
+    const { rate, vacationPay, hospitalRate } =
+      schedule[Number(document.querySelector(".activeYear").textContent)]
+        .months[Number(monthItem.id)];
+
     const salaryDay = sumSalaryDay(
       addHours100,
       addHours120,
@@ -139,7 +125,9 @@ scheduleBlock.addEventListener("click", (e) => {
       leaveOnRequest,
       workDay,
       workHoliday,
-      31.5
+      rate,
+      vacationPay,
+      hospitalRate
     ).toFixed(2);
     const dayInfo = dayIndex < 10 ? "0" + dayIndex : dayIndex;
     const monthInfo = Number(monthItem.id) + 1;
@@ -162,8 +150,6 @@ scheduleBlock.addEventListener("click", (e) => {
       monthInfoStr,
       salaryDay
     );
-
-    console.log(["dayInfoTable"], dayInfoTable);
 
     dayInfoTable.innerHTML = infoDay;
     listItems.classList.add("listItemsShow");
@@ -196,9 +182,18 @@ async function formSend(e) {
     workDayTime,
   } = values;
 
-  console.log(["backshiftStatus"], backshiftStatus);
-
   const yearActive = Number(document.querySelector(".activeYear").textContent);
+
+  // start block calculate urlop
+
+  const {
+    birthday: birthdayDay,
+    higherPowerTime: higherPowerHours,
+    leaveOnRequestDays,
+    workHolidayDays,
+  } = schedule[yearActive];
+
+  // end block calculate urlop
 
   schedule[yearActive].months[Number(monthItem.id)].days[
     dayIndex - 1
@@ -254,11 +249,17 @@ async function formSend(e) {
   }
 
   if (statusDay === "birthday") {
+    if (birthdayDay.dayUsed >= birthdayDay.day) {
+      alert("Вихідний до ДН уже використаний!!!");
+      return;
+    }
     birthday.status = true;
     birthday.day = 1;
+    birthdayDay.dayUsed += 1;
   } else {
     birthday.status = false;
     birthday.day = 0;
+    if (birthdayDay.dayUsed > 0) birthdayDay.dayUsed -= 1;
   }
 
   if (statusDay === "hospital") {
@@ -291,14 +292,27 @@ async function formSend(e) {
   }
 
   if (higherPowerForm) {
+    if (
+      Number(higherPowerTime) + higherPowerHours.hoursUsed >
+      higherPowerHours.hours
+    ) {
+      alert(
+        `Вища сила, залишилося ${
+          higherPowerHours.hours - higherPowerHours.hoursUsed
+        } год.`
+      );
+      return;
+    }
     higherPower.status = true;
     higherPower.time = Number(higherPowerTime);
+    higherPowerHours.hoursUsed += Number(higherPowerTime);
 
     if (statusDay === "workDay")
       workDay.time = workDay.time - Number(higherPowerTime);
     if (workDay.time === 0) workDay.status = false;
   } else {
     higherPower.status = false;
+    higherPowerHours.hoursUsed -= higherPower.time;
     higherPower.time = 0;
   }
 

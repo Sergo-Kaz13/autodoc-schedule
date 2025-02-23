@@ -1,4 +1,6 @@
+import calculateUrlop from "./calculateUrlop.js";
 import editDataField from "./editDataField.js";
+import showMonthInfo from "./showMonthInfo.js";
 
 const toggleInputActive = (
   board = "",
@@ -6,7 +8,10 @@ const toggleInputActive = (
   inputText = "",
   schedule
 ) => {
-  console.log(["schedule"], schedule);
+  const activeYear = document.querySelector(".activeYear").textContent;
+  const activeMonthId = document.querySelector(".monthItem").id;
+
+  const activeMonth = schedule[activeYear].months[activeMonthId];
 
   const editBoard = document.querySelector(board);
 
@@ -39,8 +44,8 @@ const toggleInputActive = (
 
       input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-          const rateInput = document.querySelector("." + inputText);
-          const ratePrice = rateInput.value;
+          const ratePrice = input.value;
+          console.log(["ratePrice"], ratePrice);
 
           const span = document.createElement("span");
           span.classList.add(spanText);
@@ -49,13 +54,14 @@ const toggleInputActive = (
           editBoard.appendChild(span);
 
           editDataField(board, ratePrice, schedule);
+          showMonthInfo(activeMonth);
+
+          board === ".editHolidayDays" ? calculateUrlop(schedule) : "";
         }
       });
 
       input.addEventListener("blur", () => {
-        const rateInput = document.querySelector("." + inputText);
-        const ratePrice = rateInput.value;
-
+        const ratePrice = input.value;
         const span = document.createElement("span");
         span.classList.add(spanText);
         span.textContent = ratePrice;
@@ -63,6 +69,9 @@ const toggleInputActive = (
         editBoard.appendChild(span);
 
         editDataField(board, ratePrice, schedule);
+        showMonthInfo(activeMonth);
+
+        board === ".editHolidayDays" ? calculateUrlop(schedule) : "";
       });
     }
   });

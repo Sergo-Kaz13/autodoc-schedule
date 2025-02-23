@@ -1,3 +1,4 @@
+import calculateUrlop from "./calculateUrlop.js";
 import { scheduleBlock } from "./data.js";
 import showMonthInfo from "./showMonthInfo.js";
 
@@ -10,8 +11,6 @@ export function showSchedule(schedule, year, month) {
 
   const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();
-
-  const { rate } = activeMonth;
 
   let workTime = 0;
   let time100 = 0;
@@ -77,4 +76,5 @@ export function showSchedule(schedule, year, month) {
   });
 
   showMonthInfo(activeMonth);
+  calculateUrlop(schedule);
 }

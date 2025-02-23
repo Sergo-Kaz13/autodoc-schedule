@@ -131,7 +131,7 @@ const showMonthInfo = (activeMonth) => {
     salaryMonthBrutto.toFixed(2);
   document.querySelector(".salaryMonthNetto").textContent = (
     salaryMonthBrutto -
-    (salaryMonthBrutto / 100) * 25
+    (salaryMonthBrutto / 100) * tax
   ).toFixed(2);
   document.querySelector(".rateSpan").textContent = rate;
   document.querySelector(".taxSpan").textContent = tax;

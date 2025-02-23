@@ -17,6 +17,8 @@ function calculateSalaryMonth(
 
     const salaryDay = (time * 8 * rate * surcharge).toFixed(2);
 
+    console.log(document.querySelector(domItemPrice));
+
     document.querySelector(domItemPrice).textContent = salaryDay;
 
     return Number(salaryDay);
