@@ -6,6 +6,7 @@ import { createSchedule } from "./scripts/createSchedule.js";
 import sumSalaryDay from "./scripts/sumSalaryDay.js";
 import createDayInfo from "./scripts/createDayInfo.js";
 import toggleInputActive from "./scripts/toggleInputActive.js";
+import calculateUrlop from "./scripts/calculateUrlop.js";
 
 const { form } = document.forms;
 
@@ -25,6 +26,7 @@ const dayInfoTable = document.querySelector(".dayInfoTable");
 const btnClose = document.querySelector(".btnClose");
 
 activeYear.textContent = currentYear;
+// let newActiveYaer = currentYear;
 monthItem.textContent = months[currentMonth];
 monthItem.id = currentMonth;
 
@@ -63,27 +65,61 @@ window.addEventListener("DOMContentLoaded", () => {
     schedule
   );
 });
-
 btnMinMonth.addEventListener("click", () => {
-  if (currentMonth > 0) {
-    currentMonth--;
+  currentMonth--;
+  if (currentMonth < 0) {
+    currentMonth = 11;
+    const newActiveYear =
+      Number(document.querySelector(".activeYear").textContent) - 1;
+    activeYear.textContent = newActiveYear;
     monthItem.textContent = months[currentMonth];
     monthItem.id = currentMonth;
 
+    if (!(newActiveYear in schedule)) {
+      const newYear = createSchedule(newActiveYear);
+      schedule[newActiveYear] = newYear;
+    }
+
     scheduleBlock.innerHTML = "";
-    showSchedule(schedule, undefined, currentMonth);
+    showSchedule(schedule, newActiveYear, currentMonth);
   }
+  monthItem.textContent = months[currentMonth];
+  monthItem.id = currentMonth;
+  const activeYearItem = Number(
+    document.querySelector(".activeYear").textContent
+  );
+
+  scheduleBlock.innerHTML = "";
+  showSchedule(schedule, activeYearItem, currentMonth);
 });
 
 btnPlusMont.addEventListener("click", () => {
-  if (currentMonth < months.length - 1) {
-    currentMonth++;
+  currentMonth++;
+  if (currentMonth > 11) {
+    currentMonth = 0;
+    const newActiveYear =
+      Number(document.querySelector(".activeYear").textContent) + 1;
+    activeYear.textContent = newActiveYear;
     monthItem.textContent = months[currentMonth];
     monthItem.id = currentMonth;
+    console.log(["newActiveYear"], typeof newActiveYear);
+
+    if (!(newActiveYear in schedule)) {
+      const newYear = createSchedule(newActiveYear);
+      schedule[newActiveYear] = newYear;
+    }
 
     scheduleBlock.innerHTML = "";
-    showSchedule(schedule, undefined, currentMonth);
+    showSchedule(schedule, newActiveYear, currentMonth);
   }
+  monthItem.textContent = months[currentMonth];
+  monthItem.id = currentMonth;
+  const activeYearItem = Number(
+    document.querySelector(".activeYear").textContent
+  );
+
+  scheduleBlock.innerHTML = "";
+  showSchedule(schedule, activeYearItem, currentMonth);
 });
 
 scheduleBlock.addEventListener("click", (e) => {
@@ -184,20 +220,6 @@ async function formSend(e) {
 
   const yearActive = Number(document.querySelector(".activeYear").textContent);
 
-  // start block calculate urlop
-
-  const {
-    birthday: birthdayDay,
-    higherPowerTime: higherPowerHours,
-    leaveOnRequestDays,
-    workHolidayDays,
-  } = schedule[yearActive];
-
-  // end block calculate urlop
-
-  // schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1]
-  //   .statusDay;
-
   const {
     addHours100,
     addHours120,
@@ -216,6 +238,49 @@ async function formSend(e) {
       .dayInfo;
 
   console.log(["statusDay"], statusDay);
+
+  const {
+    birthday: birthdayYear,
+    higherPowerTime: higherPowerTimeYear,
+    leaveOnRequestDays,
+    workHolidayDays,
+  } = schedule[yearActive];
+
+  const urlopData = calculateUrlop(schedule);
+  console.log(["urlopData"], urlopData);
+
+  console.log(["higherPowerForm"], higherPowerForm);
+
+  if (statusDay === "birthday") {
+    if (urlopData.birthdayUsed === birthdayYear) {
+      alert("Вихідний до ДН використаний!!!");
+      return;
+    }
+  } else if (statusDay === "workHoliday") {
+    if (urlopData.workHolidayUsed === workHolidayDays) {
+      alert("Відпустка використана.");
+      return;
+    }
+  } else if (statusDay === "leaveOnRequest") {
+    if (urlopData.leaveOnRequestUsed === leaveOnRequestDays) {
+      alert("Відпустка на вимогу використана.");
+      return;
+    }
+  } else if (higherPowerForm) {
+    console.log(["high"], urlopData.higherPowerUsed + Number(higherPowerTime));
+
+    if (
+      urlopData.higherPowerUsed + Number(higherPowerTime) >
+      higherPowerTimeYear
+    ) {
+      alert(
+        `Вища сила, залишилося ${
+          higherPowerTimeYear - urlopData.higherPowerUsed
+        } год.`
+      );
+      return;
+    }
+  }
 
   //============= START ===============
 
@@ -264,20 +329,14 @@ async function formSend(e) {
   }
 
   if (statusDay === "birthday") {
-    if (birthdayDay.dayUsed >= birthdayDay.day) {
-      alert("Вихідний до ДН уже використаний!!!");
-    } else {
-      birthday.status = true;
-      birthday.day = 1;
-      birthdayDay.dayUsed += 1;
-      schedule[yearActive].months[Number(monthItem.id)].days[
-        dayIndex - 1
-      ].statusDay = statusDay;
-    }
+    birthday.status = true;
+    birthday.day = 1;
+    schedule[yearActive].months[Number(monthItem.id)].days[
+      dayIndex - 1
+    ].statusDay = statusDay;
   } else {
     birthday.status = false;
     birthday.day = 0;
-    if (birthdayDay.dayUsed > 0) birthdayDay.dayUsed -= 1;
   }
 
   if (statusDay === "hospital") {
@@ -296,7 +355,7 @@ async function formSend(e) {
 
   backshiftStatus ? (backshift.status = true) : (backshift.status = false);
 
-  if (addHours50Form) {
+  if (addHours50Form && statusDay === "workDay") {
     addHours50.status = true;
     addHours50.time = Number(time50);
   } else {
@@ -304,7 +363,7 @@ async function formSend(e) {
     addHours50.time = 0;
   }
 
-  if (addHours120Form) {
+  if (addHours120Form && statusDay === "workDay") {
     addHours120.status = true;
     addHours120.time = Number(time120);
   } else {
@@ -312,36 +371,17 @@ async function formSend(e) {
     addHours120.time = 0;
   }
 
-  if (higherPowerForm) {
-    if (
-      Number(higherPowerTime) + higherPowerHours.hoursUsed >
-      higherPowerHours.hours
-    ) {
-      alert(
-        `Вища сила, залишилося ${
-          higherPowerHours.hours - higherPowerHours.hoursUsed
-        } год.`
-      );
-    } else {
-      higherPower.status = true;
-      higherPower.time = Number(higherPowerTime);
-      higherPowerHours.hoursUsed += Number(higherPowerTime);
-    }
-
-    if (statusDay === "workDay" && higherPower.status)
-      workDay.time = workDay.time - Number(higherPowerTime);
+  if (higherPowerForm && statusDay === "workDay") {
+    higherPower.status = true;
+    higherPower.time = Number(higherPowerTime);
+    workDay.time = workDay.time - Number(higherPowerTime);
     if (workDay.time === 0) workDay.status = false;
   } else {
     higherPower.status = false;
-    higherPowerHours.hoursUsed -= higherPower.time;
     higherPower.time = 0;
   }
 
   // ============= END ================
-
-  // schedule[yearActive].months[Number(monthItem.id)].days[
-  //   dayIndex - 1
-  // ].statusDay = statusDay;
 
   console.log(values);
   console.log(["schedule"], schedule);

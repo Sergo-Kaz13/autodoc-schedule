@@ -23,7 +23,7 @@ function editDataField(board = "", value = "", schedule) {
       activeMonth.premiumPay = Number(value);
       break;
     case ".editHolidayDays":
-      schedule[activeYear].workHolidayDays.days = Number(value);
+      schedule[activeYear].workHolidayDays = Number(value);
       break;
   }
   localStorage.setItem("schedule", JSON.stringify(schedule));

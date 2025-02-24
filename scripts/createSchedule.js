@@ -2,22 +2,10 @@ import { daysInMonth } from "./daysInMonth.js";
 
 export function createSchedule(year) {
   const fullYear = {
-    workHolidayDays: {
-      days: 24,
-      daysUsed: 0,
-    },
-    leaveOnRequestDays: {
-      days: 4,
-      daysUsed: 0,
-    },
-    higherPowerTime: {
-      hours: 16,
-      hoursUsed: 0,
-    },
-    birthday: {
-      day: 1,
-      dayUsed: 0,
-    },
+    workHolidayDays: 24,
+    leaveOnRequestDays: 4,
+    higherPowerTime: 16,
+    birthday: 1,
     salaryYear: 0,
     months: [],
   };

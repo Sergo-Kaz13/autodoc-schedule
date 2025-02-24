@@ -10,29 +10,43 @@ function calculateUrlop(schedule) {
     workHolidayDays,
   } = schedule[activeYear];
 
-  document.querySelector(".holidayDaysSpan").textContent = workHolidayDays.days;
+  document.querySelector(".holidayDaysSpan").textContent = workHolidayDays;
   document.querySelector(".leaveOnRequestDays").textContent =
-    leaveOnRequestDays.days;
-  document.querySelector(".higherPowerHours").textContent =
-    higherPowerTime.hours;
-  document.querySelector(".birthday").textContent = birthday.day;
+    leaveOnRequestDays;
+  document.querySelector(".higherPowerHours").textContent = higherPowerTime;
+  document.querySelector(".birthday").textContent = birthday;
 
-  document.querySelector(".workHolidayDaysUsed").textContent =
-    workHolidayDays.daysUsed;
+  let birthdayUsed = 0;
+  let higherPowerUsed = 0;
+  let leaveOnRequestUsed = 0;
+  let workHolidayUsed = 0;
+
+  months.forEach(({ days }) => {
+    days.forEach(({ dayInfo }) => {
+      const { birthday, higherPower, workHoliday, leaveOnRequest } = dayInfo;
+
+      birthday.status ? (birthdayUsed += birthday.day) : "";
+      higherPower.status ? (higherPowerUsed += higherPower.time) : "";
+      workHoliday.status ? (workHolidayUsed += workHoliday.day) : "";
+      leaveOnRequest.status ? (leaveOnRequestUsed += leaveOnRequest.day) : "";
+    });
+  });
+
+  document.querySelector(".workHolidayDaysUsed").textContent = workHolidayUsed;
   document.querySelector(".leaveOnRequestDaysUsed").textContent =
-    leaveOnRequestDays.daysUsed;
-  document.querySelector(".higherPowerTimeUsed").textContent =
-    higherPowerTime.hoursUsed;
-  document.querySelector(".birthdayUsed").textContent = birthday.dayUsed;
+    leaveOnRequestUsed;
+  document.querySelector(".higherPowerTimeUsed").textContent = higherPowerUsed;
+  document.querySelector(".birthdayUsed").textContent = birthdayUsed;
 
   document.querySelector(".workHolidayDaysStay").textContent =
-    workHolidayDays.days - workHolidayDays.daysUsed;
+    workHolidayDays - workHolidayUsed;
   document.querySelector(".leaveOnRequestDaysStay").textContent =
-    leaveOnRequestDays.days - leaveOnRequestDays.daysUsed;
+    leaveOnRequestDays - leaveOnRequestUsed;
   document.querySelector(".higherPowerTimeStay").textContent =
-    higherPowerTime.hours - higherPowerTime.hoursUsed;
-  document.querySelector(".birthdayStay").textContent =
-    birthday.day - birthday.dayUsed;
+    higherPowerTime - higherPowerUsed;
+  document.querySelector(".birthdayStay").textContent = birthday - birthdayUsed;
+
+  return { workHolidayUsed, leaveOnRequestUsed, higherPowerUsed, birthdayUsed };
 }
 
 export default calculateUrlop;
