@@ -7,6 +7,7 @@ import sumSalaryDay from "./scripts/sumSalaryDay.js";
 import createDayInfo from "./scripts/createDayInfo.js";
 import toggleInputActive from "./scripts/toggleInputActive.js";
 import calculateUrlop from "./scripts/calculateUrlop.js";
+import modalUrlopInfo from "./scripts/modalUrlopInfo.js";
 
 const { form } = document.forms;
 
@@ -249,31 +250,27 @@ async function formSend(e) {
   const urlopData = calculateUrlop(schedule);
   console.log(["urlopData"], urlopData);
 
-  console.log(["higherPowerForm"], higherPowerForm);
-
   if (statusDay === "birthday") {
     if (urlopData.birthdayUsed === birthdayYear) {
-      alert("Вихідний до ДН використаний!!!");
+      modalUrlopInfo("Вихідний до ДН використаний.");
       return;
     }
   } else if (statusDay === "workHoliday") {
     if (urlopData.workHolidayUsed === workHolidayDays) {
-      alert("Відпустка використана.");
+      modalUrlopInfo("Основна відпустка використана.");
       return;
     }
   } else if (statusDay === "leaveOnRequest") {
     if (urlopData.leaveOnRequestUsed === leaveOnRequestDays) {
-      alert("Відпустка на вимогу використана.");
+      modalUrlopInfo("Відпустка на вимогу використана.");
       return;
     }
   } else if (higherPowerForm) {
-    console.log(["high"], urlopData.higherPowerUsed + Number(higherPowerTime));
-
     if (
       urlopData.higherPowerUsed + Number(higherPowerTime) >
       higherPowerTimeYear
     ) {
-      alert(
+      modalUrlopInfo(
         `Вища сила, залишилося ${
           higherPowerTimeYear - urlopData.higherPowerUsed
         } год.`
@@ -350,8 +347,23 @@ async function formSend(e) {
     hospital.day = 0;
   }
 
-  statusDay === "weekend" ? (weekend.status = true) : (weekend.status = false);
-  statusDay === "holiday" ? (holiday.status = true) : (holiday.status = false);
+  if (statusDay === "weekend") {
+    weekend.status = true;
+    schedule[yearActive].months[Number(monthItem.id)].days[
+      dayIndex - 1
+    ].statusDay = statusDay;
+  } else {
+    weekend.status = false;
+  }
+
+  if (statusDay === "holiday") {
+    holiday.status = true;
+    schedule[yearActive].months[Number(monthItem.id)].days[
+      dayIndex - 1
+    ].statusDay = statusDay;
+  } else {
+    holiday.status = false;
+  }
 
   backshiftStatus ? (backshift.status = true) : (backshift.status = false);
 
