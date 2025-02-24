@@ -384,6 +384,16 @@ body {
   font-size: 16px;
 }
 
+.holidayDaysSpan::before {
+  content: "🖋";
+  position: absolute;
+  right: 1px;
+  top: 50%;
+  transform: rotate(110deg);
+  transform: translateY(-50%);
+  font-size: 15px;
+}
+
 .rateSpan::after,
 .editPremiumSpan::after {
   content: " zł.";
@@ -391,6 +401,7 @@ body {
 
 .holidayDaysSpan::after {
   content: " дн.";
+  font-size: 12px;
 }
 
 .taxSpan::after,
@@ -429,11 +440,6 @@ body {
   width: 20px;
   height: 20px;
   text-align: center;
-}
-
-.scheduleItemDayEvent {
-  /* background: rgb(246, 169, 15);
-  color: rgb(255, 255, 255); */
 }
 
 .listItemsBlock {

@@ -36,7 +36,11 @@ export function showSchedule(schedule, year, month) {
     div.append(span);
     div.id = "scheduleItem";
 
-    if (i + 1 === currentDate && currentMonth === month) {
+    if (
+      i + 1 === currentDate &&
+      currentMonth === month &&
+      year === new Date().getFullYear()
+    ) {
       div.classList.add("currentDate");
     }
 
