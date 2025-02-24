@@ -138,10 +138,6 @@ const showMonthInfo = (activeMonth) => {
   document.querySelector(".hospitalSpan").textContent = hospitalRate;
   document.querySelector(".holidaySpan").textContent = vacationPay;
   document.querySelector(".editPremiumSpan").textContent = premiumPay;
-
-  console.log(["time"], allTime.workDayTime);
-
-  console.log(["allTime.workDayTime"], allTime);
 };
 
 export default showMonthInfo;

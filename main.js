@@ -195,9 +195,8 @@ async function formSend(e) {
 
   // end block calculate urlop
 
-  schedule[yearActive].months[Number(monthItem.id)].days[
-    dayIndex - 1
-  ].statusDay = statusDay;
+  // schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1]
+  //   .statusDay;
 
   const {
     addHours100,
@@ -216,9 +215,16 @@ async function formSend(e) {
     schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1]
       .dayInfo;
 
+  console.log(["statusDay"], statusDay);
+
+  //============= START ===============
+
   if (statusDay === "workDay") {
     workDay.status = true;
     workDay.time = Number(workDayTime);
+    schedule[yearActive].months[Number(monthItem.id)].days[
+      dayIndex - 1
+    ].statusDay = statusDay;
   } else {
     workDay.status = false;
     workDay.time = 0;
@@ -227,6 +233,9 @@ async function formSend(e) {
   if (statusDay === "addHours100") {
     addHours100.status = true;
     addHours100.time = Number(time100);
+    schedule[yearActive].months[Number(monthItem.id)].days[
+      dayIndex - 1
+    ].statusDay = statusDay;
   } else {
     addHours100.status = false;
     addHours100.time = 0;
@@ -235,6 +244,9 @@ async function formSend(e) {
   if (statusDay === "workHoliday") {
     workHoliday.status = true;
     workHoliday.day = 1;
+    schedule[yearActive].months[Number(monthItem.id)].days[
+      dayIndex - 1
+    ].statusDay = statusDay;
   } else {
     workHoliday.status = false;
     workHoliday.day = 0;
@@ -243,6 +255,9 @@ async function formSend(e) {
   if (statusDay === "leaveOnRequest") {
     leaveOnRequest.status = true;
     leaveOnRequest.day = 1;
+    schedule[yearActive].months[Number(monthItem.id)].days[
+      dayIndex - 1
+    ].statusDay = statusDay;
   } else {
     leaveOnRequest.status = false;
     leaveOnRequest.day = 0;
@@ -251,11 +266,14 @@ async function formSend(e) {
   if (statusDay === "birthday") {
     if (birthdayDay.dayUsed >= birthdayDay.day) {
       alert("Вихідний до ДН уже використаний!!!");
-      return;
+    } else {
+      birthday.status = true;
+      birthday.day = 1;
+      birthdayDay.dayUsed += 1;
+      schedule[yearActive].months[Number(monthItem.id)].days[
+        dayIndex - 1
+      ].statusDay = statusDay;
     }
-    birthday.status = true;
-    birthday.day = 1;
-    birthdayDay.dayUsed += 1;
   } else {
     birthday.status = false;
     birthday.day = 0;
@@ -265,6 +283,9 @@ async function formSend(e) {
   if (statusDay === "hospital") {
     hospital.status = true;
     hospital.day = 1;
+    schedule[yearActive].months[Number(monthItem.id)].days[
+      dayIndex - 1
+    ].statusDay = statusDay;
   } else {
     hospital.status = false;
     hospital.day = 0;
@@ -301,13 +322,13 @@ async function formSend(e) {
           higherPowerHours.hours - higherPowerHours.hoursUsed
         } год.`
       );
-      return;
+    } else {
+      higherPower.status = true;
+      higherPower.time = Number(higherPowerTime);
+      higherPowerHours.hoursUsed += Number(higherPowerTime);
     }
-    higherPower.status = true;
-    higherPower.time = Number(higherPowerTime);
-    higherPowerHours.hoursUsed += Number(higherPowerTime);
 
-    if (statusDay === "workDay")
+    if (statusDay === "workDay" && higherPower.status)
       workDay.time = workDay.time - Number(higherPowerTime);
     if (workDay.time === 0) workDay.status = false;
   } else {
@@ -315,6 +336,12 @@ async function formSend(e) {
     higherPowerHours.hoursUsed -= higherPower.time;
     higherPower.time = 0;
   }
+
+  // ============= END ================
+
+  // schedule[yearActive].months[Number(monthItem.id)].days[
+  //   dayIndex - 1
+  // ].statusDay = statusDay;
 
   console.log(values);
   console.log(["schedule"], schedule);
