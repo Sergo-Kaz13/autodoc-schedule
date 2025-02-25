@@ -8,10 +8,10 @@ const toggleInputActive = (
   inputText = "",
   schedule
 ) => {
-  const activeYear = document.querySelector(".activeYear").textContent;
-  const activeMonthId = document.querySelector(".monthItem").id;
+  // const activeYear = document.querySelector(".activeYear").textContent;
+  // const activeMonthId = document.querySelector(".monthItem").id;
 
-  const activeMonth = schedule[activeYear].months[activeMonthId];
+  // const activeMonth = schedule[activeYear].months[activeMonthId];
 
   const editBoard = document.querySelector(board);
 
@@ -54,6 +54,11 @@ const toggleInputActive = (
           editBoard.appendChild(span);
 
           editDataField(board, ratePrice, schedule);
+
+          const activeYear = document.querySelector(".activeYear").textContent;
+          const activeMonthId = document.querySelector(".monthItem").id;
+          const activeMonth = schedule[activeYear].months[activeMonthId];
+
           showMonthInfo(activeMonth);
 
           board === ".editHolidayDays" ? calculateUrlop(schedule) : "";
@@ -69,6 +74,11 @@ const toggleInputActive = (
         editBoard.appendChild(span);
 
         editDataField(board, ratePrice, schedule);
+
+        const activeYear = document.querySelector(".activeYear").textContent;
+        const activeMonthId = document.querySelector(".monthItem").id;
+        const activeMonth = schedule[activeYear].months[activeMonthId];
+
         showMonthInfo(activeMonth);
 
         board === ".editHolidayDays" ? calculateUrlop(schedule) : "";
