@@ -406,8 +406,8 @@ async function formSend(e) {
   showSchedule(schedule, yearActive, Number(monthItem.id));
 }
 
-const removeLocalhost = document.querySelector(".removeLocalhoste");
+// const removeLocaStorage = document.querySelector(".removeLocaStorage");
 
-removeLocalhost.addEventListener("click", () => {
-  localStorage.removeItem("schedule");
-});
+// removeLocaStorage.addEventListener("click", () => {
+//   localStorage.removeItem("schedule");
+// });
