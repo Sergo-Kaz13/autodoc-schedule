@@ -36,21 +36,24 @@ body {
 body {
   line-height: 1.5;
   font-size: 1rem;
-  background: rgb(244, 133, 38);
+  /* background: rgb(244, 133, 38); */
+  background-color: #f4f4f4;
   font-family: "Inter", sans-serif;
 }
 
 .wrapper {
   min-height: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 10px;
-  padding-bottom: 50px;
+  max-width: 600px;
+  background: white;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .appTitle {
   font-size: 24px;
-  color: rgb(255, 255, 255);
+  color: #333;
   text-transform: uppercase;
   text-align: center;
   padding: 15px;
@@ -63,10 +66,7 @@ body {
   -ms-grid-columns: 1fr 5px 1fr 5px 1fr 5px 1fr 5px 1fr 5px 1fr 5px 1fr;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
-  color: rgb(244, 133, 38);
-  padding: 10px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid rgb(255, 255, 255);
+  color: #333;
   margin-bottom: 30px;
 }
 
@@ -78,11 +78,10 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  /* align-items: center; */
-  border: 1px solid rgb(244, 133, 38);
+  align-items: center;
   border-radius: 5px;
-  min-height: 50px;
-  background: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  min-height: 44px;
   -webkit-transition: all ease-in-out 0.28s;
   -o-transition: all ease-in-out 0.28s;
   transition: all ease-in-out 0.28s;
@@ -101,40 +100,41 @@ body {
 .scheduleItemLeaveOnRequest,
 .scheduleItemL4,
 .scheduleItemBirthday {
-  border: 2px solid rgb(255, 255, 255);
   font-weight: 700;
-  color: rgb(255, 255, 255);
+  color: #333;
 }
 
 .scheduleItemWork {
-  background: rgb(255, 255, 255);
-  color: rgb(244, 133, 38);
+  display: flex;
+  flex-direction: column;
+  background: rgb(34, 197, 94);
+  color: #333;
 }
 
 .scheduleItem100 {
-  background: rgb(176, 199, 227);
+  display: flex;
+  flex-direction: column;
+  background: rgb(234, 179, 8);
 }
 
-.scheduleItem100::before {
+.scheduleItem100::after {
   content: "100%";
-  position: absolute;
-  bottom: 2px;
-  width: 100%;
   text-align: center;
-  font-size: 12px;
-  color: rgb(255, 255, 255);
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #333;
 }
 
 .scheduleItemDayOff {
-  background: rgb(244, 133, 38);
-  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  background: rgb(239, 68, 68);
+  color: #333;
 }
 
 .scheduleItemDayOff::after {
   content: "wolne";
-  position: absolute;
-  bottom: 2px;
-  width: 100%;
   text-align: center;
   font-size: 8px;
   text-transform: uppercase;
@@ -142,29 +142,28 @@ body {
 }
 
 .scheduleItemHoliday {
-  background: rgb(244, 133, 38);
-  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  background: rgb(249, 115, 22);
+  color: #333;
 }
 
 .scheduleItemHoliday::after {
-  content: "wolne za święto";
-  position: absolute;
-  bottom: 2px;
-  width: 100%;
+  content: "święto";
   text-align: center;
   font-size: 8px;
-  line-height: 1.2;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .scheduleItemWorkHoliday {
-  background: rgb(191, 128, 183);
+  display: flex;
+  flex-direction: column;
+  background: rgb(59, 130, 246);
 }
 
 .scheduleItemWorkHoliday::after {
   content: "urlop";
-  position: absolute;
-  bottom: 2px;
-  width: 100%;
   text-align: center;
   font-size: 8px;
   text-transform: uppercase;
@@ -172,86 +171,83 @@ body {
 }
 
 .scheduleItemLeaveOnRequest {
-  background: rgb(90, 104, 179);
+  display: flex;
+  flex-direction: column;
+  background: rgb(80, 185, 235);
 }
 
 .scheduleItemLeaveOnRequest::after {
   content: "urlop na żądanie";
-  position: absolute;
-  bottom: 2px;
-  width: 100%;
   text-align: center;
   font-size: 8px;
-  line-height: 1.2;
+  line-height: 1.1;
+  text-transform: uppercase;
 }
 
 .scheduleItemL4 {
-  color: rgb(255, 255, 255);
-  background: rgb(245, 124, 113);
+  display: flex;
+  flex-direction: column;
+  color: #333;
+  background: rgb(153, 153, 255);
 }
 
 .scheduleItemL4::after {
   content: "L4";
-  position: absolute;
-  bottom: 2px;
-  width: 100%;
   text-align: center;
-  font-size: 13px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .scheduleItemBirthday {
-  background: rgb(101, 194, 150);
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(220, 120, 140);
 }
 
 .scheduleItemBirthday::after {
   content: "🎂";
-  position: absolute;
-  bottom: 2px;
-  width: 100%;
   text-align: center;
 }
 
 .backshift {
-  -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
+  border: 3px dashed rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 1);
 }
 
 .addHours50::after {
   content: "50%";
-  position: absolute;
-  bottom: 12px;
-  width: 100%;
   text-align: center;
-  font-size: 10px;
-  color: rgb(255, 255, 255);
-  background: rgb(191, 128, 183);
+  width: 100%;
+  font-size: 9px;
+  color: #333;
+  background: rgb(253, 224, 71);
 }
 
 .addHours120::before {
   content: "120%";
-  position: absolute;
-  bottom: 0;
   width: 100%;
   text-align: center;
-  font-size: 10px;
-  color: rgb(255, 255, 255);
-  background: rgb(191, 128, 183);
+  font-size: 9px;
+  color: #333;
+  background: rgb(255, 180, 80);
 }
 
 .higherPower {
-  background: rgb(88, 196, 198);
-  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  background: rgb(168, 85, 247);
+  color: #333;
 }
 
 .higherPower::after {
-  content: "urlop siła wyższa";
-  position: absolute;
-  width: 100%;
-  bottom: 2px;
+  content: "siła wyższa";
   text-align: center;
-  text-transform: none;
+  text-transform: uppercase;
   font-size: 8px;
   line-height: 1.2;
+  padding-bottom: 2px;
 }
 
 .scheduleItemEvening::after {
@@ -280,32 +276,40 @@ body {
 }
 
 .statusDay {
-  color: rgb(255, 255, 255);
-  font-size: 14px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-size: 12px;
   font-weight: 400;
 }
 
 .statusDay th {
-  background-color: rgb(104 227 227);
-  color: rgb(16 52 242);
+  border: 1px solid #d1d5db;
+  background-color: #f3f4f6;
+  font-weight: 700;
+  color: #333;
   text-transform: uppercase;
   padding: 5px;
 }
 
+.statusDay td {
+  border: 1px solid #d1d5db;
+}
+
 .statusDay tr:nth-child(odd) {
-  background: rgb(214, 238, 238);
-  color: rgb(244, 133, 38);
+  background-color: #ffffff;
+  color: #333;
 }
 
 .statusDay tr:nth-child(even) {
-  background: rgb(32, 204, 135);
-  color: rgb(214, 238, 238);
+  background-color: #f9fafb;
+  color: #333;
 }
 
 .statusDay tr.allBlock {
-  background: rgb(4 73 116);
-  color: rgb(255, 255, 255);
-  font-weight: 700;
+  color: #333;
+  font-weight: 600;
 }
 
 .allBlock td:first-child {
@@ -314,44 +318,44 @@ body {
 }
 
 .fieldSalaryNetto {
-  background: rgb(158 48 31);
-  font-weight: 700;
+  background-color: #f9fafb;
+  font-weight: 600;
 }
 
 .tableUrlop {
-  font-size: 14px;
-  font-weight: 500;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .tableUrlop .tableUrlopTitle {
-  color: rgb(0, 0, 0);
+  color: #333;
   font-size: 12px;
-}
-
-.tableUrlop td:first-child {
-  background: rgb(90, 104, 179);
-  color: rgb(231 238 246);
-  font-size: 12px;
-  font-weight: 300;
 }
 
 .tableUrlop th {
+  border: 1px solid #d1d5db;
   font-size: 10px;
-  color: rgb(231 238 246);
+  background-color: #f3f4f6;
+  font-weight: 700;
+  color: #333;
   text-transform: uppercase;
   padding: 5px 5px;
 }
 
-.tableUrlop th:not(.tableUrlop th:first-child) {
-  background: rgb(200, 93, 93);
+.tableUrlop tr:nth-child(odd) {
+  background-color: #ffffff;
 }
 
-.tableUrlop tr {
-  background: rgb(214, 238, 238);
+.tableUrlop tr:nth-child(even) {
+  background-color: #f9fafb;
 }
 
 .tableUrlop td {
   padding: 3px 5px;
+  border: 1px solid #d1d5db;
 }
 
 .statusDay td {
@@ -359,24 +363,34 @@ body {
 }
 
 .rateTable {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   -ms-flex-item-align: center;
   -ms-grid-row-align: center;
   align-self: center;
-  color: rgb(214, 238, 238);
-  font-size: 14px;
+  color: #333;
+  font-size: 12px;
 }
 
 .rateTable tr:nth-child(odd) {
-  background: rgb(184 87 149);
+  background-color: #ffffff;
 }
 
 .rateTable tr:nth-child(even) {
-  background: rgb(51, 169, 243);
+  background-color: #f9fafb;
 }
 
 .rateTable td {
   padding: 3px 5px;
+  border: 1px solid #d1d5db;
   min-width: 150px;
+}
+
+.rateTable th {
+  border: 1px solid #d1d5db;
+  background-color: #f3f4f6;
+  font-weight: 700;
 }
 
 .rateTable .editBoard,
@@ -411,7 +425,7 @@ body {
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .holidayDaysSpan::before {
@@ -425,7 +439,7 @@ body {
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .rateSpan::after,
@@ -454,12 +468,14 @@ body {
   box-sizing: border-box;
   margin: 0;
   text-align: center;
+  font-size: 12px;
 }
 
 .holidayDaysInput,
 .editPremiumInput {
   text-align: left;
   padding-left: 5px;
+  font-size: 12px;
 }
 
 .editHolidayDays:has(input),
@@ -468,13 +484,10 @@ body {
 }
 
 .currentDate {
-  border: 4px solid rgb(249, 4, 4);
 }
 
 .currentDate span {
-  width: 20px;
-  height: 20px;
-  text-align: center;
+  color: #fff;
 }
 
 .listItemsBlock {
@@ -517,7 +530,7 @@ body {
   background: rgb(255, 165, 0);
   font-size: 14px;
   font-weight: 600;
-  color: rgb(255, 255, 255);
+  color: #333;
 }
 
 .listItemsEvents td::first-letter {
@@ -541,7 +554,7 @@ body {
 .listItemsEvents select {
   margin-left: 10px;
   border-radius: 5px;
-  color: rgb(244, 133, 38);
+  color: #333;
   font-size: 14px;
   font-weight: 700;
 }
@@ -554,7 +567,7 @@ body {
 
 .dayInfoTable th {
   font-size: 16px;
-  color: rgb(255, 99, 71);
+  color: #333;
   background: rgb(255, 255, 255);
   font-weight: 600;
   padding: 0 5px;
@@ -562,7 +575,7 @@ body {
 
 .dayInfoTable tr {
   background-color: rgb(236 40 158);
-  color: rgba(255, 255, 255, 1);
+  color: #333;
   font-weight: 400;
 }
 
@@ -582,7 +595,7 @@ tr.salaryDay {
 }
 
 .formTitleText {
-  color: rgb(244, 133, 38);
+  color: #333;
   text-transform: uppercase;
 }
 
@@ -624,7 +637,7 @@ tr.salaryDay {
   border-radius: 5px;
   border: 2px solid rgb(255, 255, 255);
   background: rgb(255, 255, 255);
-  color: rgb(244, 133, 38);
+  color: #333;
   text-transform: uppercase;
   font-weight: 700;
   -webkit-transition: all ease-in-out 0.28s;
@@ -649,7 +662,7 @@ tr.salaryDay {
 
 .listItems li {
   border-bottom: 1px solid rgb(255, 255, 255);
-  color: rgb(9, 108, 245);
+  color: #333;
 }
 
 .activeYear {
@@ -657,7 +670,7 @@ tr.salaryDay {
   padding: 0 10px;
   font-size: 16px;
   font-weight: 600;
-  color: rgb(255, 255, 255);
+  color: #333;
 }
 
 .activeMonth {
@@ -671,7 +684,7 @@ tr.salaryDay {
   -ms-flex-pack: center;
   justify-content: center;
   gap: 15px;
-  color: rgb(255, 255, 255);
+  color: #333;
   font-weight: 700;
   text-transform: uppercase;
   padding: 0 10px 10px 10px;
@@ -681,7 +694,7 @@ tr.salaryDay {
 .btnRight {
   font-size: 20px;
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.7);
+  color: #333;
   -webkit-transition: all ease-in-out 0.28s;
   -o-transition: all ease-in-out 0.28s;
   transition: all ease-in-out 0.28s;
@@ -690,7 +703,7 @@ tr.salaryDay {
 .btnLeft:hover,
 .btnRight:hover {
   cursor: pointer;
-  color: rgb(255, 255, 255);
+  color: #333;
 }
 
 .monthItem {
@@ -704,17 +717,20 @@ tr.salaryDay {
   -ms-grid-columns: 1fr 5px 1fr 5px 1fr 5px 1fr 5px 1fr 5px 1fr 5px 1fr;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
-  padding: 0 10px;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .nameDay {
-  background: rgba(255, 255, 255, 0.8);
-  color: rgb(244, 133, 38);
+  background: #ddd;
+  padding: 10px;
+  color: #333;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
   text-transform: capitalize;
   border-radius: 5px;
+  cursor: pointer;
+  transition: 0.28s;
 }
 
 .blindBlock {

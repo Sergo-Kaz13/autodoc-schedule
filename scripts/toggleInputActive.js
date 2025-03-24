@@ -31,10 +31,15 @@ const toggleInputActive = (
       let height;
 
       if (e.target.tagName === "TD") {
-        height = e.target.offsetHeight;
+        height = e.target.clientHeight;
       } else {
-        height = e.target.parentNode.offsetHeight;
+        height = e.target.parentNode.clientHeight;
       }
+      // if (e.target.tagName === "TD") {
+      //   height = e.target.offsetHeight;
+      // } else {
+      //   height = e.target.parentNode.offsetHeight;
+      // }
 
       input.style.width = "100%";
       input.style.height = height + "px";
