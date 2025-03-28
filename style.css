@@ -45,9 +45,8 @@ body {
   min-height: 100%;
   max-width: 600px;
   background: white;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 8px;
+  margin: 0 auto;
+  padding: 50px 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -492,6 +491,8 @@ body {
 
 .listItemsBlock {
   position: absolute;
+  /* position: fixed; */
+  /* overflow-y: auto; */
   z-index: 100;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
@@ -501,7 +502,7 @@ body {
   align-items: center;
   left: 0;
   top: 0;
-  padding-top: 70px;
+  padding: 70px 0;
   width: 100%;
   height: 100%;
   display: none;
@@ -514,7 +515,8 @@ body {
 }
 
 .listItemsEvents {
-  position: relative;
+  position: absolute;
+  top: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -523,14 +525,13 @@ body {
   -ms-flex-direction: column;
   flex-direction: column;
   gap: 20px;
-  list-style: none;
-  border: 2px solid rgb(255, 255, 0);
-  border-radius: 10px;
-  padding: 50px 30px 20px 30px;
-  background: rgb(255, 165, 0);
+  padding: 50px 20px 20px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  color: #333;
   font-size: 14px;
   font-weight: 600;
-  color: #333;
 }
 
 .listItemsEvents td::first-letter {
@@ -545,6 +546,7 @@ body {
   -webkit-transition: all ease-in-out 0.28s;
   -o-transition: all ease-in-out 0.28s;
   transition: all ease-in-out 0.28s;
+  cursor: pointer;
 }
 
 .btnClose:hover {
@@ -560,42 +562,71 @@ body {
 }
 
 .dayInfoTable {
-  background: rgb(255, 255, 255);
-  padding: 15px;
-  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 900;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  border-spacing: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .dayInfoTable th {
   font-size: 16px;
   color: #333;
-  background: rgb(255, 255, 255);
   font-weight: 600;
-  padding: 0 5px;
+  background: rgb(255, 255, 255);
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.2);
+  padding: 6px 12px;
+  border-radius: 6px;
 }
 
 .dayInfoTable tr {
-  background-color: rgb(236 40 158);
-  color: #333;
   font-weight: 400;
+  background-color: #ff99cc;
+  color: #fff;
+}
+
+.dayInfoTable tr:nth-child(2) {
+  background-color: #e85aa5;
+  color: #fff;
+}
+
+.dayInfoTable tr:nth-child(3) {
+  background-color: #d1478b;
+  color: #fff;
 }
 
 .dayInfoTable td {
   padding: 0 5px;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 8px 12px;
 }
 
-tr.salaryDay {
-  background: rgb(63 228 103);
+.dayInfoTable tr.salaryDay {
+  background-color: #28a745;
+  color: #fff;
+}
+
+#form {
+  font-size: 14px;
+  color: #444;
+  background-color: #f3f3f3;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
 
 .formTitle {
   text-align: center;
   margin-bottom: 15px;
   padding: 5px;
-  background: #fff;
 }
 
 .formTitleText {
-  color: #333;
   text-transform: uppercase;
 }
 
@@ -606,7 +637,7 @@ tr.salaryDay {
 }
 
 .listItemsBlockTwo {
-  padding-bottom: 15px;
+  padding-bottom: 25px;
 }
 
 .listItemsBlockOne,
@@ -631,38 +662,26 @@ tr.salaryDay {
 }
 
 .btnSubmit {
-  min-width: 150px;
-  min-height: 50px;
-  padding: 5px 30px;
-  border-radius: 5px;
-  border: 2px solid rgb(255, 255, 255);
-  background: rgb(255, 255, 255);
-  color: #333;
   text-transform: uppercase;
   font-weight: 700;
+  font-size: 16px;
   -webkit-transition: all ease-in-out 0.28s;
   -o-transition: all ease-in-out 0.28s;
   transition: all ease-in-out 0.28s;
+  display: block;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .btnSubmit:hover {
-  cursor: pointer;
-}
-
-.listItemsEvents li {
-  -webkit-transition: all ease-in-out 0.28s;
-  -o-transition: all ease-in-out 0.28s;
-  transition: all ease-in-out 0.28s;
-}
-
-.listItemsEvents li:hover {
-  cursor: pointer;
-  opacity: 0.2;
-}
-
-.listItems li {
-  border-bottom: 1px solid rgb(255, 255, 255);
-  color: #333;
+  background-color: #0056b3;
 }
 
 .activeYear {
