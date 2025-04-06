@@ -1,6 +1,6 @@
 const CACHE_NAME = "schedule-app-cache-v1";
 const urlsToCache = [
-  "/",
+  "https://sergo-kaz13.github.io/autodoc-schedule/",
   "/index.html",
   "/styles.css",
   "/main.js",
