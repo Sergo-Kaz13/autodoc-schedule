@@ -1,5 +1,7 @@
 "use strict";
 
+import changeDataSchedule from "./changeDataSchedule.js";
+
 function editDataField(board = "", value = "", schedule) {
   const activeYear = document.querySelector(".activeYear").textContent;
   const activeMonthId = document.querySelector(".monthItem").id;
@@ -26,7 +28,13 @@ function editDataField(board = "", value = "", schedule) {
       schedule[activeYear].workHolidayDays = Number(value);
       break;
   }
-  localStorage.setItem("schedule", JSON.stringify(schedule));
+
+  const request = indexedDB.open("AutodocSchedule", 1);
+
+  request.onsuccess = function (event) {
+    const db = event.target.result;
+    changeDataSchedule(db, schedule);
+  };
 }
 
 export default editDataField;

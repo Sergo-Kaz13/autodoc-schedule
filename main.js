@@ -8,6 +8,9 @@ import createDayInfo from "./scripts/createDayInfo.js";
 import toggleInputActive from "./scripts/toggleInputActive.js";
 import calculateUrlop from "./scripts/calculateUrlop.js";
 import modalUrlopInfo from "./scripts/modalUrlopInfo.js";
+import getSchedule from "./scripts/getSchedule.js";
+import checkDataWithGetAll from "./scripts/checkDataWithGetAll.js";
+import changeDataSchedule from "./scripts/changeDataSchedule.js";
 
 const { form } = document.forms;
 
@@ -32,39 +35,100 @@ monthItem.textContent = months[currentMonth];
 monthItem.id = currentMonth;
 
 window.addEventListener("DOMContentLoaded", () => {
-  schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+  const request = indexedDB.open("AutodocSchedule", 1);
 
-  const year = new Date().getFullYear();
+  request.onupgradeneeded = function (event) {
+    const db = event.target.result;
 
-  if (Object.keys(schedule).length === 0) {
-    schedule[year] = createSchedule(year);
-    localStorage.setItem("schedule", JSON.stringify(schedule));
-    showSchedule(schedule);
-  } else {
-    showSchedule(schedule);
-    console.log(["schedule"], schedule);
-  }
-  toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
-  toggleInputActive(".taxBoard", "taxSpan", "taxInput", schedule);
-  toggleInputActive(
-    ".hospitalBoard",
-    "hospitalSpan",
-    "hospitalInput",
-    schedule
-  );
-  toggleInputActive(".holidayBoard", "holidaySpan", "holidayInput", schedule);
-  toggleInputActive(
-    ".editHolidayDays",
-    "holidayDaysSpan",
-    "holidayDaysInput",
-    schedule
-  );
-  toggleInputActive(
-    ".editPremium",
-    "editPremiumSpan",
-    "editPremiumInput",
-    schedule
-  );
+    console.log(db);
+
+    if (!db.objectStoreNames.contains("schedule")) {
+      db.createObjectStore("schedule", { keyPath: "id" });
+      console.log("Hello my frend!!!");
+    }
+  };
+
+  request.onsuccess = function (event) {
+    const db = event.target.result;
+    console.log("База даних відкрита:", db);
+    checkDataWithGetAll(db)
+      .then((result) => {
+        console.log(result);
+        if (Object.keys(result).length !== 0) {
+          schedule = result;
+          showSchedule(schedule);
+        } else {
+          schedule = JSON.parse(localStorage.getItem("schedule")) || {};
+          if (Object.keys(schedule).length !== 0) {
+            changeDataSchedule(db, schedule);
+            showSchedule(schedule);
+          } else {
+            const year = new Date().getFullYear();
+            schedule[year] = createSchedule(year);
+            changeDataSchedule(db, schedule);
+            showSchedule(schedule);
+          }
+        }
+
+        // ++++++++++++
+        toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
+        toggleInputActive(".taxBoard", "taxSpan", "taxInput", schedule);
+        toggleInputActive(
+          ".hospitalBoard",
+          "hospitalSpan",
+          "hospitalInput",
+          schedule
+        );
+        toggleInputActive(
+          ".holidayBoard",
+          "holidaySpan",
+          "holidayInput",
+          schedule
+        );
+        toggleInputActive(
+          ".editHolidayDays",
+          "holidayDaysSpan",
+          "holidayDaysInput",
+          schedule
+        );
+        toggleInputActive(
+          ".editPremium",
+          "editPremiumSpan",
+          "editPremiumInput",
+          schedule
+        );
+        // +++++++++++++
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  request.onerror = function (event) {
+    console.log("Помилка відкриття бази:", event.target.error);
+  };
+  // debugger;
+  // toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
+  // toggleInputActive(".taxBoard", "taxSpan", "taxInput", schedule);
+  // toggleInputActive(
+  //   ".hospitalBoard",
+  //   "hospitalSpan",
+  //   "hospitalInput",
+  //   schedule
+  // );
+  // toggleInputActive(".holidayBoard", "holidaySpan", "holidayInput", schedule);
+  // toggleInputActive(
+  //   ".editHolidayDays",
+  //   "holidayDaysSpan",
+  //   "holidayDaysInput",
+  //   schedule
+  // );
+  // toggleInputActive(
+  //   ".editPremium",
+  //   "editPremiumSpan",
+  //   "editPremiumInput",
+  //   schedule
+  // );
 });
 btnMinMonth.addEventListener("click", () => {
   currentMonth--;
@@ -400,14 +464,13 @@ async function formSend(e) {
 
   listItems.classList.remove("listItemsShow");
 
-  localStorage.setItem("schedule", JSON.stringify(schedule));
+  const request = indexedDB.open("AutodocSchedule", 1);
+
+  request.onsuccess = function (event) {
+    const db = event.target.result;
+    changeDataSchedule(db, schedule);
+  };
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, yearActive, Number(monthItem.id));
 }
-
-// const removeLocaStorage = document.querySelector(".removeLocaStorage");
-
-// removeLocaStorage.addEventListener("click", () => {
-//   localStorage.removeItem("schedule");
-// });
