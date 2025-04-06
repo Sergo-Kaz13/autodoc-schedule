@@ -1,10 +1,11 @@
 const CACHE_NAME = "schedule-app-cache-v1";
+const BASE_URL = "/autodoc-schedule";
 const urlsToCache = [
-  "https://sergo-kaz13.github.io/autodoc-schedule/",
-  "/index.html",
-  "/styles.css",
-  "/main.js",
-  "/icon-192.png",
+  `${BASE_URL}/`,
+  `${BASE_URL}/index.html`,
+  `${BASE_URL}/styles.css`,
+  `${BASE_URL}/main.js`,
+  `${BASE_URL}/icon-192.png`,
 ];
 
 // Кешування файлів при встановленні
@@ -13,6 +14,21 @@ self.addEventListener("install", (event) => {
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(urlsToCache);
     })
+  );
+});
+
+// Оновлення кешу (очищення старих версій)
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      )
+    )
   );
 });
 

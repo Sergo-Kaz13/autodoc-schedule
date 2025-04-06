@@ -396,7 +396,7 @@
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
-          .register("./service-worker.js")
+          .register("/autodoc-schedule/service-worker.js")
           .then(() => console.log("✅ Service Worker зареєстрований"))
           .catch((err) => console.error("❌ Service Worker помилка:", err));
       }
