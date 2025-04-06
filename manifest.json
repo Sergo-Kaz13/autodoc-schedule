@@ -1,13 +1,13 @@
 {
   "name": "Autodoc Schedule",
   "short_name": "Schedule",
-  "start_url": "/",
+  "start_url": "/autodoc-schedule/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2196f3",
   "icons": [
     {
-      "src": "/icon-192.png",
+      "src": "/autodoc-schedule/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     }
