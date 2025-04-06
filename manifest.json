@@ -1,6 +1,6 @@
 {
-  "name": "Мій Розклад",
-  "short_name": "Розклад",
+  "name": "Autodoc Schedule",
+  "short_name": "Schedule",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
