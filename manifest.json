@@ -1,7 +1,7 @@
 {
   "name": "Мій Розклад",
   "short_name": "Розклад",
-  "start_url": "/",
+  "start_url": "https://sergo-kaz13.github.io/autodoc-schedule/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2196f3",
