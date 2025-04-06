@@ -10,6 +10,10 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/x-icon" href="./favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#2196f3" />
+    <link rel="icon" href="/icon-192.png" />
+
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="./main.js" defer></script>
     <title>Autodoc Schedule</title>
@@ -389,6 +393,13 @@
       </div>
     </div>
 
-    <!-- <button class="removeLocaStorage">remove localStorage</button> -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/service-worker.js")
+          .then(() => console.log("✅ Service Worker зареєстрований"))
+          .catch((err) => console.error("❌ Service Worker помилка:", err));
+      }
+    </script>
   </body>
 </html>
