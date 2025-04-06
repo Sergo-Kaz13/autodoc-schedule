@@ -2,6 +2,7 @@
   "name": "Autodoc Schedule",
   "short_name": "Schedule",
   "start_url": "/autodoc-schedule/",
+  "scope": "/autodoc-schedule/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2196f3",
