@@ -17,69 +17,74 @@ export function showSchedule(schedule, year, month) {
   let time50 = 0;
   let time120 = 0;
 
-  activeMonth.days.map(({ numberDay, statusDay, dayInfo }, i) => {
-    workTime += dayInfo.workDay.time;
-    time100 += dayInfo.addHours100.time;
-    time50 += dayInfo.addHours50.time;
-    time120 += dayInfo.addHours120.time;
+  const monthDays = activeMonth.days.map(
+    ({ numberDay, statusDay, dayInfo }, i) => {
+      workTime += dayInfo.workDay.time;
+      time100 += dayInfo.addHours100.time;
+      time50 += dayInfo.addHours50.time;
+      time120 += dayInfo.addHours120.time;
 
-    if (i === 0) {
-      for (let j = 0; j < numberDay; j++) {
-        const fakeDay = document.createElement("div");
-        scheduleBlock.append(fakeDay);
+      if (i === 0) {
+        for (let j = 0; j < numberDay; j++) {
+          const fakeDay = document.createElement("div");
+          scheduleBlock.append(fakeDay);
+        }
       }
+
+      const div = document.createElement("div");
+      const span = document.createElement("span");
+      span.textContent = i + 1;
+      div.append(span);
+      div.id = "scheduleItem";
+
+      if (
+        i + 1 === currentDate &&
+        currentMonth === month &&
+        year === new Date().getFullYear()
+      ) {
+        div.classList.add("currentDate");
+      }
+
+      if (dayInfo.backshift.status) div.classList.add("backshift");
+      if (dayInfo.addHours50.status) div.classList.add("addHours50");
+      if (dayInfo.addHours120.status) div.classList.add("addHours120");
+      if (dayInfo.higherPower.status) div.classList.add("higherPower");
+
+      switch (statusDay) {
+        case "workDay":
+          div.classList.add("scheduleItem", "scheduleItemWork");
+          break;
+        case "addHours100":
+          div.classList.add("scheduleItem", "scheduleItem100");
+          break;
+        case "weekend":
+          div.classList.add("scheduleItem", "scheduleItemDayOff");
+          break;
+        case "holiday":
+          div.classList.add("scheduleItem", "scheduleItemHoliday");
+          break;
+        case "workHoliday":
+          div.classList.add("scheduleItem", "scheduleItemWorkHoliday");
+          break;
+        case "leaveOnRequest":
+          div.classList.add("scheduleItem", "scheduleItemLeaveOnRequest");
+          break;
+        case "hospital":
+          div.classList.add("scheduleItem", "scheduleItemL4");
+          break;
+        case "birthday":
+          div.classList.add("scheduleItem", "scheduleItemBirthday");
+          break;
+      }
+
+      // scheduleBlock.append(div);
+      return div;
     }
+  );
 
-    const div = document.createElement("div");
-    const span = document.createElement("span");
-    span.textContent = i + 1;
-    div.append(span);
-    div.id = "scheduleItem";
+  console.log(["monthDays"], monthDays);
 
-    if (
-      i + 1 === currentDate &&
-      currentMonth === month &&
-      year === new Date().getFullYear()
-    ) {
-      div.classList.add("currentDate");
-    }
-
-    if (dayInfo.backshift.status) div.classList.add("backshift");
-    if (dayInfo.addHours50.status) div.classList.add("addHours50");
-    if (dayInfo.addHours120.status) div.classList.add("addHours120");
-    if (dayInfo.higherPower.status) div.classList.add("higherPower");
-
-    switch (statusDay) {
-      case "workDay":
-        div.classList.add("scheduleItem", "scheduleItemWork");
-        break;
-      case "addHours100":
-        div.classList.add("scheduleItem", "scheduleItem100");
-        break;
-      case "weekend":
-        div.classList.add("scheduleItem", "scheduleItemDayOff");
-        break;
-      case "holiday":
-        div.classList.add("scheduleItem", "scheduleItemHoliday");
-        break;
-      case "workHoliday":
-        div.classList.add("scheduleItem", "scheduleItemWorkHoliday");
-        break;
-      case "leaveOnRequest":
-        div.classList.add("scheduleItem", "scheduleItemLeaveOnRequest");
-        break;
-      case "hospital":
-        div.classList.add("scheduleItem", "scheduleItemL4");
-        break;
-      case "birthday":
-        div.classList.add("scheduleItem", "scheduleItemBirthday");
-        break;
-    }
-
-    // scheduleBlock.append(div);
-    document.querySelector(".schedule").append(div);
-  });
-
+  document.querySelector(".schedule").append(...monthDays);
   showMonthInfo(activeMonth);
   calculateUrlop(schedule);
 }
