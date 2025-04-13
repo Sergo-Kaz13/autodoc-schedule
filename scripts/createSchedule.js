@@ -23,9 +23,12 @@ export function createSchedule(year) {
     };
 
     for (let j = 1; j <= days; j++) {
-      let numDayWeek = new Date(`${year}-${i}-${j}`).getDay() - 1;
+      let numDayWeek = new Date(year, i - 1, j).getDay() - 1;
       numDayWeek =
         numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
+      // let numDayWeek = new Date(`${year}-${i}-${j}`).getDay() - 1;
+      // numDayWeek =
+      //   numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
 
       let statusDay = "workDay";
       let time = 8;
