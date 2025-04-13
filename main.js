@@ -64,6 +64,7 @@ window.addEventListener("DOMContentLoaded", () => {
           console.log(["result"], result[2025].months[0].days);
 
           alert("Дані готові для відображення!!!");
+          alert(result[2025].months.length);
           alert(JSON.stringify(result[2025].months[0].days));
           showSchedule(schedule);
         } else {
