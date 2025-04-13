@@ -46,17 +46,18 @@ body {
   max-width: 600px;
   background: white;
   margin: 0 auto;
-  padding: 50px 20px;
+  padding: 10px 10px 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .appTitle {
-  font-size: 24px;
-  color: #333;
+  font-size: 20px;
+  color: #222;
   text-transform: uppercase;
   text-align: center;
-  padding: 15px;
-  font-weight: 500;
+  padding: 5px;
+  letter-spacing: 1;
+  font-weight: 700;
 }
 
 .schedule {
@@ -686,10 +687,10 @@ body {
 
 .activeYear {
   text-align: center;
-  padding: 0 10px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  color: #333;
+  color: #555;
+  margin: 4px 0;
 }
 
 .activeMonth {
@@ -703,32 +704,34 @@ body {
   -ms-flex-pack: center;
   justify-content: center;
   gap: 15px;
-  color: #333;
-  font-weight: 700;
+  color: #000;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2;
   text-transform: uppercase;
-  padding: 0 10px 10px 10px;
+  margin: 4px 0 10px;
 }
 
 .btnLeft,
 .btnRight {
-  font-size: 20px;
-  font-weight: 900;
-  color: #333;
-  -webkit-transition: all ease-in-out 0.28s;
-  -o-transition: all ease-in-out 0.28s;
-  transition: all ease-in-out 0.28s;
+  background-color: #f0f0f0;
+  border: none;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .btnLeft:hover,
 .btnRight:hover {
-  cursor: pointer;
-  color: #333;
+  background-color: #d9d9d9;
 }
 
-.monthItem {
+/* .monthItem {
   letter-spacing: 2px;
   font-size: 20px;
-}
+} */
 
 .nameDays {
   display: -ms-grid;
