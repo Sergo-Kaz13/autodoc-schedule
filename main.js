@@ -61,6 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
         alert("Дані отримано!!!!");
         if (Object.keys(result).length !== 0) {
           schedule = result;
+          alert("Дані готові для відображення!!!");
           showSchedule(schedule);
         } else {
           schedule = JSON.parse(localStorage.getItem("schedule")) || {};
