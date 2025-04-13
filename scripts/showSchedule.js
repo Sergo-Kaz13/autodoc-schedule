@@ -17,6 +17,8 @@ export function showSchedule(schedule, year, month) {
   let time50 = 0;
   let time120 = 0;
 
+  alert(JSON.stringify(activeMonth));
+
   const monthDays = activeMonth.days.map(
     ({ numberDay, statusDay, dayInfo }, i) => {
       workTime += dayInfo.workDay.time;
