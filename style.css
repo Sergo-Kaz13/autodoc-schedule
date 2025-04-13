@@ -280,8 +280,8 @@ body {
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: #333;
-  /* font-size: 12px; */
-  font-size: 16px;
+  font-size: 12px;
+  /* font-size: 16px; */
   font-weight: 400;
 }
 
@@ -315,8 +315,8 @@ body {
 
 .allBlock td:first-child {
   text-transform: uppercase;
-  /* font-size: 12px; */
-  font-size: 16px;
+  font-size: 12px;
+  /* font-size: 16px; */
 }
 
 .fieldSalaryNetto {
@@ -328,15 +328,15 @@ body {
   width: 100%;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  /* font-size: 12px; */
-  font-size: 16px;
+  font-size: 12px;
+  /* font-size: 16px; */
   font-weight: 400;
 }
 
 .tableUrlop .tableUrlopTitle {
   color: #333;
-  /* font-size: 12px; */
-  font-size: 16px;
+  font-size: 12px;
+  /* font-size: 16px; */
 }
 
 .tableUrlop th {
@@ -374,8 +374,8 @@ body {
   -ms-grid-row-align: center;
   align-self: center;
   color: #333;
-  /* font-size: 12px; */
-  font-size: 16px;
+  font-size: 12px;
+  /* font-size: 16px; */
 }
 
 .rateTable tr:nth-child(odd) {
