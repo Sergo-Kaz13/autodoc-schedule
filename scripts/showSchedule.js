@@ -17,6 +17,7 @@ export function showSchedule(schedule, year, month) {
   let time50 = 0;
   let time120 = 0;
 
+  alert(JSON.stringify(activeMonth));
   alert(JSON.stringify(activeMonth.days));
   alert(activeMonth.days.length);
 
