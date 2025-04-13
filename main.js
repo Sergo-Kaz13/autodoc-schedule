@@ -58,6 +58,7 @@ window.addEventListener("DOMContentLoaded", () => {
       .then((result) => {
         console.log(result);
         alert(JSON.stringify(result));
+        alert("Дані отримано!!!!");
         if (Object.keys(result).length !== 0) {
           schedule = result;
           showSchedule(schedule);
