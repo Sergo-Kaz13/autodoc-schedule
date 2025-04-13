@@ -41,16 +41,19 @@ window.addEventListener("DOMContentLoaded", () => {
     const db = event.target.result;
 
     console.log(db);
+    alert("Object store 'task' created.");
 
     if (!db.objectStoreNames.contains("schedule")) {
       db.createObjectStore("schedule", { keyPath: "id" });
       console.log("Hello my frend!!!");
+      alert("Database opened successfully.");
     }
   };
 
   request.onsuccess = function (event) {
     const db = event.target.result;
     console.log("База даних відкрита:", db);
+    alert("Database opened successfully.");
     checkDataWithGetAll(db)
       .then((result) => {
         console.log(result);
@@ -101,11 +104,13 @@ window.addEventListener("DOMContentLoaded", () => {
       })
       .catch((err) => {
         console.error(err);
+        alert("" + err);
       });
   };
 
   request.onerror = function (event) {
     console.log("Помилка відкриття бази:", event.target.error);
+    alert("Error opening database: " + event.target.error);
   };
   // debugger;
   // toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
