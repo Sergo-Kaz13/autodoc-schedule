@@ -57,6 +57,7 @@ window.addEventListener("DOMContentLoaded", () => {
     checkDataWithGetAll(db)
       .then((result) => {
         console.log(result);
+        alert(JSON.stringify(result));
         if (Object.keys(result).length !== 0) {
           schedule = result;
           showSchedule(schedule);
