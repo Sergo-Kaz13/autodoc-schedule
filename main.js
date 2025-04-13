@@ -41,31 +41,20 @@ window.addEventListener("DOMContentLoaded", () => {
     const db = event.target.result;
 
     console.log(db);
-    alert("Object store 'task' created.");
-
     if (!db.objectStoreNames.contains("schedule")) {
       db.createObjectStore("schedule", { keyPath: "id" });
       console.log("Hello my frend!!!");
-      alert("Database opened successfully.");
     }
   };
 
   request.onsuccess = function (event) {
     const db = event.target.result;
     console.log("База даних відкрита:", db);
-    alert("Database opened successfully.");
     checkDataWithGetAll(db)
       .then((result) => {
         console.log(result);
-        alert(JSON.stringify(result));
-        alert("Дані отримано!!!!");
         if (Object.keys(result).length !== 0) {
           schedule = result;
-          console.log(["result"], result[2025].months[0].days);
-
-          alert("Дані готові для відображення!!!");
-          alert(result[2025].months.length);
-          alert(JSON.stringify(result[2025].months[0].days[0]));
           showSchedule(schedule);
         } else {
           schedule = JSON.parse(localStorage.getItem("schedule")) || {};
@@ -111,13 +100,11 @@ window.addEventListener("DOMContentLoaded", () => {
       })
       .catch((err) => {
         console.error(err);
-        alert("" + err);
       });
   };
 
   request.onerror = function (event) {
     console.log("Помилка відкриття бази:", event.target.error);
-    alert("Error opening database: " + event.target.error);
   };
   // debugger;
   // toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
@@ -179,7 +166,6 @@ btnPlusMont.addEventListener("click", () => {
     activeYear.textContent = newActiveYear;
     monthItem.textContent = months[currentMonth];
     monthItem.id = currentMonth;
-    console.log(["newActiveYear"], typeof newActiveYear);
 
     if (!(newActiveYear in schedule)) {
       const newYear = createSchedule(newActiveYear);
@@ -221,8 +207,6 @@ scheduleBlock.addEventListener("click", (e) => {
     } =
       schedule[Number(document.querySelector(".activeYear").textContent)]
         .months[Number(monthItem.id)].days[dayIndex - 1].dayInfo;
-
-    console.log(["schedule"], schedule);
 
     const { rate, vacationPay, hospitalRate } =
       schedule[Number(document.querySelector(".activeYear").textContent)]
@@ -279,7 +263,6 @@ async function formSend(e) {
   e.preventDefault();
 
   const formDate = new FormData(form);
-  console.log(formDate);
   const values = Object.fromEntries(formDate.entries());
   const {
     statusDay,
@@ -314,8 +297,6 @@ async function formSend(e) {
     schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1]
       .dayInfo;
 
-  console.log(["statusDay"], statusDay);
-
   const {
     birthday: birthdayYear,
     higherPowerTime: higherPowerTimeYear,
@@ -324,7 +305,6 @@ async function formSend(e) {
   } = schedule[yearActive];
 
   const urlopData = calculateUrlop(schedule);
-  console.log(["urlopData"], urlopData);
 
   if (statusDay === "birthday") {
     if (urlopData.birthdayUsed === birthdayYear) {
@@ -470,9 +450,6 @@ async function formSend(e) {
   }
 
   // ============= END ================
-
-  console.log(values);
-  console.log(["schedule"], schedule);
 
   listItems.classList.remove("listItemsShow");
 

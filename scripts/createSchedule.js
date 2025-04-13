@@ -13,10 +13,6 @@ export function createSchedule(year) {
   for (let i = 1; i < 13; i++) {
     const days = daysInMonth(i, year);
 
-    console.log(["days"], days);
-
-    alert("days" + JSON.stringify(days));
-
     const month = {
       rate: 31.5,
       tax: 27,

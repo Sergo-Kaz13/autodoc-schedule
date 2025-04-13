@@ -17,10 +17,6 @@ export function showSchedule(schedule, year, month) {
   let time50 = 0;
   let time120 = 0;
 
-  alert(JSON.stringify(activeMonth));
-  alert(JSON.stringify(activeMonth.days));
-  alert(activeMonth.days.length);
-
   const monthDays = activeMonth.days.map(
     ({ numberDay, statusDay, dayInfo }, i) => {
       workTime += dayInfo.workDay.time;
@@ -84,9 +80,6 @@ export function showSchedule(schedule, year, month) {
       return div;
     }
   );
-
-  console.log(["monthDays"], monthDays);
-  alert(JSON.stringify(monthDays));
 
   const fragment = document.createDocumentFragment();
   monthDays.forEach((day) => fragment.appendChild(day));
