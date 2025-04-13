@@ -77,14 +77,17 @@ export function showSchedule(schedule, year, month) {
           break;
       }
 
-      // scheduleBlock.append(div);
       return div;
     }
   );
 
   console.log(["monthDays"], monthDays);
+  alert(JSON.stringify(monthDays));
 
-  document.querySelector(".schedule").append(...monthDays);
+  const fragment = document.createDocumentFragment();
+  monthDays.forEach((day) => fragment.appendChild(day));
+
+  document.querySelector(".schedule").append(fragment);
   showMonthInfo(activeMonth);
   calculateUrlop(schedule);
 }
