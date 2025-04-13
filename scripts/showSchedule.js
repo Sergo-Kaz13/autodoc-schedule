@@ -76,7 +76,8 @@ export function showSchedule(schedule, year, month) {
         break;
     }
 
-    scheduleBlock.append(div);
+    // scheduleBlock.append(div);
+    document.querySelector(".schedule").append(div);
   });
 
   showMonthInfo(activeMonth);
