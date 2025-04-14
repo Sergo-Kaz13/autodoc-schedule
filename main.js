@@ -106,29 +106,8 @@ window.addEventListener("DOMContentLoaded", () => {
   request.onerror = function (event) {
     console.log("Помилка відкриття бази:", event.target.error);
   };
-  // debugger;
-  // toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
-  // toggleInputActive(".taxBoard", "taxSpan", "taxInput", schedule);
-  // toggleInputActive(
-  //   ".hospitalBoard",
-  //   "hospitalSpan",
-  //   "hospitalInput",
-  //   schedule
-  // );
-  // toggleInputActive(".holidayBoard", "holidaySpan", "holidayInput", schedule);
-  // toggleInputActive(
-  //   ".editHolidayDays",
-  //   "holidayDaysSpan",
-  //   "holidayDaysInput",
-  //   schedule
-  // );
-  // toggleInputActive(
-  //   ".editPremium",
-  //   "editPremiumSpan",
-  //   "editPremiumInput",
-  //   schedule
-  // );
 });
+
 btnMinMonth.addEventListener("click", () => {
   currentMonth--;
   if (currentMonth < 0) {

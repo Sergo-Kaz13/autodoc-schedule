@@ -11,8 +11,8 @@ function calculateUrlop(schedule) {
   } = schedule[activeYear];
 
   document.querySelector(".holidayDaysSpan").textContent = workHolidayDays;
-  document.querySelector(".leaveOnRequestDays").textContent =
-    leaveOnRequestDays;
+  // document.querySelector(".leaveOnRequestDays").textContent =
+  //   leaveOnRequestDays;
   document.querySelector(".higherPowerHours").textContent = higherPowerTime;
   document.querySelector(".birthday").textContent = birthday;
 
@@ -27,14 +27,32 @@ function calculateUrlop(schedule) {
 
       birthday.status ? (birthdayUsed += birthday.day) : "";
       higherPower.status ? (higherPowerUsed += higherPower.time) : "";
-      workHoliday.status ? (workHolidayUsed += workHoliday.day) : "";
-      leaveOnRequest.status ? (leaveOnRequestUsed += leaveOnRequest.day) : "";
+      // workHoliday.status ? (workHolidayUsed += workHoliday.day) : "";
+      if (workHoliday.status) {
+        if (
+          workHolidayDays - workHolidayUsed >
+          leaveOnRequestDays - leaveOnRequestUsed
+        ) {
+          workHolidayUsed += workHoliday.day;
+        } else {
+          workHolidayUsed += workHoliday.day;
+          leaveOnRequestUsed += workHoliday.day;
+        }
+      }
+      // leaveOnRequest.status
+      //   ? ((leaveOnRequestUsed += leaveOnRequest.day),
+      //     (workHolidayUsed += leaveOnRequest.day))
+      //   : "";
+      if (leaveOnRequest.status) {
+        leaveOnRequestUsed += leaveOnRequest.day;
+        workHolidayUsed += leaveOnRequest.day;
+      }
     });
   });
 
   document.querySelector(".workHolidayDaysUsed").textContent = workHolidayUsed;
-  document.querySelector(".leaveOnRequestDaysUsed").textContent =
-    leaveOnRequestUsed;
+  // document.querySelector(".leaveOnRequestDaysUsed").textContent =
+  // leaveOnRequestUsed;
   document.querySelector(".higherPowerTimeUsed").textContent = higherPowerUsed;
   document.querySelector(".birthdayUsed").textContent = birthdayUsed;
 
