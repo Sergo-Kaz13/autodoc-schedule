@@ -53,8 +53,8 @@ function calculateUrlop(schedule) {
   });
 
   document.querySelector(".workHolidayDaysUsed").textContent = workHolidayUsed;
-  // document.querySelector(".leaveOnRequestDaysUsed").textContent =
-  // leaveOnRequestUsed;
+  document.querySelector(".leaveOnRequestDaysUsed").textContent =
+    leaveOnRequestUsedCound;
   document.querySelector(".higherPowerTimeUsed").textContent = higherPowerUsed;
   document.querySelector(".birthdayUsed").textContent = birthdayUsed;
 
