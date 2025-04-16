@@ -50,6 +50,9 @@ function calculateUrlop(schedule) {
     });
   });
 
+  console.log(["workHolidayUsed"], workHolidayUsed);
+  console.log(["leaveOnRequestUsed"], leaveOnRequestUsed);
+
   document.querySelector(".workHolidayDaysUsed").textContent = workHolidayUsed;
   // document.querySelector(".leaveOnRequestDaysUsed").textContent =
   // leaveOnRequestUsed;

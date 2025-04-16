@@ -291,11 +291,13 @@ async function formSend(e) {
       return;
     }
   } else if (statusDay === "workHoliday") {
+    console.log(["workHolidayDays"], workHolidayDays);
     if (urlopData.workHolidayUsed === workHolidayDays) {
       modalUrlopInfo("Основна відпустка використана.");
       return;
     }
   } else if (statusDay === "leaveOnRequest") {
+    console.log(["leaveOnRequestDays"], leaveOnRequestDays);
     if (urlopData.leaveOnRequestUsed === leaveOnRequestDays) {
       modalUrlopInfo("Відпустка на вимогу використана.");
       return;

@@ -81,7 +81,7 @@ body {
   align-items: center;
   border-radius: 5px;
   overflow: hidden;
-  min-height: 44px;
+  min-height: 50px;
   -webkit-transition: all ease-in-out 0.28s;
   -o-transition: all ease-in-out 0.28s;
   transition: all ease-in-out 0.28s;
@@ -218,6 +218,8 @@ body {
 
 .addHours50::after {
   content: "50%";
+  position: absolute;
+  bottom: 0;
   text-align: center;
   width: 100%;
   font-size: 9px;
@@ -227,6 +229,8 @@ body {
 
 .addHours120::before {
   content: "120%";
+  position: absolute;
+  top: 0;
   width: 100%;
   text-align: center;
   font-size: 9px;
