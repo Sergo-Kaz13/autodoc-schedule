@@ -276,6 +276,9 @@ async function formSend(e) {
     schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1]
       .dayInfo;
 
+  const { statusDay: statusDayActive } =
+    schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1];
+
   const {
     birthday: birthdayYear,
     higherPowerTime: higherPowerTimeYear,
@@ -291,16 +294,27 @@ async function formSend(e) {
       return;
     }
   } else if (statusDay === "workHoliday") {
-    console.log(["workHolidayDays"], workHolidayDays);
-    if (urlopData.workHolidayUsed === workHolidayDays) {
-      modalUrlopInfo("Основна відпустка використана.");
+    if (statusDay === statusDayActive) {
+      listItems.classList.remove("listItemsShow");
       return;
+    } else if (urlopData.workHolidayUsed === workHolidayDays) {
+      if (statusDayActive !== "leaveOnRequest") {
+        modalUrlopInfo("Основна відпустка використана.");
+        return;
+      }
     }
   } else if (statusDay === "leaveOnRequest") {
-    console.log(["leaveOnRequestDays"], leaveOnRequestDays);
-    if (urlopData.leaveOnRequestUsed === leaveOnRequestDays) {
-      modalUrlopInfo("Відпустка на вимогу використана.");
+    if (statusDay === statusDayActive) {
+      listItems.classList.remove("listItemsShow");
       return;
+    } else if (urlopData.leaveOnRequestUsed === leaveOnRequestDays) {
+      if (statusDayActive !== "workHoliday") {
+        modalUrlopInfo("Відпустка на вимогу використана.");
+        return;
+      } else if (urlopData.leaveOnRequestUsedCound === 4) {
+        modalUrlopInfo("Відпустка на вимогу використана.");
+        return;
+      }
     }
   } else if (higherPowerForm) {
     if (

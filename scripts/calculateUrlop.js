@@ -20,6 +20,7 @@ function calculateUrlop(schedule) {
   let higherPowerUsed = 0;
   let leaveOnRequestUsed = 0;
   let workHolidayUsed = 0;
+  let leaveOnRequestUsedCound = 0;
 
   months.forEach(({ days }) => {
     days.forEach(({ dayInfo }) => {
@@ -45,13 +46,11 @@ function calculateUrlop(schedule) {
       //   : "";
       if (leaveOnRequest.status) {
         leaveOnRequestUsed += leaveOnRequest.day;
+        leaveOnRequestUsedCound += leaveOnRequest.day;
         workHolidayUsed += leaveOnRequest.day;
       }
     });
   });
-
-  console.log(["workHolidayUsed"], workHolidayUsed);
-  console.log(["leaveOnRequestUsed"], leaveOnRequestUsed);
 
   document.querySelector(".workHolidayDaysUsed").textContent = workHolidayUsed;
   // document.querySelector(".leaveOnRequestDaysUsed").textContent =
@@ -67,7 +66,13 @@ function calculateUrlop(schedule) {
     higherPowerTime - higherPowerUsed;
   document.querySelector(".birthdayStay").textContent = birthday - birthdayUsed;
 
-  return { workHolidayUsed, leaveOnRequestUsed, higherPowerUsed, birthdayUsed };
+  return {
+    workHolidayUsed,
+    leaveOnRequestUsed,
+    higherPowerUsed,
+    birthdayUsed,
+    leaveOnRequestUsedCound,
+  };
 }
 
 export default calculateUrlop;
