@@ -46,7 +46,7 @@ body {
   max-width: 600px;
   background: white;
   margin: 0 auto;
-  padding: 10px 10px 30px;
+  padding: 10px 10px 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -279,6 +279,162 @@ body {
   gap: 30px;
 }
 
+/* section start */
+.month-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 500px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 8px solid transparent;
+  padding: 6px 10px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.label {
+  font-weight: 600;
+}
+
+/* Кольорові ліві стрічки */
+.label.workday {
+  border-left: 8px solid #28a745; /* зелений */
+  padding-left: 8px;
+}
+
+.label.urlop {
+  border-left: 8px solid #007bff; /* синій */
+  padding-left: 8px;
+}
+
+.label.extra50 {
+  border-left: 8px solid #ffc107; /* жовтий */
+  padding-left: 8px;
+}
+
+.label.extra120 {
+  border-left: 8px solid #fd7e14; /* помаранчевий */
+  padding-left: 8px;
+}
+
+.label.higherPower {
+  border-left: 8px solid #6f42c1; /* фіолетовий */
+  padding-left: 8px;
+}
+
+.label.sick {
+  border-left: 8px solid #e83e8c; /* рожевий */
+  padding-left: 8px;
+}
+
+.label.premium {
+  border-left: 8px solid #20c997; /* бірюзовий */
+  padding-left: 8px;
+}
+
+.value {
+  color: #333;
+}
+
+/* section end */
+
+/* accordion start */
+.accordion {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.accordion-header {
+  background-color: #eee;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 10px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  border-top: 1px solid #ccc;
+}
+
+.accordion-header:hover {
+  background-color: #ddd;
+}
+
+.accordion-content {
+  display: none;
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ccc;
+}
+
+.accordion-content .row {
+  padding: 5px 0;
+  border-bottom: 1px dashed #ccc;
+}
+
+/* accordion end */
+
+/* dashboard start */
+.dashboard {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.card-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 1 calc(50% - 10px);
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.overtime-50 {
+  background-color: #ffe066;
+}
+
+.overtime-120 {
+  background-color: #f8c291;
+}
+
+.vacation {
+  background-color: #74b9ff;
+  color: white;
+}
+
+/* dashboard end */
+
 .statusDay {
   width: 100%;
   background-color: white;
@@ -316,7 +472,32 @@ body {
   color: #333;
   font-weight: 600;
 }
+/* --------------- */
+/* .workDay {
+  background-color: #2ecc71;
+  color: #fff;
+}
 
+.overtime-100 {
+  background-color: #2980b9;
+  color: #fff;
+}
+
+.overtime-50 {
+  background-color: #f1c40f;
+}
+
+.overtime-120 {
+  background-color: #f39c12;
+  color: #fff;
+}
+
+.holiday {
+  background-color: #e74c3c;
+  color: #fff;
+} */
+
+/* ----------------- */
 .allBlock td:first-child {
   text-transform: uppercase;
   font-size: 12px;
@@ -426,11 +607,10 @@ body {
   text-align: left;
 }
 
-.rateSpan::before,
+/* .rateSpan::before,
 .taxSpan::before,
 .hospitalSpan::before,
 .holidaySpan::before,
-.holidayDaysSpan::before,
 .editPremiumSpan::before {
   content: "🖊";
   position: absolute;
@@ -443,37 +623,18 @@ body {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   font-size: 12px;
-}
+} */
 
-.holidayDaysSpan::before {
-  content: "🖋";
-  position: absolute;
-  right: 1px;
-  top: 50%;
-  -webkit-transform: rotate(110deg);
-  -ms-transform: rotate(110deg);
-  transform: rotate(110deg);
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  font-size: 12px;
-}
+/* .rateSpan::after, */
+/* .editPremiumSpan::after {
+  content: " zł";
+} */
 
-.rateSpan::after,
-.editPremiumSpan::after {
-  content: " zł.";
-}
-
-.holidayDaysSpan::after {
-  content: " дн.";
-  font-size: 12px;
-}
-
-.taxSpan::after,
-.hospitalSpan::after,
-.holidaySpan::after {
+/* .taxSpan::after, */
+/* .hospitalSpan::after, */
+/* .holidaySpan::after {
   content: " %";
-}
+} */
 
 .rateInput,
 .taxInput,
@@ -487,6 +648,9 @@ body {
   text-align: center;
   /* font-size: 12px; */
   font-size: 16px;
+  /* color: #000 !important; */
+  height: 16px !important;
+  width: 30px !important;
 }
 
 .holidayDaysInput,

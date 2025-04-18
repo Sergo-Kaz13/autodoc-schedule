@@ -239,30 +239,118 @@
         <!-- <div class="scheduleItem"><span>1</span></div> -->
       </div>
 
-      <div class="statisticsBoard">
-        <table class="statusDay">
+      <div class="statisticsBoard summary-wrapper">
+        <!-- Зарплата за місяць start -->
+        <section class="card">
+          <h2>Заробітна плата</h2>
+          <div class="row">
+            <span>Робочі годи:</span>
+            <strong
+              ><span class="workDayTime">0</span> год. /
+              <span class="workPrice">0</span> zł</strong
+            >
+          </div>
+          <div class="row">
+            <span>Понаднормові 100%:</span>
+            <strong
+              ><span class="dayTime100">0</span> год. /
+              <span class="time100Price">00.00</span> zł</strong
+            >
+          </div>
+          <div class="row">
+            <span>Понаднормові 50%:</span>
+            <strong
+              ><span class="dayTime50">0</span> год. /
+              <span class="time50Price">00.00</span> zł</strong
+            >
+          </div>
+          <div class="row">
+            <span>Понаднормові 120%:</span>
+            <strong
+              ><span class="dayTime120">0</span> год. /
+              <span class="time120Price">00.00</span> zł</strong
+            >
+          </div>
+          <div class="row">
+            <span>Вища сила:</span>
+            <strong
+              ><span class="higherPowerTime">0</span> год. /
+              <span class="higherPowerPrice">00.00</span> zł</strong
+            >
+          </div>
+          <div class="row">
+            <span>Відпустка до ДН:</span>
+            <strong
+              ><span class="birthdayTime">0</span> дн. /
+              <span class="birthdayPrice">00.00</span> zł</strong
+            >
+          </div>
+          <div class="row">
+            <span>Відпустка:</span>
+            <strong
+              ><span class="workHolidayTime">0</span> дн. /
+              <span class="workHolidayPrice">00.00</span> zł</strong
+            >
+          </div>
+          <div class="row">
+            <span>Відпустка на вимогу:</span>
+            <strong
+              ><span class="leaveOnRequestTime">0</span> дн. /
+              <span class="leaveOnRequestPrice">00.00</span> zł</strong
+            >
+          </div>
+          <div class="row">
+            <span>Лікарняний:</span>
+            <strong
+              ><span class="hospitalTime">0</span> дн. /
+              <span class="hospitalPrice">00.00</span> zł</strong
+            >
+          </div>
+          <div class="row">
+            <span>Премія:</span>
+            <strong
+              ><span class="editPremium">
+                <span class="editPremiumSpan">0</span>
+              </span>
+              zł 🖋</strong
+            >
+          </div>
+          <div class="row total">
+            <span>Усього:</span>
+            <strong>
+              <span class="hoursWorked">0</span> год. /
+              <span class="grossSalary">0</span> zł</strong
+            >
+          </div>
+          <div class="row net">
+            <span>Нетто:</span>
+            <strong><span class="salaryMonthNetto">0</span> zł</strong>
+          </div>
+        </section>
+        <!-- Зарплата за місяць end -->
+        <!-- <table class="statusDay">
           <thead>
             <tr>
               <th colspan="3">інформація за місяць</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr class="workDay">
               <td>робочий день</td>
               <td><span class="workDayTime"></span> год.</td>
               <td><span class="workPrice"></span> zł.</td>
             </tr>
-            <tr>
+            <tr class="overtime-100">
               <td>понаднормові 100%</td>
               <td><span class="dayTime100">0</span> год.</td>
               <td><span class="time100Price">0</span> zł.</td>
             </tr>
-            <tr>
+            <tr class="overtime-50">
               <td>понаднормові 50%</td>
               <td><span class="dayTime50">0</span> год.</td>
               <td><span class="time50Price">0</span> zł.</td>
             </tr>
-            <tr>
+            <tr class="overtime-120">
               <td>понаднормові 120%</td>
               <td><span class="dayTime120">0</span> год.</td>
               <td><span class="time120Price">0</span> zł.</td>
@@ -279,7 +367,7 @@
                 <span class="birthdayPrice">0</span>
               </td>
             </tr>
-            <tr>
+            <tr class="holiday">
               <td>відпустка</td>
               <td><span class="workHolidayTime">0</span> дн.</td>
               <td>
@@ -320,8 +408,50 @@
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
 
+        <!-- Налаштування ставок start -->
+        <section class="card">
+          <h2>Ставки і податки</h2>
+          <div class="row light">
+            <span>Ставка:</span>
+            <strong
+              ><span class="editBoard">
+                <span class="rateSpan">31.5</span>
+              </span>
+              zł 🖋</strong
+            >
+          </div>
+          <div class="row red">
+            <span>Податок:</span>
+            <strong>
+              <span class="taxBoard">
+                <span class="taxSpan">27</span>
+              </span>
+              % 🖋</strong
+            >
+          </div>
+          <div class="row yellow">
+            <span>Лікарняні:</span>
+            <strong>
+              <span class="hospitalBoard">
+                <span class="hospitalSpan">63.3</span>
+              </span>
+              % 🖋</strong
+            >
+          </div>
+          <div class="row">
+            <span>Відпускні:</span>
+            <strong>
+              <span class="holidayBoard">
+                <span class="holidaySpan">100</span>
+              </span>
+              % 🖋</strong
+            >
+          </div>
+        </section>
+        <!-- Налаштування ставок end -->
+        <!-- 
         <table class="rateTable">
           <tbody>
             <tr>
@@ -349,9 +479,58 @@
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
 
-        <table class="tableUrlop">
+        <!-- відпустка за рік start -->
+        <section class="card">
+          <h2>Відпустка за рік</h2>
+          <div class="vacation-row">
+            <span>Відпустка</span>
+            <strong>
+              <span class="workHolidayDaysUsed">0</span> /
+              <span class="editHolidayDays"
+                ><span class="holidayDaysSpan">26</span>
+              </span>
+              дн. 🖋
+            </strong>
+            <small
+              >(Залишилось:
+              <span class="workHolidayDaysStay">26</span> дн.)</small
+            >
+          </div>
+          <div class="vacation-row">
+            <span>На вимогу</span>
+            <strong>
+              <span class="leaveOnRequestDaysUsed">0</span> / 4 дн.</strong
+            >
+            <small
+              >(Залишилось:
+              <span class="leaveOnRequestDaysStay">4</span> дн.)</small
+            >
+          </div>
+          <div class="vacation-row">
+            <span>Вища сила</span>
+            <strong
+              ><span class="higherPowerTimeUsed">0</span> /
+              <span class="higherPowerHours">16</span> год.</strong
+            >
+            <small
+              >(Залишилось:
+              <span class="higherPowerTimeStay">16</span> год.)</small
+            >
+          </div>
+          <div class="vacation-row">
+            <span>До ДН</span>
+            <strong
+              ><span class="birthdayUsed">0</span> /
+              <span class="birthday">1</span> дн.</strong
+            >
+          </div>
+        </section>
+        <!-- відпустка за рік end -->
+
+        <!-- table urlop start -->
+        <!-- <table class="tableUrlop">
           <thead>
             <tr>
               <th colspan="4" class="tableUrlopTitle">відпустка за рік</th>
@@ -374,10 +553,9 @@
             </tr>
             <tr class="tableUrlopLeave">
               <td>відпустка на вимогу</td>
-              <!-- <td><span class="leaveOnRequestDays">4</span> дн.</td> -->
+
               <td><span class="leaveOnRequestDays"></span></td>
               <td><span class="leaveOnRequestDaysUsed">0</span> дн.</td>
-              <!-- <td><span class="leaveOnRequestDaysUsed"></span></td> -->
               <td><span class="leaveOnRequestDaysStay">4</span> дн.</td>
             </tr>
             <tr>
@@ -393,9 +571,82 @@
               <td><span class="birthdayStay">1</span> дн.</td>
             </tr>
           </tbody>
-        </table>
+        </table> -->
+
+        <!-- table urlop end -->
       </div>
     </div>
+
+    <!-- section start -->
+
+    <style>
+      .summary-wrapper {
+        /* padding: 1rem; */
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        /* background-color: #f9fafb; */
+      }
+      .card {
+        background: #fff;
+        border-radius: 1rem;
+        padding: 1rem;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+      }
+      .card h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+        color: #444;
+      }
+      .row,
+      .vacation-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.3rem 0;
+        border-bottom: 1px solid #eee;
+      }
+      .row.total,
+      .row.net {
+        font-weight: bold;
+        color: #111;
+      }
+      .vacation-row small {
+        font-size: 0.75rem;
+        color: #888;
+        margin-left: 0.5rem;
+      }
+
+      /* .row.primary,
+      .vacation-row.primary {
+        background-color: #e0f7fa;
+      }
+      .row.blue,
+      .vacation-row.blue {
+        background-color: #e3f2fd;
+      }
+      .row.orange,
+      .vacation-row.orange {
+        background-color: #fff3e0;
+      }
+      .row.green,
+      .vacation-row.green {
+        background-color: #e8f5e9;
+      }
+      .row.yellow,
+      .vacation-row.yellow {
+        background-color: #fffde7;
+      }
+      .row.red,
+      .vacation-row.red {
+        background-color: #ffebee;
+      }
+      .row.light {
+        background-color: #f5f5f5;
+      } */
+    </style>
+
+    <!-- section end -->
 
     <script>
       if ("serviceWorker" in navigator) {

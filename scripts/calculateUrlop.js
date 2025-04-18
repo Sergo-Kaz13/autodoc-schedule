@@ -53,8 +53,18 @@ function calculateUrlop(schedule) {
   });
 
   document.querySelector(".workHolidayDaysUsed").textContent = workHolidayUsed;
+  console.log(
+    (document.querySelector(".workHolidayDaysUsed").textContent =
+      workHolidayUsed)
+  );
+
   document.querySelector(".leaveOnRequestDaysUsed").textContent =
     leaveOnRequestUsedCound;
+  console.log(
+    (document.querySelector(".leaveOnRequestDaysUsed").textContent =
+      leaveOnRequestUsedCound)
+  );
+
   document.querySelector(".higherPowerTimeUsed").textContent = higherPowerUsed;
   document.querySelector(".birthdayUsed").textContent = birthdayUsed;
 
@@ -64,7 +74,7 @@ function calculateUrlop(schedule) {
     leaveOnRequestDays - leaveOnRequestUsed;
   document.querySelector(".higherPowerTimeStay").textContent =
     higherPowerTime - higherPowerUsed;
-  document.querySelector(".birthdayStay").textContent = birthday - birthdayUsed;
+  // document.querySelector(".birthdayStay").textContent = birthday - birthdayUsed;
 
   return {
     workHolidayUsed,
