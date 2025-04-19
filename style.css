@@ -67,7 +67,7 @@ body {
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .scheduleItem {
@@ -182,6 +182,7 @@ body {
   font-size: 8px;
   line-height: 1.1;
   text-transform: uppercase;
+  padding: 0 3px;
 }
 
 .scheduleItemL4 {
@@ -279,169 +280,12 @@ body {
   gap: 30px;
 }
 
-/* section start */
-.month-summary {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-width: 500px;
-  margin: 0 auto;
-  font-family: sans-serif;
-  font-size: 14px;
-}
-
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-left: 8px solid transparent;
-  padding: 6px 10px;
-  background: #f9f9f9;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.label {
-  font-weight: 600;
-}
-
-/* Кольорові ліві стрічки */
-.label.workday {
-  border-left: 8px solid #28a745; /* зелений */
-  padding-left: 8px;
-}
-
-.label.urlop {
-  border-left: 8px solid #007bff; /* синій */
-  padding-left: 8px;
-}
-
-.label.extra50 {
-  border-left: 8px solid #ffc107; /* жовтий */
-  padding-left: 8px;
-}
-
-.label.extra120 {
-  border-left: 8px solid #fd7e14; /* помаранчевий */
-  padding-left: 8px;
-}
-
-.label.higherPower {
-  border-left: 8px solid #6f42c1; /* фіолетовий */
-  padding-left: 8px;
-}
-
-.label.sick {
-  border-left: 8px solid #e83e8c; /* рожевий */
-  padding-left: 8px;
-}
-
-.label.premium {
-  border-left: 8px solid #20c997; /* бірюзовий */
-  padding-left: 8px;
-}
-
-.value {
-  color: #333;
-}
-
-/* section end */
-
-/* accordion start */
-.accordion {
-  max-width: 600px;
-  margin: 0 auto;
-  font-family: sans-serif;
-}
-
-.accordion-header {
-  background-color: #eee;
-  border: none;
-  width: 100%;
-  text-align: left;
-  padding: 10px 15px;
-  font-weight: bold;
-  cursor: pointer;
-  border-top: 1px solid #ccc;
-}
-
-.accordion-header:hover {
-  background-color: #ddd;
-}
-
-.accordion-content {
-  display: none;
-  padding: 10px 15px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ccc;
-}
-
-.accordion-content .row {
-  padding: 5px 0;
-  border-bottom: 1px dashed #ccc;
-}
-
-/* accordion end */
-
-/* dashboard start */
-.dashboard {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.summary {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.section {
-  margin-bottom: 20px;
-}
-
-.section-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-}
-
-.card-grid {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.card {
-  flex: 1 1 calc(50% - 10px);
-  background: #f5f5f5;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.overtime-50 {
-  background-color: #ffe066;
-}
-
-.overtime-120 {
-  background-color: #f8c291;
-}
-
-.vacation {
-  background-color: #74b9ff;
-  color: white;
-}
-
-/* dashboard end */
-
 .statusDay {
   width: 100%;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: #333;
   font-size: 12px;
-  /* font-size: 16px; */
   font-weight: 400;
 }
 
@@ -472,32 +316,7 @@ body {
   color: #333;
   font-weight: 600;
 }
-/* --------------- */
-/* .workDay {
-  background-color: #2ecc71;
-  color: #fff;
-}
 
-.overtime-100 {
-  background-color: #2980b9;
-  color: #fff;
-}
-
-.overtime-50 {
-  background-color: #f1c40f;
-}
-
-.overtime-120 {
-  background-color: #f39c12;
-  color: #fff;
-}
-
-.holiday {
-  background-color: #e74c3c;
-  color: #fff;
-} */
-
-/* ----------------- */
 .allBlock td:first-child {
   text-transform: uppercase;
   font-size: 12px;
@@ -509,12 +328,50 @@ body {
   font-weight: 600;
 }
 
+/* New styles info start */
+.summary-wrapper {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* background-color: #f9fafb; */
+}
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+.card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: #444;
+}
+.row,
+.vacation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+}
+.row.total,
+.row.net {
+  font-weight: bold;
+  color: #111;
+}
+.vacation-row small {
+  font-size: 0.75rem;
+  color: #888;
+  margin-left: 0.5rem;
+}
+/* New styles info end */
+
 .tableUrlop {
   width: 100%;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-size: 12px;
-  /* font-size: 16px; */
   font-weight: 400;
 }
 
