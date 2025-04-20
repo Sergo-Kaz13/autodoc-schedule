@@ -41,7 +41,7 @@ const toggleInputActive = (
 
       function resazeInput() {
         calculator.textContent = input.value || "";
-        input.style.width = calculator.offsetWidth + "px";
+        input.style.width = calculator.offsetWidth + 2 + "px";
       }
 
       resazeInput();
