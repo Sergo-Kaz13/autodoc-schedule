@@ -1,6 +1,7 @@
 import calculateUrlop from "./calculateUrlop.js";
 import editDataField from "./editDataField.js";
 import showMonthInfo from "./showMonthInfo.js";
+import showWarningModal from "./showWarningModal.js";
 
 const toggleInputActive = (
   board = "",
@@ -8,15 +9,14 @@ const toggleInputActive = (
   inputText = "",
   schedule
 ) => {
-  // const activeYear = document.querySelector(".activeYear").textContent;
-  // const activeMonthId = document.querySelector(".monthItem").id;
-
-  // const activeMonth = schedule[activeYear].months[activeMonthId];
-
   const editBoard = document.querySelector(board);
+  const workHolidayDaysUsed = Number(
+    document.querySelector(".workHolidayDaysUsed").textContent
+  );
 
   editBoard.addEventListener("click", (e) => {
     const rateSpan = document.querySelector("." + spanText);
+    const calculator = document.getElementById("widthCalculator");
 
     if (rateSpan) {
       const ratePrice = rateSpan.innerText;
@@ -35,22 +35,29 @@ const toggleInputActive = (
       } else {
         height = e.target.parentNode.clientHeight;
       }
-      // if (e.target.tagName === "TD") {
-      //   height = e.target.offsetHeight;
-      // } else {
-      //   height = e.target.parentNode.offsetHeight;
-      // }
-
-      input.style.width = "100%";
-      input.style.height = height + "px";
 
       editBoard.innerHTML = "";
       editBoard.appendChild(input).focus();
 
+      function resazeInput() {
+        calculator.textContent = input.value || "";
+        input.style.width = calculator.offsetWidth + "px";
+      }
+
+      resazeInput();
+      input.addEventListener("input", resazeInput);
+      input.style.height = height + "px";
+
       input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
+          if (input.value < workHolidayDaysUsed) {
+            const modal = document.querySelector(".warningModal");
+            if (!modal) {
+              showWarningModal(".editHolidayDays");
+            }
+            return;
+          }
           const ratePrice = input.value;
-          console.log(["ratePrice"], ratePrice);
 
           const span = document.createElement("span");
           span.classList.add(spanText);
@@ -71,6 +78,14 @@ const toggleInputActive = (
       });
 
       input.addEventListener("blur", () => {
+        if (input.value < workHolidayDaysUsed) {
+          const modal = document.querySelector(".warningModal");
+          if (!modal) {
+            showWarningModal(".editHolidayDays");
+          }
+          input.focus();
+          return;
+        }
         const ratePrice = input.value;
         const span = document.createElement("span");
         span.classList.add(spanText);

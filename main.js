@@ -37,6 +37,8 @@ monthItem.id = currentMonth;
 window.addEventListener("DOMContentLoaded", () => {
   const request = indexedDB.open("AutodocSchedule", 1);
 
+  console.log(document.querySelector(".warningModal"));
+
   request.onupgradeneeded = function (event) {
     const db = event.target.result;
 

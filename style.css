@@ -464,66 +464,73 @@ body {
   text-align: left;
 }
 
-/* .rateSpan::before,
-.taxSpan::before,
-.hospitalSpan::before,
-.holidaySpan::before,
-.editPremiumSpan::before {
-  content: "🖊";
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  -webkit-transform: rotate(110deg);
-  -ms-transform: rotate(110deg);
-  transform: rotate(110deg);
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  font-size: 12px;
-} */
-
-/* .rateSpan::after, */
-/* .editPremiumSpan::after {
-  content: " zł";
-} */
-
-/* .taxSpan::after, */
-/* .hospitalSpan::after, */
-/* .holidaySpan::after {
-  content: " %";
-} */
-
 .rateInput,
 .taxInput,
 .hospitalInput,
 .holidayInput,
 .holidayDaysInput,
 .editPremiumInput {
+  display: inline-block;
+  position: relative;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
-  text-align: center;
-  /* font-size: 12px; */
+  text-align: right;
   font-size: 16px;
-  /* color: #000 !important; */
   height: 16px !important;
-  width: 30px !important;
 }
 
 .holidayDaysInput,
 .editPremiumInput {
-  text-align: left;
-  padding-left: 5px;
-  /* font-size: 12px; */
   font-size: 16px;
+}
+
+#widthCalculator {
+  visibility: hidden;
+  position: absolute;
+  white-space: pre;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.holidayDaysInput {
+  width: auto;
+  min-width: 20px;
+}
+
+.warningModal {
+  position: absolute;
+  bottom: 190%;
+  left: 0;
+  transform: translateY(0.5rem);
+  background-color: #ffdddd;
+  color: #a94442;
+  border: 1px solid #f5c6cb;
+  border-left: 5px solid #e53935;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  border-radius: 0.5rem;
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  animation: fadeInSlide 0.3s ease-out;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0.5rem);
+  }
 }
 
 .editHolidayDays:has(input),
 .editPremium:has(input) {
   padding: 0;
-}
-
-.currentDate {
 }
 
 .currentDate span {
@@ -532,8 +539,6 @@ body {
 
 .listItemsBlock {
   position: absolute;
-  /* position: fixed; */
-  /* overflow-y: auto; */
   z-index: 100;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
