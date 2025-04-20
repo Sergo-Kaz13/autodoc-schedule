@@ -50,7 +50,10 @@ const toggleInputActive = (
 
       input.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-          if (input.value < workHolidayDaysUsed) {
+          if (
+            inputText === "holidayDaysInput" &&
+            input.value < workHolidayDaysUsed
+          ) {
             const modal = document.querySelector(".warningModal");
             if (!modal) {
               showWarningModal(".editHolidayDays");
@@ -78,7 +81,10 @@ const toggleInputActive = (
       });
 
       input.addEventListener("blur", () => {
-        if (input.value < workHolidayDaysUsed) {
+        if (
+          inputText === "holidayDaysInput" &&
+          input.value < workHolidayDaysUsed
+        ) {
           const modal = document.querySelector(".warningModal");
           if (!modal) {
             showWarningModal(".editHolidayDays");
