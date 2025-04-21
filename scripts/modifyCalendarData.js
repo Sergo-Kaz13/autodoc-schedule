@@ -18,7 +18,7 @@ function modifyCalendarData(data, el, schedule) {
       break;
     default:
       elData = "";
-      break;
+      return;
   }
 
   const year = document.querySelector(".activeYear").textContent;
