@@ -3,7 +3,7 @@ const BASE_URL = "/autodoc-schedule";
 const urlsToCache = [
   `${BASE_URL}/`,
   `${BASE_URL}/index.html`,
-  `${BASE_URL}/styles.css`,
+  `${BASE_URL}/style.css`,
   `${BASE_URL}/main.js`,
   `${BASE_URL}/icon-192.png`,
   // "/index.html",
