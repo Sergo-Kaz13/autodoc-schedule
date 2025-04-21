@@ -496,6 +496,7 @@ window.addEventListener("beforeinstallprompt", (e) => {
 
   // Показуємо модальне вікно
   const modal = document.getElementById("install-modal");
+  const closeBtn = document.getElementById("close-btn");
   modal.style.display = "block";
 
   const installBtn = document.getElementById("install-btn");
@@ -513,5 +514,9 @@ window.addEventListener("beforeinstallprompt", (e) => {
       }
       deferredPrompt = null;
     });
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
   });
 });
