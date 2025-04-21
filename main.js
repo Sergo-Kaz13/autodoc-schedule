@@ -11,6 +11,7 @@ import modalUrlopInfo from "./scripts/modalUrlopInfo.js";
 import getSchedule from "./scripts/getSchedule.js";
 import checkDataWithGetAll from "./scripts/checkDataWithGetAll.js";
 import changeDataSchedule from "./scripts/changeDataSchedule.js";
+import getDecemberData from "./scripts/getDecemberData.js";
 
 const { form } = document.forms;
 
@@ -30,7 +31,6 @@ const dayInfoTable = document.querySelector(".dayInfoTable");
 const btnClose = document.querySelector(".btnClose");
 
 activeYear.textContent = currentYear;
-// let newActiveYaer = currentYear;
 monthItem.textContent = months[currentMonth];
 monthItem.id = currentMonth;
 
@@ -121,9 +121,6 @@ btnMinMonth.addEventListener("click", () => {
       const newYear = createSchedule(newActiveYear);
       schedule[newActiveYear] = newYear;
     }
-
-    // scheduleBlock.innerHTML = "";
-    // showSchedule(schedule, newActiveYear, currentMonth);
   }
   monthItem.textContent = months[currentMonth];
   monthItem.id = currentMonth;
@@ -153,12 +150,11 @@ btnPlusMont.addEventListener("click", () => {
     monthItem.id = currentMonth;
 
     if (!(newActiveYear in schedule)) {
-      const newYear = createSchedule(newActiveYear);
+      const decemberDate = getDecemberData(schedule[newActiveYear - 1]);
+
+      const newYear = createSchedule(newActiveYear, decemberDate);
       schedule[newActiveYear] = newYear;
     }
-
-    // scheduleBlock.innerHTML = "";
-    // showSchedule(schedule, newActiveYear, currentMonth);
   }
   monthItem.textContent = months[currentMonth];
   monthItem.id = currentMonth;

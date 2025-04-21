@@ -1,6 +1,8 @@
 import { daysInMonth } from "./daysInMonth.js";
 
-export function createSchedule(year) {
+export function createSchedule(year, decemberData = null) {
+  console.log(decemberData);
+
   const fullYear = {
     workHolidayDays: 24,
     leaveOnRequestDays: 4,
@@ -14,10 +16,10 @@ export function createSchedule(year) {
     const days = daysInMonth(i, year);
 
     const month = {
-      rate: 31.5,
-      tax: 27,
-      hospitalRate: 63.3,
-      vacationPay: 100,
+      rate: decemberData?.rate ?? 31.5,
+      tax: decemberData?.tax ?? 27,
+      hospitalRate: decemberData?.hospitalRate ?? 63.3,
+      vacationPay: decemberData?.vacationPay ?? 100,
       premiumPay: 0,
       days: [],
     };
@@ -26,9 +28,6 @@ export function createSchedule(year) {
       let numDayWeek = new Date(year, i - 1, j).getDay() - 1;
       numDayWeek =
         numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
-      // let numDayWeek = new Date(`${year}-${i}-${j}`).getDay() - 1;
-      // numDayWeek =
-      //   numDayWeek < 0 ? (numDayWeek = 6) : (numDayWeek = numDayWeek);
 
       let statusDay = "workDay";
       let time = 8;
