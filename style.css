@@ -53,6 +53,17 @@ body {
   z-index: 9999;
 }
 
+.install-modal-block-bnt {
+  display: flex;
+  justify-content: space-between;
+}
+
+#close-btn,
+#install-btn {
+  border-radius: 0.4rem;
+  padding: 3px 5px;
+}
+
 .wrapper {
   min-height: 100%;
   max-width: 600px;
