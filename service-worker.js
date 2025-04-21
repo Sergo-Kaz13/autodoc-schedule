@@ -40,6 +40,7 @@ self.addEventListener("activate", (event) => {
 // Обробка запитів
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  if (!event.request.url.startsWith("http")) return;
 
   event.respondWith(
     fetch(event.request)
@@ -53,8 +54,6 @@ self.addEventListener("fetch", (event) => {
       })
       .catch(() => caches.match(event.request).then((res) => res))
   );
-
-  // if (!event.request.url.startsWith("http")) return;
 
   // event.respondWith(
   //   caches.match(event.request).then((cached) => {
