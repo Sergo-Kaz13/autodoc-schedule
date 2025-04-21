@@ -490,9 +490,11 @@ document.querySelectorAll(".accordion-header").forEach((btn) => {
 
 // accordion end
 
+// modal install
 let deferredPrompt;
 
 window.addEventListener("beforeinstallprompt", (e) => {
+  console.log("📦 beforeinstallprompt fired!");
   e.preventDefault(); // зупиняємо авто-появу банера
   deferredPrompt = e;
 

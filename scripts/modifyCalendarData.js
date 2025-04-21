@@ -1,5 +1,25 @@
 function modifyCalendarData(data, el, schedule) {
-  if (el !== "rateInput") return;
+  console.log(["el"], el);
+
+  let elData = "";
+
+  switch (el) {
+    case "rateInput":
+      elData = "rate";
+      break;
+    case "taxInput":
+      elData = "tax";
+      break;
+    case "hospitalInput":
+      elData = "hospitalRate";
+      break;
+    case "holidayInput":
+      elData = "vacationPay";
+      break;
+    default:
+      elData = "";
+      break;
+  }
 
   const year = document.querySelector(".activeYear").textContent;
   const month = document.querySelector(".monthItem").id;
@@ -8,13 +28,13 @@ function modifyCalendarData(data, el, schedule) {
     if (Number(key) >= Number(year)) {
       if (Number(key) > Number(year)) {
         schedule[key].months.map((day) => {
-          day.rate = Number(data);
+          day[elData] = Number(data);
           return day;
         });
       } else if (Number(key) === Number(year)) {
         schedule[year].months.map((day, i) => {
           if (i >= Number(month)) {
-            day.rate = Number(data);
+            day[elData] = Number(data);
             return day;
           }
           return day;
