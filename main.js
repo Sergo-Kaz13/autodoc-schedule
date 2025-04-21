@@ -489,3 +489,31 @@ document.querySelectorAll(".accordion-header").forEach((btn) => {
 });
 
 // accordion end
+
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault(); // зупиняємо авто-появу банера
+  deferredPrompt = e;
+
+  // Показуємо модальне вікно
+  const modal = document.getElementById("install-modal");
+  modal.style.display = "block";
+
+  const installBtn = document.getElementById("install-btn");
+  installBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+
+    // Показати системне вікно встановлення
+    deferredPrompt.prompt();
+
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("Користувач погодився на встановлення");
+      } else {
+        console.log("Користувач відмовився");
+      }
+      deferredPrompt = null;
+    });
+  });
+});
