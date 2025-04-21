@@ -39,19 +39,34 @@ self.addEventListener("activate", (event) => {
 
 // Обробка запитів
 self.addEventListener("fetch", (event) => {
-  if (!event.request.url.startsWith("http")) return;
+  if (event.request.method !== "GET") return;
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      return (
-        cached ||
-        fetch(event.request).then((response) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, response.clone());
-            return response;
-          });
-        })
-      );
-    })
+    fetch(event.request)
+      .then((response) => {
+        // Кешування нових ресурсів
+        const cloned = response.clone();
+        caches
+          .open(CACHE_NAME)
+          .then((cache) => cache.put(event.request, cloned));
+        return response;
+      })
+      .catch(() => caches.match(event.request).then((res) => res))
   );
+
+  // if (!event.request.url.startsWith("http")) return;
+
+  // event.respondWith(
+  //   caches.match(event.request).then((cached) => {
+  //     return (
+  //       cached ||
+  //       fetch(event.request).then((response) => {
+  //         return caches.open(CACHE_NAME).then((cache) => {
+  //           cache.put(event.request, response.clone());
+  //           return response;
+  //         });
+  //       })
+  //     );
+  //   })
+  // );
 });
