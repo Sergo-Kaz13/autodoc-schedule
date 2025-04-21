@@ -40,7 +40,7 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-#install-modal {
+/* #install-modal {
   display: none;
   position: fixed;
   top: 5%;
@@ -51,7 +51,7 @@ body {
   border-radius: 0.5rem;
   padding: 20px;
   z-index: 9999;
-}
+} */
 
 .wrapper {
   min-height: 100%;
