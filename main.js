@@ -493,31 +493,30 @@ window.addEventListener("beforeinstallprompt", (e) => {
   console.log("📦 beforeinstallprompt fired!");
   e.preventDefault(); // зупиняємо авто-появу банера
   deferredPrompt = e;
-  deferredPrompt.prompt();
 
   // Показуємо модальне вікно
-  // const modal = document.getElementById("install-modal");
-  // const closeBtn = document.getElementById("close-btn");
-  // modal.style.display = "block";
+  const modal = document.getElementById("install-modal");
+  const closeBtn = document.getElementById("close-btn");
+  modal.style.display = "block";
 
-  // const installBtn = document.getElementById("install-btn");
-  // installBtn.addEventListener("click", () => {
-  //   modal.style.display = "none";
+  const installBtn = document.getElementById("install-btn");
+  installBtn.addEventListener("click", () => {
+    modal.style.display = "none";
 
-  // Показати системне вікно встановлення
-  //   deferredPrompt.prompt();
+    // Показати системне вікно встановлення
+    deferredPrompt.prompt();
 
-  //   deferredPrompt.userChoice.then((choiceResult) => {
-  //     if (choiceResult.outcome === "accepted") {
-  //       console.log("Користувач погодився на встановлення");
-  //     } else {
-  //       console.log("Користувач відмовився");
-  //     }
-  //     deferredPrompt = null;
-  //   });
-  // });
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("Користувач погодився на встановлення");
+      } else {
+        console.log("Користувач відмовився");
+      }
+      deferredPrompt = null;
+    });
+  });
 
-  // closeBtn.addEventListener("click", () => {
-  //   modal.style.display = "none";
-  // });
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
 });
