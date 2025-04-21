@@ -36,9 +36,6 @@ monthItem.id = currentMonth;
 
 window.addEventListener("DOMContentLoaded", () => {
   const request = indexedDB.open("AutodocSchedule", 1);
-
-  console.log(document.querySelector(".warningModal"));
-
   request.onupgradeneeded = function (event) {
     const db = event.target.result;
 
@@ -125,8 +122,8 @@ btnMinMonth.addEventListener("click", () => {
       schedule[newActiveYear] = newYear;
     }
 
-    scheduleBlock.innerHTML = "";
-    showSchedule(schedule, newActiveYear, currentMonth);
+    // scheduleBlock.innerHTML = "";
+    // showSchedule(schedule, newActiveYear, currentMonth);
   }
   monthItem.textContent = months[currentMonth];
   monthItem.id = currentMonth;
@@ -136,6 +133,13 @@ btnMinMonth.addEventListener("click", () => {
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, activeYearItem, currentMonth);
+
+  const request = indexedDB.open("AutodocSchedule", 1);
+
+  request.onsuccess = function (event) {
+    const db = event.target.result;
+    changeDataSchedule(db, schedule);
+  };
 });
 
 btnPlusMont.addEventListener("click", () => {
@@ -153,8 +157,8 @@ btnPlusMont.addEventListener("click", () => {
       schedule[newActiveYear] = newYear;
     }
 
-    scheduleBlock.innerHTML = "";
-    showSchedule(schedule, newActiveYear, currentMonth);
+    // scheduleBlock.innerHTML = "";
+    // showSchedule(schedule, newActiveYear, currentMonth);
   }
   monthItem.textContent = months[currentMonth];
   monthItem.id = currentMonth;
@@ -164,6 +168,13 @@ btnPlusMont.addEventListener("click", () => {
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, activeYearItem, currentMonth);
+
+  const request = indexedDB.open("AutodocSchedule", 1);
+
+  request.onsuccess = function (event) {
+    const db = event.target.result;
+    changeDataSchedule(db, schedule);
+  };
 });
 
 scheduleBlock.addEventListener("click", (e) => {

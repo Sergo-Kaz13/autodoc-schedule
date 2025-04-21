@@ -1,5 +1,6 @@
 import calculateUrlop from "./calculateUrlop.js";
 import editDataField from "./editDataField.js";
+import modifyCalendarData from "./modifyCalendarData.js";
 import showMonthInfo from "./showMonthInfo.js";
 import showWarningModal from "./showWarningModal.js";
 
@@ -68,6 +69,7 @@ const toggleInputActive = (
           editBoard.innerHTML = "";
           editBoard.appendChild(span);
 
+          modifyCalendarData(input.value, inputText, schedule);
           editDataField(board, ratePrice, schedule);
 
           const activeYear = document.querySelector(".activeYear").textContent;
@@ -99,6 +101,7 @@ const toggleInputActive = (
         editBoard.innerHTML = "";
         editBoard.appendChild(span);
 
+        modifyCalendarData(input.value, inputText, schedule);
         editDataField(board, ratePrice, schedule);
 
         const activeYear = document.querySelector(".activeYear").textContent;
