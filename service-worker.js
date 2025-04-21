@@ -6,9 +6,9 @@ const urlsToCache = [
   `${BASE_URL}/styles.css`,
   `${BASE_URL}/main.js`,
   `${BASE_URL}/icon-192.png`,
-  "/index.html",
-  "/main.js",
-  "/styles.css",
+  // "/index.html",
+  // "/main.js",
+  // "/styles.css",
 ];
 
 // Кешування файлів при встановленні
