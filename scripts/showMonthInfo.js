@@ -1,6 +1,7 @@
+import calculateAverageSalary from "./calculateAverageSalary.js";
 import calculateSalaryMonth from "./calculateSalaryMonth.js";
 
-const showMonthInfo = (activeMonth) => {
+const showMonthInfo = (activeMonth, schedule) => {
   const { rate, vacationPay, hospitalRate, tax, premiumPay, days } =
     activeMonth;
 
@@ -136,7 +137,9 @@ const showMonthInfo = (activeMonth) => {
   document.querySelector(".rateSpan").textContent = rate;
   document.querySelector(".taxSpan").textContent = tax;
   document.querySelector(".hospitalSpan").textContent = hospitalRate;
-  document.querySelector(".holidaySpan").textContent = vacationPay;
+  // document.querySelector(".holidaySpan").textContent = vacationPay;
+  document.querySelector(".holidaySpan").textContent =
+    calculateAverageSalary(schedule);
   document.querySelector(".editPremiumSpan").textContent = premiumPay;
 };
 

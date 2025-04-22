@@ -85,6 +85,6 @@ export function showSchedule(schedule, year, month) {
   monthDays.forEach((day) => fragment.appendChild(day));
 
   document.querySelector(".schedule").append(fragment);
-  showMonthInfo(activeMonth);
+  showMonthInfo(activeMonth, schedule);
   calculateUrlop(schedule);
 }
