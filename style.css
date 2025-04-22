@@ -56,18 +56,6 @@ body {
   padding: 1rem;
   z-index: 9999;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  animation: popUp 0.3s ease-out;
-}
-
-@keyframes popUp {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
 }
 
 .install-modal-block-bnt {
