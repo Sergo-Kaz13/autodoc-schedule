@@ -47,10 +47,26 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background: white;
+  color: #1e1e1e;
   border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  padding: 20px;
+  border-radius: 1.2rem;
+  max-width: 400px;
+  width: 90%;
+  padding: 2rem;
   z-index: 9999;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: popUp 0.3s ease-out;
+}
+
+@keyframes popUp {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .install-modal-block-bnt {
@@ -60,8 +76,13 @@ body {
 
 #close-btn,
 #install-btn {
-  border-radius: 0.4rem;
-  padding: 3px 5px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+  /* border-radius: 0.4rem;
+  padding: 3px 5px; */
 }
 
 .wrapper {
