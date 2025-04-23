@@ -1,12 +1,19 @@
 "use strict";
 
-function calculateSalaryMonth(
-  domItemTime = "",
-  domItemPrice = "",
-  time = 0,
-  rate = 0,
-  surcharge = 1
-) {
+import calculateTimeMonth from "./calculateTimeMonth.js";
+
+function calculateSalaryMonth(activeMonth) {
+  // domItemTime = "",
+  // domItemPrice = "",
+  // time = 0,
+  // rate = 0,
+  // surcharge = 1
+  const {} = activeMonth;
+
+  const time = calculateTimeMonth(activeMonth);
+
+  let salaryMonthBrutto = 0;
+
   if (
     domItemTime === ".birthdayTime" ||
     domItemTime === ".workHolidayTime" ||

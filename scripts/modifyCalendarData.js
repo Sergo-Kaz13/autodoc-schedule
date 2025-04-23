@@ -16,6 +16,9 @@ function modifyCalendarData(data, el, schedule) {
     case "holidayInput":
       elData = "vacationPay";
       break;
+    case "minSalaryInput":
+      elData = "minSalary";
+      break;
     default:
       elData = "";
       return;

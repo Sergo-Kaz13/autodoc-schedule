@@ -95,6 +95,12 @@ window.addEventListener("DOMContentLoaded", () => {
           "editPremiumInput",
           schedule
         );
+        toggleInputActive(
+          ".minSalaryBlock",
+          "minSalarySpan",
+          "minSalaryInput",
+          schedule
+        );
         // +++++++++++++
       })
       .catch((err) => {

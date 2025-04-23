@@ -502,7 +502,8 @@ body {
 .hospitalInput,
 .holidayInput,
 .holidayDaysInput,
-.editPremiumInput {
+.editPremiumInput,
+.minSalaryInput {
   display: inline-block;
   position: relative;
   -webkit-box-sizing: border-box;

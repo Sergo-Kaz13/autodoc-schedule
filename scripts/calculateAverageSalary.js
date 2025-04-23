@@ -4,10 +4,16 @@ function calculateAverageSalary(schedule) {
 
   let sumSalary = 0;
 
-  if (activeMonth >= 2) {
-    schedule[activeYear].months.forEach(({ premiumPay, days }) => {
+  if (activeMonth >= 3) {
+    schedule[activeYear].months.forEach(({ premiumPay, days }, i) => {
+      if (i < activeMonth && i > activeMonth - 4) {
+        console.log(["days"], days);
+        console.log(["i"], i);
+      }
       sumSalary += premiumPay;
     });
+  } else {
+    console.log("lol");
   }
 
   console.log(["activeYear"], activeYear);
