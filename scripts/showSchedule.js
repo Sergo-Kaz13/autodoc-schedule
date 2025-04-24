@@ -33,9 +33,26 @@ export function showSchedule(schedule, year, month) {
 
       const div = document.createElement("div");
       const span = document.createElement("span");
+      const block50 = document.createElement("span");
+      const block100 = document.createElement("span");
+      const block120 = document.createElement("span");
+      const backshift = document.createElement("span");
+
       span.textContent = i + 1;
-      div.append(span);
-      div.id = "scheduleItem";
+      block50.textContent = "50%";
+      block100.textContent = "100%";
+      block120.textContent = "120%";
+      backshift.textContent = "🌗";
+
+      span.classList.add("blockData");
+      block50.classList.add("block50");
+      block100.classList.add("block100");
+      block120.classList.add("block120");
+      backshift.classList.add("backshift");
+
+      div.append(span, block50, block100, block120, backshift);
+
+      div.id = i + 1;
 
       if (
         i + 1 === currentDate &&
@@ -45,9 +62,14 @@ export function showSchedule(schedule, year, month) {
         div.classList.add("currentDate");
       }
 
-      if (dayInfo.backshift.status) div.classList.add("backshift");
-      if (dayInfo.addHours50.status) div.classList.add("addHours50");
-      if (dayInfo.addHours120.status) div.classList.add("addHours120");
+      // if (dayInfo.backshift.status) div.classList.add("backshift");
+      if (dayInfo.backshift.status)
+        backshift.classList.add("backshiftShowBlock");
+      // if (dayInfo.addHours50.status) div.classList.add("addHours50");
+      if (dayInfo.addHours50.status) block50.classList.add("blockOverTimeShow");
+      // if (dayInfo.addHours120.status) div.classList.add("addHours120");
+      if (dayInfo.addHours120.status)
+        block120.classList.add("blockOverTimeShow");
       if (dayInfo.higherPower.status) div.classList.add("higherPower");
 
       switch (statusDay) {
@@ -56,6 +78,9 @@ export function showSchedule(schedule, year, month) {
           break;
         case "addHours100":
           div.classList.add("scheduleItem", "scheduleItem100");
+          // div.classList.add("scheduleItem", "scheduleItemWork");
+          // span.classList.add("scheduleItem100");
+          block100.classList.add("blockOverTimeShow");
           break;
         case "weekend":
           div.classList.add("scheduleItem", "scheduleItemDayOff");
