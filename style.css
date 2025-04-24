@@ -107,9 +107,10 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  flex-direction: column;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border-radius: 5px;
   overflow: hidden;
@@ -124,6 +125,47 @@ body {
   opacity: 0.7;
 }
 
+/* new style 50, 100, 120 start */
+.blockData {
+  background: #1a237e;
+  color: white;
+  font-size: 0.75em;
+  padding: 0px 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: right;
+  align-self: flex-end;
+}
+
+.block50,
+.block100,
+.block120 {
+  display: none;
+  width: 100%;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  color: #1a237e;
+}
+
+.block50 {
+  background-color: #4caf50;
+}
+
+.block100 {
+  background-color: #ffeb3b;
+}
+
+.block120 {
+  background-color: #f44336;
+}
+
+.blockOverTimeShow {
+  display: inline-block;
+}
+/* new style 50, 100, 120 end */
+
 .scheduleItemWork,
 .scheduleItem100,
 .scheduleItemDayOff,
@@ -137,30 +179,16 @@ body {
 }
 
 .scheduleItemWork {
-  display: flex;
-  flex-direction: column;
   background: rgb(34, 197, 94);
   color: #333;
 }
 
 .scheduleItem100 {
-  display: flex;
-  flex-direction: column;
+  text-align: center;
   background: rgb(234, 179, 8);
 }
 
-.scheduleItem100::after {
-  content: "100%";
-  text-align: center;
-  font-size: 11px;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: #333;
-}
-
 .scheduleItemDayOff {
-  display: flex;
-  flex-direction: column;
   background: rgb(239, 68, 68);
   color: #333;
 }
@@ -174,8 +202,6 @@ body {
 }
 
 .scheduleItemHoliday {
-  display: flex;
-  flex-direction: column;
   background: rgb(249, 115, 22);
   color: #333;
 }
@@ -189,8 +215,6 @@ body {
 }
 
 .scheduleItemWorkHoliday {
-  display: flex;
-  flex-direction: column;
   background: rgb(59, 130, 246);
 }
 
@@ -203,8 +227,6 @@ body {
 }
 
 .scheduleItemLeaveOnRequest {
-  display: flex;
-  flex-direction: column;
   background: rgb(80, 185, 235);
 }
 
@@ -218,8 +240,6 @@ body {
 }
 
 .scheduleItemL4 {
-  display: flex;
-  flex-direction: column;
   color: #333;
   background: rgb(153, 153, 255);
 }
@@ -233,8 +253,6 @@ body {
 }
 
 .scheduleItemBirthday {
-  display: flex;
-  flex-direction: column;
   background-color: rgb(220, 120, 140);
 }
 
@@ -244,31 +262,18 @@ body {
 }
 
 .backshift {
-  border: 3px dashed rgba(0, 0, 0, 0.4);
+  /* border: 3px dashed rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 1);
-  box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 1); */
+  display: none;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  font-size: 10px;
 }
 
-.addHours50::after {
-  content: "50%";
-  position: absolute;
-  bottom: 0;
-  text-align: center;
-  width: 100%;
-  font-size: 9px;
-  color: #333;
-  background: rgb(253, 224, 71);
-}
-
-.addHours120::before {
-  content: "120%";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 9px;
-  color: #333;
-  background: rgb(255, 180, 80);
+.backshiftShowBlock {
+  display: inline-block;
 }
 
 .higherPower {
@@ -285,17 +290,6 @@ body {
   font-size: 8px;
   line-height: 1.2;
   padding-bottom: 2px;
-}
-
-.scheduleItemEvening::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 10px;
-  height: 10px;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 50%;
 }
 
 .statisticsBoard {
@@ -565,8 +559,9 @@ body {
   padding: 0;
 }
 
-.currentDate span {
-  color: #fff;
+.currentDate .blockData {
+  background-color: #b2dfdb;
+  color: #1a237e;
 }
 
 .listItemsBlock {

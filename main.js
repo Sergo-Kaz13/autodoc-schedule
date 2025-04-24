@@ -176,9 +176,8 @@ btnPlusMont.addEventListener("click", () => {
 scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");
 
-  if (scheduleItem.id === "scheduleItem") {
-    dayIndex = Number(e.target.textContent);
-
+  if (scheduleItem.classList.contains("scheduleItem")) {
+    dayIndex = Number(scheduleItem.id);
     const {
       addHours100,
       addHours120,
@@ -427,7 +426,10 @@ async function formSend(e) {
 
   backshiftStatus ? (backshift.status = true) : (backshift.status = false);
 
-  if (addHours50Form && statusDay === "workDay") {
+  if (
+    addHours50Form &&
+    (statusDay === "workDay" || statusDay === "addHours100")
+  ) {
     addHours50.status = true;
     addHours50.time = Number(time50);
   } else {
@@ -435,7 +437,10 @@ async function formSend(e) {
     addHours50.time = 0;
   }
 
-  if (addHours120Form && statusDay === "workDay") {
+  if (
+    addHours120Form &&
+    (statusDay === "workDay" || statusDay === "addHours100")
+  ) {
     addHours120.status = true;
     addHours120.time = Number(time120);
   } else {
