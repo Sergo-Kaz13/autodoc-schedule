@@ -110,7 +110,7 @@ body {
   flex-direction: column;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   border-radius: 5px;
   overflow: hidden;
@@ -119,6 +119,13 @@ body {
   -o-transition: all ease-in-out 0.28s;
   transition: all ease-in-out 0.28s;
   cursor: pointer;
+
+  /* ... */
+  gap: 2px;
+  padding: 6px;
+  font-size: 0.85rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .scheduleItem:hover {
@@ -127,14 +134,13 @@ body {
 
 /* new style 50, 100, 120 start */
 .blockData {
-  background: #1a237e;
-  color: white;
-  font-size: 0.75em;
+  color: #333;
+  font-size: 0.9em;
   padding: 0px 5px;
   border-radius: 5px;
-  font-weight: bold;
-  text-align: right;
-  align-self: flex-end;
+  font-weight: 800;
+  text-align: center;
+  align-self: center;
 }
 
 .block50,
@@ -150,15 +156,15 @@ body {
 }
 
 .block50 {
-  background-color: #4caf50;
+  background-color: #66bb6a;
 }
 
 .block100 {
-  background-color: #ffeb3b;
+  background-color: #fff176;
 }
 
 .block120 {
-  background-color: #f44336;
+  background-color: #e53935;
 }
 
 .blockOverTimeShow {
@@ -179,17 +185,17 @@ body {
 }
 
 .scheduleItemWork {
-  background: rgb(34, 197, 94);
+  background-color: #43a047;
   color: #333;
 }
 
 .scheduleItem100 {
   text-align: center;
-  background: rgb(234, 179, 8);
+  background-color: #43a047;
 }
 
 .scheduleItemDayOff {
-  background: rgb(239, 68, 68);
+  background-color: #ef5350;
   color: #333;
 }
 
@@ -262,24 +268,16 @@ body {
 }
 
 .backshift {
-  /* border: 3px dashed rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 1);
-  box-shadow: 0 0 3px rgba(0, 0, 0, 1); */
-  display: none;
-  position: absolute;
-  left: 2px;
-  top: 2px;
-  font-size: 10px;
-}
-
-.backshiftShowBlock {
-  display: inline-block;
+  border: 3px dashed rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
 }
 
 .higherPower {
   display: flex;
   flex-direction: column;
-  background: rgb(168, 85, 247);
+  background-color: #9575cd;
   color: #333;
 }
 
@@ -560,8 +558,20 @@ body {
 }
 
 .currentDate .blockData {
-  background-color: #b2dfdb;
-  color: #1a237e;
+  color: #fff;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 200, 83, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 83, 0);
+  }
 }
 
 .listItemsBlock {
