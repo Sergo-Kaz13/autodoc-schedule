@@ -36,21 +36,18 @@ export function showSchedule(schedule, year, month) {
       const block50 = document.createElement("span");
       const block100 = document.createElement("span");
       const block120 = document.createElement("span");
-      const backshift = document.createElement("span");
 
       span.textContent = i + 1;
       block50.textContent = "50%";
       block100.textContent = "100%";
       block120.textContent = "120%";
-      backshift.textContent = "🌗";
 
       span.classList.add("blockData");
       block50.classList.add("block50");
       block100.classList.add("block100");
       block120.classList.add("block120");
-      backshift.classList.add("backshift");
 
-      div.append(span, block50, block100, block120, backshift);
+      div.append(span, block50, block100, block120);
 
       div.id = i + 1;
 
@@ -62,9 +59,9 @@ export function showSchedule(schedule, year, month) {
         div.classList.add("currentDate");
       }
 
-      // if (dayInfo.backshift.status) div.classList.add("backshift");
-      if (dayInfo.backshift.status)
-        backshift.classList.add("backshiftShowBlock");
+      if (dayInfo.backshift.status) div.classList.add("backshift");
+      // if (dayInfo.backshift.status)
+      //   backshift.classList.add("backshiftShowBlock");
       // if (dayInfo.addHours50.status) div.classList.add("addHours50");
       if (dayInfo.addHours50.status) block50.classList.add("blockOverTimeShow");
       // if (dayInfo.addHours120.status) div.classList.add("addHours120");
