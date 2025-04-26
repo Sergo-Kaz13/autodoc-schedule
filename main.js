@@ -505,6 +505,10 @@ async function formSend(e) {
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, yearActive, Number(monthItem.id));
+
+  document.body.style.overflow = "auto";
+  document.body.style.position = "";
+
   form.reset();
 }
 
