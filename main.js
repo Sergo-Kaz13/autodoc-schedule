@@ -255,10 +255,10 @@ scheduleBlock.addEventListener("click", (e) => {
 
     dayInfoTable.innerHTML = infoDay;
     listItems.classList.add("listItemsShow");
-  }
 
-  document.body.style.overflow = "hidden";
-  document.body.style.position = "fixed";
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+  }
 });
 
 modalWindow.addEventListener("click", (e) => {
