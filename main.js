@@ -179,6 +179,24 @@ scheduleBlock.addEventListener("click", (e) => {
 
   if (scheduleItem.classList.contains("scheduleItem")) {
     dayIndex = Number(scheduleItem.id);
+    const indexDayWeek = Number(
+      scheduleItem.getAttribute("data-index-day-week")
+    );
+
+    if (indexDayWeek === 6) {
+      const humen = document.createElement("span");
+
+      humen.classList.add("humenAnimation");
+      scheduleItem.classList.add("modalInfo");
+      scheduleItem.appendChild(humen);
+
+      setTimeout(() => {
+        scheduleItem.classList.remove("modalInfo");
+        scheduleItem.removeChild(humen);
+      }, 3000);
+      return;
+    }
+
     const {
       addHours100,
       addHours120,
