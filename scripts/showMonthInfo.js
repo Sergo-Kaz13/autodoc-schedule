@@ -17,14 +17,23 @@ const showMonthInfo = (activeMonth, schedule) => {
     salaryMonthBrutto * (tax / 100)
   ).toFixed(2);
 
-  document.querySelector(".grossSalary").textContent = salaryMonthBrutto;
-  document.querySelector(".salaryMonthNetto").textContent = salaryMonthNetto;
-  document.querySelector(".rateSpan").textContent = rate;
-  document.querySelector(".taxSpan").textContent = tax;
-  document.querySelector(".hospitalSpan").textContent = hospitalRate;
-  document.querySelector(".holidaySpan").textContent = vacationPay;
-  document.querySelector(".editPremiumSpan").textContent = premiumPay;
-  document.querySelector(".minSalarySpan").textContent = minSalary;
+  const fields = [
+    { selector: ".grossSalary", value: salaryMonthBrutto },
+    { selector: ".salaryMonthNetto", value: salaryMonthNetto },
+    { selector: ".rateSpan", value: rate },
+    { selector: ".taxSpan", value: tax },
+    { selector: ".hospitalSpan", value: hospitalRate },
+    { selector: ".holidaySpan", value: vacationPay },
+    { selector: ".editPremiumSpan", value: premiumPay },
+    { selector: ".minSalarySpan", value: minSalary },
+  ];
+
+  fields.forEach(({ selector, value }) => {
+    const element = document.querySelector(selector);
+    if (element) {
+      element.textContent = value;
+    }
+  });
 };
 
 export default showMonthInfo;
