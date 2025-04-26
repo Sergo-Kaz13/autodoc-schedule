@@ -29,6 +29,7 @@ const btnPlusMont = document.querySelector(".btnRight");
 const listItems = document.querySelector(".listItemsBlock");
 const dayInfoTable = document.querySelector(".dayInfoTable");
 const btnClose = document.querySelector(".btnClose");
+const modalWindow = document.querySelector(".listItemsBlock");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -238,10 +239,20 @@ scheduleBlock.addEventListener("click", (e) => {
     dayInfoTable.innerHTML = infoDay;
     listItems.classList.add("listItemsShow");
   }
+
+  document.body.style.overflow = "hidden";
 });
 
-btnClose.addEventListener("click", () => {
-  listItems.classList.remove("listItemsShow");
+modalWindow.addEventListener("click", (e) => {
+  const el = e.target;
+  if (
+    el.classList.contains("btnClose") ||
+    el.classList.contains("listItemsBlock")
+  ) {
+    listItems.classList.remove("listItemsShow");
+  }
+
+  document.body.style.overflow = "auto";
 });
 
 form.addEventListener("submit", formSend);
@@ -471,6 +482,7 @@ async function formSend(e) {
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, yearActive, Number(monthItem.id));
+  document.body.style.overflow = "auto";
 }
 
 // accordion start
