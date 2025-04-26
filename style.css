@@ -614,7 +614,7 @@ body {
   border-radius: 20px;
   color: #333;
   font-weight: 600;
-  width: calc(100% - 40px);
+  width: calc(100% - 55px);
   max-width: 400px;
   max-height: 90vh;
   overflow-y: auto;
@@ -709,12 +709,6 @@ body {
   color: #fff;
 }
 
-.formBlockHidden {
-  height: 0;
-  overflow: hidden;
-  transition: height 0.5s ease;
-}
-
 #form {
   color: #444;
   background-color: #f3f3f3;
@@ -731,11 +725,6 @@ body {
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.3s ease;
-}
-
-.formTitle:active {
-  text-decoration: underline;
-  color: #0056b3;
 }
 
 .listItemsBlockOne {
