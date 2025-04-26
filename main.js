@@ -29,6 +29,7 @@ const btnPlusMont = document.querySelector(".btnRight");
 const listItems = document.querySelector(".listItemsBlock");
 const dayInfoTable = document.querySelector(".dayInfoTable");
 const modalWindow = document.querySelector(".listItemsBlock");
+const scrollModal = document.querySelector(".listItemsEvents");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -258,6 +259,7 @@ scheduleBlock.addEventListener("click", (e) => {
 
     document.body.style.overflow = "hidden";
     document.body.style.position = "fixed";
+    scrollModal.scrollTop = 0;
   }
 });
 
