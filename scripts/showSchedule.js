@@ -50,6 +50,7 @@ export function showSchedule(schedule, year, month) {
       div.append(span, block50, block100, block120);
 
       div.id = i + 1;
+      div.setAttribute("data-index-day-week", `${numberDay}`);
 
       if (
         i + 1 === currentDate &&

@@ -47,191 +47,196 @@
 
           <table class="dayInfoTable"></table>
 
-          <form id="form">
+          <div class="formBlock">
             <div class="formTitle">
               <span class="formTitleText">внести зміни</span>
               <span class="formTitleIcon">👇</span>
             </div>
-            <div class="listItemsBlockOne">
-              <div>
-                <input
-                  type="radio"
-                  name="statusDay"
-                  id="workDay"
-                  value="workDay"
-                  checked
-                />
-                <label for="workDay">робочий день</label>
-                <select name="workDayTime" id="">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8" selected>8</option>
-                </select>
-              </div>
 
-              <div>
-                <input
-                  type="radio"
-                  name="statusDay"
-                  id="addHours100"
-                  value="addHours100"
-                />
-                <label for="addHours100">понаднормові 100%</label>
-                <select name="time100" id="">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8" selected>8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                </select>
-              </div>
+            <div class="formBlockHidden">
+              <form id="form">
+                <div class="listItemsBlockOne">
+                  <div>
+                    <input
+                      type="radio"
+                      name="statusDay"
+                      id="workDay"
+                      value="workDay"
+                      checked
+                    />
+                    <label for="workDay">робочий день</label>
+                    <select name="workDayTime" id="">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8" selected>8</option>
+                    </select>
+                  </div>
 
-              <div>
-                <input
-                  type="radio"
-                  name="statusDay"
-                  id="weekend"
-                  value="weekend"
-                />
-                <label for="weekend">вихідний</label>
-              </div>
+                  <div>
+                    <input
+                      type="radio"
+                      name="statusDay"
+                      id="addHours100"
+                      value="addHours100"
+                    />
+                    <label for="addHours100">понаднормові 100%</label>
+                    <select name="time100" id="">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8" selected>8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                    </select>
+                  </div>
 
-              <div>
-                <input
-                  type="radio"
-                  name="statusDay"
-                  id="holiday"
-                  value="holiday"
-                />
-                <label for="holiday">святковий вихідний</label>
-              </div>
+                  <div>
+                    <input
+                      type="radio"
+                      name="statusDay"
+                      id="weekend"
+                      value="weekend"
+                    />
+                    <label for="weekend">вихідний</label>
+                  </div>
 
-              <div>
-                <input
-                  type="radio"
-                  name="statusDay"
-                  id="workHoliday"
-                  value="workHoliday"
-                />
-                <label for="workHoliday">відпустка</label>
-              </div>
+                  <div>
+                    <input
+                      type="radio"
+                      name="statusDay"
+                      id="holiday"
+                      value="holiday"
+                    />
+                    <label for="holiday">святковий вихідний</label>
+                  </div>
 
-              <div>
-                <input
-                  type="radio"
-                  name="statusDay"
-                  id="leaveOnRequest"
-                  value="leaveOnRequest"
-                />
-                <label for="leaveOnRequest">відпустка на вимогу</label>
-              </div>
+                  <div>
+                    <input
+                      type="radio"
+                      name="statusDay"
+                      id="workHoliday"
+                      value="workHoliday"
+                    />
+                    <label for="workHoliday">відпустка</label>
+                  </div>
 
-              <div>
-                <input
-                  type="radio"
-                  name="statusDay"
-                  id="hospital"
-                  value="hospital"
-                />
-                <label for="hospital">лікарняний</label>
-              </div>
+                  <div>
+                    <input
+                      type="radio"
+                      name="statusDay"
+                      id="leaveOnRequest"
+                      value="leaveOnRequest"
+                    />
+                    <label for="leaveOnRequest">відпустка на вимогу</label>
+                  </div>
 
-              <div>
-                <input
-                  type="radio"
-                  name="statusDay"
-                  id="birthday"
-                  value="birthday"
-                />
-                <label for="birthday">вихідний до ДН</label>
-              </div>
+                  <div>
+                    <input
+                      type="radio"
+                      name="statusDay"
+                      id="hospital"
+                      value="hospital"
+                    />
+                    <label for="hospital">лікарняний</label>
+                  </div>
+
+                  <div>
+                    <input
+                      type="radio"
+                      name="statusDay"
+                      id="birthday"
+                      value="birthday"
+                    />
+                    <label for="birthday">вихідний до ДН</label>
+                  </div>
+                </div>
+
+                <div class="listItemsBlockTwo">
+                  <div>
+                    <input
+                      type="checkbox"
+                      name="backshift"
+                      id="backshift"
+                      value="backshift"
+                    />
+                    <label for="backshift">друга зміна</label>
+                  </div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      name="higherPower"
+                      id="higherPower"
+                      value="higherPower"
+                    />
+                    <label for="higherPower">вища сила</label>
+                    <select name="higherPowerTime" id="">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8" selected>8</option>
+                    </select>
+                  </div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      name="addHours50"
+                      id="addHours50"
+                      value="addHours50"
+                    />
+                    <label for="addHours50">понаднормові 50%</label>
+                    <select name="time50" id="">
+                      <option value="1">1</option>
+                      <option value="2" selected>2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <input
+                      type="checkbox"
+                      name="addHours120"
+                      id="addHours120"
+                      value="addHours120"
+                    />
+                    <label for="addHours120">понаднормові 120%</label>
+                    <select name="time120" id="">
+                      <option value="1">1</option>
+                      <option value="2" selected>2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="formBlockBtn">
+                  <button type="submit" class="btnSubmit">ok</button>
+                </div>
+              </form>
             </div>
-
-            <div class="listItemsBlockTwo">
-              <div>
-                <input
-                  type="checkbox"
-                  name="backshift"
-                  id="backshift"
-                  value="backshift"
-                />
-                <label for="backshift">друга зміна</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="higherPower"
-                  id="higherPower"
-                  value="higherPower"
-                />
-                <label for="higherPower">вища сила</label>
-                <select name="higherPowerTime" id="">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8" selected>8</option>
-                </select>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="addHours50"
-                  id="addHours50"
-                  value="addHours50"
-                />
-                <label for="addHours50">понаднормові 50%</label>
-                <select name="time50" id="">
-                  <option value="1">1</option>
-                  <option value="2" selected>2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                </select>
-              </div>
-
-              <div>
-                <input
-                  type="checkbox"
-                  name="addHours120"
-                  id="addHours120"
-                  value="addHours120"
-                />
-                <label for="addHours120">понаднормові 120%</label>
-                <select name="time120" id="">
-                  <option value="1">1</option>
-                  <option value="2" selected>2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                </select>
-              </div>
-            </div>
-            <div class="formBlockBtn">
-              <button type="submit" class="btnSubmit">ok</button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
 

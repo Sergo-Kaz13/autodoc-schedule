@@ -28,7 +28,8 @@ const btnMinMonth = document.querySelector(".btnLeft");
 const btnPlusMont = document.querySelector(".btnRight");
 const listItems = document.querySelector(".listItemsBlock");
 const dayInfoTable = document.querySelector(".dayInfoTable");
-const btnClose = document.querySelector(".btnClose");
+const modalWindow = document.querySelector(".listItemsBlock");
+const scrollModal = document.querySelector(".listItemsEvents");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -184,6 +185,24 @@ scheduleBlock.addEventListener("click", (e) => {
 
   if (scheduleItem.classList.contains("scheduleItem")) {
     dayIndex = Number(scheduleItem.id);
+    const indexDayWeek = Number(
+      scheduleItem.getAttribute("data-index-day-week")
+    );
+
+    if (indexDayWeek === 6) {
+      const humen = document.createElement("span");
+
+      humen.classList.add("humenAnimation");
+      scheduleItem.classList.add("modalInfo");
+      scheduleItem.appendChild(humen);
+
+      setTimeout(() => {
+        scheduleItem.classList.remove("modalInfo");
+        scheduleItem.removeChild(humen);
+      }, 3000);
+      return;
+    }
+
     const {
       addHours100,
       addHours120,
@@ -243,11 +262,26 @@ scheduleBlock.addEventListener("click", (e) => {
 
     dayInfoTable.innerHTML = infoDay;
     listItems.classList.add("listItemsShow");
+
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    scrollModal.scrollTop = 0;
   }
 });
 
-btnClose.addEventListener("click", () => {
-  listItems.classList.remove("listItemsShow");
+modalWindow.addEventListener("click", (e) => {
+  const el = e.target;
+  if (
+    el.classList.contains("btnClose") ||
+    el.classList.contains("listItemsBlock")
+  ) {
+    listItems.classList.remove("listItemsShow");
+
+    document.body.style.overflow = "auto";
+    document.body.style.position = "";
+
+    form.reset();
+  }
 });
 
 form.addEventListener("submit", formSend);
@@ -477,25 +511,12 @@ async function formSend(e) {
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, yearActive, Number(monthItem.id));
+
+  document.body.style.overflow = "auto";
+  document.body.style.position = "";
+
+  form.reset();
 }
-
-// accordion start
-document.querySelectorAll(".accordion-header").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const content = btn.nextElementSibling;
-    const isOpen = content.style.display === "block";
-
-    // Закриваємо всі блоки
-    document.querySelectorAll(".accordion-content").forEach((el) => {
-      el.style.display = "none";
-    });
-
-    // Якщо був закритий — відкриваємо
-    content.style.display = isOpen ? "none" : "block";
-  });
-});
-
-// accordion end
 
 // modal install
 let deferredPrompt;
