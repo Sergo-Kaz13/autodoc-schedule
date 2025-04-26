@@ -259,6 +259,7 @@ scheduleBlock.addEventListener("click", (e) => {
   }
 
   document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";
 });
 
 modalWindow.addEventListener("click", (e) => {
@@ -271,6 +272,7 @@ modalWindow.addEventListener("click", (e) => {
   }
 
   document.body.style.overflow = "auto";
+  document.body.style.position = "";
 });
 
 form.addEventListener("submit", formSend);
@@ -500,26 +502,7 @@ async function formSend(e) {
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, yearActive, Number(monthItem.id));
-  document.body.style.overflow = "auto";
 }
-
-// accordion start
-document.querySelectorAll(".accordion-header").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const content = btn.nextElementSibling;
-    const isOpen = content.style.display === "block";
-
-    // Закриваємо всі блоки
-    document.querySelectorAll(".accordion-content").forEach((el) => {
-      el.style.display = "none";
-    });
-
-    // Якщо був закритий — відкриваємо
-    content.style.display = isOpen ? "none" : "block";
-  });
-});
-
-// accordion end
 
 // modal install
 let deferredPrompt;
