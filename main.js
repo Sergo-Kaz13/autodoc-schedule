@@ -12,6 +12,7 @@ import getSchedule from "./scripts/getSchedule.js";
 import checkDataWithGetAll from "./scripts/checkDataWithGetAll.js";
 import changeDataSchedule from "./scripts/changeDataSchedule.js";
 import getDecemberData from "./scripts/getDecemberData.js";
+import showForm from "./scripts/showForm.js";
 
 const { form } = document.forms;
 
@@ -28,8 +29,9 @@ const btnMinMonth = document.querySelector(".btnLeft");
 const btnPlusMont = document.querySelector(".btnRight");
 const listItems = document.querySelector(".listItemsBlock");
 const dayInfoTable = document.querySelector(".dayInfoTable");
-const btnClose = document.querySelector(".btnClose");
 const modalWindow = document.querySelector(".listItemsBlock");
+const formBlockHidden = document.querySelector(".formTitle");
+const blockFormFidden = document.querySelector(".formBlockHidden");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -107,6 +109,8 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("Помилка відкриття бази:", event.target.error);
   };
 });
+
+formBlockHidden.addEventListener("click", showForm);
 
 btnMinMonth.addEventListener("click", () => {
   currentMonth--;
@@ -269,6 +273,8 @@ modalWindow.addEventListener("click", (e) => {
     el.classList.contains("listItemsBlock")
   ) {
     listItems.classList.remove("listItemsShow");
+    showForm();
+    blockFormFidden.classList.remove("formBlockShow");
 
     document.body.style.overflow = "auto";
     document.body.style.position = "";
