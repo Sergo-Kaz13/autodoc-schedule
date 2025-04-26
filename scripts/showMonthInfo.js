@@ -11,86 +11,18 @@ const showMonthInfo = (activeMonth, schedule) => {
     minSalary = "4666",
   } = activeMonth;
 
-  let salaryMonthBrutto = 0;
-
-  salaryMonthBrutto += calculateSalaryMonth(activeMonth);
-
-  // salaryMonthBrutto += calculateSalaryMonth(
-  //   ".workDayTime",
-  //   ".workPrice",
-  //   allTime.workDayTime,
-  //   rate
-  // );
-  // salaryMonthBrutto += calculateSalaryMonth(
-  //   ".dayTime100",
-  //   ".time100Price",
-  //   allTime.dayTime100,
-  //   rate,
-  //   2
-  // );
-  // salaryMonthBrutto += calculateSalaryMonth(
-  //   ".dayTime50",
-  //   ".time50Price",
-  //   allTime.dayTime50,
-  //   rate,
-  //   1.5
-  // );
-  // salaryMonthBrutto += calculateSalaryMonth(
-  //   ".dayTime120",
-  //   ".time120Price",
-  //   allTime.dayTime120,
-  //   rate,
-  //   2.2
-  // );
-  // salaryMonthBrutto += calculateSalaryMonth(
-  //   ".higherPowerTime",
-  //   ".higherPowerPrice",
-  //   allTime.higherPowerTime,
-  //   rate,
-  //   0.5
-  // );
-  // salaryMonthBrutto += calculateSalaryMonth(
-  //   ".birthdayTime",
-  //   ".birthdayPrice",
-  //   allTime.birthdayTime,
-  //   rate,
-  //   vacationPay / 100
-  // );
-  // salaryMonthBrutto += calculateSalaryMonth(
-  //   ".workHolidayTime",
-  //   ".workHolidayPrice",
-  //   allTime.workHolidayTime,
-  //   rate,
-  //   vacationPay / 100
-  // );
-  // salaryMonthBrutto += calculateSalaryMonth(
-  //   ".leaveOnRequestTime",
-  //   ".leaveOnRequestPrice",
-  //   allTime.leaveOnRequestTime,
-  //   rate,
-  //   vacationPay / 100
-  // );
-  // salaryMonthBrutto += calculateSalaryMonth(
-  //   ".hospitalTime",
-  //   ".hospitalPrice",
-  //   allTime.hospitalTime,
-  //   rate,
-  //   hospitalRate / 100
-  // );
-  // salaryMonthBrutto += premiumPay;
-
-  document.querySelector(".grossSalary").textContent =
-    salaryMonthBrutto.toFixed(2);
-  document.querySelector(".salaryMonthNetto").textContent = (
+  const salaryMonthBrutto = calculateSalaryMonth(activeMonth) || 0;
+  const salaryMonthNetto = (
     salaryMonthBrutto -
-    (salaryMonthBrutto / 100) * tax
+    salaryMonthBrutto * (tax / 100)
   ).toFixed(2);
+
+  document.querySelector(".grossSalary").textContent = salaryMonthBrutto;
+  document.querySelector(".salaryMonthNetto").textContent = salaryMonthNetto;
   document.querySelector(".rateSpan").textContent = rate;
   document.querySelector(".taxSpan").textContent = tax;
   document.querySelector(".hospitalSpan").textContent = hospitalRate;
   document.querySelector(".holidaySpan").textContent = vacationPay;
-  // document.querySelector(".holidaySpan").textContent =
-  //   calculateAverageSalary(schedule);
   document.querySelector(".editPremiumSpan").textContent = premiumPay;
   document.querySelector(".minSalarySpan").textContent = minSalary;
 };

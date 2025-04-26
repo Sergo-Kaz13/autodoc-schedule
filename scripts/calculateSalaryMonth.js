@@ -1,11 +1,12 @@
 "use strict";
 
+import calculateNightBonus from "./calculateNightBonus.js";
 import calculateTimeMonth from "./calculateTimeMonth.js";
 
 function calculateSalaryMonth(activeMonth) {
   console.log(["activeMonth"], activeMonth);
 
-  const { rate, vacationPay, hospitalRate } = activeMonth;
+  const { rate, vacationPay, hospitalRate, minSalary } = activeMonth;
 
   const workPrice = document.querySelector(".workPrice");
   const dayTime100Price = document.querySelector(".time100Price");
@@ -18,48 +19,91 @@ function calculateSalaryMonth(activeMonth) {
   const hospitalPrice = document.querySelector(".hospitalPrice");
 
   const time = calculateTimeMonth(activeMonth);
-
-  console.log(["time"], time);
-
+  const nightBonusHour = calculateNightBonus(time, minSalary);
   let salaryMonthBrutto = 0;
 
-  workPrice.textContent = time.workDayTime * rate;
-  dayTime100Price.textContent = time.dayTime100 * rate * 2;
-  time50Price.textContent = time.dayTime50 * rate * 1.5;
-  time120Price.textContent = time.dayTime120 * rate * 2.2;
-  higherPowerPrice.textContent = time.higherPowerTime * rate * 0.5;
-  birthdayPrice.textContent =
-    time.birthdayTime * 8 * rate * (vacationPay / 100);
-  workHolidayPrice.textContent =
-    time.workHolidayTime * 8 * rate * (vacationPay / 100);
-  leaveOnRequestPrice.textContent =
-    time.leaveOnRequestTime * 8 * rate * (vacationPay / 100);
-  hospitalPrice.textContent =
-    time.hospitalTime * 8 * rate * (hospitalRate / 100);
+  const sumWorkPrice = sumSalaryHoursType(time.workDayTime, rate);
+  workPrice.textContent = sumWorkPrice;
+  salaryMonthBrutto += sumWorkPrice;
 
-  // все що нище потрібно переписати
-  // if (
-  //   domItemTime === ".birthdayTime" ||
-  //   domItemTime === ".workHolidayTime" ||
-  //   domItemTime === ".leaveOnRequestTime" ||
-  //   domItemTime === ".hospitalTime"
-  // ) {
-  //   document.querySelector(domItemTime).textContent = time;
+  const sumDayTime100Price = sumSalaryHoursType(time.dayTime100, rate, 1, 2);
+  dayTime100Price.textContent = sumDayTime100Price;
+  salaryMonthBrutto += sumDayTime100Price;
 
-  //   const salaryDay = (time * 8 * rate * surcharge).toFixed(2);
+  const sumTime50Price = sumSalaryHoursType(time.dayTime50, rate, 1, 1.5);
+  time50Price.textContent = sumTime50Price;
+  salaryMonthBrutto += sumTime50Price;
 
-  //   document.querySelector(domItemPrice).textContent = salaryDay;
+  const sumTime120Price = sumSalaryHoursType(
+    time.dayTime120,
+    rate,
+    1,
+    2,
+    true,
+    nightBonusHour
+  );
+  time120Price.textContent = sumTime120Price;
+  salaryMonthBrutto += sumTime120Price;
 
-  //   return Number(salaryDay);
-  // } else {
-  //   document.querySelector(domItemTime).textContent = time;
+  const sumHigherPowerPrice = sumSalaryHoursType(
+    time.higherPowerTime,
+    rate,
+    1,
+    0.5
+  );
+  higherPowerPrice.textContent = sumHigherPowerPrice;
+  salaryMonthBrutto += sumHigherPowerPrice;
 
-  //   const salaryDay = (time * rate * surcharge).toFixed(2);
+  const sumBirthdayPrice = sumSalaryHoursType(
+    time.birthdayTime,
+    rate,
+    8,
+    vacationPay / 100
+  );
+  birthdayPrice.textContent = sumBirthdayPrice;
+  salaryMonthBrutto += sumBirthdayPrice;
 
-  //   document.querySelector(domItemPrice).textContent = salaryDay;
+  const sumWorkHolidayPrice = sumSalaryHoursType(
+    time.workHolidayTime,
+    rate,
+    8,
+    vacationPay / 100
+  );
+  workHolidayPrice.textContent = sumWorkHolidayPrice;
+  salaryMonthBrutto += sumWorkHolidayPrice;
 
-  //   return Number(salaryDay);
-  // }
+  const sumLeaveOnRequestPrice = sumSalaryHoursType(
+    time.leaveOnRequestTime,
+    rate,
+    8,
+    vacationPay / 100
+  );
+  leaveOnRequestPrice.textContent = sumLeaveOnRequestPrice;
+  salaryMonthBrutto += sumLeaveOnRequestPrice;
+
+  const sumHospitalPrice = sumSalaryHoursType(
+    time.hospitalTime,
+    rate,
+    8,
+    hospitalRate / 100
+  );
+  hospitalPrice.textContent = sumHospitalPrice;
+  salaryMonthBrutto += sumHospitalPrice;
+
+  function sumSalaryHoursType(
+    time,
+    rate,
+    workdayToHours = 1,
+    overtimeBonusRate = 1,
+    hasNightBonus = false,
+    nightBonusHour = 1
+  ) {
+    const baseSalary = time * rate * workdayToHours * overtimeBonusRate;
+    const nightBonus = hasNightBonus ? time * nightBonusHour : 0;
+    return baseSalary + nightBonus;
+  }
+
+  return Number(salaryMonthBrutto.toFixed(2));
 }
 
 export default calculateSalaryMonth;
