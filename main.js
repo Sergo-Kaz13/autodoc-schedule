@@ -269,10 +269,12 @@ modalWindow.addEventListener("click", (e) => {
     el.classList.contains("listItemsBlock")
   ) {
     listItems.classList.remove("listItemsShow");
-  }
 
-  document.body.style.overflow = "auto";
-  document.body.style.position = "";
+    document.body.style.overflow = "auto";
+    document.body.style.position = "";
+
+    form.reset();
+  }
 });
 
 form.addEventListener("submit", formSend);
@@ -502,6 +504,7 @@ async function formSend(e) {
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, yearActive, Number(monthItem.id));
+  form.reset();
 }
 
 // modal install
