@@ -1,6 +1,17 @@
 function calculateTimeMonth(month) {
   const { days } = month;
 
+  const workDayTime = document.querySelector(".workDayTime");
+  const dayTime100 = document.querySelector(".dayTime100");
+  const dayTime50 = document.querySelector(".dayTime50");
+  const dayTime120 = document.querySelector(".dayTime120");
+  const higherPowerTime = document.querySelector(".higherPowerTime");
+  const birthdayTime = document.querySelector(".birthdayTime");
+  const workHolidayTime = document.querySelector(".workHolidayTime");
+  const leaveOnRequestTime = document.querySelector(".leaveOnRequestTime");
+  const hospitalTime = document.querySelector(".hospitalTime");
+  const allWorkTime = document.querySelector(".hoursWorked");
+
   const allTime = {
     workDayTime: 0,
     dayTime100: 0,
@@ -57,7 +68,16 @@ function calculateTimeMonth(month) {
     allTime.dayTime50 +
     allTime.dayTime120;
 
-  document.querySelector(".hoursWorked").textContent = sumWorkTime;
+  workDayTime.textContent = allTime.workDayTime;
+  dayTime100.textContent = allTime.dayTime100;
+  dayTime50.textContent = allTime.dayTime50;
+  dayTime120.textContent = allTime.dayTime120;
+  higherPowerTime.textContent = allTime.higherPowerTime;
+  birthdayTime.textContent = allTime.birthdayTime;
+  workHolidayTime.textContent = allTime.workHolidayTime;
+  leaveOnRequestTime.textContent = allTime.leaveOnRequestTime;
+  hospitalTime.textContent = allTime.hospitalTime;
+  allWorkTime.textContent = sumWorkTime;
 
   return allTime;
 }
