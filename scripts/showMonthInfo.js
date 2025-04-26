@@ -34,6 +34,8 @@ const showMonthInfo = (activeMonth, schedule) => {
       element.textContent = value;
     }
   });
+
+  calculateAverageSalary(schedule);
 };
 
 export default showMonthInfo;
