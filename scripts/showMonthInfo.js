@@ -35,7 +35,7 @@ const showMonthInfo = (activeMonth, schedule) => {
     }
   });
 
-  calculateAverageSalary(schedule);
+  // calculateAverageSalary(schedule);
 };
 
 export default showMonthInfo;

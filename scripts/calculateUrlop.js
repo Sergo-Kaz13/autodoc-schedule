@@ -1,5 +1,3 @@
-"use strict";
-
 function calculateUrlop(schedule) {
   const activeYear = document.querySelector(".activeYear").textContent;
   const {
@@ -11,8 +9,6 @@ function calculateUrlop(schedule) {
   } = schedule[activeYear];
 
   document.querySelector(".holidayDaysSpan").textContent = workHolidayDays;
-  // document.querySelector(".leaveOnRequestDays").textContent =
-  //   leaveOnRequestDays;
   document.querySelector(".higherPowerHours").textContent = higherPowerTime;
   document.querySelector(".birthday").textContent = birthday;
 
@@ -26,25 +22,30 @@ function calculateUrlop(schedule) {
     days.forEach(({ dayInfo }) => {
       const { birthday, higherPower, workHoliday, leaveOnRequest } = dayInfo;
 
-      birthday.status ? (birthdayUsed += birthday.day) : "";
-      higherPower.status ? (higherPowerUsed += higherPower.time) : "";
-      // workHoliday.status ? (workHolidayUsed += workHoliday.day) : "";
-      if (workHoliday.status) {
-        if (
-          workHolidayDays - workHolidayUsed >
-          leaveOnRequestDays - leaveOnRequestUsed
-        ) {
-          workHolidayUsed += workHoliday.day;
-        } else {
-          workHolidayUsed += workHoliday.day;
-          leaveOnRequestUsed += workHoliday.day;
+      if (birthday?.status) birthdayUsed += birthday.day;
+      if (higherPower?.status) higherPowerUsed += higherPower.time;
+
+      if (workHoliday?.status) {
+        const workHolidayRemaining = workHolidayDays - workHolidayUsed;
+        const leaveOnRequestRemaining = leaveOnRequestDays - leaveOnRequestUsed;
+
+        workHolidayUsed += workHoliday.day;
+        if (workHolidayRemaining <= leaveOnRequestRemaining) {
+          leaveOnRequestUsedCound += workHoliday.day;
         }
+
+        // if (
+        //   workHolidayDays - workHolidayUsed >
+        //   leaveOnRequestDays - leaveOnRequestUsed
+        // ) {
+        //   workHolidayUsed += workHoliday.day;
+        // } else {
+        //   workHolidayUsed += workHoliday.day;
+        //   leaveOnRequestUsed += workHoliday.day;
+        // }
       }
-      // leaveOnRequest.status
-      //   ? ((leaveOnRequestUsed += leaveOnRequest.day),
-      //     (workHolidayUsed += leaveOnRequest.day))
-      //   : "";
-      if (leaveOnRequest.status) {
+
+      if (leaveOnRequest?.status) {
         leaveOnRequestUsed += leaveOnRequest.day;
         leaveOnRequestUsedCound += leaveOnRequest.day;
         workHolidayUsed += leaveOnRequest.day;
@@ -52,29 +53,22 @@ function calculateUrlop(schedule) {
     });
   });
 
-  document.querySelector(".workHolidayDaysUsed").textContent = workHolidayUsed;
-  console.log(
-    (document.querySelector(".workHolidayDaysUsed").textContent =
-      workHolidayUsed)
+  const vacationBalance = workHolidayDays - workHolidayUsed;
+
+  if (vacationBalance < 4) {
+    leaveOnRequestUsedCound = 4 - vacationBalance;
+  }
+
+  updateTextContent(".workHolidayDaysUsed", workHolidayUsed);
+  updateTextContent(".leaveOnRequestDaysUsed", leaveOnRequestUsed);
+  updateTextContent(".higherPowerTimeUsed", higherPowerUsed);
+  updateTextContent(".birthdayUsed", birthdayUsed);
+  updateTextContent(".workHolidayDaysStay", vacationBalance);
+  updateTextContent(
+    ".leaveOnRequestDaysStay",
+    leaveOnRequestDays - leaveOnRequestUsed
   );
-
-  document.querySelector(".leaveOnRequestDaysUsed").textContent =
-    leaveOnRequestUsedCound;
-  console.log(
-    (document.querySelector(".leaveOnRequestDaysUsed").textContent =
-      leaveOnRequestUsedCound)
-  );
-
-  document.querySelector(".higherPowerTimeUsed").textContent = higherPowerUsed;
-  document.querySelector(".birthdayUsed").textContent = birthdayUsed;
-
-  document.querySelector(".workHolidayDaysStay").textContent =
-    workHolidayDays - workHolidayUsed;
-  document.querySelector(".leaveOnRequestDaysStay").textContent =
-    leaveOnRequestDays - leaveOnRequestUsed;
-  document.querySelector(".higherPowerTimeStay").textContent =
-    higherPowerTime - higherPowerUsed;
-  // document.querySelector(".birthdayStay").textContent = birthday - birthdayUsed;
+  updateTextContent(".higherPowerTimeStay", higherPowerTime - higherPowerUsed);
 
   return {
     workHolidayUsed,
@@ -82,7 +76,15 @@ function calculateUrlop(schedule) {
     higherPowerUsed,
     birthdayUsed,
     leaveOnRequestUsedCound,
+    vacationBalance,
   };
 }
+
+const updateTextContent = (selector, value) => {
+  const element = document.querySelector(selector);
+  if (element) {
+    element.textContent = value;
+  }
+};
 
 export default calculateUrlop;
