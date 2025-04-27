@@ -348,8 +348,10 @@ async function formSend(e) {
   } else if (statusDay === "workHoliday") {
     if (statusDay === statusDayActive) {
       listItems.classList.remove("listItemsShow");
+      document.body.style.overflow = "auto";
+      document.body.style.position = "";
       return;
-    } else if (urlopData.workHolidayUsed === workHolidayDays) {
+    } else if (urlopData.workHolidayUsed >= workHolidayDays) {
       if (statusDayActive !== "leaveOnRequest") {
         modalUrlopInfo("Основна відпустка використана.");
         return;
@@ -358,15 +360,20 @@ async function formSend(e) {
   } else if (statusDay === "leaveOnRequest") {
     if (statusDay === statusDayActive) {
       listItems.classList.remove("listItemsShow");
+      document.body.style.overflow = "auto";
+      document.body.style.position = "";
       return;
     } else if (urlopData.leaveOnRequestUsed === leaveOnRequestDays) {
-      if (statusDayActive !== "workHoliday") {
-        modalUrlopInfo("Відпустка на вимогу використана.");
-        return;
-      } else if (urlopData.leaveOnRequestUsedCound === 4) {
-        modalUrlopInfo("Відпустка на вимогу використана.");
-        return;
-      }
+      modalUrlopInfo("Відпустка на вимогу використана.");
+      return;
+    } else if (
+      urlopData.vacationBalance <= 0 &&
+      statusDayActive !== "workHoliday"
+    ) {
+      modalUrlopInfo(
+        "Відпустка на вимогу не може бути використана, так як не залишилося основної відпустки."
+      );
+      return;
     }
   } else if (higherPowerForm) {
     if (
@@ -505,6 +512,8 @@ async function formSend(e) {
   // ============= END ================
 
   listItems.classList.remove("listItemsShow");
+  document.body.style.overflow = "auto";
+  document.body.style.position = "";
 
   const request = indexedDB.open("AutodocSchedule", 1);
 
