@@ -1,23 +1,31 @@
-function calculateAverageSalary(schedule) {
+function calculateAverageSalary(schedule, totalMonths = 12) {
   const activeMonth = Number(document.querySelector(".monthItem").id);
   const activeYear = Number(document.querySelector(".activeYear").textContent);
 
-  let sumSalary = 0;
+  let averageSalaryMonths;
+  // debugger;
+  if (activeMonth - totalMonths < 0) {
+    console.log(["hello"], "hello");
 
-  if (activeMonth >= 3) {
-    schedule[activeYear].months.forEach(({ premiumPay, days }, i) => {
-      if (i < activeMonth && i > activeMonth - 4) {
-        console.log(["days"], days);
-        console.log(["i"], i);
-      }
-      sumSalary += premiumPay;
-    });
+    const prevAverageSalaryMonths = schedule[activeYear].months.slice(
+      0,
+      activeMonth
+    );
+
+    averageSalaryMonths = schedule[activeYear - 1].months.slice(
+      -(totalMonths - prevAverageSalaryMonths.length)
+    );
+    averageSalaryMonths = [...averageSalaryMonths, ...prevAverageSalaryMonths];
   } else {
-    console.log("lol");
+    averageSalaryMonths = schedule[activeYear].months.slice(
+      activeMonth - totalMonths,
+      activeMonth
+    );
   }
 
   console.log(["activeYear"], activeYear);
   console.log(["activeMonth"], activeMonth);
+  console.log(["averageSalaryMonths"], averageSalaryMonths);
 
   return 10;
 }

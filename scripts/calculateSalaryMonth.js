@@ -98,7 +98,7 @@ function calculateSalaryMonth(activeMonth) {
   ) {
     const baseSalary = time * rate * workdayToHours * overtimeBonusRate;
     const nightBonus = hasNightBonus ? time * nightBonusHour : 0;
-    return baseSalary + nightBonus;
+    return Number((baseSalary + nightBonus).toFixed(2));
   }
 
   return Number(salaryMonthBrutto.toFixed(2));
