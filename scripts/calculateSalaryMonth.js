@@ -4,7 +4,7 @@ import calculateNightBonus from "./calculateNightBonus.js";
 import calculateTimeMonth from "./calculateTimeMonth.js";
 
 function calculateSalaryMonth(activeMonth) {
-  const { rate, vacationPay, hospitalRate, minSalary } = activeMonth;
+  const { rate, vacationPay, hospitalRate, minSalary = "4666" } = activeMonth;
 
   const workPrice = document.querySelector(".workPrice");
   const dayTime100Price = document.querySelector(".time100Price");
