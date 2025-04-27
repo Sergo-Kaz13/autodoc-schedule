@@ -12,6 +12,7 @@ import getSchedule from "./scripts/getSchedule.js";
 import checkDataWithGetAll from "./scripts/checkDataWithGetAll.js";
 import changeDataSchedule from "./scripts/changeDataSchedule.js";
 import getDecemberData from "./scripts/getDecemberData.js";
+import showModalSetting from "./scripts/showModalSetting.js";
 
 const { form } = document.forms;
 
@@ -30,6 +31,7 @@ const listItems = document.querySelector(".listItemsBlock");
 const dayInfoTable = document.querySelector(".dayInfoTable");
 const modalWindow = document.querySelector(".listItemsBlock");
 const scrollModal = document.querySelector(".listItemsEvents");
+const btnSetting = document.querySelector(".btnSetting");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -113,6 +115,8 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("Помилка відкриття бази:", event.target.error);
   };
 });
+
+btnSetting.addEventListener("click", (e) => showModalSetting(e));
 
 btnMinMonth.addEventListener("click", () => {
   currentMonth--;
