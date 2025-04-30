@@ -2,8 +2,11 @@
 
 import calculateNightBonus from "./calculateNightBonus.js";
 import calculateTimeMonth from "./calculateTimeMonth.js";
+import renderMonthlyHours from "./renderMonthlyHours.js";
 
 function calculateSalaryMonth(activeMonth) {
+  console.log(["acativeMonth"], activeMonth);
+
   const { rate, vacationPay, hospitalRate, minSalary = "4666" } = activeMonth;
 
   const workPrice = document.querySelector(".workPrice");
@@ -16,7 +19,11 @@ function calculateSalaryMonth(activeMonth) {
   const leaveOnRequestPrice = document.querySelector(".leaveOnRequestPrice");
   const hospitalPrice = document.querySelector(".hospitalPrice");
 
+  renderMonthlyHours(activeMonth);
   const time = calculateTimeMonth(activeMonth);
+
+  console.log(["time"], time);
+
   const nightBonusHour = calculateNightBonus(time, minSalary);
   let salaryMonthBrutto = 0;
 

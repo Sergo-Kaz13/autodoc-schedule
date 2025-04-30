@@ -12,6 +12,7 @@ const showMonthInfo = (activeMonth, schedule) => {
   } = activeMonth;
 
   const salaryMonthBrutto = calculateSalaryMonth(activeMonth) + premiumPay || 0;
+
   const salaryMonthNetto = (
     salaryMonthBrutto -
     salaryMonthBrutto * (tax / 100)
