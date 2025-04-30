@@ -1,5 +1,7 @@
 import calculateAverageSalary from "./calculateAverageSalary.js";
 import calculateSalaryMonth from "./calculateSalaryMonth.js";
+import renderMonthlyHours from "./renderMonthlyHours.js";
+import renderSalaryMonth from "./renderSalaryMonth.js";
 
 const showMonthInfo = (activeMonth, schedule) => {
   const {
@@ -11,7 +13,25 @@ const showMonthInfo = (activeMonth, schedule) => {
     minSalary = "4666",
   } = activeMonth;
 
-  const salaryMonthBrutto = calculateSalaryMonth(activeMonth) + premiumPay || 0;
+  renderMonthlyHours(activeMonth);
+  const sumSalaryMonth = calculateSalaryMonth(activeMonth);
+  renderSalaryMonth(sumSalaryMonth);
+
+  const salaryMonthBrutto =
+    Number(
+      (
+        sumSalaryMonth.sumWorkPrice +
+        sumSalaryMonth.sumDayTime100Price +
+        sumSalaryMonth.sumTime50Price +
+        sumSalaryMonth.sumTime120Price +
+        sumSalaryMonth.sumHigherPowerPrice +
+        sumSalaryMonth.sumBirthdayPrice +
+        sumSalaryMonth.sumWorkHolidayPrice +
+        sumSalaryMonth.sumLeaveOnRequestPrice +
+        sumSalaryMonth.sumHospitalPrice +
+        premiumPay
+      ).toFixed(2)
+    ) || 0;
 
   const salaryMonthNetto = (
     salaryMonthBrutto -
