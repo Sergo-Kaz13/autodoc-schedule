@@ -7,9 +7,7 @@ function calculateNightBonus(time, minSalary) {
     time.higherPowerTime +
     time.birthdayTime * 8;
 
-  console.log(["scheduleTime"], scheduleTime);
   const nightBonusHour = Number(((minSalary / scheduleTime) * 0.2).toFixed(2));
-  console.log(["nightBonusHour"], nightBonusHour);
 
   document.querySelector(".rateHour").textContent = nightBonusHour;
   document.querySelector(".scheduleHoursMonth").textContent = scheduleTime;

@@ -1,3 +1,4 @@
+import calculateAverageSalary from "./calculateAverageSalary.js";
 import calculateUrlop from "./calculateUrlop.js";
 import { scheduleBlock } from "./data.js";
 import showMonthInfo from "./showMonthInfo.js";
@@ -110,4 +111,5 @@ export function showSchedule(schedule, year, month) {
   document.querySelector(".schedule").append(fragment);
   showMonthInfo(activeMonth, schedule);
   calculateUrlop(schedule);
+  calculateAverageSalary(schedule);
 }
