@@ -8,6 +8,15 @@ function calculateSlaryForPeriod(period) {
   period.forEach((month) => {
     const { premiumPay } = month;
     periodSalary += premiumPay;
+    const {
+      sumWorkPrice,
+      sumDayTime100Price,
+      sumTime120Price,
+      sumTime50Price,
+    } = calculateSalaryMonth(month);
+
+    periodSalary +=
+      sumWorkPrice + sumDayTime100Price + sumTime120Price + sumTime50Price;
 
     const { workDayTime, dayTime100, dayTime120, dayTime50 } =
       calculateTimeMonth(month);
@@ -15,10 +24,11 @@ function calculateSlaryForPeriod(period) {
     totalWorkTime += workDayTime + dayTime100 + dayTime50 + dayTime120;
   });
 
-  console.log(["periodSalary"], periodSalary);
-  console.log(["totalWorkTime"], totalWorkTime);
+  const averageRate = Number((periodSalary / totalWorkTime).toFixed(2));
 
-  console.log(["period"], period);
+  document.querySelector(".vacationPay").textContent = averageRate;
+
+  return averageRate;
 }
 
 export default calculateSlaryForPeriod;

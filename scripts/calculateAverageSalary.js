@@ -5,7 +5,7 @@ function calculateAverageSalary(schedule, totalMonths = 12) {
   const activeYear = Number(document.querySelector(".activeYear").textContent);
 
   let averageSalaryMonths;
-  // debugger;
+
   if (activeMonth - totalMonths < 0) {
     const prevAverageSalaryMonths = schedule[activeYear].months.slice(
       0,
@@ -33,13 +33,7 @@ function calculateAverageSalary(schedule, totalMonths = 12) {
     console.log(["averageSalaryMonths"], averageSalaryMonths);
   }
 
-  console.log(["activeYear"], activeYear);
-  console.log(["activeMonth"], activeMonth);
-  console.log(["averageSalaryMonths"], averageSalaryMonths);
-
-  calculateSalaryForPeriod(averageSalaryMonths);
-
-  return 10;
+  return calculateSalaryForPeriod(averageSalaryMonths);
 }
 
 export default calculateAverageSalary;

@@ -78,12 +78,12 @@ window.addEventListener("DOMContentLoaded", () => {
           "hospitalInput",
           schedule
         );
-        toggleInputActive(
-          ".holidayBoard",
-          "holidaySpan",
-          "holidayInput",
-          schedule
-        );
+        // toggleInputActive(
+        //   ".holidayBoard",
+        //   "holidaySpan",
+        //   "holidayInput",
+        //   schedule
+        // );
         toggleInputActive(
           ".editHolidayDays",
           "holidayDaysSpan",

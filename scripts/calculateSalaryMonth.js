@@ -3,9 +3,7 @@
 import calculateNightBonus from "./calculateNightBonus.js";
 import calculateTimeMonth from "./calculateTimeMonth.js";
 
-function calculateSalaryMonth(activeMonth) {
-  console.log(["acativeMonth"], activeMonth);
-
+function calculateSalaryMonth(activeMonth, averageSalary) {
   const { rate, vacationPay, hospitalRate, minSalary = "4666" } = activeMonth;
 
   const salary = {
@@ -19,7 +17,6 @@ function calculateSalaryMonth(activeMonth) {
     sumLeaveOnRequestPrice: 0,
     sumHospitalPrice: 0,
   };
-
   const time = calculateTimeMonth(activeMonth);
   const nightBonusHour = calculateNightBonus(time, minSalary);
 
@@ -45,33 +42,40 @@ function calculateSalaryMonth(activeMonth) {
     0.5
   );
 
-  salary.sumBirthdayPrice = sumSalaryHoursType(
-    time.birthdayTime,
-    rate,
-    8,
-    vacationPay / 100
-  );
-
-  salary.sumWorkHolidayPrice = sumSalaryHoursType(
-    time.workHolidayTime,
-    rate,
-    8,
-    vacationPay / 100
-  );
-
-  salary.sumLeaveOnRequestPrice = sumSalaryHoursType(
-    time.leaveOnRequestTime,
-    rate,
-    8,
-    vacationPay / 100
-  );
-
   salary.sumHospitalPrice = sumSalaryHoursType(
     time.hospitalTime,
     rate,
     8,
     hospitalRate / 100
   );
+
+  if (averageSalary) {
+    console.log(["averageSalary"], averageSalary);
+
+    salary.sumBirthdayPrice = sumSalaryHoursType(
+      time.birthdayTime,
+      averageSalary,
+      // rate,
+      8
+      // vacationPay / 100
+    );
+
+    salary.sumWorkHolidayPrice = sumSalaryHoursType(
+      time.workHolidayTime,
+      averageSalary,
+      // rate,
+      8
+      // vacationPay / 100
+    );
+
+    salary.sumLeaveOnRequestPrice = sumSalaryHoursType(
+      time.leaveOnRequestTime,
+      averageSalary,
+      // rate,
+      8
+      // vacationPay / 100
+    );
+  }
 
   function sumSalaryHoursType(
     time,
@@ -85,6 +89,8 @@ function calculateSalaryMonth(activeMonth) {
     const nightBonus = hasNightBonus ? time * nightBonusHour : 0;
     return Number((baseSalary + nightBonus).toFixed(2));
   }
+
+  console.log(salary);
 
   return salary;
 }

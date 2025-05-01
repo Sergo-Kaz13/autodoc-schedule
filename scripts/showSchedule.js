@@ -109,7 +109,7 @@ export function showSchedule(schedule, year, month) {
   monthDays.forEach((day) => fragment.appendChild(day));
 
   document.querySelector(".schedule").append(fragment);
-  showMonthInfo(activeMonth, schedule);
+
   calculateUrlop(schedule);
-  calculateAverageSalary(schedule);
+  showMonthInfo(activeMonth, calculateAverageSalary(schedule));
 }

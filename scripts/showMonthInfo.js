@@ -1,9 +1,8 @@
-import calculateAverageSalary from "./calculateAverageSalary.js";
 import calculateSalaryMonth from "./calculateSalaryMonth.js";
 import renderMonthlyHours from "./renderMonthlyHours.js";
 import renderSalaryMonth from "./renderSalaryMonth.js";
 
-const showMonthInfo = (activeMonth, schedule) => {
+const showMonthInfo = (activeMonth, averageRate) => {
   const {
     rate,
     vacationPay,
@@ -14,7 +13,7 @@ const showMonthInfo = (activeMonth, schedule) => {
   } = activeMonth;
 
   renderMonthlyHours(activeMonth);
-  const sumSalaryMonth = calculateSalaryMonth(activeMonth);
+  const sumSalaryMonth = calculateSalaryMonth(activeMonth, averageRate);
   renderSalaryMonth(sumSalaryMonth);
 
   const salaryMonthBrutto =
@@ -55,8 +54,6 @@ const showMonthInfo = (activeMonth, schedule) => {
       element.textContent = value;
     }
   });
-
-  // calculateAverageSalary(schedule);
 };
 
 export default showMonthInfo;
