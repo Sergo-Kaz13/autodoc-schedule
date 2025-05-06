@@ -110,6 +110,7 @@ export function showSchedule(schedule, year, month) {
 
   document.querySelector(".schedule").append(fragment);
 
+  const averageRate = calculateAverageSalary(schedule, 3);
   calculateUrlop(schedule);
-  showMonthInfo(activeMonth, calculateAverageSalary(schedule));
+  showMonthInfo(activeMonth);
 }

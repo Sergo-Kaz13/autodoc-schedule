@@ -33,7 +33,12 @@ function calculateAverageSalary(schedule, totalMonths = 12) {
     console.log(["averageSalaryMonths"], averageSalaryMonths);
   }
 
-  return calculateSalaryForPeriod(averageSalaryMonths);
+  const averageRate = calculateSalaryForPeriod(averageSalaryMonths);
+
+  schedule[activeYear].months[activeMonth].vacationPay = averageRate;
+
+  console.log(schedule[activeYear].months[activeMonth]);
+  return averageRate;
 }
 
 export default calculateAverageSalary;

@@ -1,6 +1,4 @@
 function renderSalaryMonth(salary) {
-  console.log(["salary"], salary);
-
   const workPrice = document.querySelector(".workPrice");
   const dayTime100Price = document.querySelector(".time100Price");
   const time50Price = document.querySelector(".time50Price");

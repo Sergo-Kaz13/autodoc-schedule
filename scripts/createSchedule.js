@@ -19,7 +19,7 @@ export function createSchedule(year, decemberData = null) {
       rate: decemberData?.rate ?? 31.5,
       tax: decemberData?.tax ?? 27,
       hospitalRate: decemberData?.hospitalRate ?? 63.3,
-      vacationPay: decemberData?.vacationPay ?? 100,
+      vacationPay: decemberData?.vacationPay ?? 31.5,
       minSalary: decemberData?.minSalary ?? 4666,
       premiumPay: 0,
       days: [],
