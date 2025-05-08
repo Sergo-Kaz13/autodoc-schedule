@@ -25,7 +25,11 @@ const showMonthInfo = (activeMonth) => {
   rateHourNight.textContent = nightBonusHour;
   scheduleHoursMonth.textContent = scheduleTime;
 
-  const sumSalaryMonth = calculateSalaryMonth(activeMonth, nightBonusHour);
+  const sumSalaryMonth = calculateSalaryMonth(
+    activeMonth,
+    rate,
+    nightBonusHour
+  );
   renderSalaryMonth(sumSalaryMonth);
 
   const salaryMonthBrutto =

@@ -41,6 +41,14 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+select {
+  margin-left: 10px;
+  border-radius: 5px;
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 #install-modal {
   display: none;
   position: fixed;

@@ -2,8 +2,8 @@
 
 import calculateTimeMonth from "./calculateTimeMonth.js";
 
-function calculateSalaryMonth(activeMonth, nightBonusHour) {
-  const { rate, vacationPay, hospitalRate } = activeMonth;
+function calculateSalaryMonth(activeMonth, rate, nightBonusHour) {
+  const { vacationPay, hospitalRate } = activeMonth;
 
   const salary = {
     sumWorkPrice: 0,

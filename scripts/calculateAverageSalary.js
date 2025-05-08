@@ -7,18 +7,15 @@ function calculateAverageSalary(schedule, totalMonths = 12) {
   let averageSalaryMonths;
 
   if (activeMonth - totalMonths < 0) {
-    const prevAverageSalaryMonths = schedule[activeYear].months.slice(
-      0,
-      activeMonth
-    );
+    averageSalaryMonths = schedule[activeYear].months.slice(0, activeMonth);
 
     if (activeYear - 1 in schedule) {
-      averageSalaryMonths = schedule[activeYear - 1].months.slice(
+      const prevAverageSalaryMonths = schedule[activeYear - 1].months.slice(
         -(totalMonths - prevAverageSalaryMonths.length)
       );
       averageSalaryMonths = [
-        ...averageSalaryMonths,
         ...prevAverageSalaryMonths,
+        ...averageSalaryMonths,
       ];
     } else {
       console.log("Дані для обчислення відсутні!");
