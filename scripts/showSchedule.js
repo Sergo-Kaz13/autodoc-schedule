@@ -1,4 +1,4 @@
-import calculateAverageSalary from "./calculateAverageSalary.js";
+import getMonths from "./getMonths.js";
 import calculateUrlop from "./calculateUrlop.js";
 import { scheduleBlock } from "./data.js";
 import showMonthInfo from "./showMonthInfo.js";
@@ -112,7 +112,9 @@ export function showSchedule(schedule, year, month) {
 
   const periodSalary = (schedule.periodSalary = 3);
 
-  const averageRate = calculateAverageSalary(schedule, periodSalary);
+  const months = getMonths(schedule, periodSalary);
+  console.log(months);
+
   calculateUrlop(schedule);
   showMonthInfo(activeMonth);
 }
