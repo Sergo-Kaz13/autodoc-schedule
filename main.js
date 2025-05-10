@@ -72,18 +72,6 @@ window.addEventListener("DOMContentLoaded", () => {
         // ++++++++++++
         toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
         toggleInputActive(".taxBoard", "taxSpan", "taxInput", schedule);
-        // toggleInputActive(
-        //   ".hospitalBoard",
-        //   "hospitalSpan",
-        //   "hospitalInput",
-        //   schedule
-        // );
-        // toggleInputActive(
-        //   ".holidayBoard",
-        //   "holidaySpan",
-        //   "holidayInput",
-        //   schedule
-        // );
         toggleInputActive(
           ".editHolidayDays",
           "holidayDaysSpan",
@@ -185,23 +173,6 @@ scheduleBlock.addEventListener("click", (e) => {
 
   if (scheduleItem.classList.contains("scheduleItem")) {
     dayIndex = Number(scheduleItem.id);
-    const indexDayWeek = Number(
-      scheduleItem.getAttribute("data-index-day-week")
-    );
-
-    if (indexDayWeek === 6) {
-      const humen = document.createElement("span");
-
-      humen.classList.add("humenAnimation");
-      scheduleItem.classList.add("modalInfo");
-      scheduleItem.appendChild(humen);
-
-      setTimeout(() => {
-        scheduleItem.classList.remove("modalInfo");
-        scheduleItem.removeChild(humen);
-      }, 3000);
-      return;
-    }
 
     const {
       addHours100,

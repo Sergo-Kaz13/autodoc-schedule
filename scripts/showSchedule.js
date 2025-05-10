@@ -63,11 +63,7 @@ export function showSchedule(schedule, year, month) {
       }
 
       if (dayInfo.backshift.status) div.classList.add("backshift");
-      // if (dayInfo.backshift.status)
-      //   backshift.classList.add("backshiftShowBlock");
-      // if (dayInfo.addHours50.status) div.classList.add("addHours50");
       if (dayInfo.addHours50.status) block50.classList.add("blockOverTimeShow");
-      // if (dayInfo.addHours120.status) div.classList.add("addHours120");
       if (dayInfo.addHours120.status)
         block120.classList.add("blockOverTimeShow");
       if (dayInfo.higherPower.status) div.classList.add("higherPower");
@@ -78,8 +74,6 @@ export function showSchedule(schedule, year, month) {
           break;
         case "addHours100":
           div.classList.add("scheduleItem", "scheduleItem100");
-          // div.classList.add("scheduleItem", "scheduleItemWork");
-          // span.classList.add("scheduleItem100");
           block100.classList.add("blockOverTimeShow");
           break;
         case "weekend":
