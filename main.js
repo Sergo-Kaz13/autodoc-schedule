@@ -72,12 +72,12 @@ window.addEventListener("DOMContentLoaded", () => {
         // ++++++++++++
         toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
         toggleInputActive(".taxBoard", "taxSpan", "taxInput", schedule);
-        toggleInputActive(
-          ".hospitalBoard",
-          "hospitalSpan",
-          "hospitalInput",
-          schedule
-        );
+        // toggleInputActive(
+        //   ".hospitalBoard",
+        //   "hospitalSpan",
+        //   "hospitalInput",
+        //   schedule
+        // );
         // toggleInputActive(
         //   ".holidayBoard",
         //   "holidaySpan",

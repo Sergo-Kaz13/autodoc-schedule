@@ -4,15 +4,8 @@ import calculateTimeMonth from "./calculateTimeMonth.js";
 import renderMonthlyHours from "./renderMonthlyHours.js";
 import renderSalaryMonth from "./renderSalaryMonth.js";
 
-const showMonthInfo = (activeMonth) => {
-  const {
-    rate,
-    vacationPay,
-    hospitalRate,
-    tax,
-    premiumPay,
-    minSalary = "4666",
-  } = activeMonth;
+const showMonthInfo = (activeMonth, vacationRate, hospitalRate) => {
+  const { rate, tax, premiumPay, minSalary = "4666" } = activeMonth;
 
   const rateHourNight = document.querySelector(".rateHour");
   const scheduleHoursMonth = document.querySelector(".scheduleHoursMonth");
@@ -27,8 +20,9 @@ const showMonthInfo = (activeMonth) => {
 
   const sumSalaryMonth = calculateSalaryMonth(
     activeMonth,
-    rate,
-    nightBonusHour
+    nightBonusHour,
+    vacationRate,
+    hospitalRate
   );
   renderSalaryMonth(sumSalaryMonth);
 
@@ -58,9 +52,9 @@ const showMonthInfo = (activeMonth) => {
     { selector: ".salaryMonthNetto", value: salaryMonthNetto },
     { selector: ".rateSpan", value: rate },
     { selector: ".taxSpan", value: tax },
-    { selector: ".hospitalSpan", value: hospitalRate },
-    { selector: ".holidaySpan", value: vacationPay },
-    { selector: ".avg-salary-rate3", value: vacationPay },
+    // { selector: ".hospitalSpan", value: hospitalRate },
+    // { selector: ".holidaySpan", value: vacationPay },
+    // { selector: ".avg-salary-rate3", value: vacationPay },
     { selector: ".editPremiumSpan", value: premiumPay },
     { selector: ".minSalarySpan", value: minSalary },
   ];

@@ -2,8 +2,14 @@
 
 import calculateTimeMonth from "./calculateTimeMonth.js";
 
-function calculateSalaryMonth(activeMonth, rate, nightBonusHour) {
-  const { vacationPay, hospitalRate } = activeMonth;
+function calculateSalaryMonth(
+  activeMonth,
+  nightBonusHour,
+  vacationRate = false,
+  hospitalRate = false
+) {
+  // const { vacationPay, hospitalRate } = activeMonth;
+  const { rate } = activeMonth;
 
   const salary = {
     sumWorkPrice: 0,
@@ -35,27 +41,33 @@ function calculateSalaryMonth(activeMonth, rate, nightBonusHour) {
     1,
     0.5
   );
-  salary.sumHospitalPrice = sumSalaryHoursType(
-    time.hospitalTime,
-    rate,
-    8,
-    hospitalRate / 100
-  );
-  salary.sumBirthdayPrice = sumSalaryHoursType(
-    time.birthdayTime,
-    vacationPay,
-    8
-  );
-  salary.sumWorkHolidayPrice = sumSalaryHoursType(
-    time.workHolidayTime,
-    vacationPay,
-    8
-  );
-  salary.sumLeaveOnRequestPrice = sumSalaryHoursType(
-    time.leaveOnRequestTime,
-    vacationPay,
-    8
-  );
+
+  if (hospitalRate) {
+    salary.sumHospitalPrice = sumSalaryHoursType(
+      time.hospitalTime,
+      1,
+      1,
+      hospitalRate
+    );
+  }
+
+  if (vacationRate) {
+    salary.sumBirthdayPrice = sumSalaryHoursType(
+      time.birthdayTime,
+      vacationRate,
+      8
+    );
+    salary.sumWorkHolidayPrice = sumSalaryHoursType(
+      time.workHolidayTime,
+      vacationRate,
+      8
+    );
+    salary.sumLeaveOnRequestPrice = sumSalaryHoursType(
+      time.leaveOnRequestTime,
+      vacationRate,
+      8
+    );
+  }
 
   function sumSalaryHoursType(
     time,

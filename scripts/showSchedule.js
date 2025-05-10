@@ -2,6 +2,7 @@ import getMonths from "./getMonths.js";
 import calculateUrlop from "./calculateUrlop.js";
 import { scheduleBlock } from "./data.js";
 import showMonthInfo from "./showMonthInfo.js";
+import calculateHourlyRate from "./calculateHourlyRate.js";
 
 export function showSchedule(schedule, year, month) {
   year = year !== undefined ? (year = year) : new Date().getFullYear();
@@ -110,11 +111,13 @@ export function showSchedule(schedule, year, month) {
 
   document.querySelector(".schedule").append(fragment);
 
-  const periodSalary = (schedule.periodSalary = 3);
+  const salaryMonths = (schedule.periodSalary = 3);
+  const workedMonths = getMonths(schedule, salaryMonths);
+  const [vacationRate] = calculateHourlyRate(workedMonths);
 
-  const months = getMonths(schedule, periodSalary);
-  console.log(months);
+  const sickPayMonths = getMonths(schedule, 12);
+  const [, hospitalRate] = calculateHourlyRate(sickPayMonths, vacationRate);
 
   calculateUrlop(schedule);
-  showMonthInfo(activeMonth);
+  showMonthInfo(activeMonth, vacationRate, hospitalRate);
 }
