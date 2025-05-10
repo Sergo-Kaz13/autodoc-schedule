@@ -7,17 +7,10 @@ import renderSalaryMonth from "./renderSalaryMonth.js";
 const showMonthInfo = (activeMonth, vacationRate, hospitalRate) => {
   const { rate, tax, premiumPay, minSalary = "4666" } = activeMonth;
 
-  const rateHourNight = document.querySelector(".rateHour");
-  const scheduleHoursMonth = document.querySelector(".scheduleHoursMonth");
-
   renderMonthlyHours(activeMonth);
   const time = calculateTimeMonth(activeMonth);
 
-  const [nightBonusHour, scheduleTime] = calculateNightBonus(time, minSalary);
-
-  rateHourNight.textContent = nightBonusHour;
-  scheduleHoursMonth.textContent = scheduleTime;
-
+  const [nightBonusHour] = calculateNightBonus(time, minSalary);
   const sumSalaryMonth = calculateSalaryMonth(
     activeMonth,
     nightBonusHour,

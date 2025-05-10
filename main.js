@@ -262,240 +262,250 @@ form.addEventListener("submit", formSend);
 async function formSend(e) {
   e.preventDefault();
 
-  const formDate = new FormData(form);
-  const values = Object.fromEntries(formDate.entries());
-  const {
-    statusDay,
-    backshift: backshiftStatus,
-    higherPower: higherPowerForm,
-    addHours100: addHours100Form,
-    addHours50: addHours50Form,
-    addHours120: addHours120Form,
-    time100,
-    time50,
-    time120,
-    higherPowerTime,
-    workDayTime,
-  } = values;
+  showSpinner();
 
-  const yearActive = Number(document.querySelector(".activeYear").textContent);
+  try {
+    const formDate = new FormData(form);
+    const values = Object.fromEntries(formDate.entries());
+    const {
+      statusDay,
+      backshift: backshiftStatus,
+      higherPower: higherPowerForm,
+      addHours100: addHours100Form,
+      addHours50: addHours50Form,
+      addHours120: addHours120Form,
+      time100,
+      time50,
+      time120,
+      higherPowerTime,
+      workDayTime,
+    } = values;
 
-  const {
-    addHours100,
-    addHours120,
-    addHours50,
-    backshift,
-    birthday,
-    higherPower,
-    holiday,
-    hospital,
-    leaveOnRequest,
-    weekend,
-    workDay,
-    workHoliday,
-  } =
-    schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1]
-      .dayInfo;
+    const yearActive = Number(
+      document.querySelector(".activeYear").textContent
+    );
 
-  const { statusDay: statusDayActive } =
-    schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1];
+    const {
+      addHours100,
+      addHours120,
+      addHours50,
+      backshift,
+      birthday,
+      higherPower,
+      holiday,
+      hospital,
+      leaveOnRequest,
+      weekend,
+      workDay,
+      workHoliday,
+    } =
+      schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1]
+        .dayInfo;
 
-  const {
-    birthday: birthdayYear,
-    higherPowerTime: higherPowerTimeYear,
-    leaveOnRequestDays,
-    workHolidayDays,
-  } = schedule[yearActive];
+    const { statusDay: statusDayActive } =
+      schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1];
 
-  const urlopData = calculateUrlop(schedule);
+    const {
+      birthday: birthdayYear,
+      higherPowerTime: higherPowerTimeYear,
+      leaveOnRequestDays,
+      workHolidayDays,
+    } = schedule[yearActive];
 
-  if (statusDay === "birthday") {
-    if (urlopData.birthdayUsed === birthdayYear) {
-      modalUrlopInfo("Вихідний до ДН використаний.");
-      return;
-    }
-  } else if (statusDay === "workHoliday") {
-    if (statusDay === statusDayActive) {
-      listItems.classList.remove("listItemsShow");
-      document.body.style.overflow = "auto";
-      document.body.style.position = "";
-      return;
-    } else if (urlopData.workHolidayUsed >= workHolidayDays) {
-      if (statusDayActive !== "leaveOnRequest") {
-        modalUrlopInfo("Основна відпустка використана.");
+    const urlopData = calculateUrlop(schedule);
+
+    if (statusDay === "birthday") {
+      if (urlopData.birthdayUsed === birthdayYear) {
+        modalUrlopInfo("Вихідний до ДН використаний.");
+        return;
+      }
+    } else if (statusDay === "workHoliday") {
+      if (statusDay === statusDayActive) {
+        listItems.classList.remove("listItemsShow");
+        document.body.style.overflow = "auto";
+        document.body.style.position = "";
+        return;
+      } else if (urlopData.workHolidayUsed >= workHolidayDays) {
+        if (statusDayActive !== "leaveOnRequest") {
+          modalUrlopInfo("Основна відпустка використана.");
+          return;
+        }
+      }
+    } else if (statusDay === "leaveOnRequest") {
+      if (statusDay === statusDayActive) {
+        listItems.classList.remove("listItemsShow");
+        document.body.style.overflow = "auto";
+        document.body.style.position = "";
+        return;
+      } else if (urlopData.leaveOnRequestUsed === leaveOnRequestDays) {
+        modalUrlopInfo("Відпустка на вимогу використана.");
+        return;
+      } else if (
+        urlopData.vacationBalance <= 0 &&
+        statusDayActive !== "workHoliday"
+      ) {
+        modalUrlopInfo(
+          "Відпустка на вимогу не може бути використана, так як не залишилося основної відпустки."
+        );
+        return;
+      }
+    } else if (higherPowerForm) {
+      if (
+        urlopData.higherPowerUsed + Number(higherPowerTime) >
+        higherPowerTimeYear
+      ) {
+        modalUrlopInfo(
+          `Вища сила, залишилося ${
+            higherPowerTimeYear - urlopData.higherPowerUsed
+          } год.`
+        );
         return;
       }
     }
-  } else if (statusDay === "leaveOnRequest") {
-    if (statusDay === statusDayActive) {
-      listItems.classList.remove("listItemsShow");
-      document.body.style.overflow = "auto";
-      document.body.style.position = "";
-      return;
-    } else if (urlopData.leaveOnRequestUsed === leaveOnRequestDays) {
-      modalUrlopInfo("Відпустка на вимогу використана.");
-      return;
-    } else if (
-      urlopData.vacationBalance <= 0 &&
-      statusDayActive !== "workHoliday"
-    ) {
-      modalUrlopInfo(
-        "Відпустка на вимогу не може бути використана, так як не залишилося основної відпустки."
-      );
-      return;
+
+    //============= START ===============
+
+    if (statusDay === "workDay") {
+      workDay.status = true;
+      workDay.time = Number(workDayTime);
+      schedule[yearActive].months[Number(monthItem.id)].days[
+        dayIndex - 1
+      ].statusDay = statusDay;
+    } else {
+      workDay.status = false;
+      workDay.time = 0;
     }
-  } else if (higherPowerForm) {
+
+    if (statusDay === "addHours100") {
+      addHours100.status = true;
+      addHours100.time = Number(time100);
+      schedule[yearActive].months[Number(monthItem.id)].days[
+        dayIndex - 1
+      ].statusDay = statusDay;
+    } else {
+      addHours100.status = false;
+      addHours100.time = 0;
+    }
+
+    if (statusDay === "workHoliday") {
+      workHoliday.status = true;
+      workHoliday.day = 1;
+      schedule[yearActive].months[Number(monthItem.id)].days[
+        dayIndex - 1
+      ].statusDay = statusDay;
+    } else {
+      workHoliday.status = false;
+      workHoliday.day = 0;
+    }
+
+    if (statusDay === "leaveOnRequest") {
+      leaveOnRequest.status = true;
+      leaveOnRequest.day = 1;
+      schedule[yearActive].months[Number(monthItem.id)].days[
+        dayIndex - 1
+      ].statusDay = statusDay;
+    } else {
+      leaveOnRequest.status = false;
+      leaveOnRequest.day = 0;
+    }
+
+    if (statusDay === "birthday") {
+      birthday.status = true;
+      birthday.day = 1;
+      schedule[yearActive].months[Number(monthItem.id)].days[
+        dayIndex - 1
+      ].statusDay = statusDay;
+    } else {
+      birthday.status = false;
+      birthday.day = 0;
+    }
+
+    if (statusDay === "hospital") {
+      hospital.status = true;
+      hospital.day = 1;
+      schedule[yearActive].months[Number(monthItem.id)].days[
+        dayIndex - 1
+      ].statusDay = statusDay;
+    } else {
+      hospital.status = false;
+      hospital.day = 0;
+    }
+
+    if (statusDay === "weekend") {
+      weekend.status = true;
+      schedule[yearActive].months[Number(monthItem.id)].days[
+        dayIndex - 1
+      ].statusDay = statusDay;
+    } else {
+      weekend.status = false;
+    }
+
+    if (statusDay === "holiday") {
+      holiday.status = true;
+      schedule[yearActive].months[Number(monthItem.id)].days[
+        dayIndex - 1
+      ].statusDay = statusDay;
+    } else {
+      holiday.status = false;
+    }
+
+    backshiftStatus ? (backshift.status = true) : (backshift.status = false);
+
     if (
-      urlopData.higherPowerUsed + Number(higherPowerTime) >
-      higherPowerTimeYear
+      addHours50Form &&
+      (statusDay === "workDay" || statusDay === "addHours100")
     ) {
-      modalUrlopInfo(
-        `Вища сила, залишилося ${
-          higherPowerTimeYear - urlopData.higherPowerUsed
-        } год.`
-      );
-      return;
+      addHours50.status = true;
+      addHours50.time = Number(time50);
+    } else {
+      addHours50.status = false;
+      addHours50.time = 0;
     }
+
+    if (
+      addHours120Form &&
+      (statusDay === "workDay" || statusDay === "addHours100")
+    ) {
+      addHours120.status = true;
+      addHours120.time = Number(time120);
+    } else {
+      addHours120.status = false;
+      addHours120.time = 0;
+    }
+
+    if (higherPowerForm && statusDay === "workDay") {
+      higherPower.status = true;
+      higherPower.time = Number(higherPowerTime);
+      workDay.time = workDay.time - Number(higherPowerTime);
+      if (workDay.time === 0) workDay.status = false;
+    } else {
+      higherPower.status = false;
+      higherPower.time = 0;
+    }
+
+    // ============= END ================
+
+    listItems.classList.remove("listItemsShow");
+    document.body.style.overflow = "auto";
+    document.body.style.position = "";
+
+    const request = indexedDB.open("AutodocSchedule", 1);
+
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+      changeDataSchedule(db, schedule);
+    };
+
+    scheduleBlock.innerHTML = "";
+    showSchedule(schedule, yearActive, Number(monthItem.id));
+
+    document.body.style.overflow = "auto";
+    document.body.style.position = "";
+  } catch (error) {
+    console.error(error);
+  } finally {
+    hideSpinner();
   }
-
-  //============= START ===============
-
-  if (statusDay === "workDay") {
-    workDay.status = true;
-    workDay.time = Number(workDayTime);
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    workDay.status = false;
-    workDay.time = 0;
-  }
-
-  if (statusDay === "addHours100") {
-    addHours100.status = true;
-    addHours100.time = Number(time100);
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    addHours100.status = false;
-    addHours100.time = 0;
-  }
-
-  if (statusDay === "workHoliday") {
-    workHoliday.status = true;
-    workHoliday.day = 1;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    workHoliday.status = false;
-    workHoliday.day = 0;
-  }
-
-  if (statusDay === "leaveOnRequest") {
-    leaveOnRequest.status = true;
-    leaveOnRequest.day = 1;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    leaveOnRequest.status = false;
-    leaveOnRequest.day = 0;
-  }
-
-  if (statusDay === "birthday") {
-    birthday.status = true;
-    birthday.day = 1;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    birthday.status = false;
-    birthday.day = 0;
-  }
-
-  if (statusDay === "hospital") {
-    hospital.status = true;
-    hospital.day = 1;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    hospital.status = false;
-    hospital.day = 0;
-  }
-
-  if (statusDay === "weekend") {
-    weekend.status = true;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    weekend.status = false;
-  }
-
-  if (statusDay === "holiday") {
-    holiday.status = true;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    holiday.status = false;
-  }
-
-  backshiftStatus ? (backshift.status = true) : (backshift.status = false);
-
-  if (
-    addHours50Form &&
-    (statusDay === "workDay" || statusDay === "addHours100")
-  ) {
-    addHours50.status = true;
-    addHours50.time = Number(time50);
-  } else {
-    addHours50.status = false;
-    addHours50.time = 0;
-  }
-
-  if (
-    addHours120Form &&
-    (statusDay === "workDay" || statusDay === "addHours100")
-  ) {
-    addHours120.status = true;
-    addHours120.time = Number(time120);
-  } else {
-    addHours120.status = false;
-    addHours120.time = 0;
-  }
-
-  if (higherPowerForm && statusDay === "workDay") {
-    higherPower.status = true;
-    higherPower.time = Number(higherPowerTime);
-    workDay.time = workDay.time - Number(higherPowerTime);
-    if (workDay.time === 0) workDay.status = false;
-  } else {
-    higherPower.status = false;
-    higherPower.time = 0;
-  }
-
-  // ============= END ================
-
-  listItems.classList.remove("listItemsShow");
-  document.body.style.overflow = "auto";
-  document.body.style.position = "";
-
-  const request = indexedDB.open("AutodocSchedule", 1);
-
-  request.onsuccess = function (event) {
-    const db = event.target.result;
-    changeDataSchedule(db, schedule);
-  };
-
-  scheduleBlock.innerHTML = "";
-  showSchedule(schedule, yearActive, Number(monthItem.id));
-
-  document.body.style.overflow = "auto";
-  document.body.style.position = "";
 
   form.reset();
 }
