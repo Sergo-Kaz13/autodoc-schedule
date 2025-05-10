@@ -8,7 +8,6 @@ import createDayInfo from "./scripts/createDayInfo.js";
 import toggleInputActive from "./scripts/toggleInputActive.js";
 import calculateUrlop from "./scripts/calculateUrlop.js";
 import modalUrlopInfo from "./scripts/modalUrlopInfo.js";
-import getSchedule from "./scripts/getSchedule.js";
 import checkDataWithGetAll from "./scripts/checkDataWithGetAll.js";
 import changeDataSchedule from "./scripts/changeDataSchedule.js";
 import getDecemberData from "./scripts/getDecemberData.js";
@@ -30,6 +29,9 @@ const listItems = document.querySelector(".listItemsBlock");
 const dayInfoTable = document.querySelector(".dayInfoTable");
 const modalWindow = document.querySelector(".listItemsBlock");
 const scrollModal = document.querySelector(".listItemsEvents");
+const periodMonths = document.querySelector("#periodMonths");
+
+console.log(["periodMonths"], periodMonths);
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -497,6 +499,22 @@ async function formSend(e) {
 
   form.reset();
 }
+
+periodMonths.addEventListener("change", (e) => {
+  const value = e.target.value;
+  schedule.periodSalary = Number(value);
+
+  console.log(["schedule"], schedule);
+
+  scheduleBlock.innerHTML = "";
+  const request = indexedDB.open("AutodocSchedule", 1);
+  request.onsuccess = function (event) {
+    const db = event.target.result;
+    changeDataSchedule(db, schedule);
+  };
+
+  showSchedule(schedule);
+});
 
 // acordion start
 // function toggleAccordion(header) {

@@ -1,7 +1,7 @@
 import calculateUrlop from "./calculateUrlop.js";
 import editDataField from "./editDataField.js";
 import modifyCalendarData from "./modifyCalendarData.js";
-import showMonthInfo from "./showMonthInfo.js";
+import { showSchedule } from "./showSchedule.js";
 import showWarningModal from "./showWarningModal.js";
 
 const toggleInputActive = (
@@ -67,12 +67,7 @@ const toggleInputActive = (
 
         modifyCalendarData(input.value, inputText, schedule);
         editDataField(board, ratePrice, schedule);
-
-        const activeYear = document.querySelector(".activeYear").textContent;
-        const activeMonthId = document.querySelector(".monthItem").id;
-        const activeMonth = schedule[activeYear].months[activeMonthId];
-
-        showMonthInfo(activeMonth);
+        showSchedule(schedule);
 
         board === ".editHolidayDays" ? calculateUrlop(schedule) : "";
       }
@@ -102,12 +97,7 @@ const toggleInputActive = (
 
       modifyCalendarData(input.value, inputText, schedule);
       editDataField(board, ratePrice, schedule);
-
-      const activeYear = document.querySelector(".activeYear").textContent;
-      const activeMonthId = document.querySelector(".monthItem").id;
-      const activeMonth = schedule[activeYear].months[activeMonthId];
-
-      showMonthInfo(activeMonth);
+      showSchedule(schedule);
 
       board === ".editHolidayDays" ? calculateUrlop(schedule) : "";
     });

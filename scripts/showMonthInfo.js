@@ -52,9 +52,6 @@ const showMonthInfo = (activeMonth, vacationRate, hospitalRate) => {
     { selector: ".salaryMonthNetto", value: salaryMonthNetto },
     { selector: ".rateSpan", value: rate },
     { selector: ".taxSpan", value: tax },
-    // { selector: ".hospitalSpan", value: hospitalRate },
-    // { selector: ".holidaySpan", value: vacationPay },
-    // { selector: ".avg-salary-rate3", value: vacationPay },
     { selector: ".editPremiumSpan", value: premiumPay },
     { selector: ".minSalarySpan", value: minSalary },
   ];
@@ -62,7 +59,11 @@ const showMonthInfo = (activeMonth, vacationRate, hospitalRate) => {
   fields.forEach(({ selector, value }) => {
     const element = document.querySelector(selector);
     if (element) {
-      element.textContent = value;
+      if (selector === ".salaryMonthNetto") {
+        element.textContent = "≈ " + value;
+      } else {
+        element.textContent = value;
+      }
     }
   });
 };
