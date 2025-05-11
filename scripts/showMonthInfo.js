@@ -1,11 +1,29 @@
+import calculateHourlyRate from "./calculateHourlyRate.js";
 import calculateNightBonus from "./calculateNightBonus.js";
 import calculateSalaryMonth from "./calculateSalaryMonth.js";
 import calculateTimeMonth from "./calculateTimeMonth.js";
+import getMonths from "./getMonths.js";
 import renderMonthlyHours from "./renderMonthlyHours.js";
 import renderSalaryMonth from "./renderSalaryMonth.js";
 
-const showMonthInfo = (activeMonth, vacationRate, hospitalRate) => {
+const showMonthInfo = (schedule) => {
+  const periodMonths = document.querySelector("#periodMonths");
+  const activeYearItem = Number(
+    document.querySelector(".activeYear").textContent
+  );
+  const monthIndex = Number(document.querySelector(".monthItem").id);
+  const activeMonth = schedule[activeYearItem].months[monthIndex];
+
   const { rate, tax, premiumPay, minSalary = "4666" } = activeMonth;
+
+  const salaryMonths = schedule.periodSalary ?? 3;
+  periodMonths.value = salaryMonths;
+
+  const workedMonths = getMonths(schedule, salaryMonths);
+  const [vacationRate] = calculateHourlyRate(workedMonths);
+
+  const sickPayMonths = getMonths(schedule, 12);
+  const [, hospitalRate] = calculateHourlyRate(sickPayMonths, vacationRate);
 
   renderMonthlyHours(activeMonth);
   const time = calculateTimeMonth(activeMonth);

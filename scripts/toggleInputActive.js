@@ -1,8 +1,8 @@
 import calculateUrlop from "./calculateUrlop.js";
 import editDataField from "./editDataField.js";
 import modifyCalendarData from "./modifyCalendarData.js";
-import { showSchedule } from "./showSchedule.js";
 import showWarningModal from "./showWarningModal.js";
+import showMonthInfo from "./showMonthInfo.js";
 
 const toggleInputActive = (
   board = "",
@@ -67,7 +67,7 @@ const toggleInputActive = (
 
         modifyCalendarData(input.value, inputText, schedule);
         editDataField(board, ratePrice, schedule);
-        showSchedule(schedule);
+        showMonthInfo(schedule);
 
         board === ".editHolidayDays" ? calculateUrlop(schedule) : "";
       }
@@ -97,7 +97,7 @@ const toggleInputActive = (
 
       modifyCalendarData(input.value, inputText, schedule);
       editDataField(board, ratePrice, schedule);
-      showSchedule(schedule);
+      showMonthInfo(schedule);
 
       board === ".editHolidayDays" ? calculateUrlop(schedule) : "";
     });
