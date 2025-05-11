@@ -15,14 +15,11 @@ function getMonths(schedule, totalMonths) {
     } else {
       console.log("Дані для обчислення відсутні!");
     }
-
-    console.log(["averageSalaryMonths"], months);
   } else {
     months = schedule[activeYear]?.months.slice(
       activeMonth - totalMonths,
       activeMonth
     );
-    console.log(["averageSalaryMonths"], months);
   }
 
   return months;

@@ -1,6 +1,4 @@
 function changeDataSchedule(db, schedule) {
-  console.log(["schedule"], schedule);
-
   const transaction = db.transaction("schedule", "readwrite");
   const store = transaction.objectStore("schedule");
 

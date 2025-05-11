@@ -1,6 +1,4 @@
 function modifyCalendarData(data, el, schedule) {
-  console.log(["el"], el);
-
   let elData = "";
 
   switch (el) {

@@ -32,8 +32,6 @@ const modalWindow = document.querySelector(".listItemsBlock");
 const scrollModal = document.querySelector(".listItemsEvents");
 const periodMonths = document.querySelector("#periodMonths");
 
-console.log(["periodMonths"], periodMonths);
-
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
 monthItem.id = currentMonth;
@@ -55,7 +53,6 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("База даних відкрита:", db);
     checkDataWithGetAll(db)
       .then((result) => {
-        console.log(result);
         if (Object.keys(result).length !== 0) {
           schedule = result;
           showSchedule(schedule);
@@ -505,26 +502,14 @@ periodMonths.addEventListener("change", (e) => {
   const value = e.target.value;
   schedule.periodSalary = Number(value);
 
-  console.log(["schedule"], schedule);
-
-  // scheduleBlock.innerHTML = "";
   const request = indexedDB.open("AutodocSchedule", 1);
   request.onsuccess = function (event) {
     const db = event.target.result;
     changeDataSchedule(db, schedule);
   };
 
-  // showSchedule(schedule);
   showMonthInfo(schedule);
 });
-
-// acordion start
-// function toggleAccordion(header) {
-//   const accordion = header.parentElement;
-//   accordion.classList.toggle("open");
-// }
-
-// acordion end
 
 // modal install
 let deferredPrompt;
