@@ -567,7 +567,7 @@ select {
 }
 
 .currentDate .blockData {
-  color: #fff;
+  color: #ccff00;
   animation: pulse 2s infinite;
 }
 
