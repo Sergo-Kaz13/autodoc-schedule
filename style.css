@@ -272,11 +272,14 @@ select {
   text-align: center;
 }
 
-.backshift {
-  border: 3px dashed rgba(0, 0, 0, 0.4);
-  border: 2px solid rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 1);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+.backshift.scheduleItem {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: #ecf0f1;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.backshift .blockData {
+  color: #ecf0f1;
 }
 
 .higherPower {

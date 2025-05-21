@@ -12,6 +12,7 @@ import checkDataWithGetAll from "./scripts/checkDataWithGetAll.js";
 import changeDataSchedule from "./scripts/changeDataSchedule.js";
 import getDecemberData from "./scripts/getDecemberData.js";
 import showMonthInfo from "./scripts/showMonthInfo.js";
+import setTodayDate from "./scripts/setTodayDate.js";
 
 const { form } = document.forms;
 
@@ -172,6 +173,9 @@ scheduleBlock.addEventListener("click", (e) => {
   if (scheduleItem.classList.contains("scheduleItem")) {
     dayIndex = Number(scheduleItem.id);
 
+    const today =
+      schedule[Number(document.querySelector(".activeYear").textContent)]
+        .months[Number(monthItem.id)].days[dayIndex - 1].dayInfo;
     const {
       addHours100,
       addHours120,
@@ -185,9 +189,7 @@ scheduleBlock.addEventListener("click", (e) => {
       weekend,
       workDay,
       workHoliday,
-    } =
-      schedule[Number(document.querySelector(".activeYear").textContent)]
-        .months[Number(monthItem.id)].days[dayIndex - 1].dayInfo;
+    } = today;
 
     const { rate, vacationPay, hospitalRate } =
       schedule[Number(document.querySelector(".activeYear").textContent)]
@@ -235,6 +237,8 @@ scheduleBlock.addEventListener("click", (e) => {
     document.body.style.overflow = "hidden";
     document.body.style.position = "fixed";
     scrollModal.scrollTop = 0;
+
+    setTodayDate(today);
   }
 });
 
