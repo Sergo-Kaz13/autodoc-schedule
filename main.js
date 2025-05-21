@@ -16,10 +16,8 @@ import showMonthInfo from "./scripts/showMonthInfo.js";
 const { form } = document.forms;
 
 let schedule = null;
-
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth();
-
 let dayIndex = null;
 
 const activeYear = document.querySelector(".activeYear");
