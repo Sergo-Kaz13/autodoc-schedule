@@ -5,16 +5,8 @@ function setTodayDate(today) {
   const elements = form.elements;
 
   Array.from(elements).forEach((el) => {
-    // console.log(["el.id"], el.id);
-    console.log(["el.id"], el.id);
-
     for (const key in today) {
-      console.log(["key"], key);
-
-      // console.log(el.id === key);
-
       if (el.id === key) {
-        console.log(today[key].status);
         if (today[key].status) {
           el.checked = true;
 
@@ -33,11 +25,6 @@ function setTodayDate(today) {
       }
     }
   });
-
-  console.log(["form"], form);
-  console.log(["elements"], elements);
-
-  console.log("message");
 }
 
 export default setTodayDate;

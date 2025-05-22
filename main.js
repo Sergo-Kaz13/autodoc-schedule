@@ -471,7 +471,8 @@ async function formSend(e) {
   if (higherPowerForm && statusDay === "workDay") {
     higherPower.status = true;
     higherPower.time = Number(higherPowerTime);
-    workDay.time = workDay.time - Number(higherPowerTime);
+    // workDay.time = workDay.time - Number(higherPowerTime);
+    workDay.time = 8 - Number(higherPowerTime);
     if (workDay.time === 0) workDay.status = false;
   } else {
     higherPower.status = false;
