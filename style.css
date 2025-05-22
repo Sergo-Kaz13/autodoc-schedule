@@ -153,6 +153,7 @@ select {
 .block120 {
   display: none;
   width: 100%;
+  border-radius: 3px;
   font-size: 10px;
   font-weight: 600;
   text-align: center;
@@ -161,11 +162,11 @@ select {
 }
 
 .block50 {
-  background-color: #66bb6a;
+  background-color: #f472b6;
 }
 
 .block100 {
-  background-color: #fff176;
+  background-color: #f97316;
 }
 
 .block120 {
@@ -207,9 +208,9 @@ select {
 .scheduleItemDayOff::after {
   content: "wolne";
   text-align: center;
-  font-size: 8px;
+  font-size: 9px;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .scheduleItemHoliday {
@@ -220,24 +221,30 @@ select {
 .scheduleItemHoliday::after {
   content: "święto";
   text-align: center;
-  font-size: 8px;
-  font-weight: 500;
+  font-size: 9px;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
+.backshift.scheduleItemWorkHoliday .blockData,
+.backshift.scheduleItemWorkHoliday,
 .scheduleItemWorkHoliday {
+  color: #333;
   background: rgb(59, 130, 246);
 }
 
 .scheduleItemWorkHoliday::after {
   content: "urlop";
   text-align: center;
-  font-size: 8px;
+  font-size: 9px;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
 }
 
+.backshift.scheduleItemLeaveOnRequest .blockData,
+.backshift.scheduleItemLeaveOnRequest,
 .scheduleItemLeaveOnRequest {
+  color: #333;
   background: rgb(80, 185, 235);
 }
 
@@ -247,9 +254,12 @@ select {
   font-size: 8px;
   line-height: 1.1;
   text-transform: uppercase;
+  font-weight: 600;
   padding: 0 3px;
 }
 
+.backshift.scheduleItemL4 .blockData,
+.backshift.scheduleItemL4,
 .scheduleItemL4 {
   color: #333;
   background: rgb(153, 153, 255);
@@ -260,11 +270,12 @@ select {
   text-align: center;
   font-size: 11px;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
 }
 
+.backshift.scheduleItemBirthday,
 .scheduleItemBirthday {
-  background-color: rgb(220, 120, 140);
+  background: rgb(220, 120, 140);
 }
 
 .scheduleItemBirthday::after {
@@ -272,7 +283,12 @@ select {
   text-align: center;
 }
 
-.backshift.scheduleItem {
+/* .backshift.scheduleItem {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: #ecf0f1;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+} */
+.backshift {
   background: linear-gradient(135deg, #2c3e50, #34495e);
   color: #ecf0f1;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
@@ -285,17 +301,22 @@ select {
 .higherPower {
   display: flex;
   flex-direction: column;
-  background-color: #9575cd;
+  /* background-color: #9575cd; */
   color: #333;
 }
 
 .higherPower::after {
   content: "siła wyższa";
+  content: "sw";
   text-align: center;
   text-transform: uppercase;
-  font-size: 8px;
+  font-size: 10px;
   line-height: 1.2;
-  padding-bottom: 2px;
+  font-weight: 600;
+  padding: 2px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: #c084fc;
 }
 
 .statisticsBoard {
