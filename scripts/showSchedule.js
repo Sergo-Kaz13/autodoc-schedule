@@ -6,8 +6,13 @@ export function showSchedule(schedule, year, month) {
   year = year !== undefined ? (year = year) : new Date().getFullYear();
   month = month !== undefined ? (month = month) : new Date().getMonth();
 
+  const switchShift = document.querySelector("#shiftOptions");
+
   const currentYear = schedule[year];
   const activeMonth = currentYear.months[month];
+  const switchShiftValue = activeMonth?.shift || "green";
+
+  switchShift.value = switchShiftValue;
 
   const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();

@@ -13,6 +13,7 @@ import changeDataSchedule from "./scripts/changeDataSchedule.js";
 import getDecemberData from "./scripts/getDecemberData.js";
 import showMonthInfo from "./scripts/showMonthInfo.js";
 import setTodayDate from "./scripts/setTodayDate.js";
+import switchGreenToOrange from "./scripts/switchGreenToOrange.js";
 
 const { form } = document.forms;
 
@@ -30,6 +31,7 @@ const dayInfoTable = document.querySelector(".dayInfoTable");
 const modalWindow = document.querySelector(".listItemsBlock");
 const scrollModal = document.querySelector(".listItemsEvents");
 const periodMonths = document.querySelector("#periodMonths");
+const switchShift = document.querySelector("#shiftOptions");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -54,16 +56,19 @@ window.addEventListener("DOMContentLoaded", () => {
       .then((result) => {
         if (Object.keys(result).length !== 0) {
           schedule = result;
+          switchGreenToOrange(schedule);
           showSchedule(schedule);
         } else {
           schedule = JSON.parse(localStorage.getItem("schedule")) || {};
           if (Object.keys(schedule).length !== 0) {
             changeDataSchedule(db, schedule);
+            switchGreenToOrange(schedule);
             showSchedule(schedule);
           } else {
             const year = new Date().getFullYear();
             schedule[year] = createSchedule(year);
             changeDataSchedule(db, schedule);
+            switchGreenToOrange(schedule);
             showSchedule(schedule);
           }
         }
@@ -114,6 +119,13 @@ btnMinMonth.addEventListener("click", () => {
     if (!(newActiveYear in schedule)) {
       const newYear = createSchedule(newActiveYear);
       schedule[newActiveYear] = newYear;
+      switchGreenToOrange(
+        schedule,
+        newActiveYear,
+        undefined,
+        true,
+        "decrement"
+      );
     }
   }
   monthItem.textContent = months[currentMonth];
@@ -148,6 +160,13 @@ btnPlusMont.addEventListener("click", () => {
 
       const newYear = createSchedule(newActiveYear, decemberDate);
       schedule[newActiveYear] = newYear;
+      switchGreenToOrange(
+        schedule,
+        newActiveYear,
+        undefined,
+        true,
+        "increment"
+      );
     }
   }
   monthItem.textContent = months[currentMonth];
@@ -512,6 +531,24 @@ periodMonths.addEventListener("change", (e) => {
   };
 
   showMonthInfo(schedule);
+});
+
+switchShift.addEventListener("change", (e) => {
+  const value = e.target.value;
+  const activeYear = Number(document.querySelector(".activeYear").textContent);
+
+  schedule[activeYear].shift = value;
+  schedule[activeYear].months[Number(monthItem.id)].shift = value;
+  switchGreenToOrange(schedule, activeYear, Number(monthItem.id), true);
+
+  const request = indexedDB.open("AutodocSchedule", 1);
+  request.onsuccess = function (event) {
+    const db = event.target.result;
+    changeDataSchedule(db, schedule);
+  };
+
+  scheduleBlock.innerHTML = "";
+  showSchedule(schedule, activeYear, Number(monthItem.id));
 });
 
 // modal install

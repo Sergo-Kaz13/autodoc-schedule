@@ -162,15 +162,15 @@ select {
 }
 
 .block50 {
-  background-color: #f472b6;
+  background: #f472b6;
 }
 
 .block100 {
-  background-color: #f97316;
+  background: #f97316;
 }
 
 .block120 {
-  background-color: #e53935;
+  background: #e53935;
 }
 
 .blockOverTimeShow {
@@ -191,17 +191,19 @@ select {
 }
 
 .scheduleItemWork {
-  background-color: #43a047;
+  background: #43a047;
   color: #333;
 }
 
 .scheduleItem100 {
   text-align: center;
-  background-color: #43a047;
+  background: #43a047;
 }
 
+.backshift.scheduleItemDayOff .blockData,
+.backshift.scheduleItemDayOff,
 .scheduleItemDayOff {
-  background-color: #ef5350;
+  background: #ef5350;
   color: #333;
 }
 
@@ -213,6 +215,8 @@ select {
   font-weight: 600;
 }
 
+.backshift.scheduleItemHoliday .blockData,
+.backshift.scheduleItemHoliday,
 .scheduleItemHoliday {
   background: rgb(249, 115, 22);
   color: #333;
@@ -277,17 +281,15 @@ select {
 .scheduleItemBirthday {
   background: rgb(220, 120, 140);
 }
+.scheduleItemBirthday .blockData {
+  color: #ecf0f1;
+}
 
 .scheduleItemBirthday::after {
   content: "🎂";
   text-align: center;
 }
 
-/* .backshift.scheduleItem {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
-  color: #ecf0f1;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-} */
 .backshift {
   background: linear-gradient(135deg, #2c3e50, #34495e);
   color: #ecf0f1;
@@ -1002,4 +1004,28 @@ select {
   justify-content: space-between;
   padding: 4px 0;
   font-size: 14px;
+}
+
+.shift {
+  display: flex;
+  justify-content: center;
+  margin-left: 0;
+}
+
+#shiftOptions {
+  padding: 4px 30px;
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #ede9fe;
+  color: #6b21a8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  appearance: none; /* прибирає дефолтну стрілку */
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23111827' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
