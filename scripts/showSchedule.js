@@ -22,6 +22,22 @@ export function showSchedule(schedule, year, month) {
   let time50 = 0;
   let time120 = 0;
 
+  let daysInPreviousMonth = new Date(year, month, 0).getDate();
+
+  const fakeFragment = document.createDocumentFragment();
+  const numberDay = activeMonth.days[activeMonth.days.length - 1].numberDay;
+
+  if (numberDay < 6) {
+    let day = 1;
+    for (let j = numberDay; j < 6; j++) {
+      const fakeDay = document.createElement("div");
+      fakeDay.classList.add("fakeDay");
+      fakeDay.textContent = day;
+      fakeFragment.append(fakeDay);
+      day = day + 1;
+    }
+  }
+
   const monthDays = activeMonth.days.map(
     ({ numberDay, statusDay, dayInfo }, i) => {
       workTime += dayInfo.workDay.time;
@@ -32,7 +48,10 @@ export function showSchedule(schedule, year, month) {
       if (i === 0) {
         for (let j = 0; j < numberDay; j++) {
           const fakeDay = document.createElement("div");
-          scheduleBlock.append(fakeDay);
+          fakeDay.classList.add("fakeDay");
+          fakeDay.textContent = daysInPreviousMonth;
+          scheduleBlock.prepend(fakeDay);
+          daysInPreviousMonth = daysInPreviousMonth - 1;
         }
       }
 
@@ -106,7 +125,7 @@ export function showSchedule(schedule, year, month) {
   const fragment = document.createDocumentFragment();
   monthDays.forEach((day) => fragment.appendChild(day));
 
-  document.querySelector(".schedule").append(fragment);
+  document.querySelector(".schedule").append(fragment, fakeFragment);
 
   calculateUrlop(schedule);
   showMonthInfo(schedule);

@@ -111,6 +111,26 @@ select {
   margin-bottom: 40px;
 }
 
+.fakeDay {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
 .scheduleItem {
   position: relative;
   display: -webkit-box;
@@ -121,7 +141,6 @@ select {
   -ms-flex-pack: center;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
   overflow: hidden;
   min-height: 50px;
   -webkit-transition: all ease-in-out 0.28s;
@@ -1015,7 +1034,7 @@ select {
 #shiftOptions {
   padding: 4px 30px;
   margin: 0 0 15px 0;
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 8px;
   border: 1px solid #d1d5db;
   background-color: #ede9fe;
