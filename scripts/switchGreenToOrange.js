@@ -8,8 +8,6 @@ function switchGreenToOrange(
   shouldUpdate = false,
   mode
 ) {
-  console.log("updateShift");
-
   year = year !== undefined ? (year = year) : new Date().getFullYear();
   month = month !== undefined ? (month = month) : new Date().getMonth();
 

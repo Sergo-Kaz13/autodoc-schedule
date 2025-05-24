@@ -17,6 +17,9 @@ function modifyCalendarData(data, el, schedule) {
     case "minSalaryInput":
       elData = "minSalary";
       break;
+    case "editActualSalaryInput":
+      elData = "actualSalary";
+      break;
     default:
       elData = "";
       return;

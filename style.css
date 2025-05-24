@@ -528,7 +528,8 @@ select {
 .rateTable .hospitalBoard,
 .rateTable .holidayBoard,
 .editHolidayDays,
-.editPremium {
+.editPremium,
+.editActualSalary {
   position: relative;
   padding: 0;
   text-align: center;
@@ -545,7 +546,8 @@ select {
 .holidayInput,
 .holidayDaysInput,
 .editPremiumInput,
-.minSalaryInput {
+.minSalaryInput,
+.editActualSalaryInput {
   display: inline-block;
   position: relative;
   -webkit-box-sizing: border-box;
@@ -1047,4 +1049,16 @@ select {
   background-size: 12px;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.actualSalary {
+  display: none;
+}
+
+.activeActualSalary {
+  display: block;
+}
+
+.showActualSalary {
+  margin-top: 10px;
 }

@@ -32,6 +32,7 @@ const modalWindow = document.querySelector(".listItemsBlock");
 const scrollModal = document.querySelector(".listItemsEvents");
 const periodMonths = document.querySelector("#periodMonths");
 const switchShift = document.querySelector("#shiftOptions");
+const actualSalaryChecken = document.querySelector("#actualSalary");
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -92,6 +93,12 @@ window.addEventListener("DOMContentLoaded", () => {
           ".minSalaryBlock",
           "minSalarySpan",
           "minSalaryInput",
+          schedule
+        );
+        toggleInputActive(
+          ".editActualSalary",
+          "editActualSalarySpan",
+          "editActualSalaryInput",
           schedule
         );
         // +++++++++++++
@@ -549,6 +556,23 @@ switchShift.addEventListener("change", (e) => {
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, activeYear, Number(monthItem.id));
+});
+
+actualSalaryChecken.addEventListener("change", (e) => {
+  console.log(e.target.checked);
+  if (e.target.checked) {
+    schedule.showActualSalary = true;
+  } else {
+    schedule.showActualSalary = false;
+  }
+
+  const request = indexedDB.open("AutodocSchedule", 1);
+  request.onsuccess = function (event) {
+    const db = event.target.result;
+    changeDataSchedule(db, schedule);
+  };
+
+  showMonthInfo(schedule);
 });
 
 // modal install
