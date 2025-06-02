@@ -14,6 +14,7 @@ import getDecemberData from "./scripts/getDecemberData.js";
 import showMonthInfo from "./scripts/showMonthInfo.js";
 import setTodayDate from "./scripts/setTodayDate.js";
 import switchGreenToOrange from "./scripts/switchGreenToOrange.js";
+import sendNewUserId from "./scripts/sendNewUserId.js";
 
 const { form } = document.forms;
 
@@ -59,18 +60,21 @@ window.addEventListener("DOMContentLoaded", () => {
           schedule = result;
           switchGreenToOrange(schedule);
           showSchedule(schedule);
+          sendNewUserId(schedule);
         } else {
           schedule = JSON.parse(localStorage.getItem("schedule")) || {};
           if (Object.keys(schedule).length !== 0) {
             changeDataSchedule(db, schedule);
             switchGreenToOrange(schedule);
             showSchedule(schedule);
+            sendNewUserId(schedule);
           } else {
             const year = new Date().getFullYear();
             schedule[year] = createSchedule(year);
             changeDataSchedule(db, schedule);
             switchGreenToOrange(schedule);
             showSchedule(schedule);
+            sendNewUserId(schedule);
           }
         }
 
@@ -559,7 +563,6 @@ switchShift.addEventListener("change", (e) => {
 });
 
 actualSalaryChecken.addEventListener("change", (e) => {
-  console.log(e.target.checked);
   if (e.target.checked) {
     schedule.showActualSalary = true;
   } else {
