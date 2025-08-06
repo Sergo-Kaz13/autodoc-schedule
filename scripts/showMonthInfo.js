@@ -1,6 +1,7 @@
 import calculateHourlyRate from "./calculateHourlyRate.js";
 import calculateNightBonus from "./calculateNightBonus.js";
 import calculateSalaryMonth from "./calculateSalaryMonth.js";
+import calculateSalaryNetto from "./calculateSalaryNetto.js";
 import calculateTimeMonth from "./calculateTimeMonth.js";
 import getMonths from "./getMonths.js";
 import renderMonthlyHours from "./renderMonthlyHours.js";
@@ -71,10 +72,12 @@ const showMonthInfo = (schedule) => {
       ).toFixed(2)
     ) || 0;
 
-  const salaryMonthNetto = (
-    salaryMonthBrutto -
-    salaryMonthBrutto * (tax / 100)
-  ).toFixed(2);
+  // const salaryMonthNetto = (
+  //   salaryMonthBrutto -
+  //   salaryMonthBrutto * (tax / 100)
+  // ).toFixed(2);
+
+  const salaryMonthNetto = calculateSalaryNetto(salaryMonthBrutto);
 
   const salaryDifference = Number((actualSalary - salaryMonthNetto).toFixed(2));
 
