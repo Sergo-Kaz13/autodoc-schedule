@@ -1,4 +1,4 @@
-import calculateTimeMonth from "./calculateTimeMonth.js";
+import calculateTimeMonth from "./calculations/calculateTimeMonth.js";
 
 function renderMonthlyHours(month) {
   const workDayTime = document.querySelector(".workDayTime");

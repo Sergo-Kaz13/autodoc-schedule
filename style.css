@@ -763,11 +763,19 @@ select {
 }
 
 #form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   color: #444;
-  background-color: #f3f3f3;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 12px;
   margin-bottom: 10px;
+}
+
+#form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .formTitle {
@@ -780,18 +788,35 @@ select {
   transition: all 0.3s ease;
 }
 
+.formTypeDay {
+  padding-left: 20px;
+}
+
+.titleAdditionallyDay {
+  padding-left: 20px;
+}
+
+.accessRestrictions {
+  display: none;
+  background-color: #ebab17;
+  border-radius: 5px;
+  padding: 5px;
+  color: #efeb94;
+  font-size: 12px;
+  padding-left: 20px;
+}
+
 .listItemsBlockOne {
-  border-bottom: 2px solid rgb(255, 255, 255);
-  padding-bottom: 20px;
-  margin-bottom: 20px;
 }
 
 .listItemsBlockTwo {
-  padding-bottom: 25px;
 }
 
 .listItemsBlockOne,
 .listItemsBlockTwo {
+  background-color: #f3f3f3;
+  border-radius: 12px;
+  padding: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

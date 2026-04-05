@@ -1,4 +1,4 @@
-import calculateUrlop from "./calculateUrlop.js";
+import calculateUrlop from "./calculations/calculateUrlop.js";
 import { scheduleBlock } from "./data.js";
 import showMonthInfo from "./showMonthInfo.js";
 
@@ -119,7 +119,7 @@ export function showSchedule(schedule, year, month) {
       }
 
       return div;
-    }
+    },
   );
 
   const fragment = document.createDocumentFragment();

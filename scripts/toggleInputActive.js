@@ -1,4 +1,4 @@
-import calculateUrlop from "./calculateUrlop.js";
+import calculateUrlop from "./calculations/calculateUrlop.js";
 import editDataField from "./editDataField.js";
 import modifyCalendarData from "./modifyCalendarData.js";
 import showWarningModal from "./showWarningModal.js";
@@ -8,7 +8,7 @@ const toggleInputActive = (
   board = "",
   spanText = "",
   inputText = "",
-  schedule
+  schedule,
 ) => {
   const editBoard = document.querySelector(board);
   const blockClickEdit = editBoard.parentElement;
@@ -45,7 +45,7 @@ const toggleInputActive = (
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         const workHolidayDaysUsed = Number(
-          document.querySelector(".workHolidayDaysUsed").textContent
+          document.querySelector(".workHolidayDaysUsed").textContent,
         );
         if (
           inputText === "holidayDaysInput" &&
@@ -75,7 +75,7 @@ const toggleInputActive = (
 
     input.addEventListener("blur", () => {
       const workHolidayDaysUsed = Number(
-        document.querySelector(".workHolidayDaysUsed").textContent
+        document.querySelector(".workHolidayDaysUsed").textContent,
       );
       if (
         inputText === "holidayDaysInput" &&

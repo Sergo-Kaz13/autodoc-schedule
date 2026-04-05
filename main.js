@@ -6,7 +6,7 @@ import { createSchedule } from "./scripts/createSchedule.js";
 import sumSalaryDay from "./scripts/sumSalaryDay.js";
 import createDayInfo from "./scripts/createDayInfo.js";
 import toggleInputActive from "./scripts/toggleInputActive.js";
-import calculateUrlop from "./scripts/calculateUrlop.js";
+import calculateUrlop from "./scripts/calculations/calculateUrlop.js";
 import modalUrlopInfo from "./scripts/modalUrlopInfo.js";
 import checkDataWithGetAll from "./scripts/checkDataWithGetAll.js";
 import changeDataSchedule from "./scripts/changeDataSchedule.js";
@@ -18,6 +18,8 @@ import sendNewUserId from "./scripts/sendNewUserId.js";
 import { saveSchedule } from "./scripts/saveSchedule.js";
 
 const { form } = document.forms;
+
+console.log(["Hello!!!!"], "Hello!!!!");
 
 let schedule = null;
 let currentYear = new Date().getFullYear();

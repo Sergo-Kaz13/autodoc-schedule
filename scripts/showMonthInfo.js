@@ -1,8 +1,8 @@
-import calculateHourlyRate from "./calculateHourlyRate.js";
-import calculateNightBonus from "./calculateNightBonus.js";
+import calculateHourlyRate from "./calculations/calculateHourlyRate.js";
+import calculateNightBonus from "./calculations/calculateNightBonus.js";
 import calculateSalaryMonth from "./calculateSalaryMonth.js";
-import calculateSalaryNetto from "./calculateSalaryNetto.js";
-import calculateTimeMonth from "./calculateTimeMonth.js";
+import calculateSalaryNetto from "./calculations/calculateSalaryNetto.js";
+import calculateTimeMonth from "./calculations/calculateTimeMonth.js";
 import getMonths from "./getMonths.js";
 import renderMonthlyHours from "./renderMonthlyHours.js";
 import renderSalaryMonth from "./renderSalaryMonth.js";
@@ -11,7 +11,7 @@ const showMonthInfo = (schedule) => {
   const actualSalaryChecken = document.querySelector("#actualSalary");
   const periodMonths = document.querySelector("#periodMonths");
   const activeYearItem = Number(
-    document.querySelector(".activeYear").textContent
+    document.querySelector(".activeYear").textContent,
   );
   const monthIndex = Number(document.querySelector(".monthItem").id);
   const activeMonth = schedule[activeYearItem].months[monthIndex];
@@ -52,7 +52,7 @@ const showMonthInfo = (schedule) => {
     activeMonth,
     nightBonusHour,
     vacationRate,
-    hospitalRate
+    hospitalRate,
   );
   renderSalaryMonth(sumSalaryMonth);
 
@@ -69,7 +69,7 @@ const showMonthInfo = (schedule) => {
         sumSalaryMonth.sumLeaveOnRequestPrice +
         sumSalaryMonth.sumHospitalPrice +
         premiumPay
-      ).toFixed(2)
+      ).toFixed(2),
     ) || 0;
 
   // const salaryMonthNetto = (
