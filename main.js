@@ -15,6 +15,7 @@ import showMonthInfo from "./scripts/showMonthInfo.js";
 import setTodayDate from "./scripts/setTodayDate.js";
 import switchGreenToOrange from "./scripts/switchGreenToOrange.js";
 import sendNewUserId from "./scripts/sendNewUserId.js";
+import { saveSchedule } from "./scripts/saveSchedule.js";
 
 const { form } = document.forms;
 
@@ -34,6 +35,15 @@ const scrollModal = document.querySelector(".listItemsEvents");
 const periodMonths = document.querySelector("#periodMonths");
 const switchShift = document.querySelector("#shiftOptions");
 const actualSalaryChecken = document.querySelector("#actualSalary");
+
+const getActiveYear = () => Number(activeYear.textContent);
+const getActiveMonth = () => Number(monthItem.id);
+
+function closeModal() {
+  listItems.classList.remove("listItemsShow");
+  document.body.style.overflow = "auto";
+  document.body.style.position = "";
+}
 
 activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
@@ -60,21 +70,21 @@ window.addEventListener("DOMContentLoaded", () => {
           schedule = result;
           switchGreenToOrange(schedule);
           showSchedule(schedule);
-          sendNewUserId(schedule);
+          // sendNewUserId(schedule);
         } else {
           schedule = JSON.parse(localStorage.getItem("schedule")) || {};
           if (Object.keys(schedule).length !== 0) {
             changeDataSchedule(db, schedule);
             switchGreenToOrange(schedule);
             showSchedule(schedule);
-            sendNewUserId(schedule);
+            // sendNewUserId(schedule);
           } else {
             const year = new Date().getFullYear();
             schedule[year] = createSchedule(year);
             changeDataSchedule(db, schedule);
             switchGreenToOrange(schedule);
             showSchedule(schedule);
-            sendNewUserId(schedule);
+            // sendNewUserId(schedule);
           }
         }
 
@@ -85,25 +95,25 @@ window.addEventListener("DOMContentLoaded", () => {
           ".editHolidayDays",
           "holidayDaysSpan",
           "holidayDaysInput",
-          schedule
+          schedule,
         );
         toggleInputActive(
           ".editPremium",
           "editPremiumSpan",
           "editPremiumInput",
-          schedule
+          schedule,
         );
         toggleInputActive(
           ".minSalaryBlock",
           "minSalarySpan",
           "minSalaryInput",
-          schedule
+          schedule,
         );
         toggleInputActive(
           ".editActualSalary",
-          "editActualSalarySpan",
+          "editActusalSalarySpan",
           "editActualSalaryInput",
-          schedule
+          schedule,
         );
         // +++++++++++++
       })
@@ -121,8 +131,7 @@ btnMinMonth.addEventListener("click", () => {
   currentMonth--;
   if (currentMonth < 0) {
     currentMonth = 11;
-    const newActiveYear =
-      Number(document.querySelector(".activeYear").textContent) - 1;
+    const newActiveYear = getActiveYear() - 1;
     activeYear.textContent = newActiveYear;
     monthItem.textContent = months[currentMonth];
     monthItem.id = currentMonth;
@@ -135,33 +144,24 @@ btnMinMonth.addEventListener("click", () => {
         newActiveYear,
         undefined,
         true,
-        "decrement"
+        "decrement",
       );
     }
   }
   monthItem.textContent = months[currentMonth];
   monthItem.id = currentMonth;
-  const activeYearItem = Number(
-    document.querySelector(".activeYear").textContent
-  );
+  const activeYearItem = getActiveYear();
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, activeYearItem, currentMonth);
-
-  const request = indexedDB.open("AutodocSchedule", 1);
-
-  request.onsuccess = function (event) {
-    const db = event.target.result;
-    changeDataSchedule(db, schedule);
-  };
+  saveSchedule(schedule);
 });
 
 btnPlusMont.addEventListener("click", () => {
   currentMonth++;
   if (currentMonth > 11) {
     currentMonth = 0;
-    const newActiveYear =
-      Number(document.querySelector(".activeYear").textContent) + 1;
+    const newActiveYear = getActiveYear() + 1;
     activeYear.textContent = newActiveYear;
     monthItem.textContent = months[currentMonth];
     monthItem.id = currentMonth;
@@ -176,25 +176,17 @@ btnPlusMont.addEventListener("click", () => {
         newActiveYear,
         undefined,
         true,
-        "increment"
+        "increment",
       );
     }
   }
   monthItem.textContent = months[currentMonth];
   monthItem.id = currentMonth;
-  const activeYearItem = Number(
-    document.querySelector(".activeYear").textContent
-  );
+  const activeYearItem = getActiveYear();
 
   scheduleBlock.innerHTML = "";
   showSchedule(schedule, activeYearItem, currentMonth);
-
-  const request = indexedDB.open("AutodocSchedule", 1);
-
-  request.onsuccess = function (event) {
-    const db = event.target.result;
-    changeDataSchedule(db, schedule);
-  };
+  saveSchedule(schedule);
 });
 
 scheduleBlock.addEventListener("click", (e) => {
@@ -204,8 +196,8 @@ scheduleBlock.addEventListener("click", (e) => {
     dayIndex = Number(scheduleItem.id);
 
     const today =
-      schedule[Number(document.querySelector(".activeYear").textContent)]
-        .months[Number(monthItem.id)].days[dayIndex - 1].dayInfo;
+      schedule[getActiveYear()].months[getActiveMonth()].days[dayIndex - 1]
+        .dayInfo;
     const {
       addHours100,
       addHours120,
@@ -222,8 +214,7 @@ scheduleBlock.addEventListener("click", (e) => {
     } = today;
 
     const { rate, vacationPay, hospitalRate } =
-      schedule[Number(document.querySelector(".activeYear").textContent)]
-        .months[Number(monthItem.id)];
+      schedule[getActiveYear()].months[getActiveMonth()];
 
     const salaryDay = sumSalaryDay(
       addHours100,
@@ -237,10 +228,10 @@ scheduleBlock.addEventListener("click", (e) => {
       workHoliday,
       rate,
       vacationPay,
-      hospitalRate
+      hospitalRate,
     ).toFixed(2);
     const dayInfo = dayIndex < 10 ? "0" + dayIndex : dayIndex;
-    const monthInfo = Number(monthItem.id) + 1;
+    const monthInfo = getActiveMonth() + 1;
     const monthInfoStr = monthInfo < 10 ? "0" + monthInfo : monthInfo;
 
     const infoDay = createDayInfo(
@@ -258,7 +249,7 @@ scheduleBlock.addEventListener("click", (e) => {
       workHoliday,
       dayInfo,
       monthInfoStr,
-      salaryDay
+      salaryDay,
     );
 
     dayInfoTable.innerHTML = infoDay;
@@ -278,11 +269,7 @@ modalWindow.addEventListener("click", (e) => {
     el.classList.contains("btnClose") ||
     el.classList.contains("listItemsBlock")
   ) {
-    listItems.classList.remove("listItemsShow");
-
-    document.body.style.overflow = "auto";
-    document.body.style.position = "";
-
+    closeModal();
     form.reset();
   }
 });
@@ -308,7 +295,12 @@ async function formSend(e) {
     workDayTime,
   } = values;
 
-  const yearActive = Number(document.querySelector(".activeYear").textContent);
+  const yearActive = getActiveYear();
+  const monthActive = getActiveMonth();
+
+  const currentDay =
+    schedule[yearActive].months[monthActive].days[dayIndex - 1];
+  const currentDayInfo = currentDay.dayInfo;
 
   const {
     addHours100,
@@ -323,12 +315,9 @@ async function formSend(e) {
     weekend,
     workDay,
     workHoliday,
-  } =
-    schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1]
-      .dayInfo;
+  } = currentDayInfo;
 
-  const { statusDay: statusDayActive } =
-    schedule[yearActive].months[Number(monthItem.id)].days[dayIndex - 1];
+  const { statusDay: statusDayActive } = currentDay;
 
   const {
     birthday: birthdayYear,
@@ -346,9 +335,7 @@ async function formSend(e) {
     }
   } else if (statusDay === "workHoliday") {
     if (statusDay === statusDayActive) {
-      listItems.classList.remove("listItemsShow");
-      document.body.style.overflow = "auto";
-      document.body.style.position = "";
+      closeModal();
       return;
     } else if (urlopData.workHolidayUsed >= workHolidayDays) {
       if (statusDayActive !== "leaveOnRequest") {
@@ -358,9 +345,7 @@ async function formSend(e) {
     }
   } else if (statusDay === "leaveOnRequest") {
     if (statusDay === statusDayActive) {
-      listItems.classList.remove("listItemsShow");
-      document.body.style.overflow = "auto";
-      document.body.style.position = "";
+      closeModal();
       return;
     } else if (urlopData.leaveOnRequestUsed === leaveOnRequestDays) {
       modalUrlopInfo("Відпустка на вимогу використана.");
@@ -370,7 +355,7 @@ async function formSend(e) {
       statusDayActive !== "workHoliday"
     ) {
       modalUrlopInfo(
-        "Відпустка на вимогу не може бути використана, так як не залишилося основної відпустки."
+        "Відпустка на вимогу не може бути використана, так як не залишилося основної відпустки.",
       );
       return;
     }
@@ -382,7 +367,7 @@ async function formSend(e) {
       modalUrlopInfo(
         `Вища сила, залишилося ${
           higherPowerTimeYear - urlopData.higherPowerUsed
-        } год.`
+        } год.`,
       );
       return;
     }
@@ -390,91 +375,64 @@ async function formSend(e) {
 
   //============= START ===============
 
-  if (statusDay === "workDay") {
-    workDay.status = true;
-    workDay.time = Number(workDayTime);
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    workDay.status = false;
-    workDay.time = 0;
+  const statusConfig = {
+    workDay: {
+      obj: workDay,
+      field: "time",
+      value: Number(workDayTime),
+    },
+    addHours100: {
+      obj: addHours100,
+      field: "time",
+      value: Number(time100),
+    },
+    workHoliday: {
+      obj: workHoliday,
+      field: "day",
+      value: 1,
+    },
+    leaveOnRequest: {
+      obj: leaveOnRequest,
+      field: "day",
+      value: 1,
+    },
+    birthday: {
+      obj: birthday,
+      field: "day",
+      value: 1,
+    },
+    hospital: {
+      obj: hospital,
+      field: "day",
+      value: 1,
+    },
+    weekend: {
+      obj: weekend,
+      field: null,
+      value: null,
+    },
+    holiday: {
+      obj: holiday,
+      field: null,
+      value: null,
+    },
+  };
+
+  for (const [key, config] of Object.entries(statusConfig)) {
+    const isActive = statusDay === key;
+
+    config.obj.status = isActive;
+
+    if (config.field) {
+      config.obj[config.field] = isActive ? config.value : 0;
+    }
+
+    if (isActive) {
+      currentDay.statusDay = key;
+    }
   }
 
-  if (statusDay === "addHours100") {
-    addHours100.status = true;
-    addHours100.time = Number(time100);
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    addHours100.status = false;
-    addHours100.time = 0;
-  }
-
-  if (statusDay === "workHoliday") {
-    workHoliday.status = true;
-    workHoliday.day = 1;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    workHoliday.status = false;
-    workHoliday.day = 0;
-  }
-
-  if (statusDay === "leaveOnRequest") {
-    leaveOnRequest.status = true;
-    leaveOnRequest.day = 1;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    leaveOnRequest.status = false;
-    leaveOnRequest.day = 0;
-  }
-
-  if (statusDay === "birthday") {
-    birthday.status = true;
-    birthday.day = 1;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    birthday.status = false;
-    birthday.day = 0;
-  }
-
-  if (statusDay === "hospital") {
-    hospital.status = true;
-    hospital.day = 1;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    hospital.status = false;
-    hospital.day = 0;
-  }
-
-  if (statusDay === "weekend") {
-    weekend.status = true;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    weekend.status = false;
-  }
-
-  if (statusDay === "holiday") {
-    holiday.status = true;
-    schedule[yearActive].months[Number(monthItem.id)].days[
-      dayIndex - 1
-    ].statusDay = statusDay;
-  } else {
-    holiday.status = false;
-  }
-
-  backshiftStatus ? (backshift.status = true) : (backshift.status = false);
+  backshift.status = Boolean(backshiftStatus);
 
   if (
     addHours50Form &&
@@ -501,7 +459,6 @@ async function formSend(e) {
   if (higherPowerForm && statusDay === "workDay") {
     higherPower.status = true;
     higherPower.time = Number(higherPowerTime);
-    // workDay.time = workDay.time - Number(higherPowerTime);
     workDay.time = 8 - Number(higherPowerTime);
     if (workDay.time === 0) workDay.status = false;
   } else {
@@ -511,70 +468,35 @@ async function formSend(e) {
 
   // ============= END ================
 
-  listItems.classList.remove("listItemsShow");
-  document.body.style.overflow = "auto";
-  document.body.style.position = "";
-
-  const request = indexedDB.open("AutodocSchedule", 1);
-
-  request.onsuccess = function (event) {
-    const db = event.target.result;
-    changeDataSchedule(db, schedule);
-  };
-
+  closeModal();
+  saveSchedule(schedule);
   scheduleBlock.innerHTML = "";
-  showSchedule(schedule, yearActive, Number(monthItem.id));
-
-  document.body.style.overflow = "auto";
-  document.body.style.position = "";
-
+  showSchedule(schedule, yearActive, monthActive);
   form.reset();
 }
 
 periodMonths.addEventListener("change", (e) => {
   const value = e.target.value;
   schedule.periodSalary = Number(value);
-
-  const request = indexedDB.open("AutodocSchedule", 1);
-  request.onsuccess = function (event) {
-    const db = event.target.result;
-    changeDataSchedule(db, schedule);
-  };
-
+  saveSchedule(schedule);
   showMonthInfo(schedule);
 });
 
 switchShift.addEventListener("change", (e) => {
   const value = e.target.value;
-  const activeYear = Number(document.querySelector(".activeYear").textContent);
+  const activeYear = getActiveYear();
 
   schedule[activeYear].shift = value;
-  schedule[activeYear].months[Number(monthItem.id)].shift = value;
-  switchGreenToOrange(schedule, activeYear, Number(monthItem.id), true);
-
-  const request = indexedDB.open("AutodocSchedule", 1);
-  request.onsuccess = function (event) {
-    const db = event.target.result;
-    changeDataSchedule(db, schedule);
-  };
-
+  schedule[activeYear].months[getActiveMonth()].shift = value;
+  switchGreenToOrange(schedule, activeYear, getActiveMonth(), true);
+  saveSchedule(schedule);
   scheduleBlock.innerHTML = "";
-  showSchedule(schedule, activeYear, Number(monthItem.id));
+  showSchedule(schedule, activeYear, getActiveMonth());
 });
 
 actualSalaryChecken.addEventListener("change", (e) => {
-  if (e.target.checked) {
-    schedule.showActualSalary = true;
-  } else {
-    schedule.showActualSalary = false;
-  }
-
-  const request = indexedDB.open("AutodocSchedule", 1);
-  request.onsuccess = function (event) {
-    const db = event.target.result;
-    changeDataSchedule(db, schedule);
-  };
-
+  schedule.showActualSalary = e.target.checked;
+  saveSchedule(schedule);
   showMonthInfo(schedule);
 });
 
