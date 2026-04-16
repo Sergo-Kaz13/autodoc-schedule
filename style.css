@@ -85,20 +85,81 @@ select {
 .wrapper {
   min-height: 100%;
   max-width: 600px;
-  background: white;
+  background: rgb(240, 244, 248);
   margin: 0 auto;
-  padding: 10px 10px 50px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* padding: 10px 10px 50px; */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.header {
+  background-color: rgb(33, 49, 85);
+  padding: 20px 20px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgb(240, 244, 248);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.titleBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .appTitle {
-  font-size: 20px;
-  color: #222;
+  font-size: 11px;
+  color: rgb(164, 170, 185);
   text-transform: uppercase;
-  text-align: center;
-  padding: 5px;
-  letter-spacing: 1;
+  letter-spacing: 2;
   font-weight: 700;
+  opacity: 0.6;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 16px 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background-color: green;
+}
+
+.calendarBlock {
+  background: white;
+  margin: 0 12px 16px;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
 }
 
 .schedule {
@@ -108,16 +169,18 @@ select {
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
   color: #333;
-  margin-bottom: 40px;
 }
 
 .fakeDay {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: #333;
+  background: transparent;
+  cursor: default;
+
+  font-size: 14px;
+  font-weight: 400;
+  color: #cbd5e0;
   border-radius: 10px;
   overflow: hidden;
-  min-height: 50px;
+  /* min-height: 50px; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -128,7 +191,7 @@ select {
   align-items: center;
   padding: 6px;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); */
 }
 
 .scheduleItem {
@@ -142,7 +205,7 @@ select {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  min-height: 50px;
+  /* min-height: 50px; */
   -webkit-transition: all ease-in-out 0.28s;
   -o-transition: all ease-in-out 0.28s;
   transition: all ease-in-out 0.28s;
@@ -151,7 +214,7 @@ select {
   /* ... */
   gap: 2px;
   padding: 6px;
-  font-size: 0.85rem;
+  font-size: 14px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
@@ -159,10 +222,11 @@ select {
 /* new style 50, 100, 120 start */
 .blockData {
   color: #333;
-  font-size: 0.9em;
+  font-size: 14px;
   padding: 0px 5px;
   border-radius: 5px;
-  font-weight: 800;
+  font-weight: 700;
+  line-height: 1;
   text-align: center;
   align-self: center;
 }
@@ -413,15 +477,47 @@ select {
 .card {
   background: #fff;
   border-radius: 1rem;
-  padding: 1rem;
+  /* padding: 1rem; */
+  overflow: hidden;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
-.card h2 {
+.salaryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1b2a4a 0%, #2d3f6b 100%);
+  padding: 14px 18px;
+}
+.card .salaryTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.salaryDate {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 2px;
+  text-transform: capitalize;
+}
+.salaryTotal {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+.salaryTotal span {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.6;
+  margin-left: 2px;
+}
+/* .card h2 {
   font-size: 1.1rem;
   margin-bottom: 0.8rem;
   color: #444;
   text-align: center;
-}
+} */
 .row,
 .vacation-row {
   display: flex;
@@ -877,10 +973,11 @@ select {
 
 .activeYear {
   text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  color: #555;
-  margin: 4px 0;
+  font-size: 13px;
+  opacity: 0.5;
+  font-weight: 500;
+  color: rgb(164, 170, 185);
+  margin-top: -2px;
 }
 
 .activeMonth {
@@ -892,36 +989,45 @@ select {
   align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 15px;
   color: #000;
   font-size: 22px;
   font-weight: bold;
   letter-spacing: 2;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin: 4px 0 10px;
 }
 
 .btnLeft,
 .btnRight {
-  background-color: #f0f0f0;
+  background-color: rgba(255, 255, 255, 0.1);
   border: none;
+  width: 36px;
+  height: 36px;
+  color: white;
   font-size: 18px;
-  padding: 8px 12px;
-  border-radius: 8px;
+  /* padding: 8px 12px; */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .btnLeft:hover,
 .btnRight:hover {
-  background-color: #d9d9d9;
+  /* background-color: #d9d9d9; */
 }
 
-/* .monthItem {
-  letter-spacing: 2px;
-  font-size: 20px;
-} */
+.monthItem {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: white;
+  text-transform: capitalize;
+}
 
 .nameDays {
   display: -ms-grid;
@@ -934,15 +1040,17 @@ select {
 }
 
 .nameDay {
-  background: #ddd;
-  padding: 10px;
-  color: #333;
-  font-size: 16px;
+  text-align: center;
+  font-size: 11px;
   font-weight: 700;
-  text-transform: capitalize;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.28s;
+  text-transform: uppercase;
+  padding: 4px 0;
+  color: #6b7280;
+  letter-spacing: 0.5px;
+}
+
+.nameDay.weekend {
+  color: #e76f51;
 }
 
 .blindBlock {
@@ -1059,21 +1167,22 @@ select {
 }
 
 #shiftOptions {
-  padding: 4px 30px;
+  padding: 4px 12px;
   margin: 0 0 15px 0;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  background-color: #ede9fe;
-  color: #6b21a8;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 20px;
+  color: #c8d8e8;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   appearance: none; /* прибирає дефолтну стрілку */
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23111827' d='M2 0L0 2h4z'/%3E%3C/svg%3E");
+  /* background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23111827' d='M2 0L0 2h4z'/%3E%3C/svg%3E"); */
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 12px;
   cursor: pointer;
   transition: background-color 0.3s;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .actualSalary {

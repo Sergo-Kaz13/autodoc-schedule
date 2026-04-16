@@ -1,8 +1,8 @@
 import calculateUrlop from "./calculations/calculateUrlop.js";
 import editDataField from "./editDataField.js";
 import modifyCalendarData from "./modifyCalendarData.js";
-import showWarningModal from "./showWarningModal.js";
-import showMonthInfo from "./showMonthInfo.js";
+import showWarningModal from "./ui/showWarningModal.js";
+import showMonthInfo from "./ui/showMonthInfo.js";
 
 const toggleInputActive = (
   board = "",

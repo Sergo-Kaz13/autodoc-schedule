@@ -21,34 +21,29 @@
   </head>
   <body>
     <div class="wrapper">
-      <h1 class="appTitle">autodoc schedule</h1>
+      <header class="header">
+        <div class="titleBlock">
+          <h1 class="appTitle">autodoc schedule</h1>
 
-      <div class="activeYear">2024</div>
+          <div class="shift">
+            <strong>
+              <select name="shiftOptions" id="shiftOptions">
+                <option class="optionGreen" value="green">🟢 Green</option>
+                <option class="optionOrange" value="orange">🟠 Orange</option>
+              </select>
+            </strong>
+          </div>
+        </div>
 
-      <div class="activeMonth">
-        <button class="btnLeft">←</button>
-        <span class="monthItem">December</span>
-        <button class="btnRight">→</button>
-      </div>
-
-      <div class="shift">
-        <strong>
-          <select name="shiftOptions" id="shiftOptions">
-            <option class="optionGreen" value="green">Green</option>
-            <option class="optionOrange" value="orange">Orange</option>
-          </select>
-        </strong>
-      </div>
-
-      <div class="nameDays">
-        <h4 class="nameDay">пн</h4>
-        <h4 class="nameDay">вт</h4>
-        <h4 class="nameDay">ср</h4>
-        <h4 class="nameDay">чт</h4>
-        <h4 class="nameDay">пт</h4>
-        <h4 class="nameDay">сб</h4>
-        <h4 class="nameDay">нд</h4>
-      </div>
+        <div class="activeMonth">
+          <button class="btnLeft">‹</button>
+          <div>
+            <span class="monthItem"></span>
+            <div class="activeYear">2024</div>
+          </div>
+          <button class="btnRight">›</button>
+        </div>
+      </header>
 
       <div class="listItemsBlock">
         <div class="listItemsEvents">
@@ -258,15 +253,54 @@
         </div>
       </div>
 
-      <div class="schedule">
-        <!-- <div class="scheduleItem"><span>1</span></div> -->
+      <div class="legend">
+        <div class="legendItem">
+          <span class="legendDot"></span>
+          денна зміна
+        </div>
+        <div class="legendItem">
+          <span class="legendDot"></span>
+          друга зміна
+        </div>
+        <div class="legendItem">
+          <span class="legendDot"></span>
+        </div>
+        <div class="legendItem">
+          <span class="legendDot"></span>
+        </div>
+      </div>
+
+      <div class="calendarBlock">
+        <div class="nameDays">
+          <h4 class="nameDay">пн</h4>
+          <h4 class="nameDay">вт</h4>
+          <h4 class="nameDay">ср</h4>
+          <h4 class="nameDay">чт</h4>
+          <h4 class="nameDay">пт</h4>
+          <h4 class="nameDay weekend">сб</h4>
+          <h4 class="nameDay weekend">нд</h4>
+        </div>
+
+        <div class="schedule">
+          <!-- <div class="scheduleItem"><span>1</span></div> -->
+        </div>
       </div>
 
       <div class="statisticsBoard summary-wrapper">
         <span id="widthCalculator"></span>
         <!-- Зарплата за місяць start -->
         <section class="card">
-          <h2>Заробітна плата</h2>
+          <div class="salaryHeader">
+            <div>
+              <h2 class="salaryTitle">Заробітна плата</h2>
+              <div class="salaryDate">
+                <span>квітень</span>
+                <span>2026</span>
+              </div>
+            </div>
+
+            <div class="salaryTotal">6203 <span>zł</span></div>
+          </div>
           <div class="row">
             <span>Робочі годи:</span>
             <strong

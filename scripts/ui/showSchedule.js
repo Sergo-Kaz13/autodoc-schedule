@@ -1,6 +1,6 @@
-import calculateUrlop from "./calculations/calculateUrlop.js";
-import { scheduleBlock } from "./data.js";
-import showMonthInfo from "./showMonthInfo.js";
+import calculateUrlop from "../calculations/calculateUrlop.js";
+import { scheduleBlock } from "../data.js";
+import showMonthInfo from "../ui/showMonthInfo.js";
 
 export function showSchedule(schedule, year, month) {
   year = year !== undefined ? (year = year) : new Date().getFullYear();

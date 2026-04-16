@@ -1,25 +1,23 @@
 "use strict";
 
-import { showSchedule } from "./scripts/showSchedule.js";
+import { showSchedule } from "./scripts/ui/showSchedule.js";
 import { months, scheduleBlock } from "./scripts/data.js";
 import { createSchedule } from "./scripts/createSchedule.js";
 import sumSalaryDay from "./scripts/sumSalaryDay.js";
 import createDayInfo from "./scripts/createDayInfo.js";
 import toggleInputActive from "./scripts/toggleInputActive.js";
 import calculateUrlop from "./scripts/calculations/calculateUrlop.js";
-import modalUrlopInfo from "./scripts/modalUrlopInfo.js";
+import modalUrlopInfo from "./scripts/ui/modalUrlopInfo.js";
 import checkDataWithGetAll from "./scripts/checkDataWithGetAll.js";
 import changeDataSchedule from "./scripts/changeDataSchedule.js";
 import getDecemberData from "./scripts/getDecemberData.js";
-import showMonthInfo from "./scripts/showMonthInfo.js";
+import showMonthInfo from "./scripts/ui/showMonthInfo.js";
 import setTodayDate from "./scripts/setTodayDate.js";
 import switchGreenToOrange from "./scripts/switchGreenToOrange.js";
 import sendNewUserId from "./scripts/sendNewUserId.js";
 import { saveSchedule } from "./scripts/saveSchedule.js";
 
 const { form } = document.forms;
-
-console.log(["Hello!!!!"], "Hello!!!!");
 
 let schedule = null;
 let currentYear = new Date().getFullYear();

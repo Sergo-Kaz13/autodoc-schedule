@@ -1,11 +1,11 @@
-import calculateHourlyRate from "./calculations/calculateHourlyRate.js";
-import calculateNightBonus from "./calculations/calculateNightBonus.js";
-import calculateSalaryMonth from "./calculateSalaryMonth.js";
-import calculateSalaryNetto from "./calculations/calculateSalaryNetto.js";
-import calculateTimeMonth from "./calculations/calculateTimeMonth.js";
-import getMonths from "./getMonths.js";
-import renderMonthlyHours from "./renderMonthlyHours.js";
-import renderSalaryMonth from "./renderSalaryMonth.js";
+import calculateHourlyRate from "../calculations/calculateHourlyRate.js";
+import calculateNightBonus from "../calculations/calculateNightBonus.js";
+import calculateSalaryMonth from "../calculations/calculateSalaryMonth.js";
+import calculateSalaryNetto from "../calculations/calculateSalaryNetto.js";
+import calculateTimeMonth from "../calculations/calculateTimeMonth.js";
+import getMonths from "../getMonths.js";
+import renderMonthlyHours from "../renderMonthlyHours.js";
+import renderSalaryMonth from "../renderSalaryMonth.js";
 
 const showMonthInfo = (schedule) => {
   const actualSalaryChecken = document.querySelector("#actualSalary");

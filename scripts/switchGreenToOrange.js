@@ -6,7 +6,7 @@ function switchGreenToOrange(
   year,
   month,
   shouldUpdate = false,
-  mode
+  mode,
 ) {
   year = year !== undefined ? (year = year) : new Date().getFullYear();
   month = month !== undefined ? (month = month) : new Date().getMonth();

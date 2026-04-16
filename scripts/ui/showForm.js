@@ -1,5 +1,6 @@
 function showForm() {
   const blockHidden = document.querySelector(".formBlockHidden");
+  console.log(["showForm"], "showForm");
 
   if (blockHidden.classList.contains("formBlockShow")) {
     blockHidden.style.height = blockHidden.scrollHeight + "px";
