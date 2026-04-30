@@ -4,7 +4,7 @@
 * Autoprefixer: v10.4.7
 * Browsers: last 4 version
 */
-
+@import url(./scripts/ui/dropdown/shiftDropdown.css);
 *,
 ::before,
 ::after {
@@ -98,7 +98,7 @@ select {
   background-color: rgb(33, 49, 85);
   padding: 20px 20px 28px;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .header::after {
@@ -1158,12 +1158,6 @@ select {
   justify-content: space-between;
   padding: 4px 0;
   font-size: 14px;
-}
-
-.shift {
-  display: flex;
-  justify-content: center;
-  margin-left: 0;
 }
 
 #shiftOptions {

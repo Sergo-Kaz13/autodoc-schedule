@@ -5,7 +5,6 @@ import { months, scheduleBlock } from "./scripts/data.js";
 import { createSchedule } from "./scripts/createSchedule.js";
 import sumSalaryDay from "./scripts/sumSalaryDay.js";
 import createDayInfo from "./scripts/createDayInfo.js";
-import toggleInputActive from "./scripts/toggleInputActive.js";
 import calculateUrlop from "./scripts/calculations/calculateUrlop.js";
 import modalUrlopInfo from "./scripts/ui/modalUrlopInfo.js";
 import checkDataWithGetAll from "./scripts/checkDataWithGetAll.js";
@@ -13,13 +12,17 @@ import changeDataSchedule from "./scripts/changeDataSchedule.js";
 import getDecemberData from "./scripts/getDecemberData.js";
 import showMonthInfo from "./scripts/ui/showMonthInfo.js";
 import setTodayDate from "./scripts/setTodayDate.js";
-import switchGreenToOrange from "./scripts/switchGreenToOrange.js";
+import initShiftPlan from "./scripts/controllers/initShiftPlan.js";
 import sendNewUserId from "./scripts/sendNewUserId.js";
 import { saveSchedule } from "./scripts/saveSchedule.js";
+import { shiftDropdown } from "./scripts/ui/dropdown/shiftDropdown.js";
+import { getSchedule } from "./scripts/db/index.js";
+import { initToggles } from "./scripts/ui/initToggles.js";
+import { openDB } from "./scripts/db/db.js";
+import store from "./scripts/store/store.js";
 
 const { form } = document.forms;
 
-let schedule = null;
 let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth();
 let dayIndex = null;
@@ -33,7 +36,6 @@ const dayInfoTable = document.querySelector(".dayInfoTable");
 const modalWindow = document.querySelector(".listItemsBlock");
 const scrollModal = document.querySelector(".listItemsEvents");
 const periodMonths = document.querySelector("#periodMonths");
-const switchShift = document.querySelector("#shiftOptions");
 const actualSalaryChecken = document.querySelector("#actualSalary");
 
 const getActiveYear = () => Number(activeYear.textContent);
@@ -49,82 +51,26 @@ activeYear.textContent = currentYear;
 monthItem.textContent = months[currentMonth];
 monthItem.id = currentMonth;
 
-window.addEventListener("DOMContentLoaded", () => {
-  const request = indexedDB.open("AutodocSchedule", 1);
-  request.onupgradeneeded = function (event) {
-    const db = event.target.result;
+window.addEventListener("DOMContentLoaded", async () => {
+  store.db = await openDB();
+  const result = await checkDataWithGetAll(store.db);
 
-    console.log(db);
-    if (!db.objectStoreNames.contains("schedule")) {
-      db.createObjectStore("schedule", { keyPath: "id" });
-      console.log("Hello my frend!!!");
+  if (Object.keys(result).length !== 0) {
+    store.setSchedule(result);
+  } else {
+    store.setSchedule(JSON.parse(localStorage.getItem("schedule")) || {});
+    if (Object.keys(store.schedule).length !== 0) {
+      changeDataSchedule(store.db, store.schedule);
+    } else {
+      store.schedule[currentYear] = createSchedule(currentYear);
+      changeDataSchedule(store.db, store.schedule);
     }
-  };
+  }
 
-  request.onsuccess = function (event) {
-    const db = event.target.result;
-    console.log("База даних відкрита:", db);
-    checkDataWithGetAll(db)
-      .then((result) => {
-        if (Object.keys(result).length !== 0) {
-          schedule = result;
-          switchGreenToOrange(schedule);
-          showSchedule(schedule);
-          // sendNewUserId(schedule);
-        } else {
-          schedule = JSON.parse(localStorage.getItem("schedule")) || {};
-          if (Object.keys(schedule).length !== 0) {
-            changeDataSchedule(db, schedule);
-            switchGreenToOrange(schedule);
-            showSchedule(schedule);
-            // sendNewUserId(schedule);
-          } else {
-            const year = new Date().getFullYear();
-            schedule[year] = createSchedule(year);
-            changeDataSchedule(db, schedule);
-            switchGreenToOrange(schedule);
-            showSchedule(schedule);
-            // sendNewUserId(schedule);
-          }
-        }
-
-        // ++++++++++++
-        toggleInputActive(".editBoard", "rateSpan", "rateInput", schedule);
-        toggleInputActive(".taxBoard", "taxSpan", "taxInput", schedule);
-        toggleInputActive(
-          ".editHolidayDays",
-          "holidayDaysSpan",
-          "holidayDaysInput",
-          schedule,
-        );
-        toggleInputActive(
-          ".editPremium",
-          "editPremiumSpan",
-          "editPremiumInput",
-          schedule,
-        );
-        toggleInputActive(
-          ".minSalaryBlock",
-          "minSalarySpan",
-          "minSalaryInput",
-          schedule,
-        );
-        toggleInputActive(
-          ".editActualSalary",
-          "editActusalSalarySpan",
-          "editActualSalaryInput",
-          schedule,
-        );
-        // +++++++++++++
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  request.onerror = function (event) {
-    console.log("Помилка відкриття бази:", event.target.error);
-  };
+  initShiftPlan(store.schedule);
+  showSchedule(store.schedule);
+  initToggles(store.schedule);
+  // sendNewUserId(store.schedule);
 });
 
 btnMinMonth.addEventListener("click", () => {
@@ -136,11 +82,11 @@ btnMinMonth.addEventListener("click", () => {
     monthItem.textContent = months[currentMonth];
     monthItem.id = currentMonth;
 
-    if (!(newActiveYear in schedule)) {
+    if (!(newActiveYear in store.schedule)) {
       const newYear = createSchedule(newActiveYear);
-      schedule[newActiveYear] = newYear;
-      switchGreenToOrange(
-        schedule,
+      store.schedule[newActiveYear] = newYear;
+      initShiftPlan(
+        store.schedule,
         newActiveYear,
         undefined,
         true,
@@ -153,8 +99,8 @@ btnMinMonth.addEventListener("click", () => {
   const activeYearItem = getActiveYear();
 
   scheduleBlock.innerHTML = "";
-  showSchedule(schedule, activeYearItem, currentMonth);
-  saveSchedule(schedule);
+  showSchedule(store.schedule, activeYearItem, currentMonth);
+  saveSchedule(store.schedule);
 });
 
 btnPlusMont.addEventListener("click", () => {
@@ -166,13 +112,13 @@ btnPlusMont.addEventListener("click", () => {
     monthItem.textContent = months[currentMonth];
     monthItem.id = currentMonth;
 
-    if (!(newActiveYear in schedule)) {
-      const decemberDate = getDecemberData(schedule[newActiveYear - 1]);
+    if (!(newActiveYear in store.schedule)) {
+      const decemberDate = getDecemberData(store.schedule[newActiveYear - 1]);
 
       const newYear = createSchedule(newActiveYear, decemberDate);
-      schedule[newActiveYear] = newYear;
-      switchGreenToOrange(
-        schedule,
+      store.schedule[newActiveYear] = newYear;
+      initShiftPlan(
+        store.schedule,
         newActiveYear,
         undefined,
         true,
@@ -183,10 +129,11 @@ btnPlusMont.addEventListener("click", () => {
   monthItem.textContent = months[currentMonth];
   monthItem.id = currentMonth;
   const activeYearItem = getActiveYear();
+  console.log(["activeYearItem"], activeYearItem);
 
   scheduleBlock.innerHTML = "";
-  showSchedule(schedule, activeYearItem, currentMonth);
-  saveSchedule(schedule);
+  showSchedule(store.schedule, activeYearItem, currentMonth);
+  saveSchedule(store.schedule);
 });
 
 scheduleBlock.addEventListener("click", (e) => {
@@ -196,8 +143,9 @@ scheduleBlock.addEventListener("click", (e) => {
     dayIndex = Number(scheduleItem.id);
 
     const today =
-      schedule[getActiveYear()].months[getActiveMonth()].days[dayIndex - 1]
-        .dayInfo;
+      store.schedule[getActiveYear()].months[getActiveMonth()].days[
+        dayIndex - 1
+      ].dayInfo;
     const {
       addHours100,
       addHours120,
@@ -214,7 +162,7 @@ scheduleBlock.addEventListener("click", (e) => {
     } = today;
 
     const { rate, vacationPay, hospitalRate } =
-      schedule[getActiveYear()].months[getActiveMonth()];
+      store.schedule[getActiveYear()].months[getActiveMonth()];
 
     const salaryDay = sumSalaryDay(
       addHours100,
@@ -299,7 +247,7 @@ async function formSend(e) {
   const monthActive = getActiveMonth();
 
   const currentDay =
-    schedule[yearActive].months[monthActive].days[dayIndex - 1];
+    store.schedule[yearActive].months[monthActive].days[dayIndex - 1];
   const currentDayInfo = currentDay.dayInfo;
 
   const {
@@ -324,9 +272,9 @@ async function formSend(e) {
     higherPowerTime: higherPowerTimeYear,
     leaveOnRequestDays,
     workHolidayDays,
-  } = schedule[yearActive];
+  } = store.schedule[yearActive];
 
-  const urlopData = calculateUrlop(schedule);
+  const urlopData = calculateUrlop(store.schedule);
 
   if (statusDay === "birthday") {
     if (urlopData.birthdayUsed === birthdayYear) {
@@ -469,36 +417,42 @@ async function formSend(e) {
   // ============= END ================
 
   closeModal();
-  saveSchedule(schedule);
+  saveSchedule(store.schedule);
   scheduleBlock.innerHTML = "";
-  showSchedule(schedule, yearActive, monthActive);
+  showSchedule(store.schedule, yearActive, monthActive);
   form.reset();
 }
 
 periodMonths.addEventListener("change", (e) => {
   const value = e.target.value;
-  schedule.periodSalary = Number(value);
-  saveSchedule(schedule);
-  showMonthInfo(schedule);
+  store.schedule.periodSalary = Number(value);
+  saveSchedule(store.schedule);
+  showMonthInfo(store.schedule);
 });
 
-switchShift.addEventListener("change", (e) => {
-  const value = e.target.value;
-  const activeYear = getActiveYear();
+// toggleDropdown();
 
-  schedule[activeYear].shift = value;
-  schedule[activeYear].months[getActiveMonth()].shift = value;
-  switchGreenToOrange(schedule, activeYear, getActiveMonth(), true);
-  saveSchedule(schedule);
-  scheduleBlock.innerHTML = "";
-  showSchedule(schedule, activeYear, getActiveMonth());
-});
+// const activeYear = getActiveYear();
+
+console.log(["Hello"], "Hello");
+
+// schedule[activeYear].shift = value;
+// schedule[activeYear].months[getActiveMonth()].shift = value;
+// switchGreenToOrange(schedule, activeYear, getActiveMonth(), true);
+// saveSchedule(schedule);
+// scheduleBlock.innerHTML = "";
+// showSchedule(schedule, activeYear, getActiveMonth());
+shiftDropdown();
 
 actualSalaryChecken.addEventListener("change", (e) => {
-  schedule.showActualSalary = e.target.checked;
-  saveSchedule(schedule);
-  showMonthInfo(schedule);
+  store.schedule.showActualSalary = e.target.checked;
+  saveSchedule(store.schedule);
+  showMonthInfo(store.schedule);
 });
+
+// dropdown.addEventListener("click", (e) => {
+//   console.log(["e"], e);
+// });
 
 // modal install
 let deferredPrompt;

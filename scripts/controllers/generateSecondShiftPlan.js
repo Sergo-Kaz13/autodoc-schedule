@@ -1,10 +1,10 @@
 function generateSecondShiftPlan(
   shiftPeriod,
-  shiftName = "green",
-  numberMonth = false
+  shiftName = "a",
+  numberMonth = false,
 ) {
   const { months } = shiftPeriod;
-  let current = shiftName === "green" ? true : false;
+  let current = shiftName === "a" ? true : false;
   if (!numberMonth) {
     months.forEach((month) => {
       const { days } = month;

@@ -1,18 +1,21 @@
 import calculateUrlop from "../calculations/calculateUrlop.js";
 import { scheduleBlock } from "../data.js";
 import showMonthInfo from "../ui/showMonthInfo.js";
+import { shiftActions } from "../data/shift.js";
 
 export function showSchedule(schedule, year, month) {
   year = year !== undefined ? (year = year) : new Date().getFullYear();
   month = month !== undefined ? (month = month) : new Date().getMonth();
 
-  const switchShift = document.querySelector("#shiftOptions");
+  const switchShift = document.querySelector(".shiftName");
+
+  console.log(["schedule"], schedule);
 
   const currentYear = schedule[year];
   const activeMonth = currentYear.months[month];
-  const switchShiftValue = activeMonth?.shift || "green";
+  const switchShiftValue = shiftActions[activeMonth?.shift] || "Графік А";
 
-  switchShift.value = switchShiftValue;
+  switchShift.textContent = switchShiftValue;
 
   const currentMonth = new Date().getMonth();
   const currentDate = new Date().getDate();
