@@ -87,6 +87,8 @@ export function showSchedule(schedule, year, month) {
         div.classList.add("currentDate");
       }
 
+      console.log(["dayInfo"], dayInfo);
+
       if (dayInfo.backshift.status) div.classList.add("backshift");
       if (dayInfo.addHours50.status) block50.classList.add("blockOverTimeShow");
       if (dayInfo.addHours120.status)

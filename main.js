@@ -488,3 +488,21 @@ window.addEventListener("beforeinstallprompt", (e) => {
     modal.style.display = "none";
   });
 });
+
+// switchShift.addEventListener("change", (e) => {
+//   const value = e.target.value;
+//   const activeYear = Number(document.querySelector(".activeYear").textContent);
+
+//   schedule[activeYear].shift = value;
+//   schedule[activeYear].months[Number(monthItem.id)].shift = value;
+//   switchGreenToOrange(schedule, activeYear, Number(monthItem.id), true);
+
+//   const request = indexedDB.open("AutodocSchedule", 1);
+//   request.onsuccess = function (event) {
+//     const db = event.target.result;
+//     changeDataSchedule(db, schedule);
+//   };
+
+//   scheduleBlock.innerHTML = "";
+//   showSchedule(schedule, activeYear, Number(monthItem.id));
+// });

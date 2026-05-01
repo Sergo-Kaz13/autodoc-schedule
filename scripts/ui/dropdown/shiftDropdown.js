@@ -1,14 +1,14 @@
+import initShiftPlan from "../../controllers/initShiftPlan.js";
 import { shiftActions, SCHEDULES } from "../../data/shift.js";
 import { setSchedule } from "../../db/schedule.js";
 import store from "../../store/store.js";
+import { showSchedule } from "../showSchedule.js";
 
 console.log(["store"], store.schedule);
 
 export function shiftDropdown() {
   const switchShift = document.querySelector(".shift");
   const shiftDot = switchShift.querySelector(".shiftDot");
-  const shiftDotPing = shiftDot.querySelector(".shiftDot-ping");
-  const shiftBtn = switchShift.querySelector(".shiftBtn");
 
   let toggleDropdown = false;
   let activeShift = "a";
@@ -37,6 +37,8 @@ export function shiftDropdown() {
     const option = e.target.closest(".option");
     if (option) {
       const shiftName = document.querySelector(".shiftName");
+      const monthItem = document.querySelector(".monthItem");
+
       if (shiftName) {
         shiftName.textContent = shiftActions[option.dataset.shift] || "";
       }
@@ -44,6 +46,20 @@ export function shiftDropdown() {
       // setSchedule();
 
       activeShift = option.dataset.shift;
+      const activeYear = Number(
+        document.querySelector(".activeYear").textContent,
+      );
+      store.schedule[activeYear].shift = activeShift;
+      store.schedule[activeYear].months[Number(monthItem.id)].shift =
+        activeShift;
+      initShiftPlan(store.schedule, activeYear, Number(monthItem.id), true);
+
+      const scheduleBlock = document.querySelector(".schedule");
+      scheduleBlock.innerHTML = "";
+      showSchedule(store.schedule, activeYear, Number(monthItem.id));
+
+      setSchedule(store.schedule);
+
       toggleDropdown = false;
       dropdown.remove();
     }
