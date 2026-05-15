@@ -18,6 +18,7 @@ import { saveSchedule } from "./scripts/saveSchedule.js";
 import { shiftDropdown } from "./scripts/ui/dropdown/shiftDropdown.js";
 import { getSchedule } from "./scripts/db/index.js";
 import { initToggles } from "./scripts/ui/initToggles.js";
+import createLegend from "./scripts/ui/legend/legend.js";
 import { openDB } from "./scripts/db/db.js";
 import store from "./scripts/store/store.js";
 
@@ -70,6 +71,8 @@ window.addEventListener("DOMContentLoaded", async () => {
   initShiftPlan(store.schedule);
   showSchedule(store.schedule);
   initToggles(store.schedule);
+
+  createLegend();
   // sendNewUserId(store.schedule);
 });
 

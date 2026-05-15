@@ -88,7 +88,18 @@ export function shiftDropdown() {
           </div>
 
           <div class="badges">
-            ${schedule.weeks.map((week, i) => `<div class="badge ${schedule.id === "night" ? "night" : i % 2 === 0 ? "green" : "blue"}">${schedule.id === "night" ? "☾" : week.slice(0, 1)}</div>`).join("")}            
+            ${schedule.weeks
+              .map((week, i) => {
+                const isNight = schedule.id === "night";
+                const isFirst = week === "1-ша";
+                const badgeClass = isNight
+                  ? "night"
+                  : isFirst
+                    ? "green"
+                    : "blue";
+                return `<div class="badge ${badgeClass}">${schedule.id === "night" ? "☾" : week.slice(0, 1)}</div>`;
+              })
+              .join("")}            
           </div>
           ${schedule.id === activeShift ? checkeIcon : ""}
         </button>
@@ -98,6 +109,14 @@ export function shiftDropdown() {
     return `
             <div class="dropdown-title">Тип графіку</div>
                 ${scheduleButtons.join("")}
+                <div class="dropdown-hint">
+                  <svg viewBox="0 0 24 24" width="12" height="12">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                  Відлік змін з 1-го тижня року
+                </div>
             <div class="spacer"></div>
     `;
   }

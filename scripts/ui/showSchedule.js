@@ -87,9 +87,15 @@ export function showSchedule(schedule, year, month) {
         div.classList.add("currentDate");
       }
 
-      console.log(["dayInfo"], dayInfo);
-
-      if (dayInfo.backshift.status) div.classList.add("backshift");
+      if (dayInfo.backshift.status === "secondShift")
+        div.classList.add("secondShift");
+      if (dayInfo.backshift.status === "nightShift") {
+        div.classList.add("nightShift");
+        const iconNight = document.createElement("span");
+        iconNight.classList.add("iconNight");
+        iconNight.textContent = "🌙";
+        div.appendChild(iconNight);
+      }
       if (dayInfo.addHours50.status) block50.classList.add("blockOverTimeShow");
       if (dayInfo.addHours120.status)
         block120.classList.add("blockOverTimeShow");

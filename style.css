@@ -5,6 +5,7 @@
 * Browsers: last 4 version
 */
 @import url(./scripts/ui/dropdown/shiftDropdown.css);
+@import url(./scripts/ui/legend/legend.css);
 *,
 ::before,
 ::after {
@@ -127,33 +128,6 @@ select {
   opacity: 0.6;
 }
 
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 0 16px 12px;
-}
-
-.legendItem {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 5px 10px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #6b7280;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-}
-
-.legendDot {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-  background-color: green;
-}
-
 .calendarBlock {
   background: white;
   margin: 0 12px 16px;
@@ -211,6 +185,7 @@ select {
   transition: all ease-in-out 0.28s;
   cursor: pointer;
 
+  min-height: 50px;
   /* ... */
   gap: 2px;
   padding: 6px;
@@ -274,93 +249,140 @@ select {
 }
 
 .scheduleItemWork {
-  background: #43a047;
-  color: #333;
+  background: rgb(26, 107, 60);
+}
+
+.scheduleItemWork .blockData {
+  color: rgb(255, 255, 255);
 }
 
 .scheduleItem100 {
   text-align: center;
-  background: #43a047;
+  /* background: #43a047; */
 }
 
-.backshift.scheduleItemDayOff .blockData,
-.backshift.scheduleItemDayOff,
+.secondShift .scheduleItemDayOff .blockData,
+.secondShift .scheduleItemDayOff,
 .scheduleItemDayOff {
-  background: #ef5350;
-  color: #333;
+  background: rgb(241, 243, 245);
+  border: 1px solid rgb(226, 229, 233);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px;
+  color: rgb(156, 163, 175);
+  font-weight: 800;
 }
 
-.scheduleItemDayOff::after {
+.scheduleItemDayOff .blockData {
+  color: rgb(156, 163, 175);
+}
+
+/* .scheduleItemDayOff::after {
   content: "wolne";
   text-align: center;
   font-size: 9px;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 800;
+  color: rgb(156, 163, 175);
+} */
+
+.secondShift .scheduleItemHoliday .blockData,
+.secondShift .scheduleItemHoliday,
+.scheduleItemHoliday {
+  background: rgb(229, 62, 62);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px;
 }
 
-.backshift.scheduleItemHoliday .blockData,
-.backshift.scheduleItemHoliday,
-.scheduleItemHoliday {
-  background: rgb(249, 115, 22);
-  color: #333;
+.scheduleItemHoliday .blockData {
+  color: rgb(255, 255, 255);
+  font-weight: 800;
 }
 
 .scheduleItemHoliday::after {
-  content: "święto";
+  content: "свято";
   text-align: center;
-  font-size: 9px;
+  font-size: 7.5px;
+  letter-spacing: 0.04em;
+  color: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  padding: 1px 3px;
+  line-height: 1.4;
   font-weight: 600;
   text-transform: uppercase;
 }
 
-.backshift.scheduleItemWorkHoliday .blockData,
-.backshift.scheduleItemWorkHoliday,
 .scheduleItemWorkHoliday {
-  color: #333;
-  background: rgb(59, 130, 246);
+  background: rgb(14, 116, 144);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px;
+}
+
+.scheduleItemWorkHoliday .blockData {
+  color: rgb(255, 255, 255);
+  font-weight: 800;
 }
 
 .scheduleItemWorkHoliday::after {
-  content: "urlop";
+  content: "Відп.";
   text-align: center;
-  font-size: 9px;
-  text-transform: uppercase;
-  font-weight: 600;
+  color: rgb(255, 255, 255);
+  font-size: 9.5px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  padding: 1px 3px;
+  line-height: 1.4;
+  font-weight: 800;
 }
 
-.backshift.scheduleItemLeaveOnRequest .blockData,
-.backshift.scheduleItemLeaveOnRequest,
 .scheduleItemLeaveOnRequest {
-  color: #333;
-  background: rgb(80, 185, 235);
+  color: rgb(8, 145, 178);
+  font-weight: 800;
+  background: rgb(255, 255, 255);
+  border: 2px dashed rgb(8, 145, 178);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px;
+}
+
+.scheduleItemLeaveOnRequest .blockData {
+  color: rgb(8, 145, 178);
+  font-weight: 800;
 }
 
 .scheduleItemLeaveOnRequest::after {
-  content: "urlop na żądanie";
+  content: "Відп.";
   text-align: center;
-  font-size: 8px;
+  font-size: 9.5px;
   line-height: 1.1;
-  text-transform: uppercase;
-  font-weight: 600;
-  padding: 0 3px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  background: rgba(8, 145, 178, 0.1);
+  border-radius: 3px;
+  padding: 1px 3px;
+  line-height: 1.4;
 }
 
-.backshift.scheduleItemL4 .blockData,
-.backshift.scheduleItemL4,
 .scheduleItemL4 {
-  color: #333;
-  background: rgb(153, 153, 255);
+  background: rgb(124, 58, 237);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px;
+}
+
+.scheduleItemL4 .blockData {
+  color: rgb(255, 255, 255);
+  font-weight: 800;
 }
 
 .scheduleItemL4::after {
-  content: "L4";
+  content: "ЛК";
   text-align: center;
-  font-size: 11px;
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  color: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  padding: 1px 3px;
+  line-height: 1.4;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 800;
 }
 
-.backshift.scheduleItemBirthday,
+.secondShift.scheduleItemBirthday,
 .scheduleItemBirthday {
   background: rgb(220, 120, 140);
 }
@@ -373,14 +395,29 @@ select {
   text-align: center;
 }
 
-.backshift {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
-  color: #ecf0f1;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+.secondShift {
+  background: rgb(26, 63, 122);
 }
 
-.backshift .blockData {
-  color: #ecf0f1;
+.secondShift .blockData {
+  color: rgb(255, 255, 255);
+}
+
+.nightShift {
+  position: relative;
+  background: rgb(26, 49, 85);
+  border: 1px solid rgba(148, 184, 245, 0.25);
+}
+
+.nightShift .blockData {
+  color: rgb(148, 184, 245);
+}
+
+.iconNight {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 10px;
 }
 
 .higherPower {

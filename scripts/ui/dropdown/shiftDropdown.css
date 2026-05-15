@@ -220,3 +220,18 @@
     transform: translateY(0) scale(1);
   }
 }
+
+.dropdown-hint {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px 8px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.dropdown-hint svg {
+  stroke: #6b7280;
+  fill: none;
+  flex-shrink: 0;
+}
