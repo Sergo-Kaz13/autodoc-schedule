@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   initShiftPlan(store.schedule);
   showSchedule(store.schedule);
   initToggles(store.schedule);
-
+// hellow
   createLegend();
   // sendNewUserId(store.schedule);
 });
