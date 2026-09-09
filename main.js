@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   initShiftPlan(store.schedule);
   showSchedule(store.schedule);
   initToggles(store.schedule);
-// hellow
+  // hellow
   createLegend();
   // sendNewUserId(store.schedule);
 });
@@ -141,6 +141,8 @@ btnPlusMont.addEventListener("click", () => {
 
 scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");
+
+  console.log(["Hello"], "Hello");
 
   if (scheduleItem.classList.contains("scheduleItem")) {
     dayIndex = Number(scheduleItem.id);
@@ -419,7 +421,7 @@ async function formSend(e) {
 
   // ============= END ================
 
-  closeModal();
+  closef();
   saveSchedule(store.schedule);
   scheduleBlock.innerHTML = "";
   showSchedule(store.schedule, yearActive, monthActive);

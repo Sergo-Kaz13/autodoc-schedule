@@ -6,6 +6,7 @@
 */
 @import url(./scripts/ui/dropdown/shiftDropdown.css);
 @import url(./scripts/ui/legend/legend.css);
+@import url(./scripts/ui/modal/modal.css);
 *,
 ::before,
 ::after {
@@ -760,97 +761,12 @@ select {
   }
 }
 
-.listItemsBlock {
-  position: fixed;
-  z-index: 100;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  left: 0;
-  top: 0;
-  padding: 30px 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: none;
-}
-
-.listItemsShow {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.listItemsEvents {
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  gap: 20px;
-  padding: 0 20px 20px 20px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 20px;
-  color: #333;
-  font-weight: 600;
-  width: calc(100% - 55px);
-  max-width: 400px;
-  max-height: 90vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  animation: modalFadeIn 0.4s ease;
-}
-
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 .listItemsEvents td::first-letter {
   text-transform: uppercase;
 }
 
-.btnClose {
-  position: sticky;
-  align-self: center;
-  top: 0;
-  width: 110%;
-  font-size: 24px;
-  text-align: right;
-  padding: 12px 5px 5px 5px;
-  background-color: #fff;
-  -webkit-transition: all ease-in-out 0.28s;
-  -o-transition: all ease-in-out 0.28s;
-  transition: all ease-in-out 0.28s;
-  cursor: pointer;
-}
-
-.btnClose:hover {
-  cursor: pointer;
-}
-
-.listItemsEvents select {
-  margin-left: 10px;
-  border-radius: 5px;
-  color: #333;
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .dayInfoTable {
+  display: none;
   font-size: 16px;
   color: #333;
   background-color: #f9f9f9;
