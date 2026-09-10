@@ -876,39 +876,6 @@ select {
   gap: 5px;
 }
 
-.formBlockBtn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.btnSubmit {
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 16px;
-  -webkit-transition: all ease-in-out 0.28s;
-  -o-transition: all ease-in-out 0.28s;
-  transition: all ease-in-out 0.28s;
-  display: block;
-  width: 100%;
-  background-color: #007bff;
-  color: white;
-  text-align: center;
-  border: none;
-  padding: 14px;
-  border-radius: 12px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.btnSubmit:hover {
-  background-color: #0056b3;
-}
-
 #form input[type="radio"],
 #form input[type="checkbox"] {
   width: 22px;

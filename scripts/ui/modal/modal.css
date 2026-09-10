@@ -41,8 +41,7 @@
   width: calc(100% - 32px);
   max-width: 400px;
   max-height: calc(100vh - 32px);
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   animation: modalFadeIn 0.4s ease;
 }
 
@@ -85,4 +84,39 @@
   color: #ffffff;
   background: rgba(255, 255, 255, 0.15);
   transition: all ease-in-out 0.28s;
+}
+
+.formBlock {
+  overflow-y: auto;
+}
+
+.footerModal {
+  display: flex;
+  gap: 10px;
+  padding: 8px 16px 18px;
+}
+
+.btnCancel {
+  flex: 1;
+  padding: 13px;
+  border-radius: 14px;
+  border: 1.5px solid #e2e8f0;
+  background-color: #f8fafc;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btnSubmit {
+  flex: 2;
+  padding: 13px;
+  border-radius: 14px;
+  border: none;
+  background-color: #2a4898;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.25s;
 }
