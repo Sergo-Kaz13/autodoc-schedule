@@ -38,6 +38,7 @@ const modalWindow = document.querySelector(".listItemsBlock");
 const scrollModal = document.querySelector(".listItemsEvents");
 const periodMonths = document.querySelector("#periodMonths");
 const actualSalaryChecken = document.querySelector("#actualSalary");
+const btnSubmit = document.querySelector(".btnSubmit");
 
 const getActiveYear = () => Number(activeYear.textContent);
 const getActiveMonth = () => Number(monthItem.id);
@@ -142,10 +143,16 @@ btnPlusMont.addEventListener("click", () => {
 scheduleBlock.addEventListener("click", (e) => {
   const scheduleItem = e.target.closest("div");
 
-  console.log(["Hello"], "Hello");
+  console.log(store.schedule);
 
   if (scheduleItem.classList.contains("scheduleItem")) {
     dayIndex = Number(scheduleItem.id);
+
+    const selectedDate = {
+      year: getActiveYear(),
+      month: getActiveMonth(),
+      day: dayIndex,
+    };
 
     const today =
       store.schedule[getActiveYear()].months[getActiveMonth()].days[
@@ -187,25 +194,9 @@ scheduleBlock.addEventListener("click", (e) => {
     const monthInfo = getActiveMonth() + 1;
     const monthInfoStr = monthInfo < 10 ? "0" + monthInfo : monthInfo;
 
-    const infoDay = createDayInfo(
-      addHours100,
-      addHours120,
-      addHours50,
-      backshift,
-      birthday,
-      higherPower,
-      holiday,
-      hospital,
-      leaveOnRequest,
-      weekend,
-      workDay,
-      workHoliday,
-      dayInfo,
-      monthInfoStr,
-      salaryDay,
-    );
+    createDayInfo(store, selectedDate);
 
-    dayInfoTable.innerHTML = infoDay;
+    // dayInfoTable.innerHTML = infoDay;
     listItems.classList.add("listItemsShow");
 
     document.body.style.overflow = "hidden";
@@ -227,7 +218,8 @@ modalWindow.addEventListener("click", (e) => {
   }
 });
 
-form.addEventListener("submit", formSend);
+// form.addEventListener("submit", formSend);
+btnSubmit.addEventListener("click", formSend);
 
 async function formSend(e) {
   e.preventDefault();
@@ -421,7 +413,7 @@ async function formSend(e) {
 
   // ============= END ================
 
-  closef();
+  closeModal();
   saveSchedule(store.schedule);
   scheduleBlock.innerHTML = "";
   showSchedule(store.schedule, yearActive, monthActive);
