@@ -811,36 +811,6 @@ select {
   color: #fff;
 }
 
-#form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  color: #444;
-  /* padding: 10px; */
-  border-radius: 12px;
-  margin-bottom: 10px;
-}
-
-#form > div {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.formTitle {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.formTypeDay {
-  padding-left: 20px;
-}
-
 .titleAdditionallyDay {
   padding-left: 20px;
 }
