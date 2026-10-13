@@ -1,6 +1,7 @@
 const modalData = [
   {
     group: "Робочі",
+    element: ".dayStatusWork .dayStatusBlock",
     types: [
       { id: "shift1", label: "1-ша зміна", icon: "🌅" },
       { id: "shift2", label: "2-га зміна", icon: "🌆" },
@@ -10,6 +11,7 @@ const modalData = [
   },
   {
     group: "Вихідні",
+    element: ".dayStatusWeekend .dayStatusBlock",
     types: [
       { id: "dayoff", label: "Вихідний", icon: "☀️" },
       { id: "holiday", label: "Святo", icon: "🎉" },
@@ -17,6 +19,7 @@ const modalData = [
   },
   {
     group: "Відпустка",
+    element: ".dayStatusVacation .dayStatusBlock",
     types: [
       { id: "vacation", label: "Основна відпустка", icon: "🌴" },
       { id: "vacationDemand", label: "Відпустка на вимогу", icon: "📋" },
@@ -25,6 +28,7 @@ const modalData = [
   },
   {
     group: "Лікарняний",
+    element: ".dayStatusHospital .dayStatusBlock",
     types: [
       { id: "sick", label: "Лікарняний", icon: "🩺" },
       { id: "bloodDonation", label: "День здачі крові", icon: "🩸" },
@@ -42,3 +46,5 @@ const ADDONS = [
   { id: "ot120", label: "Понаднормові 120%", icon: "⚡" },
   { id: "force", label: "Вища сила", icon: "⚡" },
 ];
+
+export { modalData, ADDONS };

@@ -21,6 +21,7 @@ import { initToggles } from "./scripts/ui/initToggles.js";
 import createLegend from "./scripts/ui/legend/legend.js";
 import { openDB } from "./scripts/db/db.js";
 import store from "./scripts/store/store.js";
+import createDayFormContent from "./scripts/ui/modal/createDayFormContent.js";
 
 const { form } = document.forms;
 
@@ -204,6 +205,7 @@ scheduleBlock.addEventListener("click", (e) => {
     scrollModal.scrollTop = 0;
 
     setTodayDate(today);
+    createDayFormContent();
   }
 });
 
