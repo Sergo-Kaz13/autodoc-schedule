@@ -8,9 +8,10 @@ const toggleInputActive = (
   board = "",
   spanText = "",
   inputText = "",
-  schedule
+  schedule,
 ) => {
   const editBoard = document.querySelector(board);
+  if (!editBoard) return;
   const blockClickEdit = editBoard.parentElement;
 
   blockClickEdit.addEventListener("click", (e) => {
@@ -45,7 +46,7 @@ const toggleInputActive = (
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         const workHolidayDaysUsed = Number(
-          document.querySelector(".workHolidayDaysUsed").textContent
+          document.querySelector(".workHolidayDaysUsed").textContent,
         );
         if (
           inputText === "holidayDaysInput" &&
@@ -75,7 +76,7 @@ const toggleInputActive = (
 
     input.addEventListener("blur", () => {
       const workHolidayDaysUsed = Number(
-        document.querySelector(".workHolidayDaysUsed").textContent
+        document.querySelector(".workHolidayDaysUsed").textContent,
       );
       if (
         inputText === "holidayDaysInput" &&
