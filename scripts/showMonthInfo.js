@@ -29,11 +29,33 @@ const showMonthInfo = (schedule) => {
 
   if (showActualSalary) {
     document.querySelector(".actualSalary").classList.add("activeActualSalary");
+    document
+      .querySelector(".yearSalaryStats")
+      ?.classList.add("activeYearSalaryStats");
   } else {
     document
       .querySelector(".actualSalary")
       .classList.remove("activeActualSalary");
+    document
+      .querySelector(".yearSalaryStats")
+      ?.classList.remove("activeYearSalaryStats");
   }
+
+  const calculateYearFieldStats = (fieldName) => {
+    const values = schedule[activeYearItem].months
+      .map((month) => Number(month?.[fieldName]))
+      .filter((value) => Number.isFinite(value) && value > 0);
+    const total = Number(
+      values.reduce((sum, value) => sum + value, 0).toFixed(2)
+    );
+    const count = values.length;
+    const average = count ? Number((total / count).toFixed(2)) : 0;
+
+    return { total, count, average };
+  };
+
+  const actualSalaryStats = calculateYearFieldStats("actualSalary");
+  const premiumStats = calculateYearFieldStats("premiumPay");
 
   const salaryMonths = schedule.periodSalary ?? 3;
   periodMonths.value = salaryMonths;
@@ -101,6 +123,20 @@ const showMonthInfo = (schedule) => {
         element.textContent = value;
       }
     }
+  });
+
+  const yearStatsFields = [
+    { selector: ".actualSalaryYearTotal", value: actualSalaryStats.total },
+    { selector: ".actualSalaryYearMonths", value: actualSalaryStats.count },
+    { selector: ".actualSalaryYearAverage", value: actualSalaryStats.average },
+    { selector: ".premiumYearTotal", value: premiumStats.total },
+    { selector: ".premiumYearMonths", value: premiumStats.count },
+    { selector: ".premiumYearAverage", value: premiumStats.average },
+  ];
+
+  yearStatsFields.forEach(({ selector, value }) => {
+    const element = document.querySelector(selector);
+    if (element) element.textContent = value;
   });
 };
 

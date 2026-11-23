@@ -1062,3 +1062,11 @@ select {
 .showActualSalary {
   margin-top: 10px;
 }
+
+.yearSalaryStats {
+  display: none;
+}
+
+.activeYearSalaryStats {
+  display: block;
+}

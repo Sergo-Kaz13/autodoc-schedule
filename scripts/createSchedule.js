@@ -22,6 +22,7 @@ export function createSchedule(year, decemberData = null) {
       vacationPay: decemberData?.vacationPay ?? 31.5,
       minSalary: decemberData?.minSalary ?? 4666,
       premiumPay: 0,
+      actualSalary: 0,
       days: [],
     };
 
