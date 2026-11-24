@@ -2,7 +2,7 @@ import calculateUrlop from "./calculateUrlop.js";
 import { scheduleBlock } from "./data.js";
 import showMonthInfo from "./showMonthInfo.js";
 
-export function showSchedule(schedule, year, month) {
+export function showSchedule(schedule, year, month, selectedDayIndices = new Set()) {
   year = year !== undefined ? (year = year) : new Date().getFullYear();
   month = month !== undefined ? (month = month) : new Date().getMonth();
 
@@ -75,6 +75,9 @@ export function showSchedule(schedule, year, month) {
 
       div.id = i + 1;
       div.setAttribute("data-index-day-week", `${numberDay}`);
+      if (selectedDayIndices.has(i + 1)) {
+        div.classList.add("multiSelected");
+      }
 
       if (
         i + 1 === currentDate &&

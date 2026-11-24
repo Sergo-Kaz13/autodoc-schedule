@@ -156,6 +156,50 @@ select {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
+.multiSelectToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 15px;
+}
+
+.multiSelectToolbar button {
+  border: 0;
+  border-radius: 6px;
+  padding: 8px 12px;
+  background: #e8eef5;
+  color: #234;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.multiSelectToolbar button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+#multiSelectControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#multiSelectControls[hidden] {
+  display: none;
+}
+
+.scheduleItem.multiSelected {
+  outline: 3px solid #1565c0;
+  outline-offset: 2px;
+  z-index: 1;
+}
+
 /* new style 50, 100, 120 start */
 .blockData {
   color: #333;
@@ -833,6 +877,14 @@ select {
 
 .btnSubmit:hover {
   background-color: #0056b3;
+}
+
+.selectedDaysSummary {
+  padding: 10px;
+  border-radius: 8px;
+  background: #e8eef5;
+  text-align: center;
+  font-weight: 600;
 }
 
 #form input[type="radio"],

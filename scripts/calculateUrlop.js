@@ -1,4 +1,4 @@
-function calculateUrlop(schedule) {
+function calculateUrlop(schedule, updateDisplay = true) {
   const activeYear = document.querySelector(".activeYear").textContent;
   const {
     birthday,
@@ -8,9 +8,11 @@ function calculateUrlop(schedule) {
     workHolidayDays,
   } = schedule[activeYear];
 
-  document.querySelector(".holidayDaysSpan").textContent = workHolidayDays;
-  document.querySelector(".higherPowerHours").textContent = higherPowerTime;
-  document.querySelector(".birthday").textContent = birthday;
+  if (updateDisplay) {
+    document.querySelector(".holidayDaysSpan").textContent = workHolidayDays;
+    document.querySelector(".higherPowerHours").textContent = higherPowerTime;
+    document.querySelector(".birthday").textContent = birthday;
+  }
 
   let birthdayUsed = 0;
   let higherPowerUsed = 0;
@@ -59,16 +61,18 @@ function calculateUrlop(schedule) {
     leaveOnRequestUsedCound = 4 - vacationBalance;
   }
 
-  updateTextContent(".workHolidayDaysUsed", workHolidayUsed);
-  updateTextContent(".leaveOnRequestDaysUsed", leaveOnRequestUsed);
-  updateTextContent(".higherPowerTimeUsed", higherPowerUsed);
-  updateTextContent(".birthdayUsed", birthdayUsed);
-  updateTextContent(".workHolidayDaysStay", vacationBalance);
-  updateTextContent(
-    ".leaveOnRequestDaysStay",
-    leaveOnRequestDays - leaveOnRequestUsed
-  );
-  updateTextContent(".higherPowerTimeStay", higherPowerTime - higherPowerUsed);
+  if (updateDisplay) {
+    updateTextContent(".workHolidayDaysUsed", workHolidayUsed);
+    updateTextContent(".leaveOnRequestDaysUsed", leaveOnRequestUsed);
+    updateTextContent(".higherPowerTimeUsed", higherPowerUsed);
+    updateTextContent(".birthdayUsed", birthdayUsed);
+    updateTextContent(".workHolidayDaysStay", vacationBalance);
+    updateTextContent(
+      ".leaveOnRequestDaysStay",
+      leaveOnRequestDays - leaveOnRequestUsed
+    );
+    updateTextContent(".higherPowerTimeStay", higherPowerTime - higherPowerUsed);
+  }
 
   return {
     workHolidayUsed,

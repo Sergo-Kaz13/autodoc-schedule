@@ -50,6 +50,17 @@
         <h4 class="nameDay">нд</h4>
       </div>
 
+      <div class="multiSelectToolbar">
+        <button type="button" id="toggleMultiSelect">Вибрати кілька днів</button>
+        <div id="multiSelectControls" hidden>
+          <span id="selectedDaysCount" aria-live="polite">Вибрано: 0</span>
+          <button type="button" id="editSelectedDays" disabled>
+            Змінити вибрані
+          </button>
+          <button type="button" id="clearSelectedDays">Очистити вибір</button>
+        </div>
+      </div>
+
       <div class="listItemsBlock">
         <div class="listItemsEvents">
           <span class="btnClose">❌</span>
